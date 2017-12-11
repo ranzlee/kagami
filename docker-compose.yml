@@ -1,0 +1,9 @@
+  webpack:
+    build: .
+    container_name: my-webpack-container
+    ports:
+      - "35729:35729"
+      - "3000:3000"
+    volumes:
+      - .:/usr/src/app
+      - /app/node_modules
