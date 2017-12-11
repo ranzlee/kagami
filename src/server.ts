@@ -3,7 +3,7 @@ const webpack = require("webpack");
 const webpackDevMiddleware = require("webpack-dev-middleware");
 
 const app = express();
-const config = require("./webpack.dev.config.js");
+const config = require("../webpack.dev.config.js");
 const compiler = webpack(config);
 
 // Tell express to use the webpack-dev-middleware and use the webpack.config.js
@@ -17,6 +17,6 @@ app.use(
 app.use(require("webpack-hot-middleware")(compiler));
 
 // Serve the files on port 3000.
-app.listen(3000, function() {
+app.listen(3000, () => {
   console.log("Qwik app listening on port 3000!\n");
 });
