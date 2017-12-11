@@ -1,7 +1,14 @@
 import * as React from "react";
+import { Grid, Row, Col } from "react-bootstrap";
 
 export default class App extends React.Component {
   render() {
-    return <p>App</p>;
+    return (
+      <Grid fluid={true}>
+        <Row>
+          <Col sm={12}>App</Col>
+        </Row>
+      </Grid>
+    );
   }
 }
