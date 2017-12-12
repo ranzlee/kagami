@@ -1,5 +1,7 @@
 const express = require("express");
 const app = express();
+const mongoose = require('mongoose');
+
 
 if (process.env.NODE_ENV !== "production") {
   console.log(
@@ -17,6 +19,24 @@ if (process.env.NODE_ENV !== "production") {
   );
   app.use(require("webpack-hot-middleware")(compiler));
 }
+
+app.get('/MongoTest', (req, res) => {
+  var promise = mongoose.connect('mongodb://mongoDb/test', {
+    useMongoClient: true,
+    /* other options */
+  });
+
+  var db = mongoose.connection;
+  db.on('error', function (e) {
+    console.log(e);
+  });
+
+  db.once('open', function () {
+    res.send('Connected');
+    // we're connected!
+  });
+
+})
 
 // Serve the files on port 3000.
 app.listen(3000, () => {
