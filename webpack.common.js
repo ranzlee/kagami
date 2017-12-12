@@ -1,10 +1,8 @@
-const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 
 module.exports = {
-  entry: [path.join(__dirname, "src/client/index.tsx")],
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".json", ".jsx"]
   },
@@ -15,10 +13,10 @@ module.exports = {
         test: /\.(ts|tsx)$/,
         loader: require.resolve("ts-loader")
       },
-      {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"]
-      },
+      // {
+      //   test: /\.css$/,
+      //   use: ["style-loader", "css-loader"]
+      // },
       {
         test: /\.(png|svg|jpg|gif|ttf|woff2|woff|eot)$/,
         use: ["file-loader"]
