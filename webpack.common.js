@@ -1,15 +1,10 @@
-const webpack = require("webpack");
 const path = require("path");
+const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 
 module.exports = {
-  entry: [
-    require.resolve("react-hot-loader/patch"),
-    require.resolve("webpack-hot-middleware/client"),
-    path.join(__dirname, "src/client/index.tsx")
-  ],
-  devtool: "inline-source-map",
+  entry: [path.join(__dirname, "src/client/index.tsx")],
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".json", ".jsx"]
   },
@@ -18,8 +13,7 @@ module.exports = {
     rules: [
       {
         test: /\.(ts|tsx)$/,
-        loader: require.resolve("ts-loader"),
-        exclude: "/node_modules/"
+        loader: require.resolve("ts-loader")
       },
       {
         test: /\.css$/,
@@ -34,10 +28,9 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(["dist"]),
     new HtmlWebpackPlugin({
-      title: "Development",
+      title: "Qwik",
       template: "./src/client/index.html"
     }),
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.ProvidePlugin({
       $: "jquery",
       jQuery: "jquery",
@@ -46,14 +39,11 @@ module.exports = {
       // In case you imported plugins individually, you must also require them here:
       Util: "exports-loader?Util!bootstrap/js/dist/util",
       Dropdown: "exports-loader?Dropdown!bootstrap/js/dist/dropdown"
-    }),
-    //todo: research and understand these modules
-    new webpack.NamedModulesPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
+    })
   ],
   output: {
     path: __dirname + "/dist",
-    filename: "bundle.js",
+    filename: "[name].bundle.js",
     publicPath: "/"
   }
 };
