@@ -6,7 +6,7 @@ export default class About extends React.Component {
     return (
       <Grid fluid={true}>
         <Row>
-          <Col sm={12}>About!</Col>
+          <Col sm={12}>About</Col>
         </Row>
       </Grid>
     );

@@ -7,7 +7,7 @@ module.exports = {
   entry: [
     require.resolve("react-hot-loader/patch"),
     require.resolve("webpack-hot-middleware/client"),
-    path.join(__dirname, "src/index.tsx")
+    path.join(__dirname, "src/client/index.tsx")
   ],
   devtool: "inline-source-map",
   resolve: {
@@ -35,7 +35,7 @@ module.exports = {
     new CleanWebpackPlugin(["dist"]),
     new HtmlWebpackPlugin({
       title: "Development",
-      template: "./src/index.html"
+      template: "./src/client/index.html"
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.ProvidePlugin({
