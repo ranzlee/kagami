@@ -5,7 +5,7 @@ import Root from "./root";
 import routes from "./routes";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-//import "./assets/styles.css";
+import "./assets/styles.css";
 
 declare const module: any;
 

@@ -23,7 +23,7 @@ export default class Home extends React.Component<HomeProps, HomeState> {
     this.state = { name: "" };
   }
 
-  getValidationState(): "success" | "warning" | "error" | undefined {
+  getValidationState = (): "success" | "warning" | "error" | undefined => {
     const length = this.state.name.length;
     if (length > 10) return "success";
     else if (length > 5) return "warning";
@@ -31,13 +31,13 @@ export default class Home extends React.Component<HomeProps, HomeState> {
     return undefined;
   }
 
-  handleChange(event: React.FormEvent<HTMLInputElement>) {
+  handleChange = (event: any) => {
     this.setState({
-      name: event.currentTarget.value
+      name: event.target.value
     });
   }
 
-  handleSubmit(event: React.FormEvent<HTMLButtonElement>) {
+  handleSubmit = (event: any ) => {
     alert("A name was submitted: " + this.state.name);
     event.preventDefault();
   }
@@ -58,7 +58,7 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                       type="text"
                       value={this.state.name}
                       placeholder="Enter text"
-                      onChange={event => this.handleChange(event as any)}
+                      onChange={this.handleChange}
                     />
                   </Col>
                   <Col sm={1}>
@@ -66,7 +66,7 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                   </Col>
                 </Row>
                 <HelpBlock>Validation is based on string length.</HelpBlock>
-                <Button>Submit</Button>
+                <Button onClick={this.handleSubmit}>Submit</Button>
               </FormGroup>
             </form>
           </Col>
