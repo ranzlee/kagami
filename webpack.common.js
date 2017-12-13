@@ -1,6 +1,5 @@
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const CleanWebpackPlugin = require("clean-webpack-plugin");
 
 module.exports = {
   resolve: {
@@ -13,10 +12,6 @@ module.exports = {
         test: /\.(ts|tsx)$/,
         loader: require.resolve("ts-loader")
       },
-      // {
-      //   test: /\.css$/,
-      //   use: ["style-loader", "css-loader"]
-      // },
       {
         test: /\.(png|svg|jpg|gif|ttf|woff2|woff|eot)$/,
         use: ["file-loader"]
@@ -24,10 +19,9 @@ module.exports = {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin(["dist"]),
     new HtmlWebpackPlugin({
       title: "Qwik",
-      template: "./src/client/index.html"
+      template: "./src/public/index.html"
     }),
     new webpack.ProvidePlugin({
       $: "jquery",
@@ -40,7 +34,7 @@ module.exports = {
     })
   ],
   output: {
-    path: __dirname + "/dist",
+    path: __dirname + "/dist/public",
     filename: "[name].bundle.js",
     publicPath: "/"
   }

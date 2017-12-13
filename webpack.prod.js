@@ -4,9 +4,10 @@ const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
 const common = require("./webpack.common.js");
 const path = require("path");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const CleanWebpackPlugin = require("clean-webpack-plugin");
 
 module.exports = merge(common, {
-  entry: [path.join(__dirname, "src/client/index.tsx")],
+  entry: [path.join(__dirname, "src/public/index.tsx")],
   module: {
     rules: [
       {
@@ -19,6 +20,7 @@ module.exports = merge(common, {
     ]
   },
   plugins: [
+    new CleanWebpackPlugin(["dist"]),
     new UglifyJSPlugin({
       sourceMap: true
     }),

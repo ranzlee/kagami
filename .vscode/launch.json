@@ -8,7 +8,8 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Express (dev)",
-      "program": "${workspaceFolder}/src/server/server.js"
+      "preLaunchTask": "npm: setup-dev",
+      "program": "${workspaceFolder}/dist/server.js"
     }
   ]
 }
