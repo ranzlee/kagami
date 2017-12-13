@@ -16,6 +16,13 @@ module.exports = merge(common, {
           fallback: "style-loader",
           use: "css-loader"
         })
+      },
+      {
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        use: ExtractTextPlugin.extract({
+          use: ["css-loader", "sass-loader"]
+        })
       }
     ]
   },
