@@ -8,7 +8,10 @@ export default class Login extends React.Component {
         <Row>
           <Col lg={4} />
           <Col lg={4}>
-            <a className="btn btn-block btn-social btn-facebook">
+            <a
+              className="btn btn-block btn-social btn-facebook"
+              href="/auth/facebook"
+            >
               <i className="fa fa-facebook" />
               Sign in with Facebook
             </a>

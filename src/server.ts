@@ -12,7 +12,6 @@ import * as path from "path";
 import * as mongoose from "mongoose";
 import * as passport from "passport";
 import expressValidator = require("express-validator");
-import * as passportConfig from "./config/passport";
 
 //import controllers
 import * as apiController from "./controllers/api";
@@ -22,6 +21,8 @@ const MongoStore = mongo(session);
 
 //read .env.config variables
 dotenv.config({ path: path.join(__dirname, ".env.config") });
+//passport variables are in .env.config, so load the variables first
+import * as passportConfig from "./config/passport";
 
 //create express server
 const app = express();
@@ -123,12 +124,30 @@ var options = {
 app.use("/", express.static(path.join(__dirname, "public"), options));
 
 //app routes
-// app.get(
-//   "/api/facebook",
-//   passportConfig.isAuthenticated,
-//   passportConfig.isAuthorized,
-//   apiController.getFacebook
-// );
+app.get(
+  "/api/facebook",
+  passportConfig.isAuthenticated,
+  passportConfig.isAuthorized,
+  apiController.getFacebook
+);
+/**
+ * OAuth authentication routes. (Sign in)
+ */
+app.get(
+  "/auth/facebook",
+  passport.authenticate("facebook", { scope: ["email", "public_profile"] })
+);
+app.get(
+  "/auth/facebook/callback",
+  passport.authenticate("facebook", {
+    failureRedirect: "/"
+  }),
+  (req, res) => {
+    if (req.session) {
+      res.redirect(req.session.returnTo || "/");
+    }
+  }
+);
 
 //begin listener
 app.listen(app.get("port"), () => {
