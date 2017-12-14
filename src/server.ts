@@ -14,25 +14,33 @@ import * as passport from "passport";
 import expressValidator = require("express-validator");
 import * as passportConfig from "./config/passport";
 
+//import controllers
+import * as apiController from "./controllers/api";
+
+//create mongo store
 const MongoStore = mongo(session);
 
+//read .env.config variables
 dotenv.config({ path: path.join(__dirname, ".env.config") });
 
+//create express server
 const app = express();
 
+//read connection uri from config
 const connectionUri = process.env.MONGODB_URI || process.env.MONGOLAB_URI || "";
-
 console.log("Mongo connection URI: " + connectionUri);
 
-mongoose.connect(connectionUri);
-
+//connect to mongo
+mongoose.connect(connectionUri, { useMongoClient: true });
 mongoose.connection.on("error", () => {
   console.log("MongoDB connection error. Please make sure MongoDB is running.");
   process.exit();
 });
 
+//display environment variable (development or production)
 console.log("process.env.NODE_ENV: " + process.env.NODE_ENV);
 
+//if not production, setup webpack middleware for HMR and express detailed errors
 if (process.env.NODE_ENV !== "production") {
   console.log(
     "development mode - using webpack-dev-middleware with HMR enabled"
@@ -51,12 +59,19 @@ if (process.env.NODE_ENV !== "production") {
   app.use(errorHandler());
 }
 
+//set the listener port from config or default to 3000
 app.set("port", process.env.PORT || 3000);
+//use compression
 app.use(compression());
+//use morgan logger
+//TODO: perhaps this should be dev only! RESEARCH
 app.use(logger("dev"));
+//TODO: do we need this parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+//TODO: what the hell is this
 app.use(expressValidator());
+//TODO: Research this session stuff
 app.use(
   session({
     resave: true,
@@ -68,15 +83,21 @@ app.use(
     })
   })
 );
+//use passport for authentication
 app.use(passport.initialize());
 app.use(passport.session());
+//use flash messages
+//TODO: Research this
 app.use(flash());
+//TODO: what the hell is this
 app.use(lusca.xframe("SAMEORIGIN"));
 app.use(lusca.xssProtection(true));
+//TODO: I assume this is putting the request user in the response
 app.use((req, res, next) => {
   res.locals.user = req.user;
   next();
 });
+//TODO: I think this will be removed when we get SPA authentication working
 app.use((req, res, next) => {
   // After successful login, redirect back to the intended page
   if (
@@ -94,13 +115,22 @@ app.use((req, res, next) => {
   next();
 });
 
+//set default options and default '/' root
 var options = {
   index: "index.html",
   maxAge: 31557600000
 };
-
 app.use("/", express.static(path.join(__dirname, "public"), options));
 
+//app routes
+// app.get(
+//   "/api/facebook",
+//   passportConfig.isAuthenticated,
+//   passportConfig.isAuthorized,
+//   apiController.getFacebook
+// );
+
+//begin listener
 app.listen(app.get("port"), () => {
   console.log(
     "  App is running at http://localhost:%d in %s mode",

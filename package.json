@@ -16,6 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "async": "^2.6.0",
     "axios": "^0.17.1",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.2",
@@ -48,6 +49,7 @@
     "request": "^2.83.0"
   },
   "devDependencies": {
+    "@types/async": "^2.0.45",
     "@types/axios": "^0.14.0",
     "@types/bcrypt-nodejs": "0.0.30",
     "@types/body-parser": "^1.16.8",

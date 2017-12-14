@@ -15,17 +15,17 @@ export default class Routes extends React.Component {
         <Navbar fluid fixedTop inverse collapseOnSelect>
           <Navbar.Header>
             <Navbar.Brand>
-              <Link to="/">Qwik</Link>
+              <Link to="/">QWIK</Link>
             </Navbar.Brand>
             <Navbar.Toggle />
           </Navbar.Header>
           <Navbar.Collapse>
             <Nav>
               <LinkContainer to="/home">
-                <NavItem eventKey={2}>Home</NavItem>
+                <NavItem eventKey={2}>HOME</NavItem>
               </LinkContainer>
               <LinkContainer to="/about">
-                <NavItem eventKey={3}>About</NavItem>
+                <NavItem eventKey={3}>ABOUT</NavItem>
               </LinkContainer>
             </Nav>
             <Nav pullRight>
