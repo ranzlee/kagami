@@ -5,6 +5,7 @@ import Root from "./root";
 import routes from "./routes";
 import "./assets/css/main.scss";
 import "./assets/styles.css";
+import "./assets/js/lib/bootstrap.min.js";
 
 declare const module: any;
 
