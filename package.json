@@ -7,10 +7,8 @@
     "build-client-prod": "webpack --config webpack.prod.js",
     "build-server": "tsc",
     "setup-dev": "npm run build-server && npm run copy-dev-config",
-    "start-dev":
-      "npm run setup-dev && node --inspect=0.0.0.0:9229 dist/server.js",
-    "start-prod":
-      "npm run build-client-prod && npm run build-server && npm run copy-prod-config && node dist/server.js",
+    "start-dev": "npm run setup-dev && node --inspect=0.0.0.0:9229 dist/server.js",
+    "start-prod": "npm run build-client-prod && npm run build-server && npm run copy-prod-config && node dist/server.js",
     "copy-dev-config": "node copyDevConfig.js",
     "copy-prod-config": "node copyProdConfig.js",
     "test": "echo \"Error: no test specified\" && exit 1"

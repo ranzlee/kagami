@@ -31,7 +31,16 @@ npm install
 * If using Docker (recommended)
 
 ```
+docker-compose build
+docker-compose up
+```
 
+* If using Docker configuration is changed (recommended)
+
+```
+docker-compose down
+docker-compose build
+docker-compose up
 ```
 
 * If local development (No Docker): Start your mongoDB server (you'll probably want another command prompt)
