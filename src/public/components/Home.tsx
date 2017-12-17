@@ -10,6 +10,7 @@ import {
   Button
 } from "react-bootstrap";
 import { UIEvent, SyntheticEvent } from "react";
+import * as axios from "axios";
 
 export interface HomeState {
   name: string;
@@ -29,18 +30,21 @@ export default class Home extends React.Component<HomeProps, HomeState> {
     else if (length > 5) return "warning";
     else if (length > 0) return "error";
     return undefined;
-  }
+  };
 
   handleChange = (event: any) => {
     this.setState({
       name: event.target.value
     });
-  }
+  };
 
-  handleSubmit = (event: any ) => {
-    alert("A name was submitted: " + this.state.name);
+  handleSubmit = (event: any) => {
+    //alert("A name was submitted: " + this.state.name);
     event.preventDefault();
-  }
+    axios.default.get("/test/dummy").then(response => {
+      alert(response.data.message);
+    });
+  };
   render() {
     return (
       <Grid fluid={true}>

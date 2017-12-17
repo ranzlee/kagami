@@ -13,19 +13,11 @@ import * as mongoose from "mongoose";
 import * as passport from "passport";
 import expressValidator = require("express-validator");
 
-//import controllers
-import * as apiController from "./controllers/api";
-
 //create mongo store
 const MongoStore = mongo(session);
 
 //read .env.config variables
 dotenv.config({ path: path.join(__dirname, ".env.config") });
-//passport variables are in .env.config, so load the variables first
-import * as passportConfig from "./config/passport";
-
-//create express server
-const app = express();
 
 //read connection uri from config
 const connectionUri = process.env.MONGODB_URI || process.env.MONGOLAB_URI || "";
@@ -41,6 +33,9 @@ mongoose.connection.on("error", () => {
 //display environment variable (development or production)
 console.log("process.env.NODE_ENV: " + process.env.NODE_ENV);
 
+//create express server
+const app = express();
+
 //if not production, setup webpack middleware for HMR and express detailed errors
 if (process.env.NODE_ENV !== "production") {
   console.log(
@@ -48,6 +43,7 @@ if (process.env.NODE_ENV !== "production") {
   );
   const webpack = require("webpack");
   const webpackDevMiddleware = require("webpack-dev-middleware");
+  const webpackHotMiddleware = require("webpack-hot-middleware");
   const config = require("../webpack.dev.js");
   const compiler = webpack(config);
   // Tell express to use the webpack-dev-middleware and use the webpack.dev.js configuration file as a base.
@@ -56,7 +52,7 @@ if (process.env.NODE_ENV !== "production") {
       publicPath: config.output.publicPath
     })
   );
-  app.use(require("webpack-hot-middleware")(compiler));
+  app.use(webpackHotMiddleware(compiler));
   app.use(errorHandler());
 }
 
@@ -98,55 +94,45 @@ app.use((req, res, next) => {
   res.locals.user = req.user;
   next();
 });
-//TODO: I think this will be removed when we get SPA authentication working
-app.use((req, res, next) => {
-  // After successful login, redirect back to the intended page
-  if (
-    req.session &&
-    !req.user &&
-    req.path !== "/login" &&
-    req.path !== "/signup" &&
-    !req.path.match(/^\/auth/) &&
-    !req.path.match(/\./)
-  ) {
-    req.session.returnTo = req.path;
-  } else if (req.session && req.user && req.path == "/account") {
-    req.session.returnTo = req.path;
-  }
-  next();
-});
 
 //set default options and default '/' root
-var options = {
-  index: "index.html",
-  maxAge: 31557600000
-};
-app.use("/", express.static(path.join(__dirname, "public"), options));
+app.use(
+  "/",
+  express.static(path.join(__dirname, "public"), {
+    index: "index.html",
+    maxAge: 31557600000
+  })
+);
+
+//passport variables are in .env.config, so load the variables first
+import * as passportConfig from "./config/passport";
+
+//import controllers
+import * as apiController from "./controllers/api";
+import * as authenticationController from "./controllers/authentication";
 
 //app routes
+//test controller
+app.get("/test/dummy", (req, res) => {
+  res.send({ message: "Hello World!" });
+});
+//api controller
 app.get(
   "/api/facebook",
   passportConfig.isAuthenticated,
   passportConfig.isAuthorized,
   apiController.getFacebook
 );
-/**
- * OAuth authentication routes. (Sign in)
- */
+//authentication controller
 app.get(
   "/auth/facebook",
-  passport.authenticate("facebook", { scope: ["email", "public_profile"] })
+  authenticationController.redirectRootIfAuthenticated,
+  authenticationController.authenticateFacebook()
 );
 app.get(
   "/auth/facebook/callback",
-  passport.authenticate("facebook", {
-    failureRedirect: "/"
-  }),
-  (req, res) => {
-    if (req.session) {
-      res.redirect(req.session.returnTo || "/");
-    }
-  }
+  passport.authenticate("facebook"),
+  authenticationController.authenticateFacebookCallback()
 );
 
 //begin listener
