@@ -14,7 +14,6 @@
         - "9229:9229"
       volumes:
         - .:/usr/src/app
-        - ./node_modules:/usr/src/app/node_modules
       links:
         - mongodb  
         - redis
@@ -26,12 +25,13 @@
         container_name: "mongodb"
         environment:
           - MONGO_DATA_DIR=/data/db
-          - MONGO_LOG_DIR=/dev/null
+          - MONGO_LOG_DIR=/data/log
         volumes:
           - ./data/db:/data/db
+          - ./data/log:/data/log
         ports:
             - 27017:27017
-        command: mongod --smallfiles --logpath=/dev/null # --quiet
+        command: mongod --smallfiles --logpath=/data/log/log
     redis:
         image: redis
         ports:
