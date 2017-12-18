@@ -15,7 +15,7 @@ export default class Routes extends React.Component {
         <Navbar fluid fixedTop inverse collapseOnSelect>
           <Navbar.Header>
             <Navbar.Brand>
-              <Link to="/">QWIK</Link>
+              <Link to="/">KAGAMI</Link>
             </Navbar.Brand>
             <Navbar.Toggle />
           </Navbar.Header>

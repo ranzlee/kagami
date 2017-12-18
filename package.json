@@ -1,17 +1,21 @@
 {
-  "name": "qwik",
+  "name": "kagami",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "build-client-prod": "webpack --config webpack.prod.js",
-    "build-server": "tsc",
+    "build-server": "tsc --project ./src/tsconfig.json",
     "setup-dev": "npm run build-server && npm run copy-dev-config",
     "start-dev": "npm run setup-dev && node --inspect=0.0.0.0:9229 dist/server.js",
     "start-prod": "npm run build-client-prod && npm run build-server && npm run copy-prod-config && node dist/server.js",
     "copy-dev-config": "node copyDevConfig.js",
     "copy-prod-config": "node copyProdConfig.js",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "_moduleAliases": {
+    "shared": "src/shared",
+    "configElements": "src/shared/models/configuration/elements"
   },
   "author": "",
   "license": "ISC",
@@ -32,6 +36,7 @@
     "fbgraph": "^1.4.1",
     "lodash": "^4.17.4",
     "lusca": "^1.5.2",
+    "module-alias": "^2.0.3",
     "mongoose": "^4.13.7",
     "morgan": "^1.9.0",
     "nodemailer": "^4.4.1",
@@ -45,6 +50,7 @@
     "react-router": "^4.2.0",
     "react-router-bootstrap": "^0.24.4",
     "react-router-dom": "^4.2.2",
+    "redux": "^3.7.2",
     "remove": "^0.1.5",
     "request": "^2.83.0"
   },

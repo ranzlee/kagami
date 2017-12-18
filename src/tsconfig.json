@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "outDir": "../dist",
+        "sourceMap": true,
+        "moduleResolution": "node",
+        "strict": true,
+        "noImplicitAny": true,
+        "module": "commonjs",
+        "target": "es5",
+        "baseUrl": ".",
+        "paths": {
+            "shared/*": ["shared/*"],
+            "configElements/*": ["shared/models/configuration/elements/*"],
+            "*": ["./../node_modules/*", "types/*"]
+        }
+    },
+    "include": [
+        "**/*"
+    ],
+    "exclude": [
+        "public/**/*"
+    ]
+}
