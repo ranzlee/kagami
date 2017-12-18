@@ -12,12 +12,13 @@ import * as path from "path";
 import * as mongoose from "mongoose";
 import * as passport from "passport";
 import expressValidator = require("express-validator");
+import fs = require("fs");
+import https = require("https");
+//read .env.config variables
+dotenv.config({ path: path.join(__dirname, ".env.config") });
 
 //create mongo store
 const MongoStore = mongo(session);
-
-//read .env.config variables
-dotenv.config({ path: path.join(__dirname, ".env.config") });
 
 //read connection uri from config
 const connectionUri = process.env.MONGODB_URI || process.env.MONGOLAB_URI || "";
@@ -135,14 +136,24 @@ app.get(
   authenticationController.authenticateFacebookCallback()
 );
 
-//begin listener
-app.listen(app.get("port"), () => {
-  console.log(
-    "  App is running at http://localhost:%d in %s mode",
-    app.get("port"),
-    app.get("env")
-  );
-  console.log("  Press CTRL-C to stop\n");
-});
+const privateKey = fs.readFileSync("key.pem");
+const certificate = fs.readFileSync("certificate.pem");
+
+https
+  .createServer(
+    {
+      key: privateKey,
+      cert: certificate
+    },
+    app
+  )
+  .listen(app.get("port"), () => {
+    console.log(
+      "  App is running at https://localhost:%d in %s mode",
+      app.get("port"),
+      app.get("env")
+    );
+    console.log("  Press CTRL-C to stop\n");
+  });
 
 module.exports = app;
