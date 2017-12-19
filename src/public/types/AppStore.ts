@@ -10,7 +10,7 @@ export interface IDomain {
 }
 
 export interface IAppState {
-    currentConfiguration: string;
+    currentConfiguration?: string;
 }
 
 export interface IUi {

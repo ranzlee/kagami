@@ -5,7 +5,7 @@ import { createLogger } from 'redux-logger';
 //var thunk = require("redux-thunk");
 //var promise = require("redux-promise-middleware");
 
-import reducer from "reducers";
+import reducer from "./reducers";
 
 const logger = createLogger( {
     // .. options

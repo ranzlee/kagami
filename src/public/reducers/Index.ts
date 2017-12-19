@@ -1,10 +1,11 @@
+import { configurationElementReducer } from './domain/ConfigurationElementReducer';
+import { entityLookupReducer } from './domain/EntityLookupReducer';
 import { combineReducers } from "redux";
 
 import { appStateReducer } from "./appState/AppStateReducer";
 
-import { configurationReducer } from "reducers/domain/ConfigurationReducer";
-import { entityLookupReducer } from "reducers/domain/EntityLookupReducer";
 
-var domainReducer = combineReducers({ configurations: configurationReducer , enittyLookup: entityLookupReducer });
+
+var domainReducer = combineReducers({ configurationElements: configurationElementReducer , entityLookup: entityLookupReducer });
 
 export default combineReducers({ appState: appStateReducer, domain: domainReducer });

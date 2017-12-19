@@ -1,22 +1,18 @@
-import { PlayerActionTypes } from "actions/PlayerActions";
-import { ActionTypeKeys } from "actions/ActionTypeKeys";
+import { EntityActionTypes } from './../../actions/EntityActions';
+import { ActionTypeKeys } from './../../actions/ActionTypeKeys';
 
-export function entityLookupReducer(lookup: any = {}, action: PlayerActionTypes) {
+export function entityLookupReducer(lookup: any = {}, action: EntityActionTypes) {
     switch (action.type) {
-        case ActionTypeKeys.SAVE_ADD_PLAYER:
-            return { ...lookup, [action.id]: { id: action.id, firstName: action.firstName, lastName: action.lastName } };
-        case ActionTypeKeys.UPDATE_PLAYER:
-            return { ...lookup, [action.id]: { id: action.id, firstName: action.firstName, lastName: action.lastName } };
-        case ActionTypeKeys.FETCH_ALL_PLAYERS_SUCCESS:
+        case ActionTypeKeys.ADD_CONFIGURATION:
+            return { ...lookup, [action.configId]: { id: action.configId } };
+        case ActionTypeKeys.ADD_CONFIG_ENTITY:
+            return { ...lookup, [action.entityId]: { id: action.entityId } };
+        case ActionTypeKeys.UPDATE_ENTITY:
             var copy = { ...lookup };
-            if (action.players) {
-                for (let i = 0; i < action.players.length; i++) {
-                    let player = action.players[i];
-                    copy[player.id] = player;
-                }
-            }
+            var entity = copy[action.id];
+            entity[action.propertyName] = action.newValue;
             return copy;
-        case ActionTypeKeys.DELETE_PLAYER:
+        case ActionTypeKeys.DELETE_ENTITY:
             var copy = { ...lookup }
             delete copy[action.id];
             return copy;

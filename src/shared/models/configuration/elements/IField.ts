@@ -1,4 +1,4 @@
-import { IConfigurationElement } from "configElements/IConfigurationElement";
+import { IConfigurationElement } from './IConfigurationElement';
 
 export interface IField extends IConfigurationElement {
     type: FieldType;

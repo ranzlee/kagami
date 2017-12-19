@@ -1,7 +1,5 @@
 import * as React from "react";
-import { IConfiguration } from "configElements/IConfiguration";
 import { Row, Col, ControlLabel, FormGroup, FormControl } from "react-bootstrap";
-import { ConfigElementType } from "configElements/ConfigElementType";
 
 export interface IOwnProps {
     id: string;
