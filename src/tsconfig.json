@@ -9,8 +9,6 @@
         "target": "es5",
         "baseUrl": ".",
         "paths": {
-            "shared/*": ["shared/*"],
-            "configElements/*": ["shared/models/configuration/elements/*"],
             "*": ["./../node_modules/*", "types/*"]
         }
     },

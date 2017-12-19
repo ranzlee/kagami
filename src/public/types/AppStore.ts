@@ -1,13 +1,11 @@
-export type App = {
+export type AppStore = {
     readonly domain: IDomain,
     readonly appState: IAppState,
     readonly ui: IUi
 }
 
 export interface IDomain {
-    configurations: string[];
-    configurationElements: any;
-    tags: string[];
+    configurationElements: any; // confiId: {configElementType: [ids]}
     entityLookup: any;
 }
 

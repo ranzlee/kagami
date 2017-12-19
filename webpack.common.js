@@ -12,17 +12,7 @@ function srcPath(subdir) {
 module.exports = {
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".json", ".jsx"],
-    alias: {
-      actions: srcPath('public/actions'),
-      apis: srcPath('public/apis'),
-      components: srcPath('public/components'),
-      containers: srcPath('public/containers'),
-      reducers: srcPath('public/reducers'),
-      types: srcPath('public/types'),
-      shared: srcPath('shared'),
-      store: srcPath('public/Store'),
-      types: srcPath('public/types')
-    }
+    alias: { }
   },
   module: {
     strictExportPresence: true,

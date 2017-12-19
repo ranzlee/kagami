@@ -13,10 +13,6 @@
     "copy-prod-config": "node copyProdConfig.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "_moduleAliases": {
-    "shared": "src/shared",
-    "configElements": "src/shared/models/configuration/elements"
-  },
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -36,7 +32,6 @@
     "fbgraph": "^1.4.1",
     "lodash": "^4.17.4",
     "lusca": "^1.5.2",
-    "module-alias": "^2.0.3",
     "mongoose": "^4.13.7",
     "morgan": "^1.9.0",
     "nodemailer": "^4.4.1",

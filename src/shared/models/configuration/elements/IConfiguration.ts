@@ -1,6 +1,6 @@
-import { IConfigurationElement } from "configElements/IConfigurationElement";
+import { IConfigurationElement } from './IConfigurationElement';
 
-export interface IConfiguration {
+export interface IConfiguration extends IConfigurationElement {
     configurationElements: string[];
     currentChangeEventId: number;
 }

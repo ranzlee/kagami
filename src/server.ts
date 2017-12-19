@@ -1,4 +1,3 @@
-require('module-alias/register')
 import * as express from "express";
 import * as compression from "compression"; // compresses requests
 import * as session from "express-session";
