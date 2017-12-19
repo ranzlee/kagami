@@ -1,9 +1,5 @@
 import { ActionTypeKeys } from "actions/ActionTypeKeys";
-import { Action, ActionCreator, Dispatch } from 'redux';
-import { App } from "types/App";
-import { ThunkAction } from 'redux-thunk';
-import * as playerApi from "apis/PlayerApi"
-import { IPlayer } from "shared/models/Player"
+import { ConfigElementType } from "configElements/ConfigElementType";
 
 export type EntityActionTypes =
     | AddEntityAction
@@ -13,55 +9,37 @@ export type EntityActionTypes =
 export interface AddEntityAction {
     type: ActionTypeKeys.ADD_ENTITY;
     id: string,
-    entityType: ConfigElementType 
+    entityType: ConfigElementType
 }
 export interface UpdateEntityAction {
-    type: ActionTypeKeys.SAVE_ADD_PLAYER;
+    type: ActionTypeKeys.UPDATE_ENTITY;
     id: string;
-    firstName: string;
-    lastName: string;
+    entityType: ConfigElementType;
+    propertyName: string;
+    newValue: any;
+    oldValue: any;
 }
 export interface DeleteEntityAction {
-    type: ActionTypeKeys.DELETE_ENTITY ;
+    type: ActionTypeKeys.DELETE_ENTITY
+    id: string,
+    entityType: ConfigElementType
 }
 
-
-export const startAddPlayer = (): StartAddPlayerItemAction => ({
-    type: ActionTypeKeys.START_ADD_PLAYER,
-});
-export const saveAddPlayer = (id: string, firstName: string, lastName: string): SaveAddPlayerItemAction => ({
-    type: ActionTypeKeys.SAVE_ADD_PLAYER,
+export const addEntity = (id: string, entityType: ConfigElementType): AddEntityAction => ({
+    type: ActionTypeKeys.ADD_ENTITY,
     id,
-    firstName,
-    lastName
+    entityType
 });
-export const cancelAddPlayer = (): CancelAddPlayerItemAction => ({
-    type: ActionTypeKeys.CANCEL_ADD_PLAYER,
-});
-export const deletePlayer = (id: string): DeletePlayerItemAction => ({
-    type: ActionTypeKeys.DELETE_PLAYER,
-    id
-});
-export const updatePlayer = (id: string, firstName: string, lastName: string): UpdatePlayerAction => ({
-    type: ActionTypeKeys.UPDATE_PLAYER,
+export const updateEntity = (id: string, entityType: ConfigElementType, propertyName: string, newValue: any, oldValue: any): UpdateEntityAction => ({
+    type: ActionTypeKeys.UPDATE_ENTITY,
     id,
-    firstName,
-    lastName
+    entityType,
+    propertyName,
+    newValue,
+    oldValue
 });
-export const setEditPlayer = (id: string): SetEditPlayerAction => ({
-    type: ActionTypeKeys.SET_EDIT_PLAYER,
-    id
+export const deleteEntity = (id: string, entityType: ConfigElementType): DeleteEntityAction => ({
+    type: ActionTypeKeys.DELETE_ENTITY,
+    id,
+    entityType
 });
-
-export const fetchAllPlayers = () => {
-    return (dispatch: any) => {
-        playerApi.fetchAllPlayers
-            .then((response: any) => dispatch({
-                type: ActionTypeKeys.FETCH_ALL_PLAYERS_SUCCESS,
-                players: response.data
-            }).error((response: any) => dispatch({
-                type: ActionTypeKeys.FETCH_ALL_PLAYERS_FAIL,
-                error: response.error
-            })));
-      }
-};
