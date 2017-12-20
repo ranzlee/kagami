@@ -46,7 +46,7 @@ module.exports = {
       "window.jQuery": "jquery",
       Popper: ["popper.js", "default"]
     }),
-    new CleanWebpackPlugin(['dist'])
+    //new CleanWebpackPlugin(['dist'])
   ],
   output: {
     path: __dirname + "/dist/public",

@@ -26,6 +26,6 @@ renderApp(KagamiRoutes);
 
 if (module.hot) {
   module.hot.accept(KagamiRoutes, () => {
-    renderApp(require("./routes/Routes").default);
+    renderApp(require("./../routes/KagamiRoutes").default);
   });
 }

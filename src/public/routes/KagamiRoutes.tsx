@@ -26,10 +26,10 @@ export default class KagamiRoutes extends React.Component {
                 <NavItem eventKey={2}>HOME</NavItem>
               </LinkContainer>
               <LinkContainer to="/configuration">
-                <NavItem eventKey={2}>CONFIGURATION</NavItem>
+                <NavItem eventKey={3}>CONFIGURATION</NavItem>
               </LinkContainer>
               <LinkContainer to="/about">
-                <NavItem eventKey={3}>ABOUT</NavItem>
+                <NavItem eventKey={4}>ABOUT</NavItem>
               </LinkContainer>
             </Nav>
             <Nav pullRight>
