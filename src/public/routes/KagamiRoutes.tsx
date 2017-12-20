@@ -1,20 +1,21 @@
 import * as React from "react";
 import { Route } from "react-router";
 import { Link } from "react-router-dom";
-import App from "./components/App";
-import Home from "./components/Home";
-import About from "./components/About";
-import Login from "./components/Login";
+import App from "./../components/App";
+import Home from "./../components/Home";
+import About from "./../components/About";
+import Login from "./../components/Login";
+import ConfigurationRoutes from "./ConfigurationRoutes";
 import { Navbar, Nav, NavItem } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import * as UserService from "./services/userService";
+import * as UserService from "./../services/userService";
 
-export default class Routes extends React.Component {
+export default class KagamiRoutes extends React.Component {
   logout = (event: any) => {
     event.preventDefault();
     UserService.logout();
   };
-
+  
   render() {
     let authLink = null;
     if (UserService.getUser() != null) {
@@ -41,8 +42,11 @@ export default class Routes extends React.Component {
               <LinkContainer to="/home">
                 <NavItem eventKey={2}>HOME</NavItem>
               </LinkContainer>
+              <LinkContainer to="/configuration">
+                <NavItem eventKey={3}>CONFIGURATION</NavItem>
+              </LinkContainer>
               <LinkContainer to="/about">
-                <NavItem eventKey={3}>ABOUT</NavItem>
+                <NavItem eventKey={4}>ABOUT</NavItem>
               </LinkContainer>
             </Nav>
             <Nav pullRight>{authLink}</Nav>
@@ -52,6 +56,7 @@ export default class Routes extends React.Component {
         <Route exact path="/home" component={Home} />
         <Route exact path="/about" component={About} />
         <Route exact path="/login" component={Login} />
+        <Route exact path="/configuration" component={ConfigurationRoutes } />
       </div>
     );
   }
