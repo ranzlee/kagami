@@ -38,8 +38,9 @@
         environment:
           - MONGO_DATA_DIR=/data/db
           - MONGO_LOG_DIR=/dev/null
-        volumes:
-          - ./data/db:/data/db
+        # Turned this off for now because windows cannot link up the mongo volume for whatever reason.
+        #volumes:  
+          #- ./data/db:/data/db
         networks:
           mongo_net:
               ipv4_address: "172.16.0.2" 
