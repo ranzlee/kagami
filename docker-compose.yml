@@ -14,6 +14,10 @@
         ports:
             - "3001:3001"
             - "35729:35729"
+        networks:
+            mongo_net:
+        depends_on:
+          - mongodb
     node:
       build: .
       ports:
