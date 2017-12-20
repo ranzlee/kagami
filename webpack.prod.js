@@ -7,7 +7,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 
 module.exports = merge(common, {
-  entry: [path.join(__dirname, "src/public/index.tsx")],
+  entry: [path.join(__dirname, "src/public/Index.tsx")],
   module: {
     rules: [
       {

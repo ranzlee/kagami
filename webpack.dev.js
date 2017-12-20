@@ -8,7 +8,7 @@ module.exports = merge(common, {
   entry: [
     require.resolve("react-hot-loader/patch"),
     require.resolve("webpack-hot-middleware/client"),
-    path.join(__dirname, "src/public/index.tsx")
+    path.join(__dirname, "src/public/Index.tsx")
   ],
   devtool: "inline-source-map",
   module: {

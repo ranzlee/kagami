@@ -1,13 +1,13 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { AppContainer } from "react-hot-loader";
-import Root from "./root";
+import Root from "./Root";
 import "./assets/css/main.scss";
 import "./assets/styles.css";
 import "./assets/js/lib/bootstrap.min.js";
 import { Provider } from "react-redux";
-import {Store} from "./Store";
-import routes from "./routes/Routes";
+import { Store } from "./Store";
+import { Routes } from "./routes/Routes";
 
 declare const module: any;
 
@@ -22,10 +22,10 @@ const renderApp = (appRoutes: any) => {
   );
 };
 
-renderApp(routes);
+renderApp(Routes);
 
 if (module.hot) {
   module.hot.accept(routes, () => {
-    renderApp(require("routes/Routes").default);
+    renderApp(require("./routes/Routes").default);
   });
 }

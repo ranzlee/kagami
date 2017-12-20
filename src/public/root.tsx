@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Router } from "react-router";
 import { createHashHistory } from "history";
-import Routes from "./routes";
+import Routes from "./routes/Routes";
 
 const history = createHashHistory();
 

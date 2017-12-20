@@ -1,11 +1,11 @@
 import * as React from "react";
 import { Route } from "react-router";
 import { Link } from "react-router-dom";
-import App from "components/App";
-import Home from "components/Home";
-import About from "components/About";
-import Login from "components/Login";
-import { ConfigurationRoutes } from "routes/ConfigurationRoutes"; 
+import App from "./../components/App";
+import Home from "./../components/Home";
+import About from "./../components/About";
+import Login from "./../components/Login";
+import ConfigurationRoutes from "./ConfigurationRoutes";
 import { Navbar, Nav, NavItem } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 
@@ -43,7 +43,7 @@ export default class Routes extends React.Component {
         <Route exact path="/home" component={Home} />
         <Route exact path="/about" component={About} />
         <Route exact path="/login" component={Login} />
-        <Route exact path="/configuration" component={ConfigurationRoutes} />
+        <Route exact path="/configuration" component={ConfigurationRoutes } />
       </div>
     );
   }

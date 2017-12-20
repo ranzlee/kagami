@@ -1,5 +1,7 @@
 import * as React from "react";
 import { Row, Col, ControlLabel, FormGroup, FormControl } from "react-bootstrap";
+import { IConfiguration } from "../../../shared/models/configuration/elements/IConfiguration";
+import { ConfigElementType } from "../../../shared/models/configuration/elements/ConfigElementType";
 
 export interface IOwnProps {
     id: string;
@@ -19,7 +21,7 @@ export interface IConnectedDispatch {
     delete: () => void;
 }
 
-export class Configurations extends React.Component<IOwnProps & IConnectedState & IConnectedDispatch, {}> {
+export class Config extends React.Component<IOwnProps & IConnectedState & IConnectedDispatch, {}> {
     updateClickHandler = (event: any) => {
         const {configuration, update} = this.props;
         
