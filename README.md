@@ -18,7 +18,7 @@ If local development (No Docker)
 * Clone the repository
 
 ```
-git clone --depth=1 https://github.com/ranzlee/Qwik <project_name>
+git clone https://gitlab.com/Alltech/Kagami.git <project_name>
 ```
 
 * Install dependencies
@@ -55,4 +55,4 @@ mongod
 npm run start-dev
 ```
 
-Navigate to `http://localhost:3000`
+Navigate to `https://localhost:3000`

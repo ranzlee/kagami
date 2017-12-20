@@ -24,7 +24,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: "Qwik",
+      title: "Kagami",
       template: "./src/public/index.html"
     }),
     new webpack.ProvidePlugin({

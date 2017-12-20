@@ -14,6 +14,7 @@ import * as passport from "passport";
 import expressValidator = require("express-validator");
 import fs = require("fs");
 import https = require("https");
+
 //read .env.config variables
 dotenv.config({ path: path.join(__dirname, ".env.config") });
 
@@ -31,17 +32,11 @@ mongoose.connection.on("error", () => {
   process.exit();
 });
 
-//display environment variable (development or production)
-console.log("process.env.NODE_ENV: " + process.env.NODE_ENV);
-
 //create express server
 const app = express();
 
 //if not production, setup webpack middleware for HMR and express detailed errors
 if (process.env.NODE_ENV !== "production") {
-  console.log(
-    "development mode - using webpack-dev-middleware with HMR enabled"
-  );
   const webpack = require("webpack");
   const webpackDevMiddleware = require("webpack-dev-middleware");
   const webpackHotMiddleware = require("webpack-hot-middleware");
@@ -64,16 +59,16 @@ app.use(compression());
 //use morgan logger
 //TODO: perhaps this should be dev only! RESEARCH
 app.use(logger("dev"));
-//TODO: do we need this parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 //TODO: what the hell is this
 app.use(expressValidator());
-//TODO: Research this session stuff
 app.use(
   session({
     resave: true,
-    saveUninitialized: true,
+    name: "connect.sid",
+    cookie: { expires: false, secure: true },
+    saveUninitialized: false,
     secret: process.env.SESSION_SECRET || "",
     store: new MongoStore({
       url: connectionUri,
@@ -87,10 +82,8 @@ app.use(passport.session());
 //use flash messages
 //TODO: Research this
 app.use(flash());
-//TODO: what the hell is this
 app.use(lusca.xframe("SAMEORIGIN"));
 app.use(lusca.xssProtection(true));
-//TODO: I assume this is putting the request user in the response
 app.use((req, res, next) => {
   res.locals.user = req.user;
   next();
@@ -106,25 +99,16 @@ app.use(
 );
 
 //passport variables are in .env.config, so load the variables first
-import * as passportConfig from "./config/passport";
+require("./config/passport");
 
 //import controllers
-import * as apiController from "./controllers/api";
 import * as authenticationController from "./controllers/authentication";
 
 //app routes
-//test controller
-app.get("/test/dummy", (req, res) => {
-  res.send({ message: "Hello World!" });
-});
-//api controller
-app.get(
-  "/api/facebook",
-  passportConfig.isAuthenticated,
-  passportConfig.isAuthorized,
-  apiController.getFacebook
-);
-//authentication controller
+//authentication controller common
+app.get("/auth/user", authenticationController.getUser);
+app.get("/auth/logout", authenticationController.logout);
+//facebook
 app.get(
   "/auth/facebook",
   authenticationController.redirectRootIfAuthenticated,
@@ -135,9 +119,20 @@ app.get(
   passport.authenticate("facebook"),
   authenticationController.authenticateFacebookCallback()
 );
+//google
+app.get(
+  "/auth/google",
+  authenticationController.redirectRootIfAuthenticated,
+  authenticationController.authenticateGoogle()
+);
+app.get(
+  "/auth/google/callback",
+  passport.authenticate("google"),
+  authenticationController.authenticateGoogleCallback()
+);
 
-const privateKey = fs.readFileSync("key.pem");
-const certificate = fs.readFileSync("certificate.pem");
+const privateKey = fs.readFileSync(path.join(__dirname, "key.pem"));
+const certificate = fs.readFileSync(path.join(__dirname, "certificate.pem"));
 
 https
   .createServer(

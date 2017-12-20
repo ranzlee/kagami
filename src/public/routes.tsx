@@ -7,15 +7,32 @@ import About from "./components/About";
 import Login from "./components/Login";
 import { Navbar, Nav, NavItem } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
+import * as UserService from "./services/userService";
 
 export default class Routes extends React.Component {
+  logout = (event: any) => {
+    event.preventDefault();
+    UserService.logout();
+  };
+
   render() {
+    let authLink = null;
+    if (UserService.getUser() != null) {
+      authLink = <NavItem onClick={this.logout}>LOGOUT</NavItem>;
+    } else {
+      authLink = (
+        <LinkContainer to="/login">
+          <NavItem eventKey={1}>LOGIN</NavItem>
+        </LinkContainer>
+      );
+    }
+
     return (
       <div>
-        <Navbar fluid fixedTop inverse collapseOnSelect>
+        <Navbar fluid fixedTop collapseOnSelect>
           <Navbar.Header>
             <Navbar.Brand>
-              <Link to="/">QWIK</Link>
+              <Link to="/">KAGAMI</Link>
             </Navbar.Brand>
             <Navbar.Toggle />
           </Navbar.Header>
@@ -28,11 +45,7 @@ export default class Routes extends React.Component {
                 <NavItem eventKey={3}>ABOUT</NavItem>
               </LinkContainer>
             </Nav>
-            <Nav pullRight>
-              <LinkContainer to="/login">
-                <NavItem eventKey={1}>LOGIN</NavItem>
-              </LinkContainer>
-            </Nav>
+            <Nav pullRight>{authLink}</Nav>
           </Navbar.Collapse>
         </Navbar>
         <Route exact path="/" component={App} />
