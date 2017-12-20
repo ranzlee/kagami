@@ -15,16 +15,16 @@ export interface IConnectedDispatch {
     update: (
         id: string,
         entityType: ConfigElementType,
-        propertyName: string, 
-        newValue: any, 
+        propertyName: string,
+        newValue: any,
         oldValue: any) => void;
-    delete: () => void;
+    deleteConfig: () => void;
 }
 
 export class Config extends React.Component<IOwnProps & IConnectedState & IConnectedDispatch, {}> {
     updateClickHandler = (event: any) => {
-        const {configuration, update} = this.props;
-        
+        const { configuration, update } = this.props;
+
         const target = event.target;
         const value = target.value;
         const name = target.name;
@@ -33,7 +33,7 @@ export class Config extends React.Component<IOwnProps & IConnectedState & IConne
     }
 
     render() {
-        const { configuration, update, delete } = this.props;
+        const { configuration, update } = this.props;
         return (
             <div>
                 <FormGroup>

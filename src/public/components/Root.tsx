@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Router } from "react-router";
 import { createHashHistory } from "history";
-import Routes from "./routes/Routes";
+import KagamiRoutes from "./../routes/KagamiRoutes";
 
 const history = createHashHistory();
 
@@ -9,7 +9,7 @@ export default class Root extends React.Component {
   render() {
     return (
       <Router history={history}>
-        <Routes children={this.props.children} />
+        <KagamiRoutes children={this.props.children} />
       </Router>
     );
   }

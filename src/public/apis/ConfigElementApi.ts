@@ -1,3 +1,4 @@
+import { ConfigElementType } from './../../shared/models/configuration/elements/ConfigElementType';
 import axios from 'axios';
 
 export const fetchConfiguration = (id: string) => {

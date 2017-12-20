@@ -9,7 +9,7 @@ import ConfigurationRoutes from "./ConfigurationRoutes";
 import { Navbar, Nav, NavItem } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 
-export default class Routes extends React.Component {
+export default class KagamiRoutes extends React.Component {
   render() {
     return (
       <div>

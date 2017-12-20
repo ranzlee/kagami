@@ -17,10 +17,14 @@ module.exports = {
   module: {
     strictExportPresence: true,
     rules: [
-      {
-        test: /\.(ts|tsx)$/,
-        loader: require.resolve("ts-loader")
-      },
+     
+// All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
+      { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
+     
+      //{
+       // test: /\.(ts|tsx)$/,
+       // loader: require.resolve("ts-loader")
+      //},
       {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: "url-loader?limit=10000&mimetype=application/font-woff"

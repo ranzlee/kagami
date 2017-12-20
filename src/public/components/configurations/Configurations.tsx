@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Button } from "react-bootstrap";
-import { Config } from "./../../containers/configurations/ConfigContainer";
+import Config from "./../../containers/configurations/ConfigContainer";
 
 export interface IOwnProps {
 }
