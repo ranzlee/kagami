@@ -4,10 +4,20 @@ import { entityLookupReducer } from './domain/EntityLookupReducer';
 
 import { appStateReducer } from "./appState/AppStateReducer";
 
-var domainReducer = combineReducers(
+var configDataSubReducers = combineReducers(
     {
-        configurationElements: configurationElementReducer,
-        entityLookup: entityLookupReducer
+        components: configurationElementReducer,
+        entities: entityLookupReducer
     });
 
-export default combineReducers({ appState: appStateReducer, domain: domainReducer });
+var domainReducer = combineReducers(
+    {
+        configData: configDataSubReducers,
+        configDataReducer
+    });
+
+export default combineReducers(
+    {
+        appState: appStateReducer,
+        domain: domainReducer
+    });

@@ -1,6 +1,5 @@
+import { IConfigData } from './../../shared/models/IConfigData';
 import { IConfigurationElement } from './../../shared/models/configuration/elements/IConfigurationElement';
-import { IConfigElements} from "./../../shared/models/IConfigElements";
-import { IEntityLookup} from "./../../shared/models/IEntityLookup";
 
 export type AppStore = {
     readonly domain: IDomain,
@@ -9,8 +8,7 @@ export type AppStore = {
 }
 
 export interface IDomain {
-    configurationElements: IConfigElements;
-    entityLookup: IEntityLookup;
+    configData: IConfigData;
 }
 
 export interface IAppState {

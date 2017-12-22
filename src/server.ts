@@ -45,7 +45,11 @@ if (process.env.NODE_ENV !== "production") {
   // Tell express to use the webpack-dev-middleware and use the webpack.dev.js configuration file as a base.
   app.use(
     webpackDevMiddleware(compiler, {
-      publicPath: config.output.publicPath
+      publicPath: config.output.publicPath,
+      watchOptions: {
+        aggregateTimeout: 300,
+        poll: 1000
+      }
     })
   );
   app.use(webpackHotMiddleware(compiler));

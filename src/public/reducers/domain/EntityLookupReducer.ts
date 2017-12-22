@@ -5,7 +5,7 @@ export function entityLookupReducer(lookup: any = {}, action: EntityActionTypes)
     switch (action.type) {
         case ActionTypeKeys.ADD_CONFIGURATION:
             return { ...lookup, [action.configId]: { id: action.configId } };
-        case ActionTypeKeys.ADD_CONFIG_ENTITY:
+        case ActionTypeKeys.ADD_ENTITY:
             return { ...lookup, [action.entityId]: { id: action.entityId } };
         case ActionTypeKeys.UPDATE_ENTITY:
             var copy = { ...lookup };
