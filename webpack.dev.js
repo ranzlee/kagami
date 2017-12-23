@@ -10,7 +10,7 @@ module.exports = merge(common, {
     require.resolve("webpack-hot-middleware/client"),
     path.join(__dirname, "src/public/components/Index.tsx")
   ],
-  devtool: "inline-source-map",
+  devtool: "cheap-module-eval-source-map",
   module: {
     rules: [
       {
