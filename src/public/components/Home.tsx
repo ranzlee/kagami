@@ -11,7 +11,7 @@ import {
 } from "react-bootstrap";
 import { UIEvent, SyntheticEvent } from "react";
 import * as axios from "axios";
-import { User } from "../../shared/models/user";
+import { User } from "../../shared/models/User";
 
 export interface HomeState {
   name: string;

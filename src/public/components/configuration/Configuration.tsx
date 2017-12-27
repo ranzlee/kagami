@@ -1,13 +1,13 @@
 import * as React from "react";
 import { Button } from "react-bootstrap";
-import { IConfiguration } from "./../../../shared/models/configuration/elements/IConfiguration";
+import {Configuration as Config} from "./../../../shared/models/configuration/Configuration"
 
 export interface IOwnProps {
-    configId: string;
+    match: any; // route match
 }
 
 export interface IConnectedState {
-    configuration: IConfiguration;
+    configuration: Config;
 }
 
 export interface IConnectedDispatch {

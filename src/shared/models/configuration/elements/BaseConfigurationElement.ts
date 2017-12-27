@@ -1,6 +1,7 @@
 import { ConfigElementType } from './../../enums/ConfigElementType';
+import { IConfigurationElement } from './IConfigurationElement';
 
-export interface IConfigurationElement {
+export abstract class BaseConfigurationElement implements IConfigurationElement {
     id: string;
     configId: string;
     configElementType: ConfigElementType;
@@ -8,5 +9,4 @@ export interface IConfigurationElement {
     description: string;
     dependencies: string[];
     tags: string[];
-    [key: string]: any;
 }

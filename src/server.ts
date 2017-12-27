@@ -35,6 +35,16 @@ mongoose.connection.on("error", () => {
 //create express server
 const app = express();
 
+var Raven = require("raven");
+// Must configure Raven before doing anything else with it
+Raven.config('https://7284ce6e12634582bd9ed45a5efd9008:57ff2d00f5644a34901aae7e5e3c0a2d@sentry.io/264284').install();
+
+// The request handler must be the first middleware on the app
+app.use(Raven.requestHandler());
+
+// The error handler must be before any other error middleware
+app.use(Raven.errorHandler());
+
 //if not production, setup webpack middleware for HMR and express detailed errors
 if (process.env.NODE_ENV !== "production") {
   const webpack = require("webpack");
@@ -45,11 +55,15 @@ if (process.env.NODE_ENV !== "production") {
   // Tell express to use the webpack-dev-middleware and use the webpack.dev.js configuration file as a base.
   app.use(
     webpackDevMiddleware(compiler, {
-      publicPath: config.output.publicPath
+      publicPath: config.output.publicPath,
+      watchOptions: {
+        aggregateTimeout: 300,
+        poll: 1000
+      }
     })
   );
   app.use(webpackHotMiddleware(compiler));
-  app.use(errorHandler());
+  //app.use(errorHandler());
 }
 
 //set the listener port from config or default to 3000

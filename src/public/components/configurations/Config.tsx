@@ -1,20 +1,20 @@
 import * as React from "react";
 import { Row, Col, ControlLabel, FormGroup, FormControl } from "react-bootstrap";
-import { IConfiguration } from "../../../shared/models/configuration/elements/IConfiguration";
-import { ConfigElementType } from "../../../shared/models/configuration/elements/ConfigElementType";
+import { Configuration } from "./../../../shared/models/configuration/Configuration"
+import { ConfigElementType } from "../../../shared/models/enums/ConfigElementType";
+import { Link } from "react-router-dom";
 
 export interface IOwnProps {
     id: string;
 }
 
 export interface IConnectedState {
-    configuration: IConfiguration;
+    configuration: Configuration;
 }
 
 export interface IConnectedDispatch {
     update: (
         id: string,
-        entityType: ConfigElementType,
         propertyName: string,
         newValue: any,
         oldValue: any) => void;
@@ -29,24 +29,39 @@ export class Config extends React.Component<IOwnProps & IConnectedState & IConne
         const value = target.value;
         const name = target.name;
 
-        update(configuration.id, ConfigElementType.configuration, name, value, configuration[name]);
+        const oldValue = configuration[name];
+        update(configuration.id, name, value, oldValue);
     }
 
     render() {
         const { configuration, update } = this.props;
+        const editUrl = "./configuration/" + configuration.id;
+
         return (
-            <div>
-                <FormGroup>
-                    <ControlLabel >Name: </ControlLabel>
-                    <FormControl
+            <div className="row">
+                <div className="col-xs-4">
+                    <label>Name:</label>
+                </div>
+                <div className="col-xs-4">
+                    <input
                         type="text"
+                        className="form-control"
+                        placeholder="Configuration Name"
+                        aria-label="Configuration Name"
                         name="name"
                         value={configuration.name}
-                        placeholder="Configuration Name"
-                        onChange={this.updateClickHandler}>
-                    </FormControl>
-                </FormGroup>
-            </div >
+                        onChange={this.updateClickHandler}></input>
+                </div>
+                <div className="col-xs-4">
+                    <Link to={editUrl}>
+                        <button
+                            type="button"
+                            className="btn btn-primary">
+                            Edit
+                        </button>
+                    </Link>
+                </div>
+            </div>
         );
     }
 }
