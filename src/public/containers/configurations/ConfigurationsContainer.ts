@@ -6,7 +6,7 @@ var cuid = require('cuid');
 
 export const mapStateToProps = (AppStore: AppStore, props: IOwnProps): IConnectedState => {
     return {
-        configurationIds: Object.keys(AppStore.domain.configElements)
+        configurationIds: Object.keys(AppStore.domain.configurations)
     }
 }
 
