@@ -8,7 +8,9 @@ export type AppStore = {
 }
 
 export interface IDomain {
-    configData: IConfigData;
+    configurations: {
+        [key: string]: IConfigData;
+    }
 }
 
 export interface IAppState {

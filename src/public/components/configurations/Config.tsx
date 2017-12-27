@@ -1,14 +1,12 @@
 import * as React from "react";
 import { Row, Col, ControlLabel, FormGroup, FormControl } from "react-bootstrap";
-import { IConfiguration } from "../../../shared/models/configuration/elements/IConfiguration";
-import { ConfigElementType } from "../../../shared/models/configuration/elements/ConfigElementType";
 
 export interface IOwnProps {
     id: string;
 }
 
 export interface IConnectedState {
-    configuration: IConfiguration;
+    configuration: models.configuration.Configuration;
 }
 
 export interface IConnectedDispatch {
@@ -29,7 +27,7 @@ export class Config extends React.Component<IOwnProps & IConnectedState & IConne
         const value = target.value;
         const name = target.name;
 
-        update(configuration.id, ConfigElementType.configuration, name, value, configuration[name]);
+        update(configuration.id,  name, value, configuration[name]);
     }
 
     render() {
