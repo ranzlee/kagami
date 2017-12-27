@@ -13,8 +13,8 @@ export function configurationReducer(configurations: { [key: string]: Configurat
             return deleteCopy;
         case ActionTypeKeys.UPDATE_CONFIGURATION:
             let copy = { ...configurations };
-            copy.Config = { ...copy[action.configId] };
-            copy.Config[action.propertyName] = action.newValue;
+            copy[action.configId]  = { ...copy[action.configId] };
+            copy[action.configId][action.propertyName] = action.newValue;
             return copy;
         default:
             return configurations;

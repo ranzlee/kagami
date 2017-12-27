@@ -5,7 +5,7 @@ import * as actions from './../../actions/EntityActions';
 
 export const mapStateToProps = (AppStore: AppStore, props: IOwnProps) : IConnectedState => {
     return {
-        configuration: AppStore.domain.configurations[props.configId]
+        configuration: AppStore.domain.configurations[props.match.params.configId]
     }
 }
 

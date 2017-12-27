@@ -56,7 +56,7 @@ export default class KagamiRoutes extends React.Component {
         <Route exact path="/home" component={Home} />
         <Route exact path="/about" component={About} />
         <Route exact path="/login" component={Login} />
-        <Route exact path="/configuration" component={ConfigurationRoutes } />
+        <Route path="/configuration" component={ConfigurationRoutes } />
       </div>
     );
   }

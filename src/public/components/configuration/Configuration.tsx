@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 import {Configuration as Config} from "./../../../shared/models/configuration/Configuration"
 
 export interface IOwnProps {
-    configId: string;
+    match: any; // route match
 }
 
 export interface IConnectedState {
