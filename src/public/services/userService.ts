@@ -1,4 +1,4 @@
-import { User } from "../../shared/models/user";
+import { User } from "../../shared/models/User";
 import * as Axios from "axios";
 import * as React from "react";
 

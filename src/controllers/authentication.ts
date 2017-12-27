@@ -3,7 +3,7 @@ import * as request from "request";
 import * as graph from "fbgraph";
 import { Response, Request, NextFunction } from "express";
 import * as passport from "passport";
-import { User } from "../shared/models/user";
+import { User } from "../shared/models/User";
 
 export let redirectRootIfAuthenticated = (
   req: Request,
