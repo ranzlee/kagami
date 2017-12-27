@@ -1,19 +1,13 @@
 import { combineReducers } from "redux";
 import { configurationElementReducer } from './domain/ConfigurationElementReducer';
-import { entityLookupReducer } from './domain/EntityLookupReducer';
 
 import { appStateReducer } from "./appState/AppStateReducer";
-
-var configDataSubReducers = combineReducers(
-    {
-        components: configurationElementReducer,
-        entities: entityLookupReducer
-    });
+import { configurationReducer } from "./../reducers/domain/ConfigurationReducer";
 
 var domainReducer = combineReducers(
     {
-        configData: configDataSubReducers,
-        configDataReducer
+        configurations: configurationReducer,
+        configElements: configurationElementReducer
     });
 
 export default combineReducers(

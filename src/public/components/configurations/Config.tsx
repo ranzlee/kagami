@@ -14,7 +14,6 @@ export interface IConnectedState {
 export interface IConnectedDispatch {
     update: (
         id: string,
-        entityType: ConfigElementType,
         propertyName: string,
         newValue: any,
         oldValue: any) => void;
@@ -29,7 +28,8 @@ export class Config extends React.Component<IOwnProps & IConnectedState & IConne
         const value = target.value;
         const name = target.name;
 
-        update(configuration.id,  name, value, configuration[name]);
+        const oldValue = configuration[name];
+        update(configuration.id, name, value, oldValue);
     }
 
     render() {

@@ -3,4 +3,5 @@ export class Configuration {
     name: string;
     tenant: string;
     currentChangeEvent: number;
+    [key: string]: any;
 }

@@ -9,8 +9,8 @@ export type AppStore = {
 }
 
 export interface IDomain {
-    configurations: Configuration[];
-    configElements: IConfigurationElement[];
+    configurations: {[key: string] : Configuration};
+    configElements: {[key: string] : IConfigurationElement};
     tags: Tag[];
 }
 

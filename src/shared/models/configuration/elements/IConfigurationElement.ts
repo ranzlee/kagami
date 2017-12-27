@@ -8,4 +8,5 @@ export interface IConfigurationElement {
     description: string;
     dependencies: string[];
     tags: string[];
+    [key: string]: any;
 }

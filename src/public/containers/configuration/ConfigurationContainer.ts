@@ -2,11 +2,10 @@ import { connect, Dispatch } from 'react-redux';
 import { AppStore } from './../../types/AppStore';
 import { Configuration, IOwnProps, IConnectedState, IConnectedDispatch } from './../../components/configuration/Configuration';
 import * as actions from './../../actions/EntityActions';
-import { ConfigElementType } from '../../../shared/models/configuration/elements/ConfigElementType';
 
 export const mapStateToProps = (AppStore: AppStore, props: IOwnProps) : IConnectedState => {
     return {
-        configuration: AppStore.domain.entityLookup[props.configId]
+        configuration: AppStore.domain.configurations[props.configId]
     }
 }
 

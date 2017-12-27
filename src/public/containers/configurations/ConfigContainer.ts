@@ -8,18 +8,18 @@ var cuid = require('cuid');
 
 export const mapStateToProps = (AppStore: AppStore, props: IOwnProps): IConnectedState => {
     return {
-        configuration: AppStore.domain.entityLookup[props.id]
+        configuration: AppStore.domain.configurations[props.id]
     }
 }
 
 export const mapDispatchToProps = (dispatch: Dispatch<actions.EntityActionTypes>): IConnectedDispatch => {
     return {
         update: (id: string,
-            entityType: ConfigElementType,
             propertyName: string,
             newValue: any,
             oldValue: any) =>
-            dispatch(actions.updateEntity(id, entityType, propertyName, newValue, oldValue)),
+            dispatch(actions.updateConfig(id, propertyName, newValue, oldValue)),
+
         deleteConfig: () => {
             console.log("TODO")
         }
