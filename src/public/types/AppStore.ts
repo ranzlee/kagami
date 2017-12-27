@@ -1,5 +1,6 @@
-import { IConfigData } from './../../shared/models/IConfigData';
-import { IConfigurationElement } from './../../shared/models/configuration/elements/IConfigurationElement';
+import { Tag } from './../../shared/models/configuration/Tag';
+import { Configuration } from '../../shared/models/configuration/Configuration';
+import { IConfigurationElement } from '../../shared/models/configuration/elements/IConfigurationElement';
 
 export type AppStore = {
     readonly domain: IDomain,
@@ -8,9 +9,9 @@ export type AppStore = {
 }
 
 export interface IDomain {
-    configurations: {
-        [key: string]: IConfigData;
-    }
+    configurations: Configuration[];
+    configElements: IConfigurationElement[];
+    tags: Tag[];
 }
 
 export interface IAppState {

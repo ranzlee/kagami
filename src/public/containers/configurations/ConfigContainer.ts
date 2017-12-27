@@ -2,7 +2,8 @@ import { connect, Dispatch } from 'react-redux';
 import { AppStore } from './../../types/AppStore';
 import { Config, IOwnProps, IConnectedDispatch, IConnectedState } from './../../components/configurations/Config';
 import * as actions from './../../actions/EntityActions';
-import { ConfigElementType } from '../../../shared/models/configuration/elements/ConfigElementType';
+import { ConfigElementType } from '../../../shared/models/enums/ConfigElementType';
+
 var cuid = require('cuid');
 
 export const mapStateToProps = (AppStore: AppStore, props: IOwnProps): IConnectedState => {

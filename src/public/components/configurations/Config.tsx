@@ -1,12 +1,14 @@
 import * as React from "react";
 import { Row, Col, ControlLabel, FormGroup, FormControl } from "react-bootstrap";
+import { Configuration } from "./../../../shared/models/configuration/Configuration"
+import { ConfigElementType } from "../../../shared/models/enums/ConfigElementType";
 
 export interface IOwnProps {
     id: string;
 }
 
 export interface IConnectedState {
-    configuration: models.configuration.Configuration;
+    configuration: Configuration;
 }
 
 export interface IConnectedDispatch {

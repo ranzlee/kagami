@@ -1,11 +1,11 @@
 import { IDomain } from './../types/AppStore';
 import { FetchConfigurationAction, FetchConfigurationSuccessAction } from './EntityActions';
-import { ConfigElementType } from './../../shared/models/configuration/elements/ConfigElementType';
 import { ActionTypeKeys } from "./ActionTypeKeys";
-import { fetchConfiguration  } from "./../apis/ConfigApi"
-import {Action, ActionCreator, Dispatch} from 'redux';
-import {ThunkAction} from 'redux-thunk';
-import {AppStore} from "./../types/AppStore"
+import { fetchConfiguration } from "./../apis/ConfigApi"
+import { Action, ActionCreator, Dispatch } from 'redux';
+import { ThunkAction } from 'redux-thunk';
+import { AppStore } from "./../types/AppStore"
+import { ConfigElementType } from '../../shared/models/enums/ConfigElementType';
 
 export type EntityActionTypes =
     | FetchConfigurationAction
@@ -57,22 +57,22 @@ export interface DeleteEntityAction {
     entityType: ConfigElementType
 }
 
-export const fetchConfig : any = async (id: string) => {
+export const fetchConfig: any = async (id: string) => {
     return async (dispatch: Dispatch<AppStore>): Promise<any> => {
         try {
             const domainResult = await fetchConfiguration(id);
             return dispatch(fetchConfigSuccess(domainResult));
         }
-        catch(e) {
+        catch (e) {
             return dispatch(fetchConfigError(e));
         }
-      }
-    };
-export const fetchConfigSuccess = (domainResult: IDomain) : FetchConfigurationSuccessAction => ({
+    }
+};
+export const fetchConfigSuccess = (domainResult: IDomain): FetchConfigurationSuccessAction => ({
     type: ActionTypeKeys.FETCH_CONFIGURATION_SUCCESS,
     payload: domainResult
 });
-export const fetchConfigError = (error: any) : FetchConfigurationErrorAction => ({
+export const fetchConfigError = (error: any): FetchConfigurationErrorAction => ({
     type: ActionTypeKeys.FETCH_CONFIGURATION_ERROR,
     payload: error
 });
