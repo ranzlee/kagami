@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { stylePaddingLeft40px } from "./Styles";
+import { styleLocalLoginLabelsPaddingLeft } from "./Styles";
 
 export interface CreateAccountState {
   email: string;
@@ -65,7 +65,7 @@ export class CreateAccount extends React.Component<
             <div className="row">
               <div className="col-lg-3" />
               <div className="col-lg-2">
-                <label style={stylePaddingLeft40px} htmlFor="email">
+                <label style={styleLocalLoginLabelsPaddingLeft} htmlFor="email">
                   Email Address
                 </label>
               </div>
@@ -85,7 +85,10 @@ export class CreateAccount extends React.Component<
             <div className="row">
               <div className="col-lg-3" />
               <div className="col-lg-2">
-                <label style={stylePaddingLeft40px} htmlFor="password">
+                <label
+                  style={styleLocalLoginLabelsPaddingLeft}
+                  htmlFor="password"
+                >
                   Password
                 </label>
               </div>
@@ -105,7 +108,10 @@ export class CreateAccount extends React.Component<
             <div className="row">
               <div className="col-lg-3" />
               <div className="col-lg-2">
-                <label style={stylePaddingLeft40px} htmlFor="confirmPassword">
+                <label
+                  style={styleLocalLoginLabelsPaddingLeft}
+                  htmlFor="confirmPassword"
+                >
                   Confirm Password
                 </label>
               </div>

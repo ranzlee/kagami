@@ -1,3 +1,3 @@
-export const stylePaddingLeft40px = {
-  paddingLeft: "40px"
+export const styleLocalLoginLabelsPaddingLeft = {
+  paddingLeft: "35px"
 };
