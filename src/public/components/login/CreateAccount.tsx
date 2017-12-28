@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { styleUnderlineBold, stylePaddingLeft50px } from "./Styles";
+import { stylePaddingLeft40px } from "./Styles";
 
 export interface CreateAccountState {
   email: string;
@@ -53,8 +53,6 @@ export class CreateAccount extends React.Component<
                 <i className="fa fa-user" aria-hidden="true" />&nbsp;&nbsp;Create
                 a new local account or&nbsp;<a
                   href=""
-                  style={styleUnderlineBold}
-                  className="text-info"
                   onClick={this.handleLoginLocalAccount}
                 >
                   login with an existing local account
@@ -69,7 +67,7 @@ export class CreateAccount extends React.Component<
             <div className="row">
               <div className="col-lg-3" />
               <div className="col-lg-2">
-                <label style={stylePaddingLeft50px} htmlFor="email">
+                <label style={stylePaddingLeft40px} htmlFor="email">
                   Email Address
                 </label>
               </div>
@@ -89,7 +87,7 @@ export class CreateAccount extends React.Component<
             <div className="row">
               <div className="col-lg-3" />
               <div className="col-lg-2">
-                <label style={stylePaddingLeft50px} htmlFor="password">
+                <label style={stylePaddingLeft40px} htmlFor="password">
                   Password
                 </label>
               </div>
@@ -109,7 +107,7 @@ export class CreateAccount extends React.Component<
             <div className="row">
               <div className="col-lg-3" />
               <div className="col-lg-2">
-                <label style={stylePaddingLeft50px} htmlFor="confirmPassword">
+                <label style={stylePaddingLeft40px} htmlFor="confirmPassword">
                   Confirm Password
                 </label>
               </div>

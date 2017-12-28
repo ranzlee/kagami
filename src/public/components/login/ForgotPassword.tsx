@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { styleUnderlineBold, stylePaddingLeft50px } from "./Styles";
+import { stylePaddingLeft40px } from "./Styles";
 
 export interface ForgotPasswordState {
   email: string;
@@ -43,8 +43,6 @@ export class ForgotPassword extends React.Component<
                 <i className="fa fa-user" aria-hidden="true" />&nbsp;&nbsp;Enter
                 your email address to reset your local account or&nbsp;<a
                   href=""
-                  style={styleUnderlineBold}
-                  className="text-info"
                   onClick={this.handleLoginLocalAccount}
                 >
                   login with an existing local account
@@ -59,7 +57,7 @@ export class ForgotPassword extends React.Component<
             <div className="row">
               <div className="col-lg-3" />
               <div className="col-lg-2">
-                <label style={stylePaddingLeft50px} htmlFor="email">
+                <label style={stylePaddingLeft40px} htmlFor="email">
                   Email Address
                 </label>
               </div>

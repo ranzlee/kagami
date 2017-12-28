@@ -1,10 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import {
-  styleUnderlineBold,
-  stylePaddingTop7px,
-  stylePaddingLeft50px
-} from "./Styles";
+import { stylePaddingLeft40px } from "./Styles";
 
 export interface LocalLoginState {
   email: string;
@@ -56,12 +52,7 @@ export class LocalLogin extends React.Component<
               <span>
                 <i className="fa fa-user" aria-hidden="true" />&nbsp;&nbsp;Login
                 using your local account or&nbsp;
-                <a
-                  href=""
-                  style={styleUnderlineBold}
-                  className="text-info"
-                  onClick={this.handleCreateAccount}
-                >
+                <a href="" onClick={this.handleCreateAccount}>
                   create a new local account
                 </a>&nbsp;to get started!
               </span>
@@ -74,7 +65,7 @@ export class LocalLogin extends React.Component<
             <div className="row">
               <div className="col-lg-3" />
               <div className="col-lg-2">
-                <label style={stylePaddingLeft50px} htmlFor="email">
+                <label style={stylePaddingLeft40px} htmlFor="email">
                   Email Address
                 </label>
               </div>
@@ -94,7 +85,7 @@ export class LocalLogin extends React.Component<
             <div className="row">
               <div className="col-lg-3" />
               <div className="col-lg-2">
-                <label style={stylePaddingLeft50px} htmlFor="password">
+                <label style={stylePaddingLeft40px} htmlFor="password">
                   Password
                 </label>
               </div>
@@ -121,7 +112,7 @@ export class LocalLogin extends React.Component<
                   title="Remember me"
                 />&nbsp;<label htmlFor="rememberMe">Remember me</label>
               </div>
-              <div className="col-lg-2" style={stylePaddingTop7px}>
+              <div className="col-lg-2">
                 <a href="" onClick={this.handleForgotPassword}>
                   Forgot your password?
                 </a>
