@@ -6,8 +6,6 @@ import Home from "./../components/Home";
 import About from "./../components/About";
 import Login from "./../components/login/Login";
 import ConfigurationRoutes from "./ConfigurationRoutes";
-import { Navbar, Nav, NavItem } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
 import * as UserService from "./../services/userService";
 
 export default class KagamiRoutes extends React.Component {
@@ -19,44 +17,56 @@ export default class KagamiRoutes extends React.Component {
   render() {
     let authLink = null;
     if (UserService.getUser() != null) {
-      authLink = <NavItem onClick={this.logout}>LOGOUT</NavItem>;
+      authLink = (
+        <a href="" className="nav-item nav-link" onClick={this.logout}>
+          LOGOUT
+        </a>
+      );
     } else {
       authLink = (
-        <LinkContainer to="/login">
-          <NavItem eventKey={1}>LOGIN</NavItem>
-        </LinkContainer>
+        <Link className="nav-item nav-link" to="/login">
+          LOGIN
+        </Link>
       );
     }
 
     return (
       <div>
-        <Navbar fluid fixedTop collapseOnSelect>
-          <Navbar.Header>
-            <Navbar.Brand>
-              <Link to="/">KAGAMI</Link>
-            </Navbar.Brand>
-            <Navbar.Toggle />
-          </Navbar.Header>
-          <Navbar.Collapse>
-            <Nav>
-              <LinkContainer to="/home">
-                <NavItem eventKey={2}>HOME</NavItem>
-              </LinkContainer>
-              <LinkContainer to="/configuration">
-                <NavItem eventKey={3}>CONFIGURATION</NavItem>
-              </LinkContainer>
-              <LinkContainer to="/about">
-                <NavItem eventKey={4}>ABOUT</NavItem>
-              </LinkContainer>
-            </Nav>
-            <Nav pullRight>{authLink}</Nav>
-          </Navbar.Collapse>
-        </Navbar>
+        <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+          <Link className="navbar-brand" to="/">
+            KAGAMI
+          </Link>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon" />
+          </button>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <div className="navbar-nav">
+              <Link className="nav-item nav-link" to="/home">
+                HOME
+              </Link>
+              <Link className="nav-item nav-link" to="/configuration">
+                CONFIGURATION
+              </Link>
+              <Link className="nav-item nav-link" to="/about">
+                ABOUT
+              </Link>
+            </div>
+            <div className="navbar-nav ml-auto">{authLink}</div>
+          </div>
+        </nav>
         <Route exact path="/" component={App} />
         <Route exact path="/home" component={Home} />
         <Route exact path="/about" component={About} />
         <Route exact path="/login" component={Login} />
-        <Route path="/configuration" component={ConfigurationRoutes } />
+        <Route path="/configuration" component={ConfigurationRoutes} />
       </div>
     );
   }

@@ -1,24 +1,22 @@
 import * as React from "react";
-import { Button } from "react-bootstrap";
-import {Configuration as Config} from "./../../../shared/models/configuration/Configuration"
+import { Configuration as Config } from "./../../../shared/models/configuration/Configuration";
 
 export interface IOwnProps {
-    match: any; // route match
+  match: any; // route match
 }
 
 export interface IConnectedState {
-    configuration: Config;
+  configuration: Config;
 }
 
-export interface IConnectedDispatch {
-}
+export interface IConnectedDispatch {}
 
-export class Configuration extends React.Component<IOwnProps & IConnectedState & IConnectedDispatch, {}> {
-
-    render() {
-        const { configuration } = this.props;
-        return (
-            <div>Configuration: {configuration.name}</div>
-        );
-    }
+export class Configuration extends React.Component<
+  IOwnProps & IConnectedState & IConnectedDispatch,
+  {}
+> {
+  render() {
+    const { configuration } = this.props;
+    return <div>Configuration: {configuration.name}</div>;
+  }
 }

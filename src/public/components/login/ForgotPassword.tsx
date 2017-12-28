@@ -1,15 +1,5 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import {
-  Grid,
-  Row,
-  Col,
-  Button,
-  FormControl,
-  FormGroup,
-  ControlLabel,
-  Checkbox
-} from "react-bootstrap";
 import { styleUnderlineBold, stylePaddingLeft50px } from "./Styles";
 
 export interface ForgotPasswordState {
@@ -45,9 +35,9 @@ export class ForgotPassword extends React.Component<
       <div>
         <br />
         <hr />
-        <Row>
-          <Col lg={3} />
-          <Col lg={9}>
+        <div className="row">
+          <div className="col-lg-3" />
+          <div className="col-lg-9">
             <div className="text-primary">
               <span>
                 <i className="fa fa-user" aria-hidden="true" />&nbsp;&nbsp;Enter
@@ -61,38 +51,41 @@ export class ForgotPassword extends React.Component<
                 </a>&nbsp;to get started!
               </span>
             </div>
-          </Col>
-        </Row>
+          </div>
+        </div>
         <br />
         <form className="form-horizontal">
-          <FormGroup>
-            <Row>
-              <Col lg={3} />
-              <Col lg={2}>
-                <ControlLabel style={stylePaddingLeft50px} htmlFor="email">Email Address</ControlLabel>
-              </Col>
-              <Col lg={4}>
-                <FormControl
+          <div className="form-group">
+            <div className="row">
+              <div className="col-lg-3" />
+              <div className="col-lg-2">
+                <label style={stylePaddingLeft50px} htmlFor="email">
+                  Email Address
+                </label>
+              </div>
+              <div className="col-lg-4">
+                <input
+                  className="form-control"
                   id="email"
                   type="text"
                   value={this.state.email}
                   placeholder="Enter your email address"
                   onChange={this.handleEmailChange}
                 />
-              </Col>
-            </Row>
-          </FormGroup>
-          <Row>
-            <Col lg={5} />
-            <Col lg={2}>
-              <Button
-                bsClass="btn btn-primary"
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-lg-5" />
+            <div className="col-lg-2">
+              <button
+                className="btn btn-primary"
                 onClick={this.handleForgotPassword}
               >
                 Reset my account password!
-              </Button>
-            </Col>
-          </Row>
+              </button>
+            </div>
+          </div>
         </form>
       </div>
     );

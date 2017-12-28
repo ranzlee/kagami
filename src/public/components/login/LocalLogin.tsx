@@ -1,16 +1,10 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import {
-  Grid,
-  Row,
-  Col,
-  Button,
-  FormControl,
-  FormGroup,
-  ControlLabel,
-  Checkbox
-} from "react-bootstrap";
-import { styleUnderlineBold, stylePaddingTop7px, stylePaddingLeft50px } from "./Styles";
+  styleUnderlineBold,
+  stylePaddingTop7px,
+  stylePaddingLeft50px
+} from "./Styles";
 
 export interface LocalLoginState {
   email: string;
@@ -55,9 +49,9 @@ export class LocalLogin extends React.Component<
       <div>
         <br />
         <hr />
-        <Row>
-          <Col lg={3} />
-          <Col lg={9}>
+        <div className="row">
+          <div className="col-lg-3" />
+          <div className="col-lg-9">
             <div className="text-primary">
               <span>
                 <i className="fa fa-user" aria-hidden="true" />&nbsp;&nbsp;Login
@@ -72,65 +66,76 @@ export class LocalLogin extends React.Component<
                 </a>&nbsp;to get started!
               </span>
             </div>
-          </Col>
-        </Row>
+          </div>
+        </div>
         <br />
         <form className="form-horizontal">
-          <FormGroup>
-            <Row>
-              <Col lg={3} />
-              <Col lg={2}>
-                <ControlLabel style={stylePaddingLeft50px} htmlFor="email">Email Address</ControlLabel>
-              </Col>
-              <Col lg={4}>
-                <FormControl
+          <div className="form-group">
+            <div className="row">
+              <div className="col-lg-3" />
+              <div className="col-lg-2">
+                <label style={stylePaddingLeft50px} htmlFor="email">
+                  Email Address
+                </label>
+              </div>
+              <div className="col-lg-4">
+                <input
+                  className="form-control"
                   id="email"
                   type="text"
                   value={this.state.email}
                   placeholder="Enter your email address"
                   onChange={this.handleEmailChange}
                 />
-              </Col>
-            </Row>
-          </FormGroup>
-          <FormGroup>
-            <Row>
-              <Col lg={3} />
-              <Col lg={2} >
-                <ControlLabel style={stylePaddingLeft50px} htmlFor="password">Password</ControlLabel>
-              </Col>
-              <Col lg={4}>
-                <FormControl
+              </div>
+            </div>
+          </div>
+          <div className="form-group">
+            <div className="row">
+              <div className="col-lg-3" />
+              <div className="col-lg-2">
+                <label style={stylePaddingLeft50px} htmlFor="password">
+                  Password
+                </label>
+              </div>
+              <div className="col-lg-4">
+                <input
+                  className="form-control"
                   id="password"
                   type="password"
                   value={this.state.password}
                   placeholder="Enter your password"
                   onChange={this.handlePasswordChange}
                 />
-              </Col>
-            </Row>
-          </FormGroup>
-          <FormGroup>
-            <Row>
-              <Col lg={5} />
-              <Col lg={2}>
-                <Checkbox title="Remember me">Remember me</Checkbox>
-              </Col>
-              <Col lg={2} style={stylePaddingTop7px}>
+              </div>
+            </div>
+          </div>
+          <div className="form-group">
+            <div className="row">
+              <div className="col-lg-5" />
+              <div className="col-lg-2">
+                <input
+                  id="rememberMe"
+                  type="checkbox"
+                  className="formControl"
+                  title="Remember me"
+                />&nbsp;<label htmlFor="rememberMe">Remember me</label>
+              </div>
+              <div className="col-lg-2" style={stylePaddingTop7px}>
                 <a href="" onClick={this.handleForgotPassword}>
                   Forgot your password?
                 </a>
-              </Col>
-            </Row>
-          </FormGroup>
-          <Row>
-            <Col lg={5} />
-            <Col lg={2}>
-              <Button bsClass="btn btn-primary" onClick={this.handleLogin}>
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-lg-5" />
+            <div className="col-lg-2">
+              <button className="btn btn-primary" onClick={this.handleLogin}>
                 Log me in!
-              </Button>
-            </Col>
-          </Row>
+              </button>
+            </div>
+          </div>
         </form>
       </div>
     );
