@@ -9,12 +9,18 @@ export interface IConnectedState {
   configuration: Config;
 }
 
-export interface IConnectedDispatch {}
+export interface IConnectedDispatch {
+  fetchConfig: (id: string) => void;
+}
 
-export class Configuration extends React.Component<
-  IOwnProps & IConnectedState & IConnectedDispatch,
-  {}
-> {
+export class Configuration extends React.Component<IOwnProps & IConnectedState & IConnectedDispatch, {}> {
+  componentDidMount() {
+    const { configuration, match, fetchConfig } = this.props;
+    if (!configuration) {
+      fetchConfig(match.params.configId);
+    }
+  }
+
   render() {
     const { configuration } = this.props;
     return <div>Configuration: {configuration.name}</div>;

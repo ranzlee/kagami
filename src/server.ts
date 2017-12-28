@@ -117,6 +117,7 @@ require("./config/passport");
 
 //import controllers
 import * as authenticationController from "./controllers/authentication";
+import * as configurationController from "./controllers/configuration";
 
 //app routes
 //authentication controller common
@@ -145,16 +146,20 @@ app.get(
   authenticationController.authenticateGoogleCallback()
 );
 
+app.get("/api/configuration/:id", configurationController.getEntireConfiguration);
+app.put("/api/configuration/:id", configurationController.addConfiguration);
+app.post("/api/configuration/:id", configurationController.updateConfiguration);
+
 const privateKey = fs.readFileSync(path.join(__dirname, "key.pem"));
 const certificate = fs.readFileSync(path.join(__dirname, "certificate.pem"));
 
 https
   .createServer(
-    {
-      key: privateKey,
-      cert: certificate
-    },
-    app
+  {
+    key: privateKey,
+    cert: certificate
+  },
+  app
   )
   .listen(app.get("port"), () => {
     console.log(

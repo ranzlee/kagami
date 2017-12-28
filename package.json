@@ -19,6 +19,7 @@
     "@types/react-redux": "^5.0.14",
     "@types/redux": "^3.6.31",
     "@types/redux-logger": "^3.0.5",
+    "@types/rx": "^4.1.1",
     "async": "^2.6.0",
     "awesome-typescript-loader": "^3.4.1",
     "axios": "^0.17.1",
@@ -56,9 +57,10 @@
     "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.2.0",
+    "redux-observable": "^0.17.0",
     "remove": "^0.1.5",
-    "request": "^2.83.0"
+    "request": "^2.83.0",
+    "rxjs": "^5.5.6"
   },
   "devDependencies": {
     "@types/async": "^2.0.46",
