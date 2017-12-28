@@ -1,7 +1,7 @@
 import * as React from "react";
 import Config from "./../../containers/configurations/ConfigContainer";
 
-export interface IOwnProps {}
+export interface IOwnProps { }
 
 export interface IConnectedState {
   configurationIds: string[];
@@ -14,14 +14,14 @@ export interface IConnectedDispatch {
 export class Configurations extends React.Component<
   IOwnProps & IConnectedState & IConnectedDispatch,
   {}
-> {
+  > {
   private renderConfigs(): JSX.Element[] {
     var returnElements: JSX.Element[] = [];
 
     const { configurationIds } = this.props;
 
     for (var i = 0; i < configurationIds.length; i++) {
-      returnElements.push(<Config id={configurationIds[i]} />);
+      returnElements.push(<Config id={configurationIds[i]} key={configurationIds[i]} />);
     }
     return returnElements;
   }

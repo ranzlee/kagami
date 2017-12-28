@@ -21,10 +21,8 @@ export interface IConnectedDispatch {
   deleteConfig: () => void;
 }
 
-export class Config extends React.Component<
-  IOwnProps & IConnectedState & IConnectedDispatch,
-  {}
-> {
+export class Config extends React.Component<IOwnProps & IConnectedState & IConnectedDispatch, {}> 
+{
   updateClickHandler = (event: any) => {
     const { configuration, update } = this.props;
 

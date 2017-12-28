@@ -6,9 +6,13 @@ import {
     fetchConfigSuccess,
     fetchConfigError,
     UpdateConfigurationAction,
-    EntityActionTypes
+    EntityActionTypes,
+    ajaxSuccess,
+    AddConfigElementAction
 } from './../actions/EntityActions';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/of';
@@ -29,14 +33,18 @@ export const fetchConfigurationEpic = (action$: any) =>
 export const addConfigurationEpic = (action$: any) =>
     action$.ofType(ActionTypeKeys.ADD_CONFIGURATION)
         .mergeMap((action: AddConfigurationAction) =>
-            ajax.put(`./api/configuration/${action.configId}`));
+            ajax.put(`./api/configuration/${action.configId}`)
+                .map(ajaxSuccess));
 
 
 export const updateConfigurationEpic = (action$: any) =>
     action$.ofType(ActionTypeKeys.UPDATE_CONFIGURATION)
+        .debounceTime(2000)
+        .distinctUntilChanged()
         .mergeMap((action: UpdateConfigurationAction) =>
             ajax.post(`./api/configuration/${action.configId}`,
                 {
                     propertyName: action.propertyName,
                     newValue: action.newValue
-                }));
+                })
+                .map(ajaxSuccess));

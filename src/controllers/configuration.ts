@@ -5,43 +5,53 @@ import { ConfigurationEntity } from "./../models/ConfigurationEntity";
 import { ConfigurationElementEntity } from "./../models/ConfigurationElementEntity";
 
 interface IConfigResponse {
-    configuration: Configuration; 
+    configuration: Configuration;
     configElements: IConfigurationElement[]
 }
 
 export const getEntireConfiguration = (req: Request, res: Response): IConfigResponse | void => {
     const configId = req.params.id;
     if (configId) {
-    ConfigurationEntity.findById(configId, (err, config) => {
-        if (err) {
-            res.status(500).send(`Could not find Config: ${configId} in the DB`);
-          }
-          ConfigurationElementEntity.find({configId: configId}, (err, configElements) => {
-            var response : IConfigResponse = {
-                configuration: config as Configuration,
-                configElements: configElements as IConfigurationElement[]
-            };
-            res.send(response)
-          });
-    })
+        ConfigurationEntity.findById(configId, (err, config) => {
+            if (err) {
+                res.status(500).send(`Could not find Config: ${configId} in the DB`);
+                return;
+            }
+            ConfigurationElementEntity.find({ configId: configId }, (err, configElements) => {
+                var response: IConfigResponse = {
+                    configuration: config as Configuration,
+                    configElements: configElements as IConfigurationElement[]
+                };
+                res.send(response);
+                return;
+            });
+        })
     }
     res.send();
-  };
+};
 
-  export const addConfiguration = (req: Request, res: Response): void => {
+export const addConfiguration = (req: Request, res: Response): void => {
     const configId = req.params.id;
     if (configId) {
         const config = new ConfigurationEntity();
         config._id = configId;
         config.currentChangeEvent = 1;
         config.save((err: Error) => {
-            res.status(500).send(`Error encountered while trying to add a new configurations to the DB`);
+            if (err) {
+                res.status(500).send(`Error encountered while trying to add a new configurations to the DB`);
+            }
+            else {
+                res.sendStatus(200);
+            }
+            return;
         });
     }
-    res.sendStatus(200);
-  };
-  
-  export const updateConfiguration =(req: Request, res: Response): void => { 
+    else {
+        res.status(500).send(`No config id passed into add configuration`);
+    }
+};
+
+export const updateConfiguration = (req: Request, res: Response): void => {
     const configId = req.params.id;
     const propertyName = req.body.propertyName;
     const newValue = req.body.newValue;
@@ -51,8 +61,15 @@ export const getEntireConfiguration = (req: Request, res: Response): IConfigResp
         config._id = configId;
         config[propertyName] = newValue;
         config.save((err: Error) => {
-            res.status(500).send(`Error encountered while trying to add a new configurations to the DB`);
+            if (err) {
+                res.status(500).send(`Error encountered while trying to update a configuration: ${configId} in the DB`);
+            }
+            else {
+                res.sendStatus(200);
+            }
+            return;
         });
+    } else {
+        res.status(500).send(`No config id passed into update configuration`);
     }
-    res.sendStatus(200); 
-  }
+}

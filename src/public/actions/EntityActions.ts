@@ -14,7 +14,8 @@ export type EntityActionTypes =
     | UpdateConfigurationAction
     | AddConfigElementAction
     | UpdateConfigElementAction
-    | DeleteConfigElementAction;
+    | DeleteConfigElementAction 
+    | AjaxSuccessAction;
 
     
 export interface FetchConfigurationAction {
@@ -62,8 +63,9 @@ export interface DeleteConfigElementAction {
     type: ActionTypeKeys.DELETE_CONFIG_ELEMENT
     id: string,
 }
-
-
+export interface AjaxSuccessAction {
+    type: ActionTypeKeys.AJAX_SUCCESS
+}
 export const fetchConfig = (id: string) : FetchConfigurationAction => ({
     type: ActionTypeKeys.FETCH_CONFIGURATION,
     id
@@ -108,4 +110,7 @@ export const updateConfigElement = (id: string, entityType: ConfigElementType, p
 export const deleteConfigElement = (id: string): DeleteConfigElementAction => ({
     type: ActionTypeKeys.DELETE_CONFIG_ELEMENT,
     id,
+});
+export const ajaxSuccess = () : AjaxSuccessAction => ({
+    type: ActionTypeKeys.AJAX_SUCCESS
 });

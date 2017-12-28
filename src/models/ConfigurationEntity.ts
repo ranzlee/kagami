@@ -6,6 +6,7 @@ export type ConfigurationEntityModel = mongoose.Document & Configuration;
 
 const configurationSchema = new mongoose.Schema(
     {
+        _id: String,
         name: String,
         tenant: String,
         currentChangeEvent: Number,
