@@ -53,7 +53,19 @@ export default class Login extends React.Component<LoginProps, LoginState> {
   render() {
     return (
       <div className="container">
-        <hr />
+        <div className="row">
+          <div className="col">
+            <div className="alert alert-secondary" role="alert">
+              <h4 className="alert-heading">Login to get started!</h4>
+              <p>
+                Kagami accounts are automatically linked by email address, so
+                feel free to use a social media account you already have or
+                create a new local account with us. As long as you use the same
+                email address across accounts, we'll know who you are.
+              </p>
+            </div>
+          </div>
+        </div>
         <div className="row">
           <div className="col-lg-3" />
           <div className="col-lg-9">
@@ -74,7 +86,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
               href="/auth/facebook"
             >
               <i className="fab fa-facebook-f" aria-hidden="true" />
-              Sign in with Facebook
+              Login with Facebook
             </a>
           </div>
           <div className="col-lg-3">
@@ -83,10 +95,19 @@ export default class Login extends React.Component<LoginProps, LoginState> {
               href="/auth/google"
             >
               <i className="fab fa-google" aria-hidden="true" />
-              Sign in with Google
+              Login with Google
             </a>
           </div>
         </div>
+        <hr className="border-secondary" />
+        <div className="row">
+          <div className="col">
+            <div className="text-center">
+              <span className="text-secondary">OR</span>
+            </div>
+          </div>
+        </div>
+        <hr className="border-secondary" />
         {this.state.context}
       </div>
     );

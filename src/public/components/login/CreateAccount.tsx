@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { styleUnderlineBold, stylePaddingLeft50px } from "./Styles";
+import { styleLocalLoginLabelsPaddingLeft } from "./Styles";
 
 export interface CreateAccountState {
   email: string;
@@ -43,8 +43,6 @@ export class CreateAccount extends React.Component<
   render() {
     return (
       <div>
-        <br />
-        <hr />
         <div className="row">
           <div className="col-lg-3" />
           <div className="col-lg-9">
@@ -53,8 +51,6 @@ export class CreateAccount extends React.Component<
                 <i className="fa fa-user" aria-hidden="true" />&nbsp;&nbsp;Create
                 a new local account or&nbsp;<a
                   href=""
-                  style={styleUnderlineBold}
-                  className="text-info"
                   onClick={this.handleLoginLocalAccount}
                 >
                   login with an existing local account
@@ -69,7 +65,7 @@ export class CreateAccount extends React.Component<
             <div className="row">
               <div className="col-lg-3" />
               <div className="col-lg-2">
-                <label style={stylePaddingLeft50px} htmlFor="email">
+                <label style={styleLocalLoginLabelsPaddingLeft} htmlFor="email">
                   Email Address
                 </label>
               </div>
@@ -89,7 +85,10 @@ export class CreateAccount extends React.Component<
             <div className="row">
               <div className="col-lg-3" />
               <div className="col-lg-2">
-                <label style={stylePaddingLeft50px} htmlFor="password">
+                <label
+                  style={styleLocalLoginLabelsPaddingLeft}
+                  htmlFor="password"
+                >
                   Password
                 </label>
               </div>
@@ -109,7 +108,10 @@ export class CreateAccount extends React.Component<
             <div className="row">
               <div className="col-lg-3" />
               <div className="col-lg-2">
-                <label style={stylePaddingLeft50px} htmlFor="confirmPassword">
+                <label
+                  style={styleLocalLoginLabelsPaddingLeft}
+                  htmlFor="confirmPassword"
+                >
                   Confirm Password
                 </label>
               </div>
