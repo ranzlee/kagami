@@ -10,7 +10,7 @@ import {
   ControlLabel,
   Checkbox
 } from "react-bootstrap";
-import { styleUnderlineBold } from "./Styles";
+import { styleUnderlineBold, stylePaddingTop7px, stylePaddingLeft50px } from "./Styles";
 
 export interface LocalLoginState {
   email: string;
@@ -74,14 +74,13 @@ export class LocalLogin extends React.Component<
             </div>
           </Col>
         </Row>
-        <hr />
         <br />
         <form className="form-horizontal">
           <FormGroup>
             <Row>
               <Col lg={3} />
-              <Col lg={2} className="text-left">
-                <ControlLabel htmlFor="email">Email Address</ControlLabel>
+              <Col lg={2}>
+                <ControlLabel style={stylePaddingLeft50px} htmlFor="email">Email Address</ControlLabel>
               </Col>
               <Col lg={4}>
                 <FormControl
@@ -97,8 +96,8 @@ export class LocalLogin extends React.Component<
           <FormGroup>
             <Row>
               <Col lg={3} />
-              <Col lg={2} className="text-left">
-                <ControlLabel htmlFor="password">Password</ControlLabel>
+              <Col lg={2} >
+                <ControlLabel style={stylePaddingLeft50px} htmlFor="password">Password</ControlLabel>
               </Col>
               <Col lg={4}>
                 <FormControl
@@ -110,14 +109,6 @@ export class LocalLogin extends React.Component<
                 />
               </Col>
             </Row>
-            <Row>
-              <Col lg={5} />
-              <Col lg={4} className="text-right">
-                <a href="" onClick={this.handleForgotPassword}>
-                  Forgot your password?
-                </a>
-              </Col>
-            </Row>
           </FormGroup>
           <FormGroup>
             <Row>
@@ -125,12 +116,17 @@ export class LocalLogin extends React.Component<
               <Col lg={2}>
                 <Checkbox title="Remember me">Remember me</Checkbox>
               </Col>
+              <Col lg={2} style={stylePaddingTop7px}>
+                <a href="" onClick={this.handleForgotPassword}>
+                  Forgot your password?
+                </a>
+              </Col>
             </Row>
           </FormGroup>
           <Row>
             <Col lg={5} />
             <Col lg={2}>
-              <Button bsClass="btn btn-default" onClick={this.handleLogin}>
+              <Button bsClass="btn btn-primary" onClick={this.handleLogin}>
                 Log me in!
               </Button>
             </Col>

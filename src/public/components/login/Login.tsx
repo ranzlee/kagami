@@ -75,11 +75,10 @@ export default class Login extends React.Component<LoginProps, LoginState> {
             </div>
           </Col>
         </Row>
-        <hr />
         <br />
         <Row>
           <Col lg={3} />
-          <Col lg={6}>
+          <Col lg={3}>
             <a
               className="btn btn-block btn-social btn-facebook"
               href="/auth/facebook"
@@ -88,11 +87,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
               Sign in with Facebook
             </a>
           </Col>
-        </Row>
-        <br />
-        <Row>
-          <Col lg={3} />
-          <Col lg={6}>
+          <Col lg={3}>
             <a
               className="btn btn-block btn-social btn-google"
               href="/auth/google"

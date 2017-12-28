@@ -10,7 +10,7 @@ import {
   ControlLabel,
   Checkbox
 } from "react-bootstrap";
-import { styleUnderlineBold } from "./Styles";
+import { styleUnderlineBold, stylePaddingLeft50px } from "./Styles";
 
 export interface ForgotPasswordState {
   email: string;
@@ -63,14 +63,13 @@ export class ForgotPassword extends React.Component<
             </div>
           </Col>
         </Row>
-        <hr />
         <br />
         <form className="form-horizontal">
           <FormGroup>
             <Row>
               <Col lg={3} />
-              <Col lg={2} className="text-left">
-                <ControlLabel htmlFor="email">Email Address</ControlLabel>
+              <Col lg={2}>
+                <ControlLabel style={stylePaddingLeft50px} htmlFor="email">Email Address</ControlLabel>
               </Col>
               <Col lg={4}>
                 <FormControl
@@ -87,7 +86,7 @@ export class ForgotPassword extends React.Component<
             <Col lg={5} />
             <Col lg={2}>
               <Button
-                bsClass="btn btn-default"
+                bsClass="btn btn-primary"
                 onClick={this.handleForgotPassword}
               >
                 Reset my account password!

@@ -10,7 +10,7 @@ import {
   ControlLabel,
   Checkbox
 } from "react-bootstrap";
-import { styleUnderlineBold } from "./Styles";
+import { styleUnderlineBold, stylePaddingLeft50px } from "./Styles";
 
 export interface CreateAccountState {
   email: string;
@@ -73,14 +73,13 @@ export class CreateAccount extends React.Component<
             </div>
           </Col>
         </Row>
-        <hr />
         <br />
         <form className="form-horizontal">
           <FormGroup>
             <Row>
               <Col lg={3} />
-              <Col lg={2} className="text-left">
-                <ControlLabel htmlFor="email">Email Address</ControlLabel>
+              <Col lg={2}>
+                <ControlLabel style={stylePaddingLeft50px} htmlFor="email">Email Address</ControlLabel>
               </Col>
               <Col lg={4}>
                 <FormControl
@@ -96,8 +95,8 @@ export class CreateAccount extends React.Component<
           <FormGroup>
             <Row>
               <Col lg={3} />
-              <Col lg={2} className="text-left">
-                <ControlLabel htmlFor="password">Password</ControlLabel>
+              <Col lg={2}>
+                <ControlLabel style={stylePaddingLeft50px} htmlFor="password">Password</ControlLabel>
               </Col>
               <Col lg={4}>
                 <FormControl
@@ -113,8 +112,8 @@ export class CreateAccount extends React.Component<
           <FormGroup>
             <Row>
               <Col lg={3} />
-              <Col lg={2} className="text-left">
-                <ControlLabel htmlFor="confirmPassword">
+              <Col lg={2}>
+                <ControlLabel style={stylePaddingLeft50px} htmlFor="confirmPassword">
                   Confirm Password
                 </ControlLabel>
               </Col>
@@ -133,7 +132,7 @@ export class CreateAccount extends React.Component<
             <Col lg={5} />
             <Col lg={2}>
               <Button
-                bsClass="btn btn-default"
+                bsClass="btn btn-primary"
                 onClick={this.handleCreateAccount}
               >
                 Create my account!
