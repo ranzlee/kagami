@@ -33,8 +33,6 @@ export class ForgotPassword extends React.Component<
   render() {
     return (
       <div>
-        <br />
-        <hr />
         <div className="row">
           <div className="col-lg-3" />
           <div className="col-lg-9">
