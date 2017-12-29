@@ -37,7 +37,13 @@ export class CreateAccount extends React.Component<
   handleConfirmPasswordChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    this.setState({ confirmPassword: event.currentTarget.value });
+    let val = event.currentTarget.value;
+    this.setState({ confirmPassword: val });
+    if (this.state.password !== val) {
+      event.currentTarget.setCustomValidity("error");
+    } else {
+      event.currentTarget.setCustomValidity("");
+    }
   };
 
   handleLoginLocalAccount = (event: React.MouseEvent<HTMLAnchorElement>) => {
@@ -113,8 +119,11 @@ export class CreateAccount extends React.Component<
                 placeholder="Enter your password"
                 onChange={this.handlePasswordChange}
                 required
+                minLength={8}
               />
-              <div className="invalid-feedback">Password is required.</div>
+              <div className="invalid-feedback">
+                Password is required and must have at least 8 characters.
+              </div>
             </div>
           </div>
           <div className="row form-group">
