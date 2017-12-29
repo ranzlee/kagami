@@ -9,12 +9,11 @@ export interface IConnectedState {
 
 export interface IConnectedDispatch {
   add: () => void;
+  fetchConfigs: () => void;
 }
 
-export class Configurations extends React.Component<
-  IOwnProps & IConnectedState & IConnectedDispatch,
-  {}
-  > {
+export class Configurations extends React.Component<IOwnProps & IConnectedState & IConnectedDispatch, {}>
+{
   private renderConfigs(): JSX.Element[] {
     var returnElements: JSX.Element[] = [];
 
@@ -24,6 +23,10 @@ export class Configurations extends React.Component<
       returnElements.push(<Config id={configurationIds[i]} key={configurationIds[i]} />);
     }
     return returnElements;
+  }
+
+  componentDidMount() {
+    this.props.fetchConfigs();
   }
 
   render() {

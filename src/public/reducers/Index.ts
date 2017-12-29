@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { configurationElementReducer } from './domain/ConfigurationElementReducer';
+import { configElementReducer } from './domain/ConfigElementReducer';
 
 import { appStateReducer } from "./appState/AppStateReducer";
 import { configurationReducer } from "./../reducers/domain/ConfigurationReducer";
@@ -7,7 +7,7 @@ import { configurationReducer } from "./../reducers/domain/ConfigurationReducer"
 var domainReducer = combineReducers(
     {
         configurations: configurationReducer,
-        configElements: configurationElementReducer
+        configElements: configElementReducer
     });
 
 export default combineReducers(

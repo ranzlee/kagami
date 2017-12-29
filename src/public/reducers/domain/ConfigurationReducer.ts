@@ -8,7 +8,7 @@ export function configurationReducer(configurations: { [key: string]: Configurat
         case ActionTypeKeys.ADD_CONFIGURATION:
             return configurations;
         case ActionTypeKeys.ADD_CONFIGURATION_SUCCESS:
-            return { ...configurations, [action.id]: { _id: action.id } };
+            return { ...configurations, [action.id]: { _id: action.id, name: '' } };
         case ActionTypeKeys.DELETE_CONFIGURATION:
             const deleteCopy = { ...configurations };
             delete deleteCopy[action.configId];

@@ -4,30 +4,11 @@ import { Response, Request, NextFunction } from "express";
 import { ConfigurationEntity } from "./../models/ConfigurationEntity";
 import { ConfigurationElementEntity } from "./../models/ConfigurationElementEntity";
 
-interface IConfigResponse {
-    configuration: Configuration;
-    configElements: IConfigurationElement[]
-}
-
-export const getEntireConfiguration = (req: Request, res: Response): IConfigResponse | void => {
-    const configId = req.params.id;
-    if (configId) {
-        ConfigurationEntity.findById(configId, (err, config) => {
-            if (err) {
-                res.status(500).send(`Could not find Config: ${configId} in the DB`);
-                return;
-            }
-            ConfigurationElementEntity.find({ configId: configId }, (err, configElements) => {
-                var response: IConfigResponse = {
-                    configuration: config as Configuration,
-                    configElements: configElements as IConfigurationElement[]
-                };
-                res.send(response);
-                return;
-            });
-        })
-    }
-    res.send();
+export const fetchConfigurations = (req: Request, res: Response): void => {
+        ConfigurationEntity.find({ }, (err, configs) => {
+            res.send(configs);
+            return;
+        });
 };
 
 export const addConfiguration = (req: Request, res: Response): void => {
@@ -41,7 +22,6 @@ export const addConfiguration = (req: Request, res: Response): void => {
         }
         return;
     });
-
 };
 
 export const updateConfiguration = (req: Request, res: Response): void => {

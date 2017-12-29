@@ -11,7 +11,8 @@ export const mapStateToProps = (AppStore: AppStore, props: IOwnProps): IConnecte
 
 export const mapDispatchToProps = (dispatch: Dispatch<actions.ConfigurationActionTypes>): IConnectedDispatch => {
     return {
-        add: () => dispatch(actions.addConfig())
+        add: () => dispatch(actions.addConfig()),
+        fetchConfigs: () => dispatch(actions.fetchConfigs())
     }
 }
 
