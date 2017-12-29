@@ -29,6 +29,7 @@
         mongo_net:
       depends_on:
         - mongodb
+        - redis
       environment:
         NODE_ENV: development 
         MONGODB_URI: mongodb://mongodb:27017 
@@ -49,5 +50,7 @@
         command: mongod --bind_ip 127.0.0.1,172.16.0.2
     redis:
         image: redis
+        networks:
+            mongo_net:
         ports:
             - "6379"

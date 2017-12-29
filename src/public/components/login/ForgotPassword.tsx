@@ -1,6 +1,5 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { styleLocalLoginLabelsPaddingLeft } from "./Styles";
 
 export interface ForgotPasswordState {
   email: string;
@@ -13,7 +12,7 @@ export interface ForgotPasswordProps {
 export class ForgotPassword extends React.Component<
   ForgotPasswordProps,
   ForgotPasswordState
-> {
+  > {
   constructor(props: ForgotPasswordProps) {
     super(props);
     this.state = { email: "" };
@@ -29,7 +28,7 @@ export class ForgotPassword extends React.Component<
     this.props.showLoginLocalAccount();
   };
 
-  handleForgotPassword = (event: any) => {};
+  handleForgotPassword = (event: any) => { };
   render() {
     return (
       <div>
@@ -50,25 +49,21 @@ export class ForgotPassword extends React.Component<
           </div>
         </div>
         <br />
-        <form className="form-horizontal">
-          <div className="form-group">
-            <div className="row">
-              <div className="col-lg-3" />
-              <div className="col-lg-2">
-                <label style={styleLocalLoginLabelsPaddingLeft} htmlFor="email">
-                  Email Address
+        <form>
+          <div className="row form-group">
+            <div className="col-lg-3" />
+            <label className="col-lg-2 col-form-label" htmlFor="email">
+              Email Address
                 </label>
-              </div>
-              <div className="col-lg-4">
-                <input
-                  className="form-control"
-                  id="email"
-                  type="text"
-                  value={this.state.email}
-                  placeholder="Enter your email address"
-                  onChange={this.handleEmailChange}
-                />
-              </div>
+            <div className="col-lg-4">
+              <input
+                className="form-control"
+                id="email"
+                type="text"
+                value={this.state.email}
+                placeholder="Enter your email address"
+                onChange={this.handleEmailChange}
+              />
             </div>
           </div>
           <div className="row">

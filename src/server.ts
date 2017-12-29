@@ -14,6 +14,8 @@ import * as passport from "passport";
 import expressValidator = require("express-validator");
 import fs = require("fs");
 import https = require("https");
+import * as redisSocketIo from "socket.io-redis";
+import * as socketIo from "socket.io";
 
 //read .env.config variables
 dotenv.config({ path: path.join(__dirname, ".env.config") });
@@ -153,21 +155,22 @@ app.post("/api/configuration/:id", configurationController.updateConfiguration);
 const privateKey = fs.readFileSync(path.join(__dirname, "key.pem"));
 const certificate = fs.readFileSync(path.join(__dirname, "certificate.pem"));
 
-https
-  .createServer(
-  {
-    key: privateKey,
-    cert: certificate
-  },
-  app
-  )
-  .listen(app.get("port"), () => {
-    console.log(
-      "  App is running at https://localhost:%d in %s mode",
-      app.get("port"),
-      app.get("env")
-    );
-    console.log("  Press CTRL-C to stop\n");
-  });
+let server = https.createServer({
+  key: privateKey,
+  cert: certificate
+}, app).listen(app.get("port"), () => {
+  console.log(
+    "  App is running at https://localhost:%d in %s mode",
+    app.get("port"),
+    app.get("env")
+  );
+  console.log("  Press CTRL-C to stop\n");
+});
+
+let io: SocketIO.Server = socketIo(server);
+io.adapter(redisSocketIo({
+  host: 'redis',
+  port: 6379
+}));
 
 module.exports = app;

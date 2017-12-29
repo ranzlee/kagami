@@ -7,8 +7,8 @@
     "build-client-prod": "webpack --config webpack.prod.js --display-error-details",
     "build-server": "tsc --project ./src/tsconfig.json",
     "setup-dev": "npm run build-server && npm run copy-dev-config",
-    "start-dev": "npm run setup-dev && node --inspect=0.0.0.0:9229 dist/server.js",
-    "start-prod": "npm run build-client-prod && npm run build-server && npm run copy-prod-config && node dist/server.js",
+    "start-dev": "npm run setup-dev && nodemon --inspect=0.0.0.0:9229 dist/server.js",
+    "start-prod": "npm run build-client-prod && npm run build-server && npm run copy-prod-config && nodemon dist/server.js",
     "copy-dev-config": "node copyDevConfig.js",
     "copy-prod-config": "node copyProdConfig.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -20,6 +20,8 @@
     "@types/redux": "^3.6.31",
     "@types/redux-logger": "^3.0.5",
     "@types/rx": "^4.1.1",
+    "@types/socket.io": "^1.4.31",
+    "@types/socket.io-redis": "^1.0.22",
     "async": "^2.6.0",
     "awesome-typescript-loader": "^3.4.1",
     "axios": "^0.17.1",
@@ -41,6 +43,7 @@
     "mongoose": "^4.13.7",
     "morgan": "^1.9.0",
     "nodemailer": "^4.4.1",
+    "nodemon": "^1.14.5",
     "passport": "^0.4.0",
     "passport-facebook": "^2.1.1",
     "passport-google-oauth": "^1.0.0",
@@ -59,7 +62,9 @@
     "redux-observable": "^0.17.0",
     "remove": "^0.1.5",
     "request": "^2.83.0",
-    "rxjs": "^5.5.6"
+    "rxjs": "^5.5.6",
+    "socket.io": "^2.0.4",
+    "socket.io-redis": "^5.2.0"
   },
   "devDependencies": {
     "@types/async": "^2.0.46",
