@@ -1,10 +1,8 @@
 import { connect, Dispatch } from 'react-redux';
 import { AppStore } from './../../types/AppStore';
 import { Config, IOwnProps, IConnectedDispatch, IConnectedState } from './../../components/configurations/Config';
-import * as actions from './../../actions/EntityActions';
+import * as actions from './../../actions/ConfigurationActions';
 import { ConfigElementType } from '../../../shared/models/enums/ConfigElementType';
-
-var cuid = require('cuid');
 
 export const mapStateToProps = (AppStore: AppStore, props: IOwnProps): IConnectedState => {
     return {
@@ -12,7 +10,7 @@ export const mapStateToProps = (AppStore: AppStore, props: IOwnProps): IConnecte
     }
 }
 
-export const mapDispatchToProps = (dispatch: Dispatch<actions.EntityActionTypes>): IConnectedDispatch => {
+export const mapDispatchToProps = (dispatch: Dispatch<actions.ConfigurationActionTypes>): IConnectedDispatch => {
     return {
         update: (id: string,
             propertyName: string,
