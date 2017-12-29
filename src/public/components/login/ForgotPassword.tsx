@@ -3,6 +3,7 @@ import * as ReactDOM from "react-dom";
 
 export interface ForgotPasswordState {
   email: string;
+  formWasValidated: string;
 }
 
 export interface ForgotPasswordProps {
@@ -12,23 +13,30 @@ export interface ForgotPasswordProps {
 export class ForgotPassword extends React.Component<
   ForgotPasswordProps,
   ForgotPasswordState
-  > {
+> {
   constructor(props: ForgotPasswordProps) {
     super(props);
-    this.state = { email: "" };
+    this.state = { email: "", formWasValidated: "" };
   }
 
-  handleEmailChange = (event: any) => {
-    this.setState({ email: event.target.value });
+  handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ email: event.currentTarget.value });
   };
 
-  handleLoginLocalAccount = (event: any) => {
-    //alert("A name was submitted: " + this.state.name);
+  handleLoginLocalAccount = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
     this.props.showLoginLocalAccount();
   };
 
-  handleForgotPassword = (event: any) => { };
+  handleForgotPassword = (event: React.FormEvent<HTMLFormElement>) => {
+    let form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    this.setState({ formWasValidated: "was-validated" });
+  };
+
   render() {
     return (
       <div>
@@ -49,30 +57,35 @@ export class ForgotPassword extends React.Component<
           </div>
         </div>
         <br />
-        <form>
+        <form
+          noValidate
+          onSubmit={this.handleForgotPassword}
+          className={this.state.formWasValidated}
+        >
           <div className="row form-group">
             <div className="col-lg-3" />
             <label className="col-lg-2 col-form-label" htmlFor="email">
               Email Address
-                </label>
+            </label>
             <div className="col-lg-4">
               <input
                 className="form-control"
                 id="email"
-                type="text"
+                type="email"
                 value={this.state.email}
                 placeholder="Enter your email address"
                 onChange={this.handleEmailChange}
+                required
               />
+              <div className="invalid-feedback">
+                Email Address is required and must be a valid email format.
+              </div>
             </div>
           </div>
           <div className="row">
             <div className="col-lg-5" />
             <div className="col-lg-2">
-              <button
-                className="btn btn-primary"
-                onClick={this.handleForgotPassword}
-              >
+              <button className="btn btn-primary" type="submit">
                 Reset my account password!
               </button>
             </div>
