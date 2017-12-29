@@ -1,23 +1,12 @@
   version: "2"
-  networks:
-    mongo_net:
-      driver: bridge
-      ipam:
-        config:
-        - subnet: 172.16.0.0/24
-          gateway: 172.16.0.1
   services:
     nginx:
         build: ./nginx
         links:
-            - node:node
+            - node
         ports:
             - "3001:3001"
             - "35729:35729"
-        networks:
-            mongo_net:
-        depends_on:
-          - mongodb
     node:
       build: .
       ports:
@@ -25,9 +14,7 @@
         - "9229:9229"
       volumes:
         - .:/usr/src/app
-      networks:
-        mongo_net:
-      depends_on:
+      links:
         - mongodb
         - redis
       environment:
@@ -41,16 +28,11 @@
           - MONGO_LOG_DIR=/dev/null
         # Turned this off for now because windows cannot link up the mongo volume for whatever reason.
         #volumes:  
-          #- ./data/db:/data/db
-        networks:
-          mongo_net:
-              ipv4_address: "172.16.0.2" 
+          #- ./data/db:/data/d
         ports:
             - 27017:27017
-        command: mongod --bind_ip 127.0.0.1,172.16.0.2
+        command: mongod 
     redis:
         image: redis
-        networks:
-            mongo_net:
         ports:
             - "6379"

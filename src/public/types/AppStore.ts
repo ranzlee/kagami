@@ -16,6 +16,7 @@ export interface IDomain {
 
 export interface IAppState {
     currentConfiguration?: string;
+    fetchedConfigs: string[];
 }
 
 export interface IUi {

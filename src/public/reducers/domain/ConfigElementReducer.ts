@@ -1,9 +1,9 @@
+import { ConfigElementActionTypes } from './../../actions/ConfigElementActions';
 import { ConfigElementType } from './../../../shared/models/enums/ConfigElementType';
 import { IConfigurationElement } from './../../../shared/models/configuration/elements/IConfigurationElement';
-import { ConfigurationElementActionTypes } from './../../actions/ConfigurationElementActions';
 import { ActionTypeKeys } from '../../actions/ActionTypeKeys';
 
-export function configurationElementReducer(configurationElements: { [key: string]: IConfigurationElement } = {}, action: ConfigurationElementActionTypes) {
+export function configElementReducer(configurationElements: { [key: string]: IConfigurationElement } = {}, action: ConfigElementActionTypes) {
     switch (action.type) {
         case ActionTypeKeys.ADD_CONFIG_ELEMENT:
             const newElement = {
@@ -16,12 +16,12 @@ export function configurationElementReducer(configurationElements: { [key: strin
             };
             return { ...configurationElements, [action.elementId]: newElement }
         case ActionTypeKeys.UPDATE_CONFIG_ELEMENT:
-            const copy = {... configurationElements};
-            copy[action.id] = {... copy[action.id]};
+            const copy = { ...configurationElements };
+            copy[action.id] = { ...copy[action.id] };
             copy[action.id][action.propertyName] = action.newValue;
-            return copy;       
-         case ActionTypeKeys.DELETE_CONFIG_ELEMENT:
-            const deleteCopy = {...configurationElements};
+            return copy;
+        case ActionTypeKeys.DELETE_CONFIG_ELEMENT:
+            const deleteCopy = { ...configurationElements };
             delete deleteCopy[action.id];
             return deleteCopy;
         default:

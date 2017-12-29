@@ -1,3 +1,4 @@
+import { Configuration } from './../../shared/models/configuration/Configuration';
 import { IDomain } from './../types/AppStore';
 import { ActionTypeKeys } from "./ActionTypeKeys";
 import { fetchConfiguration } from "./../apis/ConfigApi"
@@ -6,9 +7,9 @@ import { AppStore } from "./../types/AppStore"
 import { ConfigElementType } from '../../shared/models/enums/ConfigElementType';
 
 export type ConfigurationActionTypes =
-    | FetchConfigurationAction
-    | FetchConfigurationSuccessAction
-    | FetchConfigurationErrorAction
+    | FetchConfigsAction
+    | FetchConfigsSuccessAction
+    | FetchConfigsErrorAction
 
     | AddConfigurationAction
     | AddConfigurationSuccessAction
@@ -18,20 +19,17 @@ export type ConfigurationActionTypes =
     | UpdateConfigurationAction;
 
 
-
-export interface FetchConfigurationAction {
-    type: ActionTypeKeys.FETCH_CONFIGURATION,
-    id: string
+export interface FetchConfigsAction {
+    type: ActionTypeKeys.FETCH_CONFIGS;
 }
-export interface FetchConfigurationSuccessAction {
-    type: ActionTypeKeys.FETCH_CONFIGURATION_SUCCESS,
-    payload: IDomain
+export interface FetchConfigsSuccessAction {
+    type: ActionTypeKeys.FETCH_CONFIGS_SUCCESS;
+    configs: Configuration[];
 }
-export interface FetchConfigurationErrorAction {
-    type: ActionTypeKeys.FETCH_CONFIGURATION_ERROR,
-    payload: any
+export interface FetchConfigsErrorAction {
+    type: ActionTypeKeys.FETCH_CONFIGS_ERROR;
+    payload: any;
 }
-
 export interface AddConfigurationAction {
     type: ActionTypeKeys.ADD_CONFIGURATION;
 }
@@ -57,21 +55,17 @@ export interface UpdateConfigurationAction {
 }
 
 
-
-
-export const fetchConfig = (id: string): FetchConfigurationAction => ({
-    type: ActionTypeKeys.FETCH_CONFIGURATION,
-    id
+export const fetchConfigs = (): FetchConfigsAction => ({
+    type: ActionTypeKeys.FETCH_CONFIGS,
 });
-export const fetchConfigSuccess = (domainResult: IDomain): FetchConfigurationSuccessAction => ({
-    type: ActionTypeKeys.FETCH_CONFIGURATION_SUCCESS,
-    payload: domainResult
+export const fetchConfigsSuccess = (configs: Configuration[]) : FetchConfigsSuccessAction => ({
+   type: ActionTypeKeys.FETCH_CONFIGS_SUCCESS,
+   configs 
 });
-export const fetchConfigError = (error: any): FetchConfigurationErrorAction => ({
-    type: ActionTypeKeys.FETCH_CONFIGURATION_ERROR,
-    payload: error
+export const fetchConfigsError = (error: any) : FetchConfigsErrorAction => ({
+   type: ActionTypeKeys.FETCH_CONFIGS_ERROR,
+   payload: error
 });
-
 
 export const addConfig = (): AddConfigurationAction => ({
     type: ActionTypeKeys.ADD_CONFIGURATION,

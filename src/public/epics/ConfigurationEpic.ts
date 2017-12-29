@@ -1,14 +1,13 @@
+import { Configuration } from './../../shared/models/configuration/Configuration';
 import {
     AddConfigurationAction,
-    FetchConfigurationAction,
-    FetchConfigurationSuccessAction,
-    FetchConfigurationErrorAction,
-    fetchConfigSuccess,
-    fetchConfigError,
     UpdateConfigurationAction,
     ConfigurationActionTypes,
     addConfigSuccess,
     addConfigError,
+    FetchConfigsAction,
+    fetchConfigsSuccess,
+    fetchConfigsError
 } from './../actions/ConfigurationActions';
 import { ajaxSuccess} from './../actions/GeneralActions';
 import 'rxjs/add/operator/map';
@@ -20,21 +19,21 @@ import 'rxjs/add/observable/of';
 import { ajax } from 'rxjs/observable/dom/ajax';
 import { ActionTypeKeys } from './../actions/ActionTypeKeys';
 import { Observable } from 'rxjs/Observable';
-import { IDomain, AppStore } from '../types/AppStore';
 import { Epic, ofType } from 'redux-observable';
 
-export const fetchConfigurationEpic = (action$: any) =>
-    action$.ofType(ActionTypeKeys.FETCH_CONFIGURATION)
-        .mergeMap((action: FetchConfigurationAction) =>
-            ajax.getJSON(`./api/configuration/${action.id}`)
-                .map(response => fetchConfigSuccess(response as IDomain))
-                .catch(error => Observable.of(fetchConfigError(error.xhr.response)))
+
+export const fetchConfigurationsEpic = (action$: any) =>
+    action$.ofType(ActionTypeKeys.FETCH_CONFIGS)
+        .mergeMap((action: FetchConfigsAction) =>
+            ajax.getJSON(`./api/config`)
+                .map(response => fetchConfigsSuccess(response as Configuration[]))
+                .catch(error => Observable.of(fetchConfigsError(error.xhr.response)))
         );
 
 export const addConfigurationEpic = (action$: any) =>
     action$.ofType(ActionTypeKeys.ADD_CONFIGURATION)
         .mergeMap((action: AddConfigurationAction) =>
-            ajax.put(`./api/configuration`)
+            ajax.put(`./api/config`)
                 .map(response => addConfigSuccess(response.xhr.response._id as string))
                 .catch(error => Observable.of(addConfigError(error.xhr.response)))
             );
@@ -45,7 +44,7 @@ export const updateConfigurationEpic = (action$: any) =>
         .debounceTime(2000)
         .distinctUntilChanged()
         .mergeMap((action: UpdateConfigurationAction) =>
-            ajax.post(`./api/configuration/${action.configId}`,
+            ajax.post(`./api/config/${action.configId}`,
                 {
                     propertyName: action.propertyName,
                     newValue: action.newValue
