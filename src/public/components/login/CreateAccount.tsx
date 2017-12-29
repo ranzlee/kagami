@@ -1,6 +1,5 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { styleLocalLoginLabelsPaddingLeft } from "./Styles";
 
 export interface CreateAccountState {
   email: string;
@@ -15,7 +14,7 @@ export interface CreateAccountProps {
 export class CreateAccount extends React.Component<
   CreateAccountProps,
   CreateAccountState
-> {
+  > {
   constructor(props: CreateAccountProps) {
     super(props);
     this.state = { email: "", password: "", confirmPassword: "" };
@@ -39,7 +38,7 @@ export class CreateAccount extends React.Component<
     this.props.showLoginLocalAccount();
   };
 
-  handleCreateAccount = (event: any) => {};
+  handleCreateAccount = (event: any) => { };
   render() {
     return (
       <div>
@@ -60,71 +59,57 @@ export class CreateAccount extends React.Component<
           </div>
         </div>
         <br />
-        <form className="form-horizontal">
-          <div className="form-group">
-            <div className="row">
-              <div className="col-lg-3" />
-              <div className="col-lg-2">
-                <label style={styleLocalLoginLabelsPaddingLeft} htmlFor="email">
-                  Email Address
+        <form>
+          <div className="row form-group">
+            <div className="col-lg-3" />
+            <label className="col-lg-2 col-form-label" htmlFor="email">
+              Email Address
                 </label>
-              </div>
-              <div className="col-lg-4">
-                <input
-                  className="form-control"
-                  id="email"
-                  type="text"
-                  value={this.state.email}
-                  placeholder="Enter your email address"
-                  onChange={this.handleEmailChange}
-                />
-              </div>
+            <div className="col-lg-4">
+              <input
+                className="form-control"
+                id="email"
+                type="text"
+                value={this.state.email}
+                placeholder="Enter your email address"
+                onChange={this.handleEmailChange}
+              />
             </div>
           </div>
-          <div className="form-group">
-            <div className="row">
-              <div className="col-lg-3" />
-              <div className="col-lg-2">
-                <label
-                  style={styleLocalLoginLabelsPaddingLeft}
-                  htmlFor="password"
-                >
-                  Password
+          <div className="row form-group">
+            <div className="col-lg-3" />
+            <label className="col-lg-2 col-form-label"
+              htmlFor="password"
+            >
+              Password
                 </label>
-              </div>
-              <div className="col-lg-4">
-                <input
-                  className="form-control"
-                  id="password"
-                  type="password"
-                  value={this.state.password}
-                  placeholder="Enter your password"
-                  onChange={this.handlePasswordChange}
-                />
-              </div>
+            <div className="col-lg-4">
+              <input
+                className="form-control"
+                id="password"
+                type="password"
+                value={this.state.password}
+                placeholder="Enter your password"
+                onChange={this.handlePasswordChange}
+              />
             </div>
           </div>
-          <div className="form-group">
-            <div className="row">
-              <div className="col-lg-3" />
-              <div className="col-lg-2">
-                <label
-                  style={styleLocalLoginLabelsPaddingLeft}
-                  htmlFor="confirmPassword"
-                >
-                  Confirm Password
+          <div className="row form-group">
+            <div className="col-lg-3" />
+            <label className="col-lg-2 col-form-label"
+              htmlFor="confirmPassword"
+            >
+              Confirm Password
                 </label>
-              </div>
-              <div className="col-lg-4">
-                <input
-                  className="form-control"
-                  id="confirmPassword"
-                  type="password"
-                  value={this.state.confirmPassword}
-                  placeholder="Re-enter your password"
-                  onChange={this.handleConfirmPasswordChange}
-                />
-              </div>
+            <div className="col-lg-4">
+              <input
+                className="form-control"
+                id="confirmPassword"
+                type="password"
+                value={this.state.confirmPassword}
+                placeholder="Re-enter your password"
+                onChange={this.handleConfirmPasswordChange}
+              />
             </div>
           </div>
           <div className="row">
