@@ -6,7 +6,6 @@ export type ConfigurationElementEntityModel = mongoose.Document & IConfiguration
 
 const configurationElementSchema = new mongoose.Schema(
     {
-        _id: String,
         configId: {type: String, index: true},
         configElementType: {type: String, index: true},
         name: String,

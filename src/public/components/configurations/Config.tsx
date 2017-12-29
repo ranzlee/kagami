@@ -31,12 +31,12 @@ export class Config extends React.Component<IOwnProps & IConnectedState & IConne
     const name = target.name;
 
     const oldValue = configuration[name];
-    update(configuration.id, name, value, oldValue);
+    update(configuration._id, name, value, oldValue);
   };
 
   render() {
     const { configuration, update } = this.props;
-    const editUrl = "./configuration/" + configuration.id;
+    const editUrl = "./configuration/" + configuration._id;
 
     return (
       <div className="row">

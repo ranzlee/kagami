@@ -1,7 +1,7 @@
 import { connect, Dispatch } from 'react-redux';
 import { AppStore } from './../../types/AppStore';
 import { Configuration, IOwnProps, IConnectedState, IConnectedDispatch } from './../../components/configuration/Configuration';
-import * as actions from './../../actions/EntityActions';
+import * as actions from './../../actions/ConfigurationActions';
 
 export const mapStateToProps = (AppStore: AppStore, props: IOwnProps): IConnectedState => {
     return {
@@ -9,7 +9,7 @@ export const mapStateToProps = (AppStore: AppStore, props: IOwnProps): IConnecte
     }
 }
 
-export const mapDispatchToProps = (dispatch: Dispatch<actions.EntityActionTypes>): IConnectedDispatch => {
+export const mapDispatchToProps = (dispatch: Dispatch<actions.ConfigurationActionTypes>): IConnectedDispatch => {
     return {
         fetchConfig: (id: string) => dispatch(actions.fetchConfig(id))
     }

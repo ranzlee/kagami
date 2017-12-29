@@ -1,7 +1,7 @@
 import { ConfigChangeEventType } from './../../enums/ConfigChangeEventType';
 
 export abstract class BaseConfigChangeEvent {
-    id: number;
+    _id: number;
     configId: string;
     configChangeEventType: ConfigChangeEventType;
 }
