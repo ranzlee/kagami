@@ -50,10 +50,10 @@ export const updateConfiguration = (req: Request, res: Response): void => {
     const newValue = req.body.newValue;
 
     if (configId) {
-        const config = new ConfigurationEntity();
-        config._id = configId;
-        config[propertyName] = newValue;
-        config.save((err: Error) => {
+        const changeObject: any = {};
+        changeObject[propertyName] = newValue;
+
+        ConfigurationElementEntity.findByIdAndUpdate(configId, {$set: changeObject}, (err: Error, updatedConfig: any) => {
             if (err) {
                 res.status(500).send(`Error encountered while trying to update a configuration: ${configId} in the DB`);
             }
