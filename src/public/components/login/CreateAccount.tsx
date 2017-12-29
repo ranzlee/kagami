@@ -5,6 +5,7 @@ export interface CreateAccountState {
   email: string;
   password: string;
   confirmPassword: string;
+  formWasValidated: string;
 }
 
 export interface CreateAccountProps {
@@ -14,31 +15,45 @@ export interface CreateAccountProps {
 export class CreateAccount extends React.Component<
   CreateAccountProps,
   CreateAccountState
-  > {
+> {
   constructor(props: CreateAccountProps) {
     super(props);
-    this.state = { email: "", password: "", confirmPassword: "" };
+    this.state = {
+      email: "",
+      password: "",
+      confirmPassword: "",
+      formWasValidated: ""
+    };
   }
 
-  handleEmailChange = (event: any) => {
-    this.setState({ email: event.target.value });
+  handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ email: event.currentTarget.value });
   };
 
-  handlePasswordChange = (event: any) => {
-    this.setState({ password: event.target.value });
+  handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ password: event.currentTarget.value });
   };
 
-  handleConfirmPasswordChange = (event: any) => {
-    this.setState({ confirmPassword: event.target.value });
+  handleConfirmPasswordChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    this.setState({ confirmPassword: event.currentTarget.value });
   };
 
-  handleLoginLocalAccount = (event: any) => {
-    //alert("A name was submitted: " + this.state.name);
+  handleLoginLocalAccount = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
     this.props.showLoginLocalAccount();
   };
 
-  handleCreateAccount = (event: any) => { };
+  handleCreateAccount = (event: React.FormEvent<HTMLFormElement>) => {
+    let form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    this.setState({ formWasValidated: "was-validated" });
+  };
+
   render() {
     return (
       <div>
@@ -59,30 +74,36 @@ export class CreateAccount extends React.Component<
           </div>
         </div>
         <br />
-        <form>
+        <form
+          noValidate
+          onSubmit={this.handleCreateAccount}
+          className={this.state.formWasValidated}
+        >
           <div className="row form-group">
             <div className="col-lg-3" />
             <label className="col-lg-2 col-form-label" htmlFor="email">
               Email Address
-                </label>
+            </label>
             <div className="col-lg-4">
               <input
                 className="form-control"
                 id="email"
-                type="text"
+                type="email"
                 value={this.state.email}
                 placeholder="Enter your email address"
                 onChange={this.handleEmailChange}
+                required
               />
+              <div className="invalid-feedback">
+                Email Address is required and must be a valid email format.
+              </div>
             </div>
           </div>
           <div className="row form-group">
             <div className="col-lg-3" />
-            <label className="col-lg-2 col-form-label"
-              htmlFor="password"
-            >
+            <label className="col-lg-2 col-form-label" htmlFor="password">
               Password
-                </label>
+            </label>
             <div className="col-lg-4">
               <input
                 className="form-control"
@@ -91,16 +112,19 @@ export class CreateAccount extends React.Component<
                 value={this.state.password}
                 placeholder="Enter your password"
                 onChange={this.handlePasswordChange}
+                required
               />
+              <div className="invalid-feedback">Password is required.</div>
             </div>
           </div>
           <div className="row form-group">
             <div className="col-lg-3" />
-            <label className="col-lg-2 col-form-label"
+            <label
+              className="col-lg-2 col-form-label"
               htmlFor="confirmPassword"
             >
               Confirm Password
-                </label>
+            </label>
             <div className="col-lg-4">
               <input
                 className="form-control"
@@ -109,16 +133,17 @@ export class CreateAccount extends React.Component<
                 value={this.state.confirmPassword}
                 placeholder="Re-enter your password"
                 onChange={this.handleConfirmPasswordChange}
+                required
               />
+              <div className="invalid-feedback">
+                Confirm Password is required and must match Password.
+              </div>
             </div>
           </div>
           <div className="row">
             <div className="col-lg-5" />
             <div className="col-lg-2">
-              <button
-                className="btn btn-primary"
-                onClick={this.handleCreateAccount}
-              >
+              <button className="btn btn-primary" type="Submit">
                 Create my account!
               </button>
             </div>
