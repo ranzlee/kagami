@@ -3,7 +3,6 @@ import { IConfigurationElement } from "./../shared/models/configuration/elements
 import { Response, Request, NextFunction } from "express";
 import { ConfigurationEntity } from "./../models/ConfigurationEntity";
 import { ConfigurationElementEntity } from "./../models/ConfigurationElementEntity";
-import * as mongoose from "mongoose";
 
 interface IConfigResponse {
     configuration: Configuration;
@@ -47,7 +46,6 @@ export const addConfiguration = (req: Request, res: Response): void => {
 
 export const updateConfiguration = (req: Request, res: Response): void => {
     const configId = req.params.id;
-    const id = mongoose.Types.ObjectId(configId);
     const propertyName = req.body.propertyName;
     const newValue = req.body.newValue;
 
