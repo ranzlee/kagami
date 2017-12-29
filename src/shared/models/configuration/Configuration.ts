@@ -1,5 +1,5 @@
 export class Configuration {
-    id: string;
+    _id: string;
     name: string;
     tenant: string;
     currentChangeEvent: number;

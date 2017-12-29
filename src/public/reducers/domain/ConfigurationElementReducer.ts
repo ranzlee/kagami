@@ -1,9 +1,9 @@
 import { ConfigElementType } from './../../../shared/models/enums/ConfigElementType';
 import { IConfigurationElement } from './../../../shared/models/configuration/elements/IConfigurationElement';
-import { EntityActionTypes } from './../../actions/EntityActions';
+import { ConfigurationElementActionTypes } from './../../actions/ConfigurationElementActions';
 import { ActionTypeKeys } from '../../actions/ActionTypeKeys';
 
-export function configurationElementReducer(configurationElements: { [key: string]: IConfigurationElement } = {}, action: EntityActionTypes) {
+export function configurationElementReducer(configurationElements: { [key: string]: IConfigurationElement } = {}, action: ConfigurationElementActionTypes) {
     switch (action.type) {
         case ActionTypeKeys.ADD_CONFIG_ELEMENT:
             const newElement = {

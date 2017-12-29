@@ -149,7 +149,7 @@ app.get(
 );
 
 app.get("/api/configuration/:id", configurationController.getEntireConfiguration);
-app.put("/api/configuration/:id", configurationController.addConfiguration);
+app.put("/api/configuration", configurationController.addConfiguration);
 app.post("/api/configuration/:id", configurationController.updateConfiguration);
 
 const privateKey = fs.readFileSync(path.join(__dirname, "key.pem"));

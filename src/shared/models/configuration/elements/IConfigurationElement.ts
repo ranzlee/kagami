@@ -1,7 +1,7 @@
 import { ConfigElementType } from './../../enums/ConfigElementType';
 
 export interface IConfigurationElement {
-    id: string;
+    _id: string;
     configId: string;
     configElementType: ConfigElementType;
     name: string;

@@ -1,9 +1,11 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import { SyntheticEvent } from "react";
 
 export interface LocalLoginState {
   email: string;
   password: string;
+  formWasValidated: string;
 }
 
 export interface LocalLoginProps {
@@ -14,103 +16,130 @@ export interface LocalLoginProps {
 export class LocalLogin extends React.Component<
   LocalLoginProps,
   LocalLoginState
-  > {
+> {
   constructor(props: LocalLoginProps) {
     super(props);
-    this.state = { email: "", password: "" };
+    this.state = { email: "", password: "", formWasValidated: "" };
   }
 
-  handleEmailChange = (event: any) => {
-    this.setState({ email: event.target.value });
+  handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ email: event.currentTarget.value });
   };
 
-  handlePasswordChange = (event: any) => {
-    this.setState({ password: event.target.value });
+  handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ password: event.currentTarget.value });
   };
 
-  handleLogin = (event: any) => {
-    let form = document.getElementById("localLogin") as any;
+  handleLogin = (event: React.FormEvent<HTMLFormElement>) => {
+    let form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
     }
-    form.classList.add('was-validated');
+    this.setState({ formWasValidated: "was-validated" });
   };
 
-  handleCreateAccount = (event: any) => {
+  handleCreateAccount = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
     this.props.showCreateAccount();
   };
 
-  handleForgotPassword = (event: any) => {
+  handleForgotPassword = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
     this.props.showForgotPassword();
   };
   render() {
-    return <div>
-      <div className="row">
-        <div className="col-lg-3" />
-        <div className="col-lg-9">
-          <div className="text-primary">
-            <span>
-              <i className="fa fa-user" aria-hidden="true" />&nbsp;&nbsp;Login using your local account or&nbsp;
+    return (
+      <div>
+        <div className="row">
+          <div className="col-lg-3" />
+          <div className="col-lg-9">
+            <div className="text-primary">
+              <span>
+                <i className="fa fa-user" aria-hidden="true" />&nbsp;&nbsp;Login
+                using your local account or&nbsp;
                 <a href="" onClick={this.handleCreateAccount}>
-                create a new local account
+                  create a new local account
                 </a>&nbsp;to get started!
               </span>
-          </div>
-        </div>
-      </div>
-      <br />
-      <form id="localLogin">
-        <div className="row form-group">
-          <div className="col-lg-3" />
-          <label className="col-lg-2 col-form-label" htmlFor="email">
-            Email Address
-                </label>
-          <div className="col-lg-4">
-            <input className="form-control" id="email" required type="text" value={this.state.email} placeholder="Enter your email address" onChange={this.handleEmailChange} />
-            <div className="invalid-feedback">
-              Email Address is required.
-                </div>
-          </div>
-        </div>
-        <div className="row form-group">
-          <div className="col-lg-3" />
-          <label className="col-lg-2 col-form-label" htmlFor="password">
-            Password
-                </label>
-          <div className="col-lg-4">
-            <input className="form-control" id="password" required type="password" value={this.state.password} placeholder="Enter your password" onChange={this.handlePasswordChange} />
-            <div className="invalid-feedback">
-              Password is required.
-                </div>
-          </div>
-        </div>
-        <div className="row form-group">
-          <div className="col-lg-5" />
-          <div className="col-lg-2">
-            <div className="form-check">
-              <input id="rememberMe" type="checkbox" className="form-check-input" title="Remember me" /><label className="form-check-label" htmlFor="rememberMe">
-                Remember me
-                </label>
             </div>
           </div>
-          <div className="col-lg-2">
-            <a href="" onClick={this.handleForgotPassword}>
-              Forgot your password?
-                </a>
-          </div>
         </div>
-        <div className="row">
-          <div className="col-lg-5" />
-          <div className="col-lg-2">
-            <button className="btn btn-primary" onClick={this.handleLogin}>
-              Log me in!
+        <br />
+        <form
+          noValidate
+          onSubmit={this.handleLogin}
+          className={this.state.formWasValidated}
+        >
+          <div className="row form-group">
+            <div className="col-lg-3" />
+            <label className="col-lg-2 col-form-label" htmlFor="email">
+              Email Address
+            </label>
+            <div className="col-lg-4">
+              <input
+                className="form-control"
+                id="email"
+                required
+                type="email"
+                value={this.state.email}
+                placeholder="Enter your email address"
+                onChange={this.handleEmailChange}
+              />
+              <div className="invalid-feedback">
+                Email Address is required and must be a valid email format.
+              </div>
+            </div>
+          </div>
+          <div className="row form-group">
+            <div className="col-lg-3" />
+            <label className="col-lg-2 col-form-label" htmlFor="password">
+              Password
+            </label>
+            <div className="col-lg-4">
+              <input
+                className="form-control"
+                id="password"
+                required
+                type="password"
+                value={this.state.password}
+                placeholder="Enter your password"
+                onChange={this.handlePasswordChange}
+              />
+              <div className="invalid-feedback">Password is required.</div>
+            </div>
+          </div>
+          <div className="row form-group">
+            <div className="col-lg-5" />
+            <div className="col-lg-2">
+              <div className="form-check">
+                <input
+                  id="rememberMe"
+                  type="checkbox"
+                  className="form-check-input"
+                  title="Remember me"
+                />
+                <label className="form-check-label" htmlFor="rememberMe">
+                  Remember me
+                </label>
+              </div>
+            </div>
+            <div className="col-lg-2">
+              <a href="" onClick={this.handleForgotPassword}>
+                Forgot your password?
+              </a>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-lg-5" />
+            <div className="col-lg-2">
+              <button type="submit" className="btn btn-primary">
+                Log me in!
               </button>
+            </div>
           </div>
-        </div>
-      </form>
-    </div>;
+        </form>
+      </div>
+    );
   }
 }

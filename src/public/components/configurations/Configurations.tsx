@@ -29,7 +29,7 @@ export class Configurations extends React.Component<
   render() {
     const { add } = this.props;
     return (
-      <div>
+      <div className="container-fluid">
         <h1>Configurations</h1>
         <button className="btn btn-primary" onClick={add}>
           Add Configuration
