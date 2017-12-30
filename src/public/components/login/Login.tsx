@@ -3,56 +3,7 @@ import * as ReactDOM from "react-dom";
 import { LocalLogin } from "./LocalLogin";
 import { CreateAccount } from "./CreateAccount";
 import { ForgotPassword } from "./ForgotPassword";
-import * as $ from "jquery";
-
-export interface AlertState {}
-
-export interface AlertProps {
-  onClose: () => void;
-}
-
-export class Alert extends React.Component<AlertProps, AlertState> {
-  constructor(props: AlertProps) {
-    super(props);
-    this.state = {};
-  }
-
-  componentDidMount() {
-    let unmanagedAlert = (
-      <div
-        className="alert alert-info alert-dismissible fade show"
-        role="alert"
-      >
-        <h5 className="alert-heading">Login to get started!</h5>
-        <p>
-          Kagami accounts are automatically linked by email address, so feel
-          free to use a social media account you already have or create a new
-          local account with us. As long as you use the same email address
-          across accounts, we'll know who you are.
-        </p>
-        <button
-          type="button"
-          className="close"
-          data-dismiss="alert"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    );
-    let thisElement = ReactDOM.findDOMNode(this);
-    ReactDOM.render(unmanagedAlert, thisElement, () => {
-      let alertElement = thisElement.firstChild;
-      $(alertElement).on("closed.bs.alert", () => {
-        this.props.onClose();
-      });
-    });
-  }
-
-  render() {
-    return <div />;
-  }
-}
+import { BootstrapFadeAlert } from "../common/BootstrapFadeAlert";
 
 export interface LoginState {
   context: JSX.Element;
@@ -121,7 +72,19 @@ export default class Login extends React.Component<LoginProps, LoginState> {
 
   showHelp = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
-    let helpAlert = <Alert onClose={this.showHelpLink} />;
+    let alertText =
+      "Kagami accounts are automatically linked by email address, so feel " +
+      "free to use a social media account you already have or create a new " +
+      "local account with us. As long as you use the same email address " +
+      "across accounts, we'll know who you are.";
+    let helpAlert = (
+      <BootstrapFadeAlert
+        onClose={this.showHelpLink}
+        alertClassName="alert-info"
+        alertBody={alertText}
+        alertTitle="Login to get started!"
+      />
+    );
     this.setState({
       help: (
         <div className="row">
