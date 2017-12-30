@@ -4,6 +4,7 @@ import { LocalLogin } from "./LocalLogin";
 import { CreateAccount } from "./CreateAccount";
 import { ForgotPassword } from "./ForgotPassword";
 import { BootstrapFadeAlert } from "../common/BootstrapFadeAlert";
+import { BootstrapInfoTooltip } from "../common/BootstrapInfoTooltip";
 
 export interface LoginState {
   context: JSX.Element;
@@ -101,68 +102,77 @@ export default class Login extends React.Component<LoginProps, LoginState> {
   render() {
     return (
       <div className="container">
-        {this.state.help}
         <div className="row">
           <div className="col-lg-3" />
           <div className="col-lg-6">
-            <div className="card">
-              <div className="card-header bg-light">
-                <div className="text-primary h5">
-                  <span>
-                    <i className="fas fa-lock" aria-hidden="true" />&nbsp;&nbsp;Login
-                    using one of your existing social media accounts.
-                  </span>
-                </div>
-              </div>
-              <div className="card-body">
-                <div className="row">
-                  <div className="col-lg-6">
-                    <a
-                      className="btn btn-block btn-social btn-facebook"
-                      href="/auth/facebook"
-                    >
-                      <i className="fab fa-facebook-f" aria-hidden="true" />
-                      Login with Facebook
-                    </a>
+            <div className="row">
+              <div className="col">
+                <div className="card">
+                  <div className="card-header bg-light">
+                    <div className="text-primary h5">
+                      <div className="float-left">
+                        <i className="fas fa-lock" aria-hidden="true" />&nbsp;&nbsp;Login
+                        using one of your existing social media accounts.
+                      </div>
+                      <div className="float-right">
+                        <BootstrapInfoTooltip title="Login using one of your social media accounts. Kagami will automatically link accounts that use the same email address." />
+                      </div>
+                    </div>
                   </div>
-                  <div className="col-lg-6">
-                    <a
-                      className="btn btn-block btn-social btn-google"
-                      href="/auth/google"
-                    >
-                      <i className="fab fa-google" aria-hidden="true" />
-                      Login with Google
-                    </a>
+                  <div className="card-body">
+                    <div className="row">
+                      <div className="col-lg-6">
+                        <a
+                          className="btn btn-block btn-social btn-facebook"
+                          href="/auth/facebook"
+                        >
+                          <i className="fab fa-facebook-f" aria-hidden="true" />
+                          Login with Facebook
+                        </a>
+                      </div>
+                      <div className="col-lg-6">
+                        <a
+                          className="btn btn-block btn-social btn-google"
+                          href="/auth/google"
+                        >
+                          <i className="fab fa-google" aria-hidden="true" />
+                          Login with Google
+                        </a>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-        <br />
-        <div className="row">
-          <div className="col">
-            <div className="text-center">
-              <span className="text-secondary h4">OR</span>
-            </div>
-          </div>
-        </div>
-        <br />
-        <div className="row">
-          <div className="col-lg-3" />
-          <div className="col-lg-6">
-            <div className="card">
-              <div className="card-header bg-light">
-                <div className="text-primary h5">
-                  <span>
-                    <i className="fas fa-lock" aria-hidden="true" />&nbsp;&nbsp;Login
-                    using your Kagami account.
-                  </span>
+            <br />
+            <div className="row">
+              <div className="col">
+                <div className="text-center">
+                  <span className="text-secondary h4">OR</span>
                 </div>
               </div>
-              <div className="card-body">{this.state.context}</div>
+            </div>
+            <br />
+            <div className="row">
+              <div className="col">
+                <div className="card">
+                  <div className="card-header bg-light">
+                    <div className="text-primary h5">
+                      <div className="float-left">
+                        <i className="fas fa-lock" aria-hidden="true" />&nbsp;&nbsp;Login
+                        using your Kagami account.
+                      </div>
+                      <div className="float-right">
+                        <BootstrapInfoTooltip title="Login with your local Kagami account or create a new account." />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="card-body">{this.state.context}</div>
+                </div>
+              </div>
             </div>
           </div>
+          <div className="col-lg-3">{this.state.help}</div>
         </div>
       </div>
     );
