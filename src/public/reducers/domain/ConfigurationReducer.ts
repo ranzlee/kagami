@@ -1,12 +1,13 @@
+import { IConfigLookup } from './../../types/AppStore';
 import { Config } from './../../components/configurations/Config';
 import { Configuration } from './../../../shared/models/configuration/Configuration';
 import { ConfigurationActionTypes } from './../../actions/ConfigurationActions';
 import { ActionTypeKeys } from '../../actions/ActionTypeKeys';
 
-export function configurationReducer(configurations: { [key: string]: Configuration } = {}, action: ConfigurationActionTypes) {
+export function configurationReducer(configurations: IConfigLookup = {}, action: ConfigurationActionTypes) {
     switch (action.type) {
-        case ActionTypeKeys.ADD_CONFIGURATION:
-            return configurations;
+        case ActionTypeKeys.FETCH_CONFIGS_SUCCESS:
+            return action.configLookup;
         case ActionTypeKeys.ADD_CONFIGURATION_SUCCESS:
             return { ...configurations, [action.id]: { _id: action.id, name: '' } };
         case ActionTypeKeys.DELETE_CONFIGURATION:

@@ -1,5 +1,5 @@
 import { Configuration } from './../../shared/models/configuration/Configuration';
-import { IDomain } from './../types/AppStore';
+import { IDomain, IConfigLookup } from './../types/AppStore';
 import { ActionTypeKeys } from "./ActionTypeKeys";
 import { fetchConfiguration } from "./../apis/ConfigApi"
 import { Action, ActionCreator, Dispatch } from 'redux';
@@ -24,7 +24,7 @@ export interface FetchConfigsAction {
 }
 export interface FetchConfigsSuccessAction {
     type: ActionTypeKeys.FETCH_CONFIGS_SUCCESS;
-    configs: Configuration[];
+    configLookup: IConfigLookup;
 }
 export interface FetchConfigsErrorAction {
     type: ActionTypeKeys.FETCH_CONFIGS_ERROR;
@@ -58,9 +58,9 @@ export interface UpdateConfigurationAction {
 export const fetchConfigs = (): FetchConfigsAction => ({
     type: ActionTypeKeys.FETCH_CONFIGS,
 });
-export const fetchConfigsSuccess = (configs: Configuration[]) : FetchConfigsSuccessAction => ({
+export const fetchConfigsSuccess = (configLookup: IConfigLookup) : FetchConfigsSuccessAction => ({
    type: ActionTypeKeys.FETCH_CONFIGS_SUCCESS,
-   configs 
+   configLookup 
 });
 export const fetchConfigsError = (error: any) : FetchConfigsErrorAction => ({
    type: ActionTypeKeys.FETCH_CONFIGS_ERROR,
