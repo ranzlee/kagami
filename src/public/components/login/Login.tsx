@@ -5,7 +5,8 @@ import { CreateAccount } from "./CreateAccount";
 import { ForgotPassword } from "./ForgotPassword";
 
 export interface LoginState {
-  context: any;
+  context: JSX.Element;
+  help: JSX.Element;
 }
 
 export interface LoginProps {}
@@ -19,8 +20,19 @@ export default class Login extends React.Component<LoginProps, LoginState> {
           showCreateAccount={this.showCreateAccount}
           showForgotPassword={this.showForgotPassword}
         />
-      )
+      ),
+      help: this.helpLink()
     };
+  }
+
+  helpLink = (): JSX.Element => {
+    return <div className="row">
+    <div className="col text-right">
+    <a href="" onClick={this.showHelp} className="text-info" title="more info">
+    <i className="fas fa-info fa-lg" aria-hidden="true"></i>
+    </a>
+    </div>
+    </div>
   }
 
   showCreateAccount = () => {
@@ -50,22 +62,36 @@ export default class Login extends React.Component<LoginProps, LoginState> {
     });
   };
 
+  showHelp = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    this.setState({ help:  
+    (<div className="row">
+    <div className="col">
+    <div className="alert alert-info alert-dismissible fade show" role="alert">
+      <h5 className="alert-heading">Login to get started!</h5>
+      <p>
+        Kagami accounts are automatically linked by email address, so
+        feel free to use a social media account you already have or
+        create a new local account with us. As long as you use the same
+        email address across accounts, we'll know who you are.
+      </p>
+      <button type="button" onClick={this.showHelpLink} className="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+  </div>) } );
+  }
+
+  showHelpLink = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    this.setState({ help: this.helpLink() });
+  }
+
   render() {
     return (
       <div className="container">
-        <div className="row">
-          <div className="col">
-            <div className="alert alert-secondary" role="alert">
-              <h4 className="alert-heading">Login to get started!</h4>
-              <p>
-                Kagami accounts are automatically linked by email address, so
-                feel free to use a social media account you already have or
-                create a new local account with us. As long as you use the same
-                email address across accounts, we'll know who you are.
-              </p>
-            </div>
-          </div>
-        </div>
+        {this.state.help}
         <div className="row">
           <div className="col-lg-3" />
           <div className="col-lg-9">

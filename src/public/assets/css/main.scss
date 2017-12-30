@@ -1,17 +1,17 @@
 //theme variables
-//@import "themes/sandstone/_variables.scss";
+@import "themes/sandstone/_variables.scss";
 //@import "themes/sketchy/_variables.scss";
 //@import "themes/lux/_variables.scss";
-@import "themes/flatly/_variables.scss";
+//@import "themes/flatly/_variables.scss";
 
 //main bootstrap
 @import "lib/bootstrap/bootstrap.scss";
 
 //theme - match with variables
-//@import "themes/sandstone/_bootswatch.scss";
+@import "themes/sandstone/_bootswatch.scss";
 //@import "themes/sketchy/_bootswatch.scss";
 //@import "themes/lux/_bootswatch.scss";
-@import "themes/flatly/_bootswatch.scss";
+//@import "themes/flatly/_bootswatch.scss";
 
 //font awesome
 @import "lib/fontawesome/fontawesome.scss";
