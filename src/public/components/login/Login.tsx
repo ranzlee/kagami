@@ -30,14 +30,14 @@ export default class Login extends React.Component<LoginProps, LoginState> {
   helpLink = (): JSX.Element => {
     return (
       <div className="row">
-        <div className="col text-right">
+        <div className="col">
           <a
             href=""
             onClick={this.showHelp}
-            className="text-info"
-            title="more info"
+            className="text-info h5"
+            title="help"
           >
-            Help
+            Need help?
           </a>
         </div>
       </div>

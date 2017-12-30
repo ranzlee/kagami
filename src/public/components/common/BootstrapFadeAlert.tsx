@@ -37,6 +37,7 @@ export class BootstrapFadeAlert extends React.Component<
     let unmanagedAlert = (
       <div className={this.state.alertClassNames} role="alert">
         <h5 className="alert-heading">{this.props.alertTitle}</h5>
+        <hr />
         <p>{this.props.alertBody}</p>
         <button
           type="button"
