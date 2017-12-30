@@ -31,14 +31,13 @@ export default class Login extends React.Component<LoginProps, LoginState> {
     return (
       <div className="row">
         <div className="col">
-          <a
-            href=""
+          <button
             onClick={this.showHelp}
-            className="text-info h5"
-            title="help"
+            className="btn btn-info btn-icon btn-icon-mini btn-round"
+            aria-label="help and information"
           >
-            Need help?
-          </a>
+            <i className="fa fa-question" />
+          </button>
         </div>
       </div>
     );
@@ -71,7 +70,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
     });
   };
 
-  showHelp = (event: React.MouseEvent<HTMLAnchorElement>) => {
+  showHelp = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     let alertText =
       "Kagami accounts are automatically linked by email address, so feel " +
@@ -109,7 +108,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
               <div className="col">
                 <div className="card">
                   <div className="card-header bg-light">
-                    <div className="text-primary h5">
+                    <div className="text-primary">
                       <div className="float-left">
                         <i className="fas fa-lock" aria-hidden="true" />&nbsp;&nbsp;Login
                         using one of your existing social media accounts.
@@ -117,25 +116,26 @@ export default class Login extends React.Component<LoginProps, LoginState> {
                       <div className="float-right">
                         <BootstrapInfoTooltip title="Login using one of your social media accounts. Kagami will automatically link accounts that use the same email address." />
                       </div>
+                      <div className="clearfix" />
                     </div>
                   </div>
                   <div className="card-body">
                     <div className="row">
                       <div className="col-lg-6">
                         <a
-                          className="btn btn-block btn-social btn-facebook"
+                          className="btn btn-block btn-facebook btn-simple"
                           href="/auth/facebook"
                         >
-                          <i className="fab fa-facebook-f" aria-hidden="true" />
-                          Login with Facebook
+                          <i className="fab fa-facebook-f" aria-hidden="true" />{" "}
+                          - Login with Facebook
                         </a>
                       </div>
                       <div className="col-lg-6">
                         <a
-                          className="btn btn-block btn-social btn-google"
+                          className="btn btn-block btn-google btn-simple"
                           href="/auth/google"
                         >
-                          <i className="fab fa-google" aria-hidden="true" />
+                          <i className="fab fa-google" aria-hidden="true" /> -
                           Login with Google
                         </a>
                       </div>
@@ -157,7 +157,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
               <div className="col">
                 <div className="card">
                   <div className="card-header bg-light">
-                    <div className="text-primary h5">
+                    <div className="text-primary">
                       <div className="float-left">
                         <i className="fas fa-lock" aria-hidden="true" />&nbsp;&nbsp;Login
                         using your Kagami account.
@@ -165,6 +165,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
                       <div className="float-right">
                         <BootstrapInfoTooltip title="Login with your local Kagami account or create a new account." />
                       </div>
+                      <div className="clearfix" />
                     </div>
                   </div>
                   <div className="card-body">{this.state.context}</div>

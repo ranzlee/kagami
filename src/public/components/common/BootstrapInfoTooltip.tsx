@@ -2,7 +2,9 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as $ from "jquery";
 
-export interface BootstrapInfoTooltipState {}
+export interface BootstrapInfoTooltipState {
+  tooltipElement: Node;
+}
 
 export interface BootstrapInfoTooltipProps {
   title: string;
@@ -14,7 +16,7 @@ export class BootstrapInfoTooltip extends React.Component<
 > {
   constructor(props: BootstrapInfoTooltipProps) {
     super(props);
-    this.state = {};
+    this.state = { tooltipElement: null };
   }
 
   onClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
@@ -30,6 +32,7 @@ export class BootstrapInfoTooltip extends React.Component<
     let thisElement = ReactDOM.findDOMNode(this);
     ReactDOM.render(unmanagedTooltip, thisElement, () => {
       let tooltipElement = thisElement.firstChild;
+      this.setState({ tooltipElement: tooltipElement });
       let options = {
         container: "body",
         delay: 300,
@@ -38,6 +41,10 @@ export class BootstrapInfoTooltip extends React.Component<
       };
       ($(tooltipElement) as any).tooltip(options);
     });
+  }
+
+  componentWillUnmount() {
+    ($(this.state.tooltipElement) as any).tooltip("dispose");
   }
 
   render() {

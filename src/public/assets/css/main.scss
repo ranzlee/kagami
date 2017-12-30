@@ -1,17 +1,21 @@
 //theme variables
-@import "themes/sandstone/_variables.scss";
+//@import "themes/sandstone/_variables.scss";
 //@import "themes/sketchy/_variables.scss";
 //@import "themes/lux/_variables.scss";
 //@import "themes/flatly/_variables.scss";
 
 //main bootstrap
-@import "lib/bootstrap/bootstrap.scss";
+//@import "lib/bootstrap/bootstrap.scss";
 
 //theme - match with variables
-@import "themes/sandstone/_bootswatch.scss";
+//@import "themes/sandstone/_bootswatch.scss";
 //@import "themes/sketchy/_bootswatch.scss";
 //@import "themes/lux/_bootswatch.scss";
 //@import "themes/flatly/_bootswatch.scss";
+
+//*** testing now-ui ***//
+@import "themes/now-ui/css/bootstrap.min.css";
+@import "themes/now-ui/sass/now-ui-kit.scss";
 
 //font awesome
 @import "lib/fontawesome/fontawesome.scss";
@@ -20,7 +24,7 @@
 @import "lib/fontawesome/fa-solid.scss";
 
 //bootstrap social buttons
-@import "lib/bootstrap-social.scss";
+//@import "lib/bootstrap-social.scss";
 
 //custom globals
 body {

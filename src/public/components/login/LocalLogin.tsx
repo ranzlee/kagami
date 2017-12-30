@@ -108,16 +108,9 @@ export class LocalLogin extends React.Component<
           <div className="row form-group">
             <div className="col-lg-4" />
             <div className="col-lg-4">
-              <div className="form-check">
-                <input
-                  id="rememberMe"
-                  type="checkbox"
-                  className="form-check-input"
-                  title="Remember me"
-                />
-                <label className="form-check-label" htmlFor="rememberMe">
-                  Remember me
-                </label>
+              <div className="checkbox">
+                <input id="rememberMe" type="checkbox" title="Remember me" />
+                <label htmlFor="rememberMe">Remember me</label>
               </div>
             </div>
             <div className="col-lg-4">

@@ -36,17 +36,27 @@ export class BootstrapFadeAlert extends React.Component<
   componentDidMount() {
     let unmanagedAlert = (
       <div className={this.state.alertClassNames} role="alert">
-        <h5 className="alert-heading">{this.props.alertTitle}</h5>
+        <div className="row">
+          <div className="col-lg-9">
+            <span className="alert-heading text-lg">
+              {this.props.alertTitle}
+            </span>
+          </div>
+          <div className="col-lg-3">
+            <div className="text-right">
+              <button
+                type="button"
+                className="btn btn-info btn-sm btn-icon btn-icon-mini"
+                data-dismiss="alert"
+                aria-label="Close"
+              >
+                <i className="fa fa-times" />
+              </button>
+            </div>
+          </div>
+        </div>
         <hr />
         <p>{this.props.alertBody}</p>
-        <button
-          type="button"
-          className="close"
-          data-dismiss="alert"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
       </div>
     );
     let thisElement = ReactDOM.findDOMNode(this);

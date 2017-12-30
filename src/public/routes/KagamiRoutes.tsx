@@ -32,7 +32,7 @@ export default class KagamiRoutes extends React.Component {
 
     return (
       <div>
-        <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+        <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-default">
           <Link className="navbar-brand" to="/">
             KAGAMI
           </Link>
