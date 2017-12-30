@@ -41,12 +41,10 @@ export class ForgotPassword extends React.Component<
     return (
       <div>
         <div className="row">
-          <div className="col-lg-3" />
-          <div className="col-lg-9">
+          <div className="col">
             <div className="text-primary">
               <span>
-                <i className="fa fa-user" aria-hidden="true" />&nbsp;&nbsp;Enter
-                your email address to reset your local account or&nbsp;<a
+                Enter your email address to reset your local account or&nbsp;<a
                   href=""
                   onClick={this.handleLoginLocalAccount}
                 >
@@ -63,11 +61,10 @@ export class ForgotPassword extends React.Component<
           className={this.state.formWasValidated}
         >
           <div className="row form-group">
-            <div className="col-lg-3" />
-            <label className="col-lg-2 col-form-label" htmlFor="email">
+            <label className="col-lg-4 col-form-label" htmlFor="email">
               Email Address
             </label>
-            <div className="col-lg-4">
+            <div className="col-lg-8">
               <input
                 className="form-control"
                 id="email"
@@ -83,8 +80,8 @@ export class ForgotPassword extends React.Component<
             </div>
           </div>
           <div className="row">
-            <div className="col-lg-5" />
-            <div className="col-lg-2">
+            <div className="col-lg-4" />
+            <div className="col-lg-8 text-right">
               <button className="btn btn-primary" type="submit">
                 Reset my account password!
               </button>

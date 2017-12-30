@@ -52,12 +52,10 @@ export class LocalLogin extends React.Component<
     return (
       <div>
         <div className="row">
-          <div className="col-lg-3" />
-          <div className="col-lg-9">
+          <div className="col">
             <div className="text-primary">
               <span>
-                <i className="fa fa-user" aria-hidden="true" />&nbsp;&nbsp;Login
-                using your local account or&nbsp;
+                Login using your local account or&nbsp;
                 <a href="" onClick={this.handleCreateAccount}>
                   create a new local account
                 </a>&nbsp;to get started!
@@ -72,11 +70,10 @@ export class LocalLogin extends React.Component<
           className={this.state.formWasValidated}
         >
           <div className="row form-group">
-            <div className="col-lg-3" />
-            <label className="col-lg-2 col-form-label" htmlFor="email">
+            <label className="col-lg-4 col-form-label" htmlFor="email">
               Email Address
             </label>
-            <div className="col-lg-4">
+            <div className="col-lg-8">
               <input
                 className="form-control"
                 id="email"
@@ -92,11 +89,10 @@ export class LocalLogin extends React.Component<
             </div>
           </div>
           <div className="row form-group">
-            <div className="col-lg-3" />
-            <label className="col-lg-2 col-form-label" htmlFor="password">
+            <label className="col-lg-4 col-form-label" htmlFor="password">
               Password
             </label>
-            <div className="col-lg-4">
+            <div className="col-lg-8">
               <input
                 className="form-control"
                 id="password"
@@ -110,8 +106,8 @@ export class LocalLogin extends React.Component<
             </div>
           </div>
           <div className="row form-group">
-            <div className="col-lg-5" />
-            <div className="col-lg-2">
+            <div className="col-lg-4" />
+            <div className="col-lg-4">
               <div className="form-check">
                 <input
                   id="rememberMe"
@@ -124,15 +120,15 @@ export class LocalLogin extends React.Component<
                 </label>
               </div>
             </div>
-            <div className="col-lg-2">
+            <div className="col-lg-4">
               <a href="" onClick={this.handleForgotPassword}>
                 Forgot your password?
               </a>
             </div>
           </div>
           <div className="row">
-            <div className="col-lg-5" />
-            <div className="col-lg-2">
+            <div className="col-lg-4" />
+            <div className="col-lg-8 text-right">
               <button type="submit" className="btn btn-primary">
                 Log me in!
               </button>

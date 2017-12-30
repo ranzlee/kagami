@@ -85,7 +85,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
             className="text-info"
             title="more info"
           >
-            <i className="fas fa-info fa-lg" aria-hidden="true" />
+            Help
           </a>
         </div>
       </div>
@@ -141,47 +141,66 @@ export default class Login extends React.Component<LoginProps, LoginState> {
         {this.state.help}
         <div className="row">
           <div className="col-lg-3" />
-          <div className="col-lg-9">
-            <div className="text-primary">
-              <span>
-                <i className="fas fa-user" aria-hidden="true" />&nbsp;&nbsp;Login
-                using one of your existing social media accounts.
-              </span>
+          <div className="col-lg-6">
+            <div className="card">
+              <div className="card-header bg-light">
+                <div className="text-primary h5">
+                  <span>
+                    <i className="fas fa-lock" aria-hidden="true" />&nbsp;&nbsp;Login
+                    using one of your existing social media accounts.
+                  </span>
+                </div>
+              </div>
+              <div className="card-body">
+                <div className="row">
+                  <div className="col-lg-6">
+                    <a
+                      className="btn btn-block btn-social btn-facebook"
+                      href="/auth/facebook"
+                    >
+                      <i className="fab fa-facebook-f" aria-hidden="true" />
+                      Login with Facebook
+                    </a>
+                  </div>
+                  <div className="col-lg-6">
+                    <a
+                      className="btn btn-block btn-social btn-google"
+                      href="/auth/google"
+                    >
+                      <i className="fab fa-google" aria-hidden="true" />
+                      Login with Google
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+        <div className="row">
+          <div className="col">
+            <div className="text-center">
+              <span className="text-secondary h4">OR</span>
             </div>
           </div>
         </div>
         <br />
         <div className="row">
           <div className="col-lg-3" />
-          <div className="col-lg-3">
-            <a
-              className="btn btn-block btn-social btn-facebook"
-              href="/auth/facebook"
-            >
-              <i className="fab fa-facebook-f" aria-hidden="true" />
-              Login with Facebook
-            </a>
-          </div>
-          <div className="col-lg-3">
-            <a
-              className="btn btn-block btn-social btn-google"
-              href="/auth/google"
-            >
-              <i className="fab fa-google" aria-hidden="true" />
-              Login with Google
-            </a>
-          </div>
-        </div>
-        <hr className="border-secondary" />
-        <div className="row">
-          <div className="col">
-            <div className="text-center">
-              <span className="text-secondary">OR</span>
+          <div className="col-lg-6">
+            <div className="card">
+              <div className="card-header bg-light">
+                <div className="text-primary h5">
+                  <span>
+                    <i className="fas fa-lock" aria-hidden="true" />&nbsp;&nbsp;Login
+                    using your Kagami account.
+                  </span>
+                </div>
+              </div>
+              <div className="card-body">{this.state.context}</div>
             </div>
           </div>
         </div>
-        <hr className="border-secondary" />
-        {this.state.context}
       </div>
     );
   }
