@@ -33,7 +33,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
         <div className="col">
           <button
             onClick={this.showHelp}
-            className="btn btn-info btn-icon btn-icon-mini btn-round"
+            className="btn btn-primary btn-icon btn-icon-mini btn-round"
             aria-label="help and information"
           >
             <i className="fa fa-question" />
@@ -80,7 +80,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
     let helpAlert = (
       <BootstrapFadeAlert
         onClose={this.showHelpLink}
-        alertClassName="alert-info"
+        alertClassName="primary"
         alertBody={alertText}
         alertTitle="Login to get started!"
       />
@@ -123,20 +123,20 @@ export default class Login extends React.Component<LoginProps, LoginState> {
                     <div className="row">
                       <div className="col-lg-6">
                         <a
-                          className="btn btn-block btn-facebook btn-simple"
+                          className="btn btn-block btn-social btn-facebook"
                           href="/auth/facebook"
                         >
-                          <i className="fab fa-facebook-f" aria-hidden="true" />{" "}
-                          - Login with Facebook
+                          <i className="fab fa-facebook-f" aria-hidden="true" />Login
+                          with Facebook
                         </a>
                       </div>
                       <div className="col-lg-6">
                         <a
-                          className="btn btn-block btn-google btn-simple"
+                          className="btn btn-block btn-social btn-google"
                           href="/auth/google"
                         >
-                          <i className="fab fa-google" aria-hidden="true" /> -
-                          Login with Google
+                          <i className="fab fa-google" aria-hidden="true" />Login
+                          with Google
                         </a>
                       </div>
                     </div>
@@ -144,11 +144,10 @@ export default class Login extends React.Component<LoginProps, LoginState> {
                 </div>
               </div>
             </div>
-            <br />
             <div className="row">
               <div className="col">
                 <div className="text-center">
-                  <span className="text-secondary h4">OR</span>
+                  <span className="text-secondary h5">OR</span>
                 </div>
               </div>
             </div>

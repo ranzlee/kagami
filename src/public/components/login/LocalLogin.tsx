@@ -54,7 +54,7 @@ export class LocalLogin extends React.Component<
         <div className="row">
           <div className="col">
             <div className="text-primary">
-              <span>
+              <span className="text-muted">
                 Login using your local account or&nbsp;
                 <a href="" onClick={this.handleCreateAccount}>
                   create a new local account

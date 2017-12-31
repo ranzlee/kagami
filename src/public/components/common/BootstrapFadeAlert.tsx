@@ -8,14 +8,14 @@ export interface BootstrapFadeAlertState {
 
 export interface BootstrapFadeAlertProps {
   alertClassName:
-    | "alert-primary"
-    | "alert-secondary"
-    | "alert-success"
-    | "alert-danger"
-    | "alert-warning"
-    | "alert-info"
-    | "alert-light"
-    | "alert-dark";
+    | "primary"
+    | "secondary"
+    | "success"
+    | "danger"
+    | "warning"
+    | "info"
+    | "light"
+    | "dark";
   alertTitle: string;
   alertBody: string;
   onClose: () => void;
@@ -28,35 +28,31 @@ export class BootstrapFadeAlert extends React.Component<
   constructor(props: BootstrapFadeAlertProps) {
     super(props);
     this.state = {
-      alertClassNames:
-        this.props.alertClassName + " alert alert-dismissible fade show"
+      alertClassNames: "alert-" + this.props.alertClassName + " alert fade show"
     };
   }
 
   componentDidMount() {
+    let buttonClasses =
+      "btn-" + this.props.alertClassName + " btn btn-icon btn-sm btn-icon-mini";
     let unmanagedAlert = (
       <div className={this.state.alertClassNames} role="alert">
-        <div className="row">
-          <div className="col-lg-9">
-            <span className="alert-heading text-lg">
-              {this.props.alertTitle}
-            </span>
-          </div>
-          <div className="col-lg-3">
-            <div className="text-right">
-              <button
-                type="button"
-                className="btn btn-info btn-sm btn-icon btn-icon-mini"
-                data-dismiss="alert"
-                aria-label="Close"
-              >
-                <i className="fa fa-times" />
-              </button>
-            </div>
-          </div>
+        <div className="container">
+          <span className="h6">{this.props.alertTitle}</span>
+          <span className="float-right">
+            &nbsp;
+            <button
+              type="button"
+              className={buttonClasses}
+              data-dismiss="alert"
+              aria-label="Close"
+            >
+              <i className="fa fa-times" />
+            </button>
+          </span>
+          <div className="clearfix" />
+          <p>{this.props.alertBody}</p>
         </div>
-        <hr />
-        <p>{this.props.alertBody}</p>
       </div>
     );
     let thisElement = ReactDOM.findDOMNode(this);

@@ -19,13 +19,13 @@ export default class KagamiRoutes extends React.Component {
     if (UserService.getUser() != null) {
       authLink = (
         <a href="" className="nav-item nav-link" onClick={this.logout}>
-          LOGOUT
+          <i className="fas fa-power-off" />&nbsp;&nbsp; LOGOUT
         </a>
       );
     } else {
       authLink = (
         <Link className="nav-item nav-link" to="/login">
-          LOGIN
+          <i className="fas fa-lock" />&nbsp;&nbsp; LOGIN
         </Link>
       );
     }

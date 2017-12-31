@@ -4,7 +4,7 @@
   &:hover,
   &:focus,
   &:active {
-    color: $social-twitter-state-color !important;
+    color: $social-twitter-state-color;
   }
 }
 
@@ -14,7 +14,7 @@
   &:hover,
   &:focus,
   &:active {
-    color: $social-facebook-state-color !important;
+    color: $social-facebook-state-color;
   }
 }
 
@@ -24,7 +24,7 @@
   &:hover,
   &:focus,
   &:active {
-    color: $social-google-state-color !important;
+    color: $social-google-state-color;
   }
 }
 
@@ -34,6 +34,6 @@
   &:hover,
   &:focus,
   &:active {
-    color: $social-linkedin-state-color !important;
+    color: $social-linkedin-state-color;
   }
 }

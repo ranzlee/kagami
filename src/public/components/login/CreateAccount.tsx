@@ -66,7 +66,7 @@ export class CreateAccount extends React.Component<
         <div className="row">
           <div className="col">
             <div className="text-primary">
-              <span>
+              <span className="text-muted">
                 Create a new local account or&nbsp;<a
                   href=""
                   onClick={this.handleLoginLocalAccount}

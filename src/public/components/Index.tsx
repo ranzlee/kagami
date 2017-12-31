@@ -3,12 +3,7 @@ import * as ReactDOM from "react-dom";
 import { AppContainer } from "react-hot-loader";
 import Root from "./Root";
 import "./../assets/css/main.scss";
-
-//*** testing now-ui ***/
-//import "./../assets/js/lib/bootstrap.min.js";
-import "./../assets/css/themes/now-ui/js/core/bootstrap.min.js";
-//*** end-testing ***/
-
+import "./../assets/js/lib/bootstrap.min.js";
 import { Provider } from "react-redux";
 import { Store } from "./../Store";
 import KagamiRoutes from "./../routes/KagamiRoutes";

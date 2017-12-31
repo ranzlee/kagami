@@ -43,7 +43,7 @@ export class ForgotPassword extends React.Component<
         <div className="row">
           <div className="col">
             <div className="text-primary">
-              <span>
+              <span className="text-muted">
                 Enter your email address to reset your local account or&nbsp;<a
                   href=""
                   onClick={this.handleLoginLocalAccount}

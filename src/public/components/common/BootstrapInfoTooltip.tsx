@@ -19,15 +19,18 @@ export class BootstrapInfoTooltip extends React.Component<
     this.state = { tooltipElement: null };
   }
 
-  onClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+  onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
   };
 
   componentDidMount() {
     let unmanagedTooltip = (
-      <a href="" onClick={this.onClick} className="text-info">
+      <button
+        onClick={this.onClick}
+        className="btn btn-info btn-icon btn-sm btn-icon-mini"
+      >
         <i className="fas fa-info" aria-hidden="true" />
-      </a>
+      </button>
     );
     let thisElement = ReactDOM.findDOMNode(this);
     ReactDOM.render(unmanagedTooltip, thisElement, () => {
