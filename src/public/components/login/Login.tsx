@@ -7,7 +7,7 @@ import { FadeAlert } from "../common/widgets/FadeAlert";
 import { Card } from "../common/containers/Card";
 
 export interface LoginState {
-  context: JSX.Element;
+  content: JSX.Element;
   help: JSX.Element;
 }
 
@@ -17,7 +17,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
   constructor(props: LoginProps) {
     super(props);
     this.state = {
-      context: (
+      content: (
         <LocalLogin
           showCreateAccount={this.showCreateAccount}
           showForgotPassword={this.showForgotPassword}
@@ -45,7 +45,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
 
   showCreateAccount = () => {
     this.setState({
-      context: (
+      content: (
         <CreateAccount showLoginLocalAccount={this.showLoginLocalAccount} />
       )
     });
@@ -53,7 +53,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
 
   showForgotPassword = () => {
     this.setState({
-      context: (
+      content: (
         <ForgotPassword showLoginLocalAccount={this.showLoginLocalAccount} />
       )
     });
@@ -61,7 +61,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
 
   showLoginLocalAccount = () => {
     this.setState({
-      context: (
+      content: (
         <LocalLogin
           showCreateAccount={this.showCreateAccount}
           showForgotPassword={this.showForgotPassword}
@@ -99,31 +99,6 @@ export default class Login extends React.Component<LoginProps, LoginState> {
   };
 
   render() {
-    let socialAuthCardBody = (
-      <div>
-        <div className="row">
-          <div className="col-lg-6">
-            <a
-              className="btn btn-block btn-social btn-facebook"
-              href="/auth/facebook"
-            >
-              <i className="fab fa-facebook-f" aria-hidden="true" />Login with
-              Facebook
-            </a>
-          </div>
-          <div className="col-lg-6">
-            <a
-              className="btn btn-block btn-social btn-google"
-              href="/auth/google"
-            >
-              <i className="fab fa-google" aria-hidden="true" />Login with
-              Google
-            </a>
-          </div>
-        </div>
-      </div>
-    );
-
     return (
       <div className="container">
         <div className="row">
@@ -135,8 +110,30 @@ export default class Login extends React.Component<LoginProps, LoginState> {
                   titleText="Login using one of your existing social media accounts."
                   toolTip="Login using one of your social media accounts. Kagami will automatically link accounts that use the same email address."
                   titleFaIconName="fa-lock"
-                  bodyContent={socialAuthCardBody}
-                />
+                >
+                  <div>
+                    <div className="row">
+                      <div className="col-lg-6">
+                        <a
+                          className="btn btn-block btn-social btn-facebook"
+                          href="/auth/facebook"
+                        >
+                          <i className="fab fa-facebook-f" aria-hidden="true" />Login
+                          with Facebook
+                        </a>
+                      </div>
+                      <div className="col-lg-6">
+                        <a
+                          className="btn btn-block btn-social btn-google"
+                          href="/auth/google"
+                        >
+                          <i className="fab fa-google" aria-hidden="true" />Login
+                          with Google
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
               </div>
             </div>
             <div className="row">
@@ -153,8 +150,9 @@ export default class Login extends React.Component<LoginProps, LoginState> {
                   titleText="Login using your Kagami account."
                   toolTip="Login with your local Kagami account or create a new account."
                   titleFaIconName="fa-lock"
-                  bodyContent={this.state.context}
-                />
+                >
+                  {this.state.content}
+                </Card>
               </div>
             </div>
           </div>

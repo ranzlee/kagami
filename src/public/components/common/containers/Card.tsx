@@ -8,7 +8,6 @@ export interface CardProps {
   titleFaIconName: string;
   titleText: string;
   toolTip?: string;
-  bodyContent: JSX.Element | React.Component;
 }
 
 export class Card extends React.Component<CardProps, CardState> {
@@ -40,7 +39,7 @@ export class Card extends React.Component<CardProps, CardState> {
                 <div className="clearfix" />
               </div>
             </div>
-            <div className="card-body">{this.props.bodyContent}</div>
+            <div className="card-body">{this.props.children}</div>
           </div>
         </div>
       </div>
