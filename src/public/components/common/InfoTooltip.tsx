@@ -2,19 +2,19 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as $ from "jquery";
 
-export interface BootstrapInfoTooltipState {
+export interface InfoTooltipState {
   tooltipElement: Node;
 }
 
-export interface BootstrapInfoTooltipProps {
+export interface InfoTooltipProps {
   title: string;
 }
 
-export class BootstrapInfoTooltip extends React.Component<
-  BootstrapInfoTooltipProps,
-  BootstrapInfoTooltipState
+export class InfoTooltip extends React.Component<
+  InfoTooltipProps,
+  InfoTooltipState
 > {
-  constructor(props: BootstrapInfoTooltipProps) {
+  constructor(props: InfoTooltipProps) {
     super(props);
     this.state = { tooltipElement: null };
   }

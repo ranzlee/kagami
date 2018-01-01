@@ -2,11 +2,11 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as $ from "jquery";
 
-export interface BootstrapFadeAlertState {
+export interface FadeAlertState {
   alertClassNames: string;
 }
 
-export interface BootstrapFadeAlertProps {
+export interface FadeAlertProps {
   alertClassName:
     | "primary"
     | "secondary"
@@ -21,11 +21,8 @@ export interface BootstrapFadeAlertProps {
   onClose: () => void;
 }
 
-export class BootstrapFadeAlert extends React.Component<
-  BootstrapFadeAlertProps,
-  BootstrapFadeAlertState
-> {
-  constructor(props: BootstrapFadeAlertProps) {
+export class FadeAlert extends React.Component<FadeAlertProps, FadeAlertState> {
+  constructor(props: FadeAlertProps) {
     super(props);
     this.state = {
       alertClassNames: "alert-" + this.props.alertClassName + " alert fade show"

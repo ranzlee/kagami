@@ -1,6 +1,5 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { SyntheticEvent } from "react";
 
 export interface LocalLoginState {
   email: string;

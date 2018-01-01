@@ -3,8 +3,8 @@ import * as ReactDOM from "react-dom";
 import { LocalLogin } from "./LocalLogin";
 import { CreateAccount } from "./CreateAccount";
 import { ForgotPassword } from "./ForgotPassword";
-import { BootstrapFadeAlert } from "../common/BootstrapFadeAlert";
-import { BootstrapInfoTooltip } from "../common/BootstrapInfoTooltip";
+import { FadeAlert } from "../common/FadeAlert";
+import { Card } from "../common/Card";
 
 export interface LoginState {
   context: JSX.Element;
@@ -78,7 +78,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
       "local account with us. As long as you use the same email address " +
       "across accounts, we'll know who you are.";
     let helpAlert = (
-      <BootstrapFadeAlert
+      <FadeAlert
         onClose={this.showHelpLink}
         alertClassName="primary"
         alertBody={alertText}
@@ -99,6 +99,31 @@ export default class Login extends React.Component<LoginProps, LoginState> {
   };
 
   render() {
+    let socialAuthCardBody = (
+      <div>
+        <div className="row">
+          <div className="col-lg-6">
+            <a
+              className="btn btn-block btn-social btn-facebook"
+              href="/auth/facebook"
+            >
+              <i className="fab fa-facebook-f" aria-hidden="true" />Login with
+              Facebook
+            </a>
+          </div>
+          <div className="col-lg-6">
+            <a
+              className="btn btn-block btn-social btn-google"
+              href="/auth/google"
+            >
+              <i className="fab fa-google" aria-hidden="true" />Login with
+              Google
+            </a>
+          </div>
+        </div>
+      </div>
+    );
+
     return (
       <div className="container">
         <div className="row">
@@ -106,42 +131,12 @@ export default class Login extends React.Component<LoginProps, LoginState> {
           <div className="col-lg-6">
             <div className="row">
               <div className="col">
-                <div className="card">
-                  <div className="card-header bg-light">
-                    <div className="text-primary">
-                      <div className="float-left">
-                        <i className="fas fa-lock" aria-hidden="true" />&nbsp;&nbsp;Login
-                        using one of your existing social media accounts.
-                      </div>
-                      <div className="float-right">
-                        <BootstrapInfoTooltip title="Login using one of your social media accounts. Kagami will automatically link accounts that use the same email address." />
-                      </div>
-                      <div className="clearfix" />
-                    </div>
-                  </div>
-                  <div className="card-body">
-                    <div className="row">
-                      <div className="col-lg-6">
-                        <a
-                          className="btn btn-block btn-social btn-facebook"
-                          href="/auth/facebook"
-                        >
-                          <i className="fab fa-facebook-f" aria-hidden="true" />Login
-                          with Facebook
-                        </a>
-                      </div>
-                      <div className="col-lg-6">
-                        <a
-                          className="btn btn-block btn-social btn-google"
-                          href="/auth/google"
-                        >
-                          <i className="fab fa-google" aria-hidden="true" />Login
-                          with Google
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <Card
+                  titleText="Login using one of your existing social media accounts."
+                  toolTip="Login using one of your social media accounts. Kagami will automatically link accounts that use the same email address."
+                  titleFaIconName="fa-lock"
+                  bodyContent={socialAuthCardBody}
+                />
               </div>
             </div>
             <div className="row">
@@ -154,21 +149,12 @@ export default class Login extends React.Component<LoginProps, LoginState> {
             <br />
             <div className="row">
               <div className="col">
-                <div className="card">
-                  <div className="card-header bg-light">
-                    <div className="text-primary">
-                      <div className="float-left">
-                        <i className="fas fa-lock" aria-hidden="true" />&nbsp;&nbsp;Login
-                        using your Kagami account.
-                      </div>
-                      <div className="float-right">
-                        <BootstrapInfoTooltip title="Login with your local Kagami account or create a new account." />
-                      </div>
-                      <div className="clearfix" />
-                    </div>
-                  </div>
-                  <div className="card-body">{this.state.context}</div>
-                </div>
+                <Card
+                  titleText="Login using your Kagami account."
+                  toolTip="Login with your local Kagami account or create a new account."
+                  titleFaIconName="fa-lock"
+                  bodyContent={this.state.context}
+                />
               </div>
             </div>
           </div>
