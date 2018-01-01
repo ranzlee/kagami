@@ -5,9 +5,10 @@ import { CreateAccount } from "./CreateAccount";
 import { ForgotPassword } from "./ForgotPassword";
 import { FadeAlert } from "../common/widgets/FadeAlert";
 import { Card } from "../common/containers/Card";
+import { SocialLoginButton } from "../common/form-elements/SocialLoginButton";
 
 export interface LoginState {
-  content: JSX.Element;
+  localLoginContext: JSX.Element;
   help: JSX.Element;
 }
 
@@ -17,7 +18,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
   constructor(props: LoginProps) {
     super(props);
     this.state = {
-      content: (
+      localLoginContext: (
         <LocalLogin
           showCreateAccount={this.showCreateAccount}
           showForgotPassword={this.showForgotPassword}
@@ -45,7 +46,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
 
   showCreateAccount = () => {
     this.setState({
-      content: (
+      localLoginContext: (
         <CreateAccount showLoginLocalAccount={this.showLoginLocalAccount} />
       )
     });
@@ -53,7 +54,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
 
   showForgotPassword = () => {
     this.setState({
-      content: (
+      localLoginContext: (
         <ForgotPassword showLoginLocalAccount={this.showLoginLocalAccount} />
       )
     });
@@ -61,7 +62,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
 
   showLoginLocalAccount = () => {
     this.setState({
-      content: (
+      localLoginContext: (
         <LocalLogin
           showCreateAccount={this.showCreateAccount}
           showForgotPassword={this.showForgotPassword}
@@ -114,22 +115,16 @@ export default class Login extends React.Component<LoginProps, LoginState> {
                   <div>
                     <div className="row">
                       <div className="col-lg-6">
-                        <a
-                          className="btn btn-block btn-social btn-facebook"
+                        <SocialLoginButton
+                          socialService="facebook"
                           href="/auth/facebook"
-                        >
-                          <i className="fab fa-facebook-f" aria-hidden="true" />Login
-                          with Facebook
-                        </a>
+                        />
                       </div>
                       <div className="col-lg-6">
-                        <a
-                          className="btn btn-block btn-social btn-google"
+                        <SocialLoginButton
+                          socialService="google"
                           href="/auth/google"
-                        >
-                          <i className="fab fa-google" aria-hidden="true" />Login
-                          with Google
-                        </a>
+                        />
                       </div>
                     </div>
                   </div>
@@ -151,7 +146,7 @@ export default class Login extends React.Component<LoginProps, LoginState> {
                   toolTip="Login with your local Kagami account or create a new account."
                   titleFaIconName="fa-lock"
                 >
-                  {this.state.content}
+                  {this.state.localLoginContext}
                 </Card>
               </div>
             </div>
