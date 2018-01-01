@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { InfoTooltip } from "./InfoTooltip";
+import { InfoTooltip } from "../widgets/InfoTooltip";
 
 export interface CardState {}
 

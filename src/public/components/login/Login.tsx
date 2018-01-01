@@ -3,8 +3,8 @@ import * as ReactDOM from "react-dom";
 import { LocalLogin } from "./LocalLogin";
 import { CreateAccount } from "./CreateAccount";
 import { ForgotPassword } from "./ForgotPassword";
-import { FadeAlert } from "../common/FadeAlert";
-import { Card } from "../common/Card";
+import { FadeAlert } from "../common/widgets/FadeAlert";
+import { Card } from "../common/containers/Card";
 
 export interface LoginState {
   context: JSX.Element;
