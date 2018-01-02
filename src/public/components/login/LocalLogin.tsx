@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Button } from "../common/form-elements/Button";
+import { Checkbox } from "../common/form-elements/Checkbox";
 import { AnchorLink } from "../common/widgets/AnchorLink";
 
 export interface LocalLoginState {
@@ -17,7 +18,7 @@ export interface LocalLoginProps {
 export class LocalLogin extends React.Component<
   LocalLoginProps,
   LocalLoginState
-> {
+  > {
   constructor(props: LocalLoginProps) {
     super(props);
     this.state = { email: "", password: "", formWasValidated: "" };
@@ -109,18 +110,13 @@ export class LocalLogin extends React.Component<
             </div>
           </div>
           <div className="row form-group">
-            <div className="col-lg-4" />
-            <div className="col-lg-4">
-              <div className="checkbox">
-                <input id="rememberMe" type="checkbox" title="Remember me" />
-                <label htmlFor="rememberMe">Remember me</label>
-              </div>
-            </div>
+            <Checkbox id="rememberMe" offset="4" labelName="Remember me" checkBoxSize="8" checkBoxTitle="Remember me" />
+            {/*
             <div className="col-lg-4">
               <a href="" onClick={this.handleForgotPassword}>
                 Forgot your password?
               </a>
-            </div>
+            </div> */}
           </div>
           <div className="row">
             <div className="col-lg-4" />
