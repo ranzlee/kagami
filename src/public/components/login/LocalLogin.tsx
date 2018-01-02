@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import { Button } from "../common/form-elements/Button";
 
 export interface LocalLoginState {
   email: string;
@@ -121,9 +122,12 @@ export class LocalLogin extends React.Component<
           <div className="row">
             <div className="col-lg-4" />
             <div className="col-lg-8 text-right">
-              <button type="submit" className="btn btn-primary">
-                Log me in!
-              </button>
+              <Button
+                buttonType="submit"
+                buttonClassName="primary"
+                buttonText="Log me in!"
+                buttonFaIconName="fa-unlock"
+              />
             </div>
           </div>
         </form>

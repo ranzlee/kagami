@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import { Button } from "../common/form-elements/Button";
 
 export interface ForgotPasswordState {
   email: string;
@@ -82,9 +83,12 @@ export class ForgotPassword extends React.Component<
           <div className="row">
             <div className="col-lg-4" />
             <div className="col-lg-8 text-right">
-              <button className="btn btn-primary" type="submit">
-                Reset my account password!
-              </button>
+              <Button
+                buttonType="submit"
+                buttonClassName="warning"
+                buttonText="Reset my account password!"
+                buttonFaIconName="fa-recycle"
+              />
             </div>
           </div>
         </form>

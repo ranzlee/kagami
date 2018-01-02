@@ -2,6 +2,7 @@ import * as React from "react";
 import { UIEvent, SyntheticEvent } from "react";
 import * as axios from "axios";
 import { User } from "../../shared/models/User";
+import { Button } from "./common/form-elements/Button";
 
 export interface HomeState {}
 
@@ -13,7 +14,7 @@ export default class Home extends React.Component<HomeProps, HomeState> {
     this.state = {};
   }
 
-  handleSubmit = (event: any) => {
+  handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     axios.default.get<User>("/auth/user").then(response => {
       if (response.data) {
@@ -30,9 +31,13 @@ export default class Home extends React.Component<HomeProps, HomeState> {
           <div className="col">
             <form>
               <div className="form-group">
-                <button className="btn btn-success" onClick={this.handleSubmit}>
-                  Say Hi To Me!
-                </button>
+                <Button
+                  buttonType="button"
+                  buttonClassName="primary"
+                  buttonText="Say hi to me!"
+                  buttonFaIconName="fa-user"
+                  onClick={this.handleSubmit}
+                />
               </div>
             </form>
           </div>

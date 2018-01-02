@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import { Button } from "../common/form-elements/Button";
 
 export interface CreateAccountState {
   email: string;
@@ -147,9 +148,12 @@ export class CreateAccount extends React.Component<
           <div className="row">
             <div className="col-lg-4" />
             <div className="col-lg-8 text-right">
-              <button className="btn btn-primary" type="Submit">
-                Create my account!
-              </button>
+              <Button
+                buttonType="submit"
+                buttonClassName="primary"
+                buttonText="Create my account!"
+                buttonFaIconName="fa-check"
+              />
             </div>
           </div>
         </form>
