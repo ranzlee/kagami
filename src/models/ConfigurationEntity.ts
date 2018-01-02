@@ -7,7 +7,7 @@ export type ConfigurationEntityModel = mongoose.Document & Configuration;
 const configurationSchema = new mongoose.Schema(
     {
         name: String,
-        tenant: String,
+        description: String,
         currentChangeEvent: Number,
     },
     { timestamps: true } as any

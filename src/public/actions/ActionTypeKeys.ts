@@ -20,6 +20,7 @@ export enum ActionTypeKeys {
     DELETE_CONFIG_ELEMENT = "DELETE_ENTITY",
 
     AJAX_SUCCESS = "AJAX_SUCCESS",
+    CANCEL_QUERY = "CANCEL_QUERY",
     
     OTHER_ACTION = "__any_other_action_type__"
 }

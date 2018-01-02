@@ -13,6 +13,7 @@ import {
 import { ajaxSuccess } from './../actions/GeneralActions';
 import 'rxjs/add/operator/reduce';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/operator/toArray';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -37,6 +38,7 @@ export const fetchConfigurationsEpic = (action$: any) =>
                         }, {});
                         return fetchConfigsSuccess(configLookup as IConfigLookup)
                 })
+                .takeUntil(action$.ofType(ActionTypeKeys.CANCEL_QUERY))
                 .catch(error => Observable.of(fetchConfigsError(error.xhr.response)))
         );
 
