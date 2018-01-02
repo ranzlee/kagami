@@ -62,6 +62,6 @@ export class FadeAlert extends React.Component<FadeAlertProps, FadeAlertState> {
   }
 
   render() {
-    return <></>;
+    return <div />;
   }
 }
