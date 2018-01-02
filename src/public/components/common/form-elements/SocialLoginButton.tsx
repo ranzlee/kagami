@@ -8,6 +8,10 @@ export interface SocialLoginButtonProps {
   href: string;
 }
 
+let iconSize = {
+  fontSize: "1.8em"
+};
+
 export class SocialLoginButton extends React.Component<
   SocialLoginButtonProps,
   SocialLoginButtonState
@@ -37,9 +41,10 @@ export class SocialLoginButton extends React.Component<
     return (
       <div>
         <a className={anchorClasses} href={this.props.href}>
-          <i className={iconClasses} aria-hidden="true" />Login with&nbsp;{
-            socialLabel
-          }
+          <span>
+            <i className={iconClasses} style={iconSize} aria-hidden="true" />
+          </span>
+          Login with&nbsp;{socialLabel}
         </a>
       </div>
     );
