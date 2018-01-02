@@ -11,7 +11,7 @@
     "start-prod": "npm run build-client-prod && npm run build-server && npm run copy-prod-config && nodemon dist/server.js",
     "copy-dev-config": "node copyDevConfig.js",
     "copy-prod-config": "node copyProdConfig.js",
-    "test": "jest",
+    "test": "jest --coverage",
     "test:watch": "npm test -- --watch"
   },
   "author": "",
