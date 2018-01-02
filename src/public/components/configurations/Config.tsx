@@ -21,7 +21,7 @@ export interface IConnectedDispatch {
   deleteConfig: () => void;
 }
 
-export class Config extends React.Component<IOwnProps & IConnectedState & IConnectedDispatch, {}> 
+export class Config extends React.Component<IOwnProps & IConnectedState & IConnectedDispatch, {}>
 {
   updateClickHandler = (event: any) => {
     const { configuration, update } = this.props;
@@ -39,27 +39,44 @@ export class Config extends React.Component<IOwnProps & IConnectedState & IConne
     const editUrl = "./configuration/" + configuration._id;
 
     return (
-      <div className="row">
-        <div className="col-xs-4">
-          <label>Name:</label>
+      <div>
+        <div className="row">
+          <div className="col-xs">
+            <label>Name:</label>
+          </div>
+          <div className="col-xs">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Configuration Name"
+              aria-label="Configuration Name"
+              name="name"
+              value={configuration.name}
+              onChange={this.updateClickHandler}
+            />
+          </div>
         </div>
-        <div className="col-xs-4">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Configuration Name"
-            aria-label="Configuration Name"
-            name="name"
-            value={configuration.name}
-            onChange={this.updateClickHandler}
-          />
-        </div>
-        <div className="col-xs-4">
-          <Link to={editUrl}>
-            <button type="button" className="btn btn-primary">
-              Edit
+        <div className="row">
+          <div className="col-xs">
+            <label>Description:</label>
+          </div>
+          <div className="col-xs">
+            <textarea
+              className="form-control"
+              placeholder="Description"
+              aria-label="Description"
+              name="description"
+              value={configuration.description}
+              onChange={this.updateClickHandler}
+            />
+          </div>
+          <div className="col-xs">
+            <Link to={editUrl}>
+              <button type="button" className="btn btn-primary">
+                Edit
             </button>
-          </Link>
+            </Link>
+          </div>
         </div>
       </div>
     );
