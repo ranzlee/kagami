@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Button } from "../common/form-elements/Button";
+import { Form } from "../common/form-elements/Form";
 import { AnchorLink } from "../common/widgets/AnchorLink";
 
 export interface CreateAccountState {
@@ -49,18 +50,10 @@ export class CreateAccount extends React.Component<
   };
 
   handleLoginLocalAccount = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
     this.props.showLoginLocalAccount();
   };
 
-  handleCreateAccount = (event: React.FormEvent<HTMLFormElement>) => {
-    let form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-    this.setState({ formWasValidated: "was-validated" });
-  };
+  handleCreateAccount = (event: React.FormEvent<HTMLFormElement>) => {};
 
   render() {
     return (
@@ -80,11 +73,7 @@ export class CreateAccount extends React.Component<
           </div>
         </div>
         <br />
-        <form
-          noValidate
-          onSubmit={this.handleCreateAccount}
-          className={this.state.formWasValidated}
-        >
+        <Form onSubmit={this.handleCreateAccount}>
           <div className="row form-group">
             <label className="col-lg-4 col-form-label" htmlFor="email">
               Email Address
@@ -157,7 +146,7 @@ export class CreateAccount extends React.Component<
               />
             </div>
           </div>
-        </form>
+        </Form>
       </div>
     );
   }

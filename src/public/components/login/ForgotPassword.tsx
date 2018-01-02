@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Button } from "../common/form-elements/Button";
+import { Form } from "../common/form-elements/Form";
 import { AnchorLink } from "../common/widgets/AnchorLink";
 
 export interface ForgotPasswordState {
@@ -26,18 +27,10 @@ export class ForgotPassword extends React.Component<
   };
 
   handleLoginLocalAccount = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
     this.props.showLoginLocalAccount();
   };
 
-  handleForgotPassword = (event: React.FormEvent<HTMLFormElement>) => {
-    let form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-    this.setState({ formWasValidated: "was-validated" });
-  };
+  handleForgotPassword = (event: React.FormEvent<HTMLFormElement>) => {};
 
   render() {
     return (
@@ -57,11 +50,7 @@ export class ForgotPassword extends React.Component<
           </div>
         </div>
         <br />
-        <form
-          noValidate
-          onSubmit={this.handleForgotPassword}
-          className={this.state.formWasValidated}
-        >
+        <Form onSubmit={this.handleForgotPassword}>
           <div className="row form-group">
             <label className="col-lg-4 col-form-label" htmlFor="email">
               Email Address
@@ -92,7 +81,7 @@ export class ForgotPassword extends React.Component<
               />
             </div>
           </div>
-        </form>
+        </Form>
       </div>
     );
   }

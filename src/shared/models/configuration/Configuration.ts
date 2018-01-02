@@ -1,7 +1,6 @@
 export class Configuration {
     _id: string;
     name: string;
-    tenant: string;
-    currentChangeEvent: number;
+    description: string;
     [key: string]: any;
 }
