@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Button } from "../common/form-elements/Button";
+import { AnchorLink } from "../common/widgets/AnchorLink";
 
 export interface ForgotPasswordState {
   email: string;
@@ -45,12 +46,12 @@ export class ForgotPassword extends React.Component<
           <div className="col">
             <div className="text-primary">
               <span className="text-muted">
-                Enter your email address to reset your local account or&nbsp;<a
-                  href=""
+                Enter your email address to reset your local account or&nbsp;
+                <AnchorLink
+                  linkText="login with an existing local account"
                   onClick={this.handleLoginLocalAccount}
-                >
-                  login with an existing local account
-                </a>&nbsp;to get started!
+                />
+                &nbsp;to get started!
               </span>
             </div>
           </div>
