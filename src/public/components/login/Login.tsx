@@ -114,13 +114,13 @@ export default class Login extends React.Component<LoginProps, LoginState> {
                 >
                   <div>
                     <div className="row">
-                      <div className="col-lg-6">
+                      <div className="col">
                         <SocialLoginButton
                           socialService="facebook"
                           href="/auth/facebook"
                         />
                       </div>
-                      <div className="col-lg-6">
+                      <div className="col">
                         <SocialLoginButton
                           socialService="google"
                           href="/auth/google"

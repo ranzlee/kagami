@@ -1,5 +1,6 @@
 import { ActionTypeKeys } from './../actions/ActionTypeKeys';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/mergeMap';
@@ -19,5 +20,6 @@ export const fetchConfigElementsEpic = (action$: any) =>
         .mergeMap((action: FetchConfigElementsAction) =>
             ajax.getJSON(`./api/config/${action.configId}/configElement`)
                 .map(response => fetchConfigElementsSuccess(response as IConfigurationElement[]))
+                .takeUntil(action$.ofType(ActionTypeKeys.CANCEL_QUERY))
                 .catch(error => Observable.of(fetchConfigElementsError(error.xhr.response)))
         );
