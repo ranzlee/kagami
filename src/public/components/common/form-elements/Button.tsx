@@ -25,6 +25,11 @@ export class Button extends React.Component<ButtonProps, ButtonState> {
     this.state = {};
   }
 
+  onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    this.props.onClick(event);
+  };
+
   render() {
     let buttonClasses = "btn btn-" + this.props.buttonClassName;
     let iconClasses = "fas " + this.props.buttonFaIconName;
@@ -43,11 +48,7 @@ export class Button extends React.Component<ButtonProps, ButtonState> {
           {innerElement}
         </button>
       ) : (
-        <button
-          type="button"
-          className={buttonClasses}
-          onClick={this.props.onClick}
-        >
+        <button type="button" className={buttonClasses} onClick={this.onClick}>
           {innerElement}
         </button>
       );

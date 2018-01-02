@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Button } from "../common/form-elements/Button";
+import { Form } from "../common/form-elements/Form";
 import { AnchorLink } from "../common/widgets/AnchorLink";
 
 export interface LocalLoginState {
@@ -31,22 +32,13 @@ export class LocalLogin extends React.Component<
     this.setState({ password: event.currentTarget.value });
   };
 
-  handleLogin = (event: React.FormEvent<HTMLFormElement>) => {
-    let form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-    this.setState({ formWasValidated: "was-validated" });
-  };
+  handleLogin = (event: React.FormEvent<HTMLFormElement>) => {};
 
   handleCreateAccount = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
     this.props.showCreateAccount();
   };
 
   handleForgotPassword = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
     this.props.showForgotPassword();
   };
   render() {
@@ -67,11 +59,7 @@ export class LocalLogin extends React.Component<
           </div>
         </div>
         <br />
-        <form
-          noValidate
-          onSubmit={this.handleLogin}
-          className={this.state.formWasValidated}
-        >
+        <Form onSubmit={this.handleLogin}>
           <div className="row form-group">
             <label className="col-lg-4 col-form-label" htmlFor="email">
               Email Address
@@ -117,9 +105,10 @@ export class LocalLogin extends React.Component<
               </div>
             </div>
             <div className="col-lg-4">
-              <a href="" onClick={this.handleForgotPassword}>
-                Forgot your password?
-              </a>
+              <AnchorLink
+                linkText="Forgot your password?"
+                onClick={this.handleForgotPassword}
+              />
             </div>
           </div>
           <div className="row">
@@ -133,7 +122,7 @@ export class LocalLogin extends React.Component<
               />
             </div>
           </div>
-        </form>
+        </Form>
       </div>
     );
   }
