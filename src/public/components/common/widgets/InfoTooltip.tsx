@@ -51,6 +51,6 @@ export class InfoTooltip extends React.Component<
   }
 
   render() {
-    return <div />;
+    return <></>;
   }
 }
