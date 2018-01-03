@@ -15,7 +15,6 @@ import 'rxjs/add/operator/reduce';
 import 'rxjs/add/operator/groupBy';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/takeUntil';
-import 'rxjs/add/operator/toArray';
 import 'rxjs/add/operator/last';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -58,14 +57,8 @@ export const updateConfigurationEpic = (action$: any) =>
         .groupBy((action: UpdateConfigurationAction) => {
             return action.propertyName;
         })
-        .map((group) => {
-            console.log("In merge map")
-            var item = group.debounceTime(2000).toArray();
-            return item;
-        })
-        .mergeMap(item => {
-            console.log("ITEM: ")
-            console.log(item);
+        .mergeMap((group) => {
+            var item = group.debounceTime(2000);
             return item;
         })
         //.debounceTime(2000)
