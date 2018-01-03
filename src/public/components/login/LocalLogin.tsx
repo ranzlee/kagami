@@ -70,8 +70,8 @@ export class LocalLogin extends React.Component<
             isRequired={true}
             onChange={this.handleEmailChange}
             invalidFeedback="Email Address is required and must be a valid email format."
-            controlColLg={8}
-            labelColLg={4}
+            controlCol={8}
+            labelCol={4}
           />
           <Textbox
             inputId="password"
@@ -82,18 +82,18 @@ export class LocalLogin extends React.Component<
             isRequired={true}
             onChange={this.handlePasswordChange}
             invalidFeedback="Password is required"
-            controlColLg={8}
-            labelColLg={4}
+            controlCol={8}
+            labelCol={4}
           />
           <div className="row form-group">
-            <div className="col-lg-4" />
-            <div className="col-lg-4">
+            <div className="col-4" />
+            <div className="col-4">
               <div className="checkbox">
                 <input id="rememberMe" type="checkbox" title="Remember me" />
                 <label htmlFor="rememberMe">Remember me</label>
               </div>
             </div>
-            <div className="col-lg-4">
+            <div className="col-4">
               <AnchorLink
                 linkText="Forgot your password?"
                 onClick={this.handleForgotPassword}
@@ -101,8 +101,8 @@ export class LocalLogin extends React.Component<
             </div>
           </div>
           <div className="row">
-            <div className="col-lg-4" />
-            <div className="col-lg-8 text-right">
+            <div className="col-4" />
+            <div className="col-8 text-right">
               <Button
                 buttonType="submit"
                 buttonClassName="primary"

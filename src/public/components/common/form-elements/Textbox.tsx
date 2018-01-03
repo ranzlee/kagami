@@ -35,6 +35,10 @@ export class Textbox extends React.Component<TextboxProps, TextboxState> {
     let maxLength = this.props.maxLength ? this.props.maxLength : null;
     let minLength = this.props.minLength ? this.props.minLength : null;
     let extendedProps = FormControl.FormControlExtendedProperties(this.props);
+    let children = null;
+    if (this.props.children) {
+      children = <div className="col">{this.props.children}</div>;
+    }
     return (
       <div className="row form-group">
         <label
@@ -60,6 +64,7 @@ export class Textbox extends React.Component<TextboxProps, TextboxState> {
             {this.props.invalidFeedback ? this.props.invalidFeedback : ""}
           </div>
         </div>
+        {children}
       </div>
     );
   }

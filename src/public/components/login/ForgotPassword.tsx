@@ -61,12 +61,12 @@ export class ForgotPassword extends React.Component<
             isRequired={true}
             onChange={this.handleEmailChange}
             invalidFeedback="Email Address is required and must be a valid email format."
-            controlColLg={8}
-            labelColLg={4}
+            controlCol={8}
+            labelCol={4}
           />
           <div className="row">
-            <div className="col-lg-4" />
-            <div className="col-lg-8 text-right">
+            <div className="col-4" />
+            <div className="col-8 text-right">
               <Button
                 buttonType="submit"
                 buttonClassName="warning"

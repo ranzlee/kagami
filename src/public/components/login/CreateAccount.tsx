@@ -84,8 +84,8 @@ export class CreateAccount extends React.Component<
             isRequired={true}
             onChange={this.handleEmailChange}
             invalidFeedback="Email Address is required and must be a valid email format."
-            controlColLg={8}
-            labelColLg={4}
+            controlCol={8}
+            labelCol={4}
           />
           <Textbox
             inputId="password"
@@ -97,8 +97,8 @@ export class CreateAccount extends React.Component<
             minLength={8}
             onChange={this.handlePasswordChange}
             invalidFeedback="Password is required and must have at least 8 characters."
-            controlColLg={8}
-            labelColLg={4}
+            controlCol={8}
+            labelCol={4}
           />
           <Textbox
             inputId="confirmPassword"
@@ -109,12 +109,12 @@ export class CreateAccount extends React.Component<
             isRequired={true}
             onChange={this.handleConfirmPasswordChange}
             invalidFeedback="Confirm Password is required and must match Password."
-            controlColLg={8}
-            labelColLg={4}
+            controlCol={8}
+            labelCol={4}
           />
           <div className="row">
-            <div className="col-lg-4" />
-            <div className="col-lg-8 text-right">
+            <div className="col-4" />
+            <div className="col-8 text-right">
               <Button
                 buttonType="submit"
                 buttonClassName="primary"
