@@ -1,6 +1,15 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
+export interface CustomValidationResult {
+  isValid: boolean;
+  validationMessage: string;
+}
+
+export interface FormControlState {
+  invalidFeedback: string;
+}
+
 export interface FormControlProps {
   labelCol?: number;
   controlCol?: number;
@@ -10,6 +19,12 @@ export interface FormControlProps {
   controlColMd?: number;
   labelColSm?: number;
   controlColSm?: number;
+  invalidFeedback?: string;
+  onChangeCustomValidation?: (
+    event: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => CustomValidationResult;
 }
 
 export interface FormControlExtendedProperties {
@@ -17,6 +32,29 @@ export interface FormControlExtendedProperties {
   formControlClasses: string;
   children: JSX.Element;
 }
+
+export let OnChangeCustomValidation = (
+  component: React.Component<FormControlProps, FormControlState>,
+  event: React.ChangeEvent<HTMLInputElement>
+): void => {
+  let target = event.currentTarget;
+  let validationResult = component.props.onChangeCustomValidation(event);
+  target.setCustomValidity("");
+  component.setState(
+    { invalidFeedback: component.props.invalidFeedback },
+    () => {
+      if (!target.validity.valid) {
+        return;
+      }
+      if (!validationResult.isValid) {
+        target.setCustomValidity(validationResult.validationMessage);
+        component.setState({
+          invalidFeedback: validationResult.validationMessage
+        });
+      }
+    }
+  );
+};
 
 export let FormControlExtendedProperties = (
   props: FormControlProps
