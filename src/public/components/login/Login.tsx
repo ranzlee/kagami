@@ -103,8 +103,8 @@ export default class Login extends React.Component<LoginProps, LoginState> {
     return (
       <div className="container">
         <div className="row">
-          <div className="col-lg-3" />
-          <div className="col-lg-6">
+          <div className="col-3" />
+          <div className="col-6">
             <div className="row">
               <div className="col">
                 <Card

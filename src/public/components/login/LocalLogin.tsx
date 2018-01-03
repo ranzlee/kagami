@@ -3,6 +3,7 @@ import * as ReactDOM from "react-dom";
 import { Button } from "../common/form-elements/Button";
 import { Checkbox } from "../common/form-elements/Checkbox";
 import { Form } from "../common/form-elements/Form";
+import { Textbox } from "../common/form-elements/Textbox";
 import { AnchorLink } from "../common/widgets/AnchorLink";
 
 export interface LocalLoginState {
@@ -61,42 +62,30 @@ export class LocalLogin extends React.Component<
         </div>
         <br />
         <Form onSubmit={this.handleLogin}>
-          <div className="row form-group">
-            <label className="col-lg-4 col-form-label" htmlFor="email">
-              Email Address
-            </label>
-            <div className="col-lg-8">
-              <input
-                className="form-control"
-                id="email"
-                required
-                type="email"
-                value={this.state.email}
-                placeholder="Enter your email address"
-                onChange={this.handleEmailChange}
-              />
-              <div className="invalid-feedback">
-                Email Address is required and must be a valid email format.
-              </div>
-            </div>
-          </div>
-          <div className="row form-group">
-            <label className="col-lg-4 col-form-label" htmlFor="password">
-              Password
-            </label>
-            <div className="col-lg-8">
-              <input
-                className="form-control"
-                id="password"
-                required
-                type="password"
-                value={this.state.password}
-                placeholder="Enter your password"
-                onChange={this.handlePasswordChange}
-              />
-              <div className="invalid-feedback">Password is required.</div>
-            </div>
-          </div>
+          <Textbox
+            inputId="email"
+            inputType="email"
+            label="Email Address"
+            value={this.state.email}
+            placeholder="Enter your email address"
+            isRequired={true}
+            onChange={this.handleEmailChange}
+            invalidFeedback="Email Address is required and must be a valid email format."
+            controlCol={8}
+            labelCol={4}
+          />
+          <Textbox
+            inputId="password"
+            inputType="password"
+            label="Password"
+            value={this.state.password}
+            placeholder="Enter your password"
+            isRequired={true}
+            onChange={this.handlePasswordChange}
+            invalidFeedback="Password is required"
+            controlCol={8}
+            labelCol={4}
+          />
           <div className="row form-group">
             <Checkbox
               id="rememberMe"
@@ -104,14 +93,16 @@ export class LocalLogin extends React.Component<
               labelName="Remember me"
               checkBoxSize="8"
               checkBoxTitle="Remember me" />
-            <AnchorLink
-              linkText="Forgot your password?"
-              onClick={this.handleForgotPassword}
-            />
+            <div className="col-4">
+              <AnchorLink
+                linkText="Forgot your password?"
+                onClick={this.handleForgotPassword}
+              />
+            </div>
           </div>
           <div className="row">
-            <div className="col-lg-4" />
-            <div className="col-lg-8 text-right">
+            <div className="col-4" />
+            <div className="col-8 text-right">
               <Button
                 buttonType="submit"
                 buttonClassName="primary"
