@@ -35,7 +35,7 @@ export class CreateAccount extends React.Component<
   };
 
   handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ password: event.currentTarget.value });
+    this.setState({ password: event.currentTarget.value, confirmPassword: "" });
   };
 
   handleConfirmPasswordChange = (
