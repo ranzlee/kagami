@@ -127,7 +127,6 @@
     "jest": "^22.0.4",
     "jquery": "^3.2.1",
     "less": "^2.7.3",
-    "nock": "^9.1.5",
     "node-sass": "^4.7.2",
     "redux-mock-store": "^1.4.0",
     "sass-loader": "^6.0.6",
