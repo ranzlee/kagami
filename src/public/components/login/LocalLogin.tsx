@@ -20,7 +20,7 @@ export interface LocalLoginProps {
 export class LocalLogin extends React.Component<
   LocalLoginProps,
   LocalLoginState
-  > {
+> {
   constructor(props: LocalLoginProps) {
     super(props);
     this.state = { email: "", password: "", formWasValidated: "" };
@@ -34,7 +34,7 @@ export class LocalLogin extends React.Component<
     this.setState({ password: event.currentTarget.value });
   };
 
-  handleLogin = (event: React.FormEvent<HTMLFormElement>) => { };
+  handleLogin = (event: React.FormEvent<HTMLFormElement>) => {};
 
   handleCreateAccount = (event: React.MouseEvent<HTMLAnchorElement>) => {
     this.props.showCreateAccount();
@@ -90,10 +90,9 @@ export class LocalLogin extends React.Component<
             <Checkbox
               inputId="rememberMe"
               label="Remember me"
-              isRequired={false}
-              invalidFeedback="Remember me is required"
               controlCol={4}
-              labelCol={4}>
+              labelCol={4}
+            >
               <AnchorLink
                 linkText="Forgot your password?"
                 onClick={this.handleForgotPassword}

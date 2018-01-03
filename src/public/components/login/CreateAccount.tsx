@@ -4,6 +4,7 @@ import { Button } from "../common/form-elements/Button";
 import { Form } from "../common/form-elements/Form";
 import { AnchorLink } from "../common/widgets/AnchorLink";
 import { Textbox } from "../common/form-elements/Textbox";
+import * as FormControl from "../common/form-elements/FormControl";
 
 export interface CreateAccountState {
   email: string;
@@ -35,26 +36,38 @@ export class CreateAccount extends React.Component<
   };
 
   handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ password: event.currentTarget.value });
+    this.setState({
+      password: event.currentTarget.value,
+      confirmPassword: ""
+    });
   };
 
   handleConfirmPasswordChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    let val = event.currentTarget.value;
-    this.setState({ confirmPassword: val });
-    if (this.state.password !== val) {
-      event.currentTarget.setCustomValidity("error");
-    } else {
-      event.currentTarget.setCustomValidity("");
+    this.setState({ confirmPassword: event.currentTarget.value });
+  };
+
+  handleConfirmPasswordChangeCustomValidation = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): FormControl.CustomValidationResult => {
+    let isValid = true;
+    if (this.state.password !== event.currentTarget.value) {
+      isValid = false;
     }
+    return {
+      isValid: isValid,
+      validationMessage: "Confirm Password must match Password"
+    };
   };
 
   handleLoginLocalAccount = (event: React.MouseEvent<HTMLAnchorElement>) => {
     this.props.showLoginLocalAccount();
   };
 
-  handleCreateAccount = (event: React.FormEvent<HTMLFormElement>) => {};
+  handleCreateAccount = (event: React.FormEvent<HTMLFormElement>) => {
+    alert("create account!");
+  };
 
   render() {
     return (
@@ -108,7 +121,10 @@ export class CreateAccount extends React.Component<
             placeholder="Re-enter your password"
             isRequired={true}
             onChange={this.handleConfirmPasswordChange}
-            invalidFeedback="Confirm Password is required and must match Password."
+            onChangeCustomValidation={
+              this.handleConfirmPasswordChangeCustomValidation
+            }
+            invalidFeedback="Confirm Password is required."
             controlCol={8}
             labelCol={4}
           />

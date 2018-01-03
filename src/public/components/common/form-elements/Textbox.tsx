@@ -2,7 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as FormControl from "./FormControl";
 
-export interface TextboxState {}
+export interface TextboxState extends FormControl.FormControlState {}
 
 export interface TextboxProps extends FormControl.FormControlProps {
   inputId: string;
@@ -12,7 +12,6 @@ export interface TextboxProps extends FormControl.FormControlProps {
   maxLength?: number;
   minLength?: number;
   label: string;
-  invalidFeedback?: string;
   value: string;
   placeholder: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -21,11 +20,15 @@ export interface TextboxProps extends FormControl.FormControlProps {
 export class Textbox extends React.Component<TextboxProps, TextboxState> {
   constructor(props: TextboxProps) {
     super(props);
+    this.state = { invalidFeedback: this.props.invalidFeedback };
   }
 
   onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (this.props.onChange) {
       this.props.onChange(event);
+    }
+    if (this.props.onChangeCustomValidation) {
+      FormControl.OnChangeCustomValidation(this, event);
     }
   };
 
@@ -57,7 +60,7 @@ export class Textbox extends React.Component<TextboxProps, TextboxState> {
             minLength={minLength}
           />
           <div className="invalid-feedback">
-            {this.props.invalidFeedback ? this.props.invalidFeedback : ""}
+            {this.state.invalidFeedback ? this.state.invalidFeedback : ""}
           </div>
         </div>
         {extendedProps.children}
