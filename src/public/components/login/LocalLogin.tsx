@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Button } from "../common/form-elements/Button";
+import { Checkbox } from "../common/form-elements/Checkbox";
 import { Form } from "../common/form-elements/Form";
 import { Textbox } from "../common/form-elements/Textbox";
 import { AnchorLink } from "../common/widgets/AnchorLink";
@@ -19,7 +20,7 @@ export interface LocalLoginProps {
 export class LocalLogin extends React.Component<
   LocalLoginProps,
   LocalLoginState
-> {
+  > {
   constructor(props: LocalLoginProps) {
     super(props);
     this.state = { email: "", password: "", formWasValidated: "" };
@@ -33,7 +34,7 @@ export class LocalLogin extends React.Component<
     this.setState({ password: event.currentTarget.value });
   };
 
-  handleLogin = (event: React.FormEvent<HTMLFormElement>) => {};
+  handleLogin = (event: React.FormEvent<HTMLFormElement>) => { };
 
   handleCreateAccount = (event: React.MouseEvent<HTMLAnchorElement>) => {
     this.props.showCreateAccount();
@@ -86,19 +87,18 @@ export class LocalLogin extends React.Component<
             labelCol={4}
           />
           <div className="row form-group">
-            <div className="col-4" />
-            <div className="col-4">
-              <div className="checkbox">
-                <input id="rememberMe" type="checkbox" title="Remember me" />
-                <label htmlFor="rememberMe">Remember me</label>
-              </div>
-            </div>
-            <div className="col-4">
+            <Checkbox
+              inputId="rememberMe"
+              label="Remember me"
+              isRequired={false}
+              invalidFeedback="Remember me is required"
+              controlCol={4}
+              labelCol={4}>
               <AnchorLink
                 linkText="Forgot your password?"
                 onClick={this.handleForgotPassword}
               />
-            </div>
+            </Checkbox>
           </div>
           <div className="row">
             <div className="col-4" />
