@@ -54,19 +54,11 @@ export const addConfigurationEpic = (action$: any) =>
 
 export const updateConfigurationEpic = (action$: any) =>
     action$.ofType(ActionTypeKeys.UPDATE_CONFIGURATION)
-        .groupBy((action: UpdateConfigurationAction) => {
-            return action.propertyName;
-        })
-        .mergeMap((group) => {
-            var item = group.debounceTime(2000);
-            return item;
-        })
+        .groupBy((action: UpdateConfigurationAction) => action.propertyName)
+        .mergeMap(group => group.debounceTime(2000))
         //.debounceTime(2000)
         //.distinctUntilChanged()
         .mergeMap((action: UpdateConfigurationAction) => {
-            console.log("In 2nd merge map")
-            console.log(action);
-            console.log("made it here: "+ action.newValue);
             return ajax.post(`./api/config/${action.configId}`,
                 {
                     propertyName: action.propertyName,
