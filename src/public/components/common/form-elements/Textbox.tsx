@@ -10,6 +10,7 @@ export interface ITextboxProps extends FormControl.IFormControlProps {
   pattern?: string;
   isRequired?: boolean;
   maxLength?: number;
+  minLength?: number;
   label: string;
   invalidFeedback?: string;
   value: string;
@@ -20,7 +21,6 @@ export interface ITextboxProps extends FormControl.IFormControlProps {
 export class Textbox extends React.Component<ITextboxProps, ITextboxState> {
   constructor(props: ITextboxProps) {
     super(props);
-    this.setState({});
   }
 
   onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,6 +33,7 @@ export class Textbox extends React.Component<ITextboxProps, ITextboxState> {
     let required = this.props.isRequired ? true : false;
     let pattern = this.props.pattern ? this.props.pattern : null;
     let maxLength = this.props.maxLength ? this.props.maxLength : null;
+    let minLength = this.props.minLength ? this.props.minLength : null;
     let extendedProps = FormControl.FormControlExtendedProperties(this.props);
     return (
       <div className="row form-group">
@@ -53,6 +54,7 @@ export class Textbox extends React.Component<ITextboxProps, ITextboxState> {
             required={required}
             pattern={pattern}
             maxLength={maxLength}
+            minLength={minLength}
           />
           <div className="invalid-feedback">
             {this.props.invalidFeedback ? this.props.invalidFeedback : ""}

@@ -3,6 +3,7 @@ import * as ReactDOM from "react-dom";
 import { Button } from "../common/form-elements/Button";
 import { Form } from "../common/form-elements/Form";
 import { AnchorLink } from "../common/widgets/AnchorLink";
+import { Textbox } from "../common/form-elements/Textbox";
 
 export interface ForgotPasswordState {
   email: string;
@@ -51,25 +52,18 @@ export class ForgotPassword extends React.Component<
         </div>
         <br />
         <Form onSubmit={this.handleForgotPassword}>
-          <div className="row form-group">
-            <label className="col-lg-4 col-form-label" htmlFor="email">
-              Email Address
-            </label>
-            <div className="col-lg-8">
-              <input
-                className="form-control"
-                id="email"
-                type="email"
-                value={this.state.email}
-                placeholder="Enter your email address"
-                onChange={this.handleEmailChange}
-                required
-              />
-              <div className="invalid-feedback">
-                Email Address is required and must be a valid email format.
-              </div>
-            </div>
-          </div>
+          <Textbox
+            inputId="email"
+            inputType="email"
+            label="Email Address"
+            value={this.state.email}
+            placeholder="Enter your email address"
+            isRequired={true}
+            onChange={this.handleEmailChange}
+            invalidFeedback="Email Address is required and must be a valid email format."
+            controlColLg={8}
+            labelColLg={4}
+          />
           <div className="row">
             <div className="col-lg-4" />
             <div className="col-lg-8 text-right">
