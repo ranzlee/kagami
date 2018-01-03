@@ -11,8 +11,6 @@ import { Observable } from 'rxjs';
 const epicMiddleware = createEpicMiddleware(updateConfigurationEpic);
 const mockStore = configureMockStore([epicMiddleware]);
 
-const testHostUrl = "http://localhost";
-
 describe('Configuration Epic', () => {
   const originalAjaxPost = Observable.ajax.post;
 
@@ -36,12 +34,14 @@ describe('Configuration Epic', () => {
     const firstFieldPropertyName = "name";
     const secondFieldPropertyName = "description";
 
-    const firstFieldValue = "cody";
+    const firstFieldValue1 = "cody";
+    const firstFieldValue2 = "cody raffy";
     const secondFieldValue = "is the man";
 
     const oldValues = "";
 
-    store.dispatch(updateConfig(configId, firstFieldPropertyName, firstFieldValue, oldValues));
+    store.dispatch(updateConfig(configId, firstFieldPropertyName, firstFieldValue1, oldValues));
+    store.dispatch(updateConfig(configId, firstFieldPropertyName, firstFieldValue2, oldValues));
     store.dispatch(updateConfig(configId, secondFieldPropertyName, secondFieldValue, oldValues));
 
     setTimeout(() => {
@@ -54,11 +54,19 @@ describe('Configuration Epic', () => {
         type: ActionTypeKeys.UPDATE_CONFIGURATION,
         configId,
         propertyName: firstFieldPropertyName,
-        newValue: firstFieldValue,
+        newValue: firstFieldValue1,
         oldValue: oldValues
       };
 
       const action2: UpdateConfigurationAction = {
+        type: ActionTypeKeys.UPDATE_CONFIGURATION,
+        configId,
+        propertyName: firstFieldPropertyName,
+        newValue: firstFieldValue2,
+        oldValue: oldValues
+      };
+
+      const action3: UpdateConfigurationAction = {
         type: ActionTypeKeys.UPDATE_CONFIGURATION,
         configId: configId,
         propertyName: secondFieldPropertyName,
@@ -66,7 +74,7 @@ describe('Configuration Epic', () => {
         oldValue: oldValues
       };
 
-      const action3: AjaxSuccessAction = {
+      const action4: AjaxSuccessAction = {
         type: ActionTypeKeys.AJAX_SUCCESS
       };
 
@@ -74,7 +82,8 @@ describe('Configuration Epic', () => {
         action1,
         action2,
         action3,
-        action3
+        action4,
+        action4
       ]);
 
       done();

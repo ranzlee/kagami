@@ -29,11 +29,7 @@
       "jsx",
       "json",
       "node"
-    ],
-    "unmockedModulePathPatterns": [
-      "<rootDir>/node_modules/nock",
-      "<rootDir>/node_modules/redux-mock-store"
-    ]
+    ] 
   },
   "dependencies": {
     "@types/react-redux": "^5.0.14",
