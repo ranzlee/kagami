@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-export interface IFormControlProps {
+export interface FormControlProps {
   labelColLg?: number;
   controlColLg?: number;
   labelColMd?: number;
@@ -10,14 +10,14 @@ export interface IFormControlProps {
   controlColSm?: number;
 }
 
-export interface IFormControlExtendedProperties {
+export interface FormControlExtendedProperties {
   labelClasses: string;
   formControlClasses: string;
 }
 
 export let FormControlExtendedProperties = (
-  props: IFormControlProps
-): IFormControlExtendedProperties => {
+  props: FormControlProps
+): FormControlExtendedProperties => {
   let labelColLg = props.labelColLg
     ? " col-lg-" + props.labelColLg + " "
     : null;

@@ -2,9 +2,9 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as FormControl from "./FormControl";
 
-export interface ITextboxState {}
+export interface TextboxState {}
 
-export interface ITextboxProps extends FormControl.IFormControlProps {
+export interface TextboxProps extends FormControl.FormControlProps {
   inputId: string;
   inputType: "email" | "password" | "search" | "tel" | "text" | "url";
   pattern?: string;
@@ -18,8 +18,8 @@ export interface ITextboxProps extends FormControl.IFormControlProps {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export class Textbox extends React.Component<ITextboxProps, ITextboxState> {
-  constructor(props: ITextboxProps) {
+export class Textbox extends React.Component<TextboxProps, TextboxState> {
+  constructor(props: TextboxProps) {
     super(props);
   }
 
