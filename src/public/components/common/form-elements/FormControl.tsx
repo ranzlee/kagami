@@ -15,6 +15,7 @@ export interface FormControlProps {
 export interface FormControlExtendedProperties {
   labelClasses: string;
   formControlClasses: string;
+  children: JSX.Element;
 }
 
 export let FormControlExtendedProperties = (
@@ -28,6 +29,10 @@ export let FormControlExtendedProperties = (
   let controlColLg = props.controlColLg ? "col-lg-" + props.controlColLg : null;
   let controlColMd = props.controlColMd ? "col-md-" + props.controlColMd : null;
   let controlColSm = props.controlColSm ? "col-sm-" + props.controlColSm : null;
+  let children = null;
+  if ((props as any).children) {
+    children = <div className="col">{(props as any).children}</div>;
+  }
   if (
     labelCol == null &&
     labelColLg == null &&
@@ -55,6 +60,7 @@ export let FormControlExtendedProperties = (
       " " +
       labelColSm,
     formControlClasses:
-      controlCol + " " + controlColLg + " " + controlColMd + " " + controlColSm
+      controlCol + " " + controlColLg + " " + controlColMd + " " + controlColSm,
+    children: children
   };
 };
