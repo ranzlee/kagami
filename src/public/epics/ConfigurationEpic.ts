@@ -55,9 +55,12 @@ export const addConfigurationEpic = (action$: any) =>
 export const updateConfigurationEpic = (action$: any) =>
     action$.ofType(ActionTypeKeys.UPDATE_CONFIGURATION)
         .groupBy((action: UpdateConfigurationAction) => action.propertyName)
-        .mergeMap(group => group.debounceTime(2000))
-        //.debounceTime(2000)
-        //.distinctUntilChanged()
+        .mergeMap(group => group
+            .distinctUntilChanged(
+                (action1: UpdateConfigurationAction, action2: UpdateConfigurationAction) => {
+                    return action1.newValue === action2.newValue;}
+                )
+            .debounceTime(2000))
         .mergeMap((action: UpdateConfigurationAction) => {
             return ajax.post(`./api/config/${action.configId}`,
                 {
