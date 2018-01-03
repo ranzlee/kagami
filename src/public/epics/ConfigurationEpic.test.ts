@@ -43,6 +43,14 @@ describe('Configuration Epic', () => {
     store.dispatch(updateConfig(configId, firstFieldPropertyName, firstFieldValue1, oldValues));
     store.dispatch(updateConfig(configId, firstFieldPropertyName, firstFieldValue2, oldValues));
     store.dispatch(updateConfig(configId, secondFieldPropertyName, secondFieldValue, oldValues));
+    
+    // Now this event should not cause an ajax call because the value has not changed from the previous value
+    setTimeout(() => {
+      store.dispatch(updateConfig(configId, secondFieldPropertyName, secondFieldValue, oldValues));
+    }, 2100);
+
+
+
 
     setTimeout(() => {
       const calls = (Observable.ajax.post as Mock<any>).mock.calls;
@@ -82,12 +90,13 @@ describe('Configuration Epic', () => {
         action1,
         action2,
         action3,
+        action3,
         action4,
         action4
       ]);
 
       done();
-    }, 3000);
+    }, 5000);
     console.log("=============1313=================");
   });
 });
