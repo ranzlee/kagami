@@ -29,16 +29,13 @@
       "jsx",
       "json",
       "node"
-    ],
-    "unmockedModulePathPatterns": [
-      "<rootDir>/node_modules/nock",
-      "<rootDir>/node_modules/redux-mock-store"
     ]
   },
   "dependencies": {
     "@types/react-redux": "^5.0.14",
     "@types/redux": "^3.6.31",
     "@types/redux-logger": "^3.0.5",
+    "@types/redux-mock-store": "0.0.13",
     "@types/rx": "^4.1.1",
     "@types/socket.io": "^1.4.31",
     "@types/socket.io-redis": "^1.0.22",
@@ -127,7 +124,6 @@
     "jest": "^22.0.4",
     "jquery": "^3.2.1",
     "less": "^2.7.3",
-    "nock": "^9.1.5",
     "node-sass": "^4.7.2",
     "redux-mock-store": "^1.4.0",
     "sass-loader": "^6.0.6",

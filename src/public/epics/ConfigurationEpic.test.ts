@@ -1,90 +1,99 @@
-/*
-ERROR in [at-loader] ./src/public/epics/ConfigurationEpic.test.ts:3:32 
-node_1     | [0]     TS7016: Could not find a declaration file for module 'redux-mock-store'. '/usr/src/app/node_modules/redux-mock-store/lib/index.js' implicitly has an 'any' type.
+var expect = require('expect');
+import Mock = jest.Mock;
+import configureMockStore from 'redux-mock-store';
+import { createEpicMiddleware } from 'redux-observable';
+import { updateConfigurationEpic } from "./ConfigurationEpic";
+import { updateConfig, UpdateConfigurationAction } from '../actions/ConfigurationActions';
+import { ActionTypeKeys } from '../actions/ActionTypeKeys';
+import { AjaxSuccessAction } from '../actions/GeneralActions';
+import { Observable } from 'rxjs';
 
-*/
+const epicMiddleware = createEpicMiddleware(updateConfigurationEpic);
+const mockStore = configureMockStore([epicMiddleware]);
 
-// var expect = require('expect');
-// import Mock = jest.Mock;
-// import configureMockStore from 'redux-mock-store';
-// import { createEpicMiddleware } from 'redux-observable';
-// import { updateConfigurationEpic } from "./ConfigurationEpic";
-// import { updateConfig, UpdateConfigurationAction } from '../actions/ConfigurationActions';
-// import { ActionTypeKeys } from '../actions/ActionTypeKeys';
-// import { AjaxSuccessAction } from '../actions/GeneralActions';
-// import { Observable } from 'rxjs';
+describe('Configuration Epic', () => {
+  jest.setTimeout(10000); // 10 second timeout
+  const originalAjaxPost = Observable.ajax.post;
 
-// const epicMiddleware = createEpicMiddleware(updateConfigurationEpic);
-// const mockStore = configureMockStore([epicMiddleware]);
+  let store: any;
 
-// const testHostUrl = "http://localhost";
+  beforeEach(() => {
+    store = mockStore();
+  });
 
-// describe('Configuration Epic', () => {
-//   const originalAjaxPost = Observable.ajax.post;
+  afterEach(() => {
+    epicMiddleware.replaceEpic(updateConfigurationEpic);
+    Observable.ajax.post = originalAjaxPost;
+  });
 
-//   let store: any;
+  it('updateConfigurationEpic debounce with separate inputs', (done) => {
 
-//   beforeEach(() => {
-//     store = mockStore();
-//   });
+    Observable.ajax.post = jest.fn(() => Observable.of(null));
 
-//   afterEach(() => {
-//     epicMiddleware.replaceEpic(updateConfigurationEpic);
-//     Observable.ajax.post = originalAjaxPost;
-//   });
+    const configId = "13";
 
-//   it('updateConfigurationEpic debounce with separate inputs', (done) => {
+    const firstFieldPropertyName = "name";
+    const secondFieldPropertyName = "description";
 
-//     Observable.ajax.post = jest.fn(() => Observable.of(null));
+    const firstFieldValue1 = "cody";
+    const firstFieldValue2 = "cody raffy";
+    const secondFieldValue = "is the man";
 
-//     const configId = "13";
+    const oldValues = "";
 
-//     const firstFieldPropertyName = "name";
-//     const secondFieldPropertyName = "description";
+    store.dispatch(updateConfig(configId, firstFieldPropertyName, firstFieldValue1, oldValues));
+    store.dispatch(updateConfig(configId, firstFieldPropertyName, firstFieldValue2, oldValues));
+    store.dispatch(updateConfig(configId, secondFieldPropertyName, secondFieldValue, oldValues));
 
-//     const firstFieldValue = "cody";
-//     const secondFieldValue = "is the man";
+    // Now this event should not cause an ajax call because the value has not changed from the previous value
+    setTimeout(() => {
+      store.dispatch(updateConfig(configId, secondFieldPropertyName, secondFieldValue, oldValues));
+    }, 2100);
 
-//     const oldValues = "";
 
-//     store.dispatch(updateConfig(configId, firstFieldPropertyName, firstFieldValue, oldValues));
-//     store.dispatch(updateConfig(configId, secondFieldPropertyName, secondFieldValue, oldValues));
+    setTimeout(() => {
+      const calls = (Observable.ajax.post as Mock<any>).mock.calls;
+      expect(Array.isArray(calls)).toBeTruthy();
+      expect(calls.length).toEqual(2);
 
-//     setTimeout(() => {
-//       const calls = (Observable.ajax.post as Mock<any>).mock.calls;
-//       expect(Array.isArray(calls)).toBeTruthy();
-//       console.log("Calls: " + calls.length);
-//       expect(calls.length).toEqual(2);
+      const action1: UpdateConfigurationAction = {
+        type: ActionTypeKeys.UPDATE_CONFIGURATION,
+        configId,
+        propertyName: firstFieldPropertyName,
+        newValue: firstFieldValue1,
+        oldValue: oldValues
+      };
 
-//       const action1: UpdateConfigurationAction = {
-//         type: ActionTypeKeys.UPDATE_CONFIGURATION,
-//         configId,
-//         propertyName: firstFieldPropertyName,
-//         newValue: firstFieldValue,
-//         oldValue: oldValues
-//       };
+      const action2: UpdateConfigurationAction = {
+        type: ActionTypeKeys.UPDATE_CONFIGURATION,
+        configId,
+        propertyName: firstFieldPropertyName,
+        newValue: firstFieldValue2,
+        oldValue: oldValues
+      };
 
-//       const action2: UpdateConfigurationAction = {
-//         type: ActionTypeKeys.UPDATE_CONFIGURATION,
-//         configId: configId,
-//         propertyName: secondFieldPropertyName,
-//         newValue: secondFieldValue,
-//         oldValue: oldValues
-//       };
+      const action3: UpdateConfigurationAction = {
+        type: ActionTypeKeys.UPDATE_CONFIGURATION,
+        configId: configId,
+        propertyName: secondFieldPropertyName,
+        newValue: secondFieldValue,
+        oldValue: oldValues
+      };
 
-//       const action3: AjaxSuccessAction = {
-//         type: ActionTypeKeys.AJAX_SUCCESS
-//       };
+      const action4: AjaxSuccessAction = {
+        type: ActionTypeKeys.AJAX_SUCCESS
+      };
 
-//       expect(store.getActions()).toEqual([
-//         action1,
-//         action2,
-//         action3,
-//         action3
-//       ]);
+      expect(store.getActions()).toEqual([
+        action1,
+        action2,
+        action3,
+        action4,
+        action4,
+        action3, // This second action 3 is fired after the debounce time
+      ]);
 
-//       done();
-//     }, 3000);
-//     console.log("=============1313=================");
-//   });
-// });
+      done();
+    }, 5000);
+  });
+});

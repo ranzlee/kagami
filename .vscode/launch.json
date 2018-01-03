@@ -20,6 +20,21 @@
       "name": "Launch Express (dev)",
       "preLaunchTask": "npm: setup-dev",
       "program": "${workspaceFolder}/dist/server.js"
+    },
+    {
+      "name": "Jest Tests", // This is the configuration name you will see in debug sidebar
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceRoot}\\node_modules\\jest\\bin\\jest.js",
+      "args": [
+        "-i"
+      ],
+      //"preLaunchTask": "build",
+      "internalConsoleOptions": "openOnSessionStart",
+      "outFiles": [
+        "${workspaceRoot}/dist/**/*"
+      ],
+      "envFile": "${workspaceRoot}/.env.dev.config"
     }
   ]
 }
