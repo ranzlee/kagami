@@ -1,6 +1,15 @@
 //main bootstrap
 @import "lib/bootstrap/bootstrap.scss";
 
+//###### bootstrap overrides for theme
+
+/*force white background for custom checkbox*/
+.custom-control-input:checked ~ .custom-control-label::before {
+  color: #fff;
+  background-color: #fff;
+}
+//###### end overrides
+
 //now-ui
 @import "themes/now-ui/sass/now-ui-kit.scss";
 
