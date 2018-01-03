@@ -89,16 +89,15 @@ export class LocalLogin extends React.Component<
           <div className="row form-group">
             <Checkbox
               id="rememberMe"
-              offset="4"
+              controlCol={4}
+              labelCol={4}
               labelName="Remember me"
-              checkBoxSize="8"
-              checkBoxTitle="Remember me" />
-            <div className="col-4">
+              checkBoxTitle="Remember me">
               <AnchorLink
                 linkText="Forgot your password?"
                 onClick={this.handleForgotPassword}
               />
-            </div>
+            </Checkbox>
           </div>
           <div className="row">
             <div className="col-4" />
