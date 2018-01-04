@@ -22,7 +22,7 @@ export const fetchConfigElementsEpic = (action$: any) =>
     action$.ofType(ActionTypeKeys.FETCH_CONFIG_ELEMENTS)
         .mergeMap((action: FetchConfigElementsAction) =>
             ajax.getJSON(`./api/config/${action.configId}/configElement`)
-                .map(response => fetchConfigElementsSuccess(response as IConfigurationElement[]))
+                .map(response => fetchConfigElementsSuccess(response as IConfigurationElement[], action.configId))
                 .takeUntil(action$.ofType(ActionTypeKeys.CANCEL_QUERY))
                 .catch(error => Observable.of(fetchConfigElementsError(error.xhr.response)))
         );

@@ -21,6 +21,7 @@ export interface FetchConfigElementsAction {
 }
 export interface FetchConfigElementsSuccessAction {
     type: ActionTypeKeys.FETCH_CONFIG_ELEMENTS_SUCCESS,
+    configId: string;
     configElements: IConfigurationElement[]
 }
 export interface FetchConfigElementsErrorAction {
@@ -57,8 +58,9 @@ export const fetchConfigElements = (configId: string): FetchConfigElementsAction
     type: ActionTypeKeys.FETCH_CONFIG_ELEMENTS,
     configId
 });
-export const fetchConfigElementsSuccess = (configElements: IConfigurationElement[]): FetchConfigElementsSuccessAction => ({
+export const fetchConfigElementsSuccess = (configElements: IConfigurationElement[], configId: string): FetchConfigElementsSuccessAction => ({
     type: ActionTypeKeys.FETCH_CONFIG_ELEMENTS_SUCCESS,
+    configId,
     configElements: configElements
 });
 export const fetchConfigElementsError = (error: any): FetchConfigElementsErrorAction => ({

@@ -7,9 +7,9 @@ interface IRouteParams {
   configId: string;
 }
 
-export interface IOwnProps extends RouteComponentProps<IRouteParams>   { }
+export interface IOwnProps extends RouteComponentProps<IRouteParams> { }
 
-export interface IConnectedState  {
+export interface IConnectedState {
   fieldIds: string[];
 }
 
@@ -24,8 +24,10 @@ export class Fields extends React.Component<IOwnProps & IConnectedState & IConne
 
     const { fieldIds } = this.props;
 
-    for (var i = 0; i < fieldIds.length; i++) {
-      returnElements.push(<Field fieldId={fieldIds[i]} key={fieldIds[i]} />);
+    if (fieldIds) {
+      for (var i = 0; i < fieldIds.length; i++) {
+        returnElements.push(<Field fieldId={fieldIds[i]} key={fieldIds[i]} />);
+      }
     }
     return returnElements;
   }
@@ -39,7 +41,7 @@ export class Fields extends React.Component<IOwnProps & IConnectedState & IConne
     return (
       <div className="container-fluid">
         <h1>Fields</h1>
-        <button className="btn btn-primary" onClick={this.add}>
+        <button className="btn btn-primary" onClick={() => this.add()}>
           Add Field
         </button>
         <hr />

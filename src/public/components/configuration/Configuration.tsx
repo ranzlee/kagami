@@ -10,17 +10,18 @@ export interface IOwnProps extends RouteComponentProps<IRouteParams> { }
 
 export interface IConnectedState {
   configuration: Config;
+  areConfigElementsLoaded: boolean;
 }
 
 export interface IConnectedDispatch {
-  fetchConfig: (id: string) => void;
+  fetchConfigElements: (id: string) => void;
 }
 
 export class Configuration extends React.Component<IOwnProps & IConnectedState & IConnectedDispatch, {}> {
   componentDidMount() {
-    const { configuration, fetchConfig } = this.props;
-    if (!configuration) {
-      fetchConfig(this.props.match.params.configId);
+    const { areConfigElementsLoaded, fetchConfigElements } = this.props;
+    if (!areConfigElementsLoaded) {
+      fetchConfigElements(this.props.match.params.configId);
     }
   }
 

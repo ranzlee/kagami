@@ -22,6 +22,14 @@
       "program": "${workspaceFolder}/dist/server.js"
     },
     {
+      "type": "chrome",
+      "name": "Docker: Attach to Chrome (Clientside)",
+      "request": "launch",
+      "url": "https://localhost:3001",
+      "sourceMaps": true,
+      "webRoot": "${workspaceRoot}"
+    },
+    {
       "name": "Jest Tests", // This is the configuration name you will see in debug sidebar
       "type": "node",
       "request": "launch",
