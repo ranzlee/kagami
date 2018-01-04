@@ -14,8 +14,7 @@ import * as passport from "passport";
 import expressValidator = require("express-validator");
 import fs = require("fs");
 import https = require("https");
-import * as redisSocketIo from "socket.io-redis";
-import * as socketIo from "socket.io";
+
 
 //read .env.config variables
 dotenv.config({ path: path.join(__dirname, ".env.config") });
@@ -121,6 +120,8 @@ require("./config/passport");
 import * as authenticationController from "./controllers/authentication";
 import * as configurationController from "./controllers/configuration";
 import * as configElementController from "./controllers/configElement";
+import { Socket } from "dgram";
+import { SocketServer } from "./socketServer";
 
 //app routes
 //authentication controller common
@@ -169,10 +170,6 @@ let server = https.createServer({
   console.log("  Press CTRL-C to stop\n");
 });
 
-let io: SocketIO.Server = socketIo(server);
-io.adapter(redisSocketIo({
-  host: 'redis',
-  port: 6379
-}));
+let socketServer = new SocketServer(server);
 
 module.exports = app;
