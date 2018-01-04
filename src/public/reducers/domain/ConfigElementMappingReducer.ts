@@ -1,4 +1,4 @@
-import { IConfigElementLookup, IConfigElementMapping } from './../../types/AppStore';
+import { IConfigElementLookup, IConfigElementMapping, IConfigElementByTypeLookup } from './../../types/AppStore';
 import { ConfigElementActionTypes } from './../../actions/ConfigElementActions';
 import { ConfigElementType } from './../../../shared/models/enums/ConfigElementType';
 import { IConfigurationElement } from './../../../shared/models/configuration/elements/IConfigurationElement';
@@ -17,6 +17,7 @@ export function configElementMappingReducer(configElementMapping: IConfigElement
         case ActionTypeKeys.FETCH_CONFIG_ELEMENTS_SUCCESS:
             return createNewMappingWithAllElements(
                 configElementMapping,
+                action.configId,
                 action.configElements)
 
         default:
@@ -48,9 +49,27 @@ function createNewMappingWithAdditionalItem(
 
 function createNewMappingWithAllElements(
     configElementMapping: IConfigElementMapping,
+    configId: string,
     configElements: IConfigurationElement[]): IConfigElementMapping {
-     return configElements.reduce(
+
+    if (!configElementMapping[configId]) {
+        return createNewConfig(configElementMapping, configId)
+    };
+
+    return configElements.reduce(
         (mapping: IConfigElementMapping, item: IConfigurationElement, index) => {
             return createNewMappingWithAdditionalItem(mapping, item.configId, item.configElementType, item._id);
         }, configElementMapping);
+}
+
+function createNewConfig(configElementMapping: IConfigElementMapping,
+    configId: string): IConfigElementMapping {
+    var newLookup: IConfigElementByTypeLookup = {}
+    var copy = { ...configElementMapping, [configId]: newLookup };
+    for (let configElementType in ConfigElementType) {
+        if (isNaN(Number(configElementType))) {
+            copy[configId][configElementType] = [];
+        }
+    }
+    return copy;
 }
