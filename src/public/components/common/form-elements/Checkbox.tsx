@@ -30,7 +30,7 @@ export class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
     let extendedProps = FormControl.FormControlExtendedProperties(this.props);
     let required = this.props.required ? true : false;
     return (
-      <>
+      <div className="row form-group">
         <div className={extendedProps.labelClasses} />
         <div className={extendedProps.formControlClasses}>
           <div className="checkbox">
@@ -40,16 +40,16 @@ export class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
               className="custom-control-input"
               required={required}
             />
-            <label htmlFor={this.props.id} className="custom-control-label">
+            <label className="" htmlFor={this.props.id}>
               {this.props.label}
             </label>
             <div className="invalid-feedback">
-              {this.props.invalidFeedback ? this.props.invalidFeedback : ""}
+              {this.state.invalidFeedback ? this.state.invalidFeedback : ""}
             </div>
           </div>
         </div>
         {extendedProps.children}
-      </>
+      </div>
     );
   }
 }
