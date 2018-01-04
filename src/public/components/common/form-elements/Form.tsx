@@ -16,12 +16,11 @@ export class Form extends React.Component<FormProps, FormState> {
   }
 
   onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
     let form = event.currentTarget;
     this.setState({ formWasValidated: "was-validated" });
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    } else {
+    if (form.checkValidity() !== false) {
       this.props.onSubmit(event);
     }
   };

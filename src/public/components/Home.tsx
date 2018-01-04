@@ -3,18 +3,23 @@ import { UIEvent, SyntheticEvent } from "react";
 import * as axios from "axios";
 import { User } from "../../shared/models/User";
 import { Button } from "./common/form-elements/Button";
+import { Card } from "./common/containers/Card";
+import { Form } from "./common/form-elements/Form";
+import { Textbox } from "./common/form-elements/Textbox";
 
-export interface HomeState {}
+export interface HomeState {
+  myTextboxState: string;
+}
 
 export interface HomeProps {}
 
 export default class Home extends React.Component<HomeProps, HomeState> {
   constructor(props: HomeProps) {
     super(props);
-    this.state = {};
+    this.state = { myTextboxState: "" };
   }
 
-  handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
+  handleHello = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     axios.default.get<User>("/auth/user").then(response => {
       if (response.data) {
@@ -24,25 +29,70 @@ export default class Home extends React.Component<HomeProps, HomeState> {
       }
     });
   };
+
+  handleMyTextboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({
+      myTextboxState: event.currentTarget.value
+    });
+  };
+
+  handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {};
+
   render() {
     return (
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col">
-            <form>
-              <div className="form-group">
-                <Button
-                  type="button"
-                  className="primary"
-                  buttonText="Say hi to me!"
-                  iconName="fa-user"
-                  onClick={this.handleSubmit}
-                />
-              </div>
-            </form>
+      <>
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col">
+              <form>
+                <div className="form-group">
+                  <Button
+                    type="button"
+                    className="primary"
+                    buttonText="Say hi to me!"
+                    iconName="fa-user"
+                    onClick={this.handleHello}
+                  />
+                </div>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
+        <div className="container">
+          <div className="row">
+            <div className="col-3" />
+            <div className="col-6">
+              <Card title="Form Controls" iconName="fa-gear">
+                <Form onSubmit={this.handleSubmit}>
+                  <Textbox
+                    id="MyTextbox"
+                    type="text"
+                    label="My Textbox"
+                    value={this.state.myTextboxState}
+                    placeholder="Enter some text"
+                    required={true}
+                    onChange={this.handleMyTextboxChange}
+                    invalidFeedback="Required"
+                    controlCol={8}
+                    labelCol={4}
+                  />
+                  <div className="row">
+                    <div className="col-4" />
+                    <div className="col-8 text-right">
+                      <Button
+                        type="submit"
+                        className="primary"
+                        buttonText="Submit!"
+                        iconName="fa-check"
+                      />
+                    </div>
+                  </div>
+                </Form>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </>
     );
   }
 }
