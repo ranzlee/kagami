@@ -1,6 +1,6 @@
 import { connect, Dispatch } from 'react-redux';
 import { AppStore } from './../../types/AppStore';
-import { Config, IOwnProps, IConnectedDispatch, IConnectedState } from './../../components/configurations/Config';
+import { ConfigurationItem, IOwnProps, IConnectedDispatch, IConnectedState } from './../../components/configurations/ConfigurationItem';
 import * as actions from './../../actions/ConfigurationActions';
 import { ConfigElementType } from '../../../shared/models/enums/ConfigElementType';
 
@@ -24,4 +24,4 @@ export const mapDispatchToProps = (dispatch: Dispatch<actions.ConfigurationActio
     }
 }
 
-export default connect<IConnectedState, IConnectedDispatch, IOwnProps>(mapStateToProps, mapDispatchToProps)(Config);
+export default connect<IConnectedState, IConnectedDispatch, IOwnProps>(mapStateToProps, mapDispatchToProps)(ConfigurationItem);
