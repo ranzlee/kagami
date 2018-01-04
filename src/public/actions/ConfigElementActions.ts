@@ -10,6 +10,8 @@ export type ConfigElementActionTypes =
     | FetchConfigElementsErrorAction
 
     | AddConfigElementAction
+    | AddConfigElementSuccessAction
+
     | UpdateConfigElementAction
     | DeleteConfigElementAction;
 
@@ -29,9 +31,15 @@ export interface FetchConfigElementsErrorAction {
 export interface AddConfigElementAction {
     type: ActionTypeKeys.ADD_CONFIG_ELEMENT;
     configId: string,
-    elementId: string,
     configElementType: ConfigElementType
 }
+export interface AddConfigElementSuccessAction {
+    type: ActionTypeKeys.ADD_CONFIG_ELEMENT_SUCCESS,
+    configId: string,
+    configElementType: ConfigElementType,
+    elementId: string
+}
+
 export interface UpdateConfigElementAction {
     type: ActionTypeKeys.UPDATE_CONFIG_ELEMENT;
     id: string;
@@ -58,12 +66,19 @@ export const fetchConfigElementsError = (error: any): FetchConfigElementsErrorAc
     payload: error
 });
 
-export const addConfigElement = (configId: string, elementId: string, configElementType: ConfigElementType): AddConfigElementAction => ({
+export const addConfigElement = (configId: string, configElementType: ConfigElementType): AddConfigElementAction => ({
     type: ActionTypeKeys.ADD_CONFIG_ELEMENT,
+    configId,
+    configElementType
+});
+export const addConfigElementSuccess = (configId: string, elementId: string, configElementType: ConfigElementType): AddConfigElementSuccessAction => ({
+    type: ActionTypeKeys.ADD_CONFIG_ELEMENT_SUCCESS,
     configId,
     elementId,
     configElementType
 });
+
+
 export const updateConfigElement = (id: string, configElementType: ConfigElementType, propertyName: string, newValue: any, oldValue: any): UpdateConfigElementAction => ({
     type: ActionTypeKeys.UPDATE_CONFIG_ELEMENT,
     id,

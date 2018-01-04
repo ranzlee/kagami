@@ -37,7 +37,7 @@ export class FieldItem extends React.Component<IOwnProps & IConnectedState & ICo
 
   render() {
     const { field, update } = this.props;
-    const editUrl = "./configuration/" + configuration._id;
+    const editUrl = "./configElement/" + field._id;
 
     return (
       <div>
@@ -52,7 +52,7 @@ export class FieldItem extends React.Component<IOwnProps & IConnectedState & ICo
               placeholder="Configuration Name"
               aria-label="Configuration Name"
               name="name"
-              value={configuration.name}
+              value={field.name}
               onChange={this.updateClickHandler}
             />
           </div>
@@ -67,7 +67,7 @@ export class FieldItem extends React.Component<IOwnProps & IConnectedState & ICo
               placeholder="Description"
               aria-label="Description"
               name="description"
-              value={configuration.description}
+              value={field.description}
               onChange={this.updateClickHandler}
             />
           </div>

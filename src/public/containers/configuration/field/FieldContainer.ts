@@ -20,4 +20,4 @@ export const mapDispatchToProps = (dispatch: Dispatch<actions.ConfigElementActio
     }
 }
 
-export default connect<IConnectedState, IConnectedDispatch, IOwnProps>(mapStateToProps, mapDispatchToProps)(Field));
+export default connect<IConnectedState, IConnectedDispatch, IOwnProps>(mapStateToProps, mapDispatchToProps)(Field);

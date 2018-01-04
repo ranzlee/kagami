@@ -3,7 +3,6 @@ import { Field as FieldModel } from "./../../../../shared/models/configuration/e
 
 export interface IOwnProps {
   fieldId: string;
-  configId: string;
 }
 
 export interface IConnectedState {

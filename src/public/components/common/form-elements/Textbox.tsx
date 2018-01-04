@@ -6,6 +6,7 @@ export interface TextboxState extends FormControl.FormControlState {}
 
 export interface TextboxProps extends FormControl.FormControlProps {
   id: string;
+  name?: string;
   type: "email" | "password" | "search" | "tel" | "text" | "url";
   pattern?: string;
   required?: boolean;
@@ -47,6 +48,7 @@ export class Textbox extends React.Component<TextboxProps, TextboxState> {
           <input
             className="form-control"
             id={this.props.id}
+            name={this.props.name}
             type={this.props.type}
             value={this.props.value}
             placeholder={this.props.placeholder}

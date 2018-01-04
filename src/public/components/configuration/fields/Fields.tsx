@@ -1,15 +1,20 @@
 import * as React from "react";
 import Config from "./../../../containers/configuration/fields/FieldsContainer";
+import Field from "./../../../containers/configuration/field/FieldContainer"
+import { RouteComponentProps } from "react-router";
 
-export interface IOwnProps { }
+interface IRouteParams {
+  configId: string;
+}
 
-export interface IConnectedState {
+export interface IOwnProps extends RouteComponentProps<IRouteParams>   { }
+
+export interface IConnectedState  {
   fieldIds: string[];
 }
 
 export interface IConnectedDispatch {
-  add: () => void;
-  fetchConfigs: () => void;
+  add: (configId: string) => void;
 }
 
 export class Fields extends React.Component<IOwnProps & IConnectedState & IConnectedDispatch, {}>
@@ -20,17 +25,21 @@ export class Fields extends React.Component<IOwnProps & IConnectedState & IConne
     const { fieldIds } = this.props;
 
     for (var i = 0; i < fieldIds.length; i++) {
-      returnElements.push(<Field id={fieldIds[i]} key={fieldIds[i]} />);
+      returnElements.push(<Field fieldId={fieldIds[i]} key={fieldIds[i]} />);
     }
     return returnElements;
   }
 
-  render() {
+  private add(): void {
     const { add } = this.props;
+    add(this.props.match.params.configId);
+  }
+
+  render() {
     return (
       <div className="container-fluid">
         <h1>Fields</h1>
-        <button className="btn btn-primary" onClick={add}>
+        <button className="btn btn-primary" onClick={this.add}>
           Add Field
         </button>
         <hr />
