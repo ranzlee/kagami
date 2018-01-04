@@ -89,24 +89,24 @@ export class CreateAccount extends React.Component<
         <br />
         <Form onSubmit={this.handleCreateAccount}>
           <Textbox
-            inputId="email"
-            inputType="email"
+            id="email"
+            type="email"
             label="Email Address"
             value={this.state.email}
             placeholder="Enter your email address"
-            isRequired={true}
+            required={true}
             onChange={this.handleEmailChange}
             invalidFeedback="Email Address is required and must be a valid email format."
             controlCol={8}
             labelCol={4}
           />
           <Textbox
-            inputId="password"
-            inputType="password"
+            id="password"
+            type="password"
             label="Password"
             value={this.state.password}
             placeholder="Enter your password"
-            isRequired={true}
+            required={true}
             minLength={8}
             onChange={this.handlePasswordChange}
             invalidFeedback="Password is required and must have at least 8 characters."
@@ -114,12 +114,12 @@ export class CreateAccount extends React.Component<
             labelCol={4}
           />
           <Textbox
-            inputId="confirmPassword"
-            inputType="password"
+            id="confirmPassword"
+            type="password"
             label="Confirm Password"
             value={this.state.confirmPassword}
             placeholder="Re-enter your password"
-            isRequired={true}
+            required={true}
             onChange={this.handleConfirmPasswordChange}
             onChangeCustomValidation={
               this.handleConfirmPasswordChangeCustomValidation
@@ -132,10 +132,10 @@ export class CreateAccount extends React.Component<
             <div className="col-4" />
             <div className="col-8 text-right">
               <Button
-                buttonType="submit"
-                buttonClassName="primary"
+                type="submit"
+                className="primary"
                 buttonText="Create my account!"
-                buttonFaIconName="fa-check"
+                iconName="fa-check"
               />
             </div>
           </div>

@@ -32,10 +32,10 @@ export default class Home extends React.Component<HomeProps, HomeState> {
             <form>
               <div className="form-group">
                 <Button
-                  buttonType="button"
-                  buttonClassName="primary"
+                  type="button"
+                  className="primary"
                   buttonText="Say hi to me!"
-                  buttonFaIconName="fa-user"
+                  iconName="fa-user"
                   onClick={this.handleSubmit}
                 />
               </div>

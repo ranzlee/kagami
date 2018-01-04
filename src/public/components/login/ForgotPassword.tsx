@@ -53,12 +53,12 @@ export class ForgotPassword extends React.Component<
         <br />
         <Form onSubmit={this.handleForgotPassword}>
           <Textbox
-            inputId="email"
-            inputType="email"
+            id="email"
+            type="email"
             label="Email Address"
             value={this.state.email}
             placeholder="Enter your email address"
-            isRequired={true}
+            required={true}
             onChange={this.handleEmailChange}
             invalidFeedback="Email Address is required and must be a valid email format."
             controlCol={8}
@@ -68,10 +68,10 @@ export class ForgotPassword extends React.Component<
             <div className="col-4" />
             <div className="col-8 text-right">
               <Button
-                buttonType="submit"
-                buttonClassName="warning"
+                type="submit"
+                className="warning"
                 buttonText="Reset my account password!"
-                buttonFaIconName="fa-recycle"
+                iconName="fa-recycle"
               />
             </div>
           </div>

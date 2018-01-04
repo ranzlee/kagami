@@ -5,10 +5,10 @@ import * as FormControl from "./FormControl";
 export interface TextboxState extends FormControl.FormControlState {}
 
 export interface TextboxProps extends FormControl.FormControlProps {
-  inputId: string;
-  inputType: "email" | "password" | "search" | "tel" | "text" | "url";
+  id: string;
+  type: "email" | "password" | "search" | "tel" | "text" | "url";
   pattern?: string;
-  isRequired?: boolean;
+  required?: boolean;
   maxLength?: number;
   minLength?: number;
   label: string;
@@ -33,24 +33,21 @@ export class Textbox extends React.Component<TextboxProps, TextboxState> {
   };
 
   render() {
-    let required = this.props.isRequired ? true : false;
+    let required = this.props.required ? true : false;
     let pattern = this.props.pattern ? this.props.pattern : null;
     let maxLength = this.props.maxLength ? this.props.maxLength : null;
     let minLength = this.props.minLength ? this.props.minLength : null;
     let extendedProps = FormControl.FormControlExtendedProperties(this.props);
     return (
       <div className="row form-group">
-        <label
-          className={extendedProps.labelClasses}
-          htmlFor={this.props.inputId}
-        >
+        <label className={extendedProps.labelClasses} htmlFor={this.props.id}>
           {this.props.label}
         </label>
         <div className={extendedProps.formControlClasses}>
           <input
             className="form-control"
-            id={this.props.inputId}
-            type={this.props.inputType}
+            id={this.props.id}
+            type={this.props.type}
             value={this.props.value}
             placeholder={this.props.placeholder}
             onChange={this.onChange}

@@ -5,9 +5,9 @@ import * as FormControl from "./FormControl";
 export interface CheckboxState extends FormControl.FormControlState {}
 
 export interface CheckboxProps extends FormControl.FormControlProps {
-  inputId: string;
+  id: string;
   label: string;
-  isRequired?: boolean;
+  required?: boolean;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -28,22 +28,19 @@ export class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
 
   render() {
     let extendedProps = FormControl.FormControlExtendedProperties(this.props);
-    let required = this.props.isRequired ? true : false;
+    let required = this.props.required ? true : false;
     return (
       <>
         <div className={extendedProps.labelClasses} />
         <div className={extendedProps.formControlClasses}>
           <div className="checkbox">
             <input
-              id={this.props.inputId}
+              id={this.props.id}
               type="checkbox"
               className="custom-control-input"
               required={required}
             />
-            <label
-              htmlFor={this.props.inputId}
-              className="custom-control-label"
-            >
+            <label htmlFor={this.props.id} className="custom-control-label">
               {this.props.label}
             </label>
             <div className="invalid-feedback">

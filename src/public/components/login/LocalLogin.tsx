@@ -63,24 +63,24 @@ export class LocalLogin extends React.Component<
         <br />
         <Form onSubmit={this.handleLogin}>
           <Textbox
-            inputId="email"
-            inputType="email"
+            id="email"
+            type="email"
             label="Email Address"
             value={this.state.email}
             placeholder="Enter your email address"
-            isRequired={true}
+            required={true}
             onChange={this.handleEmailChange}
             invalidFeedback="Email Address is required and must be a valid email format."
             controlCol={8}
             labelCol={4}
           />
           <Textbox
-            inputId="password"
-            inputType="password"
+            id="password"
+            type="password"
             label="Password"
             value={this.state.password}
             placeholder="Enter your password"
-            isRequired={true}
+            required={true}
             onChange={this.handlePasswordChange}
             invalidFeedback="Password is required"
             controlCol={8}
@@ -88,7 +88,7 @@ export class LocalLogin extends React.Component<
           />
           <div className="row form-group">
             <Checkbox
-              inputId="rememberMe"
+              id="rememberMe"
               label="Remember me"
               controlCol={4}
               labelCol={4}
@@ -103,10 +103,10 @@ export class LocalLogin extends React.Component<
             <div className="col-4" />
             <div className="col-8 text-right">
               <Button
-                buttonType="submit"
-                buttonClassName="primary"
+                type="submit"
+                className="primary"
                 buttonText="Log me in!"
-                buttonFaIconName="fa-unlock"
+                iconName="fa-unlock"
               />
             </div>
           </div>
