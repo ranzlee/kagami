@@ -6,6 +6,7 @@ import { Button } from "./common/form-elements/Button";
 import { Card } from "./common/containers/Card";
 import { Form } from "./common/form-elements/Form";
 import { Textbox } from "./common/form-elements/Textbox";
+import * as FormControl from "./common/form-elements/FormControl";
 
 export interface HomeState {
   myTextboxState: string;
@@ -16,7 +17,7 @@ export interface HomeProps {}
 export default class Home extends React.Component<HomeProps, HomeState> {
   constructor(props: HomeProps) {
     super(props);
-    this.state = { myTextboxState: "" };
+    this.state = { myTextboxState: "aaa" };
   }
 
   handleHello = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -36,7 +37,22 @@ export default class Home extends React.Component<HomeProps, HomeState> {
     });
   };
 
-  handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {};
+  handleMyTextboxCustomValidation = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): FormControl.CustomValidationResult => {
+    let isValid = true;
+    if (event.currentTarget.value !== "aaaa") {
+      isValid = false;
+    }
+    return {
+      isValid: isValid,
+      validationMessage: "Value must be aaaa."
+    };
+  };
+
+  handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    alert("form was submitted!");
+  };
 
   render() {
     return (
@@ -69,9 +85,12 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                     type="text"
                     label="My Textbox"
                     value={this.state.myTextboxState}
-                    placeholder="Enter some text"
+                    placeholder="Enter 'aaaa'"
                     required={true}
                     onChange={this.handleMyTextboxChange}
+                    onChangeCustomValidation={
+                      this.handleMyTextboxCustomValidation
+                    }
                     invalidFeedback="Required"
                     controlCol={8}
                     labelCol={4}

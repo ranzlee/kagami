@@ -5,10 +5,7 @@ import * as FormControl from "./FormControl";
 export interface CheckboxState extends FormControl.FormControlState {}
 
 export interface CheckboxProps extends FormControl.FormControlProps {
-  id: string;
-  label: string;
   required?: boolean;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export class Checkbox extends React.Component<CheckboxProps, CheckboxState> {

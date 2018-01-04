@@ -5,16 +5,13 @@ import * as FormControl from "./FormControl";
 export interface TextboxState extends FormControl.FormControlState {}
 
 export interface TextboxProps extends FormControl.FormControlProps {
-  id: string;
   type: "email" | "password" | "search" | "tel" | "text" | "url";
   pattern?: string;
   required?: boolean;
   maxLength?: number;
   minLength?: number;
-  label: string;
   value: string;
   placeholder: string;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export class Textbox extends React.Component<TextboxProps, TextboxState> {
