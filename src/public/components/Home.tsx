@@ -17,7 +17,7 @@ export interface HomeProps {}
 export default class Home extends React.Component<HomeProps, HomeState> {
   constructor(props: HomeProps) {
     super(props);
-    this.state = { myTextboxState: "aaa" };
+    this.state = { myTextboxState: "" };
   }
 
   handleHello = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -78,8 +78,8 @@ export default class Home extends React.Component<HomeProps, HomeState> {
           <div className="row">
             <div className="col-3" />
             <div className="col-6">
-              <Card title="Form Controls" iconName="fa-gear">
-                <Form onSubmit={this.handleSubmit}>
+              <Card title="Form Controls" iconName="fa-cog">
+                <Form onSubmit={this.handleSubmit} validateOnMount={true}>
                   <Textbox
                     id="MyTextbox"
                     type="text"
