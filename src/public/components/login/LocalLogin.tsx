@@ -1,6 +1,9 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Button } from "../common/form-elements/Button";
+import { Checkbox } from "../common/form-elements/Checkbox";
+import { Form } from "../common/form-elements/Form";
+import { Textbox } from "../common/form-elements/Textbox";
 import { AnchorLink } from "../common/widgets/AnchorLink";
 
 export interface LocalLoginState {
@@ -31,22 +34,13 @@ export class LocalLogin extends React.Component<
     this.setState({ password: event.currentTarget.value });
   };
 
-  handleLogin = (event: React.FormEvent<HTMLFormElement>) => {
-    let form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-    this.setState({ formWasValidated: "was-validated" });
-  };
+  handleLogin = (event: React.FormEvent<HTMLFormElement>) => {};
 
   handleCreateAccount = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
     this.props.showCreateAccount();
   };
 
   handleForgotPassword = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
     this.props.showForgotPassword();
   };
   render() {
@@ -67,73 +61,56 @@ export class LocalLogin extends React.Component<
           </div>
         </div>
         <br />
-        <form
-          noValidate
-          onSubmit={this.handleLogin}
-          className={this.state.formWasValidated}
-        >
-          <div className="row form-group">
-            <label className="col-lg-4 col-form-label" htmlFor="email">
-              Email Address
-            </label>
-            <div className="col-lg-8">
-              <input
-                className="form-control"
-                id="email"
-                required
-                type="email"
-                value={this.state.email}
-                placeholder="Enter your email address"
-                onChange={this.handleEmailChange}
-              />
-              <div className="invalid-feedback">
-                Email Address is required and must be a valid email format.
-              </div>
-            </div>
-          </div>
-          <div className="row form-group">
-            <label className="col-lg-4 col-form-label" htmlFor="password">
-              Password
-            </label>
-            <div className="col-lg-8">
-              <input
-                className="form-control"
-                id="password"
-                required
-                type="password"
-                value={this.state.password}
-                placeholder="Enter your password"
-                onChange={this.handlePasswordChange}
-              />
-              <div className="invalid-feedback">Password is required.</div>
-            </div>
-          </div>
-          <div className="row form-group">
-            <div className="col-lg-4" />
-            <div className="col-lg-4">
-              <div className="checkbox">
-                <input id="rememberMe" type="checkbox" title="Remember me" />
-                <label htmlFor="rememberMe">Remember me</label>
-              </div>
-            </div>
-            <div className="col-lg-4">
-              <a href="" onClick={this.handleForgotPassword}>
-                Forgot your password?
-              </a>
-            </div>
-          </div>
+        <Form onSubmit={this.handleLogin}>
+          <Textbox
+            id="email"
+            type="email"
+            label="Email Address"
+            value={this.state.email}
+            placeholder="Enter your email address"
+            required={true}
+            onChange={this.handleEmailChange}
+            invalidFeedback="Email Address is required and must be a valid email format."
+            controlCol={8}
+            labelCol={4}
+          />
+          <Textbox
+            id="password"
+            type="password"
+            label="Password"
+            value={this.state.password}
+            placeholder="Enter your password"
+            required={true}
+            onChange={this.handlePasswordChange}
+            invalidFeedback="Password is required"
+            controlCol={8}
+            labelCol={4}
+          />
+          <Checkbox
+            id="rememberMe"
+            label="Remember me"
+            controlCol={4}
+            labelCol={4}
+            //required={true}
+            //invalidFeedback="Test required"
+          >
+            <AnchorLink
+              linkText="Forgot your password?"
+              onClick={this.handleForgotPassword}
+            />
+          </Checkbox>
           <div className="row">
-            <div className="col-lg-4" />
-            <div className="col-lg-8 text-right">
+            <div className="col-4" />
+            <div className="col-8 text-right">
               <Button
-                buttonType="submit"
-                buttonClassName="primary"
+                type="submit"
+                className="primary"
                 buttonText="Log me in!"
-                buttonFaIconName="fa-unlock"
+                iconName="fa-unlock"
               />
             </div>
           </div>
-        </form>
+        </Form>
       </div>
     );
   }

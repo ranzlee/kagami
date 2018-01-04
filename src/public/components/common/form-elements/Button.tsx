@@ -4,8 +4,8 @@ import * as ReactDOM from "react-dom";
 export interface ButtonState {}
 
 export interface ButtonProps {
-  buttonType: "button" | "submit";
-  buttonClassName:
+  type: "button" | "submit";
+  className:
     | "primary"
     | "secondary"
     | "success"
@@ -15,7 +15,7 @@ export interface ButtonProps {
     | "light"
     | "dark";
   buttonText: string;
-  buttonFaIconName?: string;
+  iconName?: string;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
@@ -25,12 +25,18 @@ export class Button extends React.Component<ButtonProps, ButtonState> {
     this.state = {};
   }
 
+  onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    if (this.props.onClick != null) {
+      this.props.onClick(event);
+    }
+  };
+
   render() {
-    let buttonClasses = "btn btn-" + this.props.buttonClassName;
-    let iconClasses = "fas " + this.props.buttonFaIconName;
+    let buttonClasses = "btn btn-" + this.props.className;
+    let iconClasses = "fas " + this.props.iconName;
     let innerElement =
-      this.props.buttonFaIconName != null &&
-      this.props.buttonFaIconName !== "" ? (
+      this.props.iconName != null && this.props.iconName !== "" ? (
         <span>
           <i className={iconClasses} />&nbsp;&nbsp;{this.props.buttonText}
         </span>
@@ -38,16 +44,12 @@ export class Button extends React.Component<ButtonProps, ButtonState> {
         <span>{this.props.buttonText}</span>
       );
     let comp =
-      this.props.buttonType === "submit" ? (
+      this.props.type === "submit" ? (
         <button type="submit" className={buttonClasses}>
           {innerElement}
         </button>
       ) : (
-        <button
-          type="button"
-          className={buttonClasses}
-          onClick={this.props.onClick}
-        >
+        <button type="button" className={buttonClasses} onClick={this.onClick}>
           {innerElement}
         </button>
       );

@@ -5,8 +5,8 @@ import { InfoTooltip } from "../widgets/InfoTooltip";
 export interface CardState {}
 
 export interface CardProps {
-  titleFaIconName: string;
-  titleText: string;
+  iconName: string;
+  title: string;
   toolTip?: string;
 }
 
@@ -23,7 +23,7 @@ export class Card extends React.Component<CardProps, CardState> {
           <InfoTooltip title={this.props.toolTip} />
         </div>
       ) : null;
-    let iconClass = "fas " + this.props.titleFaIconName;
+    let iconClass = "fas " + this.props.iconName;
     return (
       <div className="row">
         <div className="col">
@@ -32,7 +32,7 @@ export class Card extends React.Component<CardProps, CardState> {
               <div className="text-primary">
                 <div className="float-left">
                   <i className={iconClass} aria-hidden="true" />&nbsp;&nbsp;{
-                    this.props.titleText
+                    this.props.title
                   }
                 </div>
                 {toolTip}

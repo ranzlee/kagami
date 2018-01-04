@@ -7,7 +7,7 @@ export interface FadeAlertState {
 }
 
 export interface FadeAlertProps {
-  alertClassName:
+  className:
     | "primary"
     | "secondary"
     | "success"
@@ -16,8 +16,8 @@ export interface FadeAlertProps {
     | "info"
     | "light"
     | "dark";
-  alertTitle: string;
-  alertBody: string;
+  title: string;
+  body: string;
   onClose: () => void;
 }
 
@@ -25,17 +25,17 @@ export class FadeAlert extends React.Component<FadeAlertProps, FadeAlertState> {
   constructor(props: FadeAlertProps) {
     super(props);
     this.state = {
-      alertClassNames: "alert-" + this.props.alertClassName + " alert fade show"
+      alertClassNames: "alert-" + this.props.className + " alert fade show"
     };
   }
 
   componentDidMount() {
     let buttonClasses =
-      "btn-" + this.props.alertClassName + " btn btn-icon btn-sm btn-icon-mini";
+      "btn-" + this.props.className + " btn btn-icon btn-sm btn-icon-mini";
     let unmanagedAlert = (
       <div className={this.state.alertClassNames} role="alert">
         <div className="container">
-          <span className="h6">{this.props.alertTitle}</span>
+          <span className="h6">{this.props.title}</span>
           <span className="float-right">
             &nbsp;
             <button
@@ -48,7 +48,7 @@ export class FadeAlert extends React.Component<FadeAlertProps, FadeAlertState> {
             </button>
           </span>
           <div className="clearfix" />
-          <p>{this.props.alertBody}</p>
+          <p>{this.props.body}</p>
         </div>
       </div>
     );

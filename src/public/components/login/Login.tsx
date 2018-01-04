@@ -81,9 +81,9 @@ export default class Login extends React.Component<LoginProps, LoginState> {
     let helpAlert = (
       <FadeAlert
         onClose={this.showHelpLink}
-        alertClassName="primary"
-        alertBody={alertText}
-        alertTitle="Login to get started!"
+        className="primary"
+        body={alertText}
+        title="Login to get started!"
       />
     );
     this.setState({
@@ -103,14 +103,14 @@ export default class Login extends React.Component<LoginProps, LoginState> {
     return (
       <div className="container">
         <div className="row">
-          <div className="col-lg-3" />
-          <div className="col-lg-6">
+          <div className="col-3" />
+          <div className="col-6">
             <div className="row">
               <div className="col">
                 <Card
-                  titleText="Login using one of your existing social media accounts."
+                  title="Login using one of your existing social media accounts."
                   toolTip="Login using one of your social media accounts. Kagami will automatically link accounts that use the same email address."
-                  titleFaIconName="fa-lock"
+                  iconName="fa-lock"
                 >
                   <div>
                     <div className="row">
@@ -142,9 +142,9 @@ export default class Login extends React.Component<LoginProps, LoginState> {
             <div className="row">
               <div className="col">
                 <Card
-                  titleText="Login using your Kagami account."
+                  title="Login using your Kagami account."
                   toolTip="Login with your local Kagami account or create a new account."
-                  titleFaIconName="fa-lock"
+                  iconName="fa-lock"
                 >
                   {this.state.localLoginContext}
                 </Card>

@@ -17,9 +17,14 @@ export class AnchorLink extends React.Component<
     this.state = {};
   }
 
+  onClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    this.props.onClick(event);
+  };
+
   render() {
     return (
-      <a href="" onClick={this.props.onClick}>
+      <a href="" onClick={this.onClick}>
         {this.props.linkText}
       </a>
     );
