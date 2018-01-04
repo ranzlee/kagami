@@ -154,6 +154,7 @@ app.get("/api/config/:id/configElement", configElementController.fetchConfigElem
 app.get("/api/config", configurationController.fetchConfigurations);
 app.put("/api/config", configurationController.addConfiguration);
 app.post("/api/config/:id", configurationController.updateConfiguration);
+app.put("/api/config/:configId/configElement/:configElementType", configElementController.addConfigElement);
 
 const privateKey = fs.readFileSync(path.join(__dirname, "key.pem"));
 const certificate = fs.readFileSync(path.join(__dirname, "certificate.pem"));
