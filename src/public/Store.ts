@@ -1,4 +1,4 @@
-import { applyMiddleware, createStore } from "redux";
+import { applyMiddleware, createStore, compose } from "redux";
 import { createLogger } from 'redux-logger';
 import { createEpicMiddleware } from 'redux-observable';
 import { rootEpic } from './epics/RootEpic';
@@ -7,12 +7,22 @@ import { rootEpic } from './epics/RootEpic';
 
 import reducer from "./reducers/Index";
 
-const logger = createLogger( {
+const logger = createLogger({
     // .. options
 });
 
 const epicMiddleware = createEpicMiddleware(rootEpic);
 
-const middleware = applyMiddleware(logger, epicMiddleware);
+const composeEnhancers =
+    typeof window === 'object' &&
+        (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
+        (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+            name: "KAGAMI"
+        }) : compose;
 
-export const Store = createStore(reducer, middleware);
+const enhancer = composeEnhancers(
+    applyMiddleware(logger, epicMiddleware),
+    // other store enhancers if any
+);
+
+export const Store = createStore(reducer, enhancer);
