@@ -1,5 +1,5 @@
 import { IConfigLookup } from './../../types/AppStore';
-import { Config } from './../../components/configurations/Config';
+import { ConfigurationItem } from './../../components/configurations/ConfigurationItem';
 import { Configuration } from './../../../shared/models/configuration/Configuration';
 import { ConfigurationActionTypes } from './../../actions/ConfigurationActions';
 import { ActionTypeKeys } from '../../actions/ActionTypeKeys';

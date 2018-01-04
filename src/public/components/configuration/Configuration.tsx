@@ -1,9 +1,11 @@
 import * as React from "react";
 import { Configuration as Config } from "./../../../shared/models/configuration/Configuration";
+import { RouteComponentProps } from "react-router";
 
-export interface IOwnProps {
-  match: any; // route match
+interface IRouteParams {
+  configId: string;
 }
+export interface IOwnProps extends RouteComponentProps<IRouteParams> { }
 
 export interface IConnectedState {
   configuration: Config;
@@ -15,9 +17,9 @@ export interface IConnectedDispatch {
 
 export class Configuration extends React.Component<IOwnProps & IConnectedState & IConnectedDispatch, {}> {
   componentDidMount() {
-    const { configuration, match, fetchConfig } = this.props;
+    const { configuration, fetchConfig } = this.props;
     if (!configuration) {
-      fetchConfig(match.params.configId);
+      fetchConfig(this.props.match.params.configId);
     }
   }
 

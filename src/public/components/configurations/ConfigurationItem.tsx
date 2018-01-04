@@ -2,6 +2,7 @@ import * as React from "react";
 import { Configuration } from "./../../../shared/models/configuration/Configuration";
 import { ConfigElementType } from "../../../shared/models/enums/ConfigElementType";
 import { Link } from "react-router-dom";
+import { Textbox } from "./../common/form-elements/Textbox"
 
 export interface IOwnProps {
   id: string;
@@ -21,7 +22,7 @@ export interface IConnectedDispatch {
   deleteConfig: () => void;
 }
 
-export class Config extends React.Component<IOwnProps & IConnectedState & IConnectedDispatch, {}>
+export class ConfigurationItem extends React.Component<IOwnProps & IConnectedState & IConnectedDispatch, {}>
 {
   updateClickHandler = (event: any) => {
     const { configuration, update } = this.props;
@@ -41,20 +42,17 @@ export class Config extends React.Component<IOwnProps & IConnectedState & IConne
     return (
       <div>
         <div className="row">
-          <div className="col-xs">
-            <label>Name:</label>
-          </div>
-          <div className="col-xs">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Configuration Name"
-              aria-label="Configuration Name"
-              name="name"
-              value={configuration.name}
-              onChange={this.updateClickHandler}
-            />
-          </div>
+          <Textbox
+            id={'ConfigurationName_' + configuration._id}
+            name="name"
+            type="text"
+            required={true}
+            placeholder="Configuration Name"
+            label="Name: "
+            value={configuration.name}
+            onChange={this.updateClickHandler} 
+            labelColSm={3}
+            controlColSm={9}/>
         </div>
         <div className="row">
           <div className="col-xs">
@@ -68,6 +66,7 @@ export class Config extends React.Component<IOwnProps & IConnectedState & IConne
               name="description"
               value={configuration.description}
               onChange={this.updateClickHandler}
+              
             />
           </div>
           <div className="col-xs">
