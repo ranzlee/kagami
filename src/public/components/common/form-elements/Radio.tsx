@@ -26,27 +26,20 @@ export class Radio extends React.Component<RadioProps, RadioState> {
     render() {
         let extendedProps = FormControl.FormControlExtendedProperties(this.props);
         let required = this.props.required ? true : false;
+        let options = ["On", "Off"];
         return (
-            <div className="row form-group">
-                <div className={extendedProps.labelClasses} />
-                <div className={extendedProps.formControlClasses}>
+            options.map(function (option, index) {
+                return (
+                    <>
                     <div className="radio">
-                        <input
-                            id={this.props.id}
-                            type="radio"
-                            className="form-check-input"
-                            required={required}
-                        />
-                        <label className="form-check-label" htmlFor={this.props.id}>
-                            {this.props.label}
+                        <input type="radio" name="radio1" id={"radio" + index.toString()} className="form-check-input" value={option} />
+                        <label className="form-check-label" htmlFor={"radio" + index.toString()}>
+                            Radio is {option}
                         </label>
-                        <div className="invalid-feedback">
-                            {this.state.invalidFeedback ? this.state.invalidFeedback : ""}
-                        </div>
                     </div>
-                </div>
-                {extendedProps.children}
-            </div>
+                    </>
+                )
+            })
         );
     }
 }

@@ -97,10 +97,11 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                   labelCol={4}
                 />
                 <Radio
-                  id="overEighteen"
-                  label="Over 18?"
+                  id="yes"
+                  label="Yes"
                   controlCol={4}
                   labelCol={4}
+                //required={true}
                 />
                 <div className="row">
                   <div className="col-4" />
