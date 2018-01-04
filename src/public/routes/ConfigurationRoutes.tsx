@@ -9,7 +9,9 @@ export default class ConfigurationRoutes extends React.Component<{}, {}> {
         return (
             <Switch>
                 <Route exact path='/configuration' component={Configurations} />
-                <Route path='/configuration/:configId' component={Configuration} />
+                <Route exact path='/configuration/:configId' component={Configuration} />
+                <Route exact path='/configuration/:configId/Field' component={Fields}/>
+                <Route exact path='/configuration/:configId/Field/:fieldId' component={Field}/>
             </Switch>
         );
     }

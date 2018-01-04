@@ -35,7 +35,7 @@ export interface AddConfigElementAction {
 export interface UpdateConfigElementAction {
     type: ActionTypeKeys.UPDATE_CONFIG_ELEMENT;
     id: string;
-    entityType: ConfigElementType;
+    configElementType: ConfigElementType;
     propertyName: string;
     newValue: any;
     oldValue: any;
@@ -64,10 +64,10 @@ export const addConfigElement = (configId: string, elementId: string, configElem
     elementId,
     configElementType
 });
-export const updateConfigElement = (id: string, entityType: ConfigElementType, propertyName: string, newValue: any, oldValue: any): UpdateConfigElementAction => ({
+export const updateConfigElement = (id: string, configElementType: ConfigElementType, propertyName: string, newValue: any, oldValue: any): UpdateConfigElementAction => ({
     type: ActionTypeKeys.UPDATE_CONFIG_ELEMENT,
     id,
-    entityType,
+    configElementType,
     propertyName,
     newValue,
     oldValue

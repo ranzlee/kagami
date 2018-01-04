@@ -8,5 +8,6 @@ export abstract class BaseConfigurationElement implements IConfigurationElement 
     name: string;
     description: string;
     dependencies: string[];
+    shared: boolean;
     tags: string[];
 }
