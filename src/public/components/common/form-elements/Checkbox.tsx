@@ -2,7 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as FormControl from "./FormControl";
 
-export interface CheckboxState extends FormControl.FormControlState {}
+export interface CheckboxState extends FormControl.FormControlState { }
 
 export interface CheckboxProps extends FormControl.FormControlProps {
   required?: boolean;
@@ -34,10 +34,10 @@ export class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
             <input
               id={this.props.id}
               type="checkbox"
-              className="custom-control-input"
+              className="form-check-input"
               required={required}
             />
-            <label className="" htmlFor={this.props.id}>
+            <label className="form-check-label" htmlFor={this.props.id}>
               {this.props.label}
             </label>
             <div className="invalid-feedback">

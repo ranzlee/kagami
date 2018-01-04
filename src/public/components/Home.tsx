@@ -5,6 +5,7 @@ import { User } from "../../shared/models/User";
 import { Button } from "./common/form-elements/Button";
 import { Card } from "./common/containers/Card";
 import { Form } from "./common/form-elements/Form";
+import { Radio } from "./common/form-elements/Radio";
 import { Textbox } from "./common/form-elements/Textbox";
 import * as FormControl from "./common/form-elements/FormControl";
 
@@ -12,7 +13,7 @@ export interface HomeState {
   myTextboxState: string;
 }
 
-export interface HomeProps {}
+export interface HomeProps { }
 
 export default class Home extends React.Component<HomeProps, HomeState> {
   constructor(props: HomeProps) {
@@ -57,60 +58,66 @@ export default class Home extends React.Component<HomeProps, HomeState> {
   render() {
     return (
       <>
-        <div className="container-fluid">
-          <div className="row">
-            <div className="col">
-              <form>
-                <div className="form-group">
-                  <Button
-                    type="button"
-                    className="primary"
-                    buttonText="Say hi to me!"
-                    iconName="fa-user"
-                    onClick={this.handleHello}
-                  />
-                </div>
-              </form>
-            </div>
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col">
+            <form>
+              <div className="form-group">
+                <Button
+                  type="button"
+                  className="primary"
+                  buttonText="Say hi to me!"
+                  iconName="fa-user"
+                  onClick={this.handleHello}
+                />
+              </div>
+            </form>
           </div>
         </div>
-        <div className="container">
-          <div className="row">
-            <div className="col-3" />
-            <div className="col-6">
-              <Card title="Form Controls" iconName="fa-gear">
-                <Form onSubmit={this.handleSubmit}>
-                  <Textbox
-                    id="MyTextbox"
-                    type="text"
-                    label="My Textbox"
-                    value={this.state.myTextboxState}
-                    placeholder="Enter 'aaaa'"
-                    required={true}
-                    onChange={this.handleMyTextboxChange}
-                    onChangeCustomValidation={
-                      this.handleMyTextboxCustomValidation
-                    }
-                    invalidFeedback="Required"
-                    controlCol={8}
-                    labelCol={4}
-                  />
-                  <div className="row">
-                    <div className="col-4" />
-                    <div className="col-8 text-right">
-                      <Button
-                        type="submit"
-                        className="primary"
-                        buttonText="Submit!"
-                        iconName="fa-check"
-                      />
-                    </div>
+      </div>
+      <div className="container">
+        <div className="row">
+          <div className="col-3" />
+          <div className="col-6">
+            <Card title="Form Controls" iconName="fa-gear">
+              <Form onSubmit={this.handleSubmit}>
+                <Textbox
+                  id="MyTextbox"
+                  type="text"
+                  label="My Textbox"
+                  value={this.state.myTextboxState}
+                  placeholder="Enter 'aaaa'"
+                  required={true}
+                  onChange={this.handleMyTextboxChange}
+                  onChangeCustomValidation={
+                    this.handleMyTextboxCustomValidation
+                  }
+                  invalidFeedback="Required"
+                  controlCol={8}
+                  labelCol={4}
+                />
+                <Radio
+                  id="overEighteen"
+                  label="Over 18?"
+                  controlCol={4}
+                  labelCol={4}
+                />
+                <div className="row">
+                  <div className="col-4" />
+                  <div className="col-8 text-right">
+                    <Button
+                      type="submit"
+                      className="primary"
+                      buttonText="Submit!"
+                      iconName="fa-check"
+                    />
                   </div>
-                </Form>
-              </Card>
-            </div>
+                </div>
+              </Form>
+            </Card>
           </div>
         </div>
+      </div>
       </>
     );
   }
