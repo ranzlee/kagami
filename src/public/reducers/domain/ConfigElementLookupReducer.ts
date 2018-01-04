@@ -4,7 +4,7 @@ import { ConfigElementType } from './../../../shared/models/enums/ConfigElementT
 import { IConfigurationElement } from './../../../shared/models/configuration/elements/IConfigurationElement';
 import { ActionTypeKeys } from '../../actions/ActionTypeKeys';
 
-export function configElementReducer(configurationElements: IConfigElementLookup  = {}, action: ConfigElementActionTypes) {
+export function configElementLookupReducer(configurationElements: IConfigElementLookup  = {}, action: ConfigElementActionTypes) {
     switch (action.type) {
         case ActionTypeKeys.ADD_CONFIG_ELEMENT_SUCCESS:
             const newElement = {
