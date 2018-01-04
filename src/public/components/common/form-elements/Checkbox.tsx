@@ -19,7 +19,7 @@ export class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
       this.props.onChange(event);
     }
     if (this.props.onChangeCustomValidation) {
-      FormControl.OnChangeCustomValidation(this, event);
+      FormControl.OnChangeCustomValidation(this, event.currentTarget);
     }
   };
 

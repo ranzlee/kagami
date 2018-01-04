@@ -38,10 +38,10 @@ export default class Home extends React.Component<HomeProps, HomeState> {
   };
 
   handleMyTextboxCustomValidation = (
-    event: React.ChangeEvent<HTMLInputElement>
+    element: HTMLInputElement
   ): FormControl.CustomValidationResult => {
     let isValid = true;
-    if (event.currentTarget.value !== "aaaa") {
+    if (element.value !== "aaaa") {
       isValid = false;
     }
     return {

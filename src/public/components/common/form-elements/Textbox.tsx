@@ -25,7 +25,7 @@ export class Textbox extends React.Component<TextboxProps, TextboxState> {
       this.props.onChange(event);
     }
     if (this.props.onChangeCustomValidation) {
-      FormControl.OnChangeCustomValidation(this, event);
+      FormControl.OnChangeCustomValidation(this, event.currentTarget);
     }
   };
 
