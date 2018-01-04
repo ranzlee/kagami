@@ -101,7 +101,8 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                   label="Yes"
                   controlCol={4}
                   labelCol={4}
-                //required={true}
+                  required={true}
+                  invalidFeedback="Required"
                 />
                 <div className="row">
                   <div className="col-4" />

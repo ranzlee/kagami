@@ -27,19 +27,38 @@ export class Radio extends React.Component<RadioProps, RadioState> {
         let extendedProps = FormControl.FormControlExtendedProperties(this.props);
         let required = this.props.required ? true : false;
         let options = ["On", "Off"];
+        const rowLength = options.length;
         return (
-            options.map(function (option, index) {
-                return (
-                    <>
-                    <div className="radio">
-                        <input type="radio" name="radio1" id={"radio" + index.toString()} className="form-check-input" value={option} />
-                        <label className="form-check-label" htmlFor={"radio" + index.toString()}>
-                            Radio is {option}
-                        </label>
+            <>
+            {options.map((option, index) => {
+                let invalidFeedback = null;
+                if (rowLength === index + 1) {
+                    invalidFeedback = <div className="invalid-feedback">
+                        {this.state.invalidFeedback ? this.state.invalidFeedback : ""}
                     </div>
-                    </>
+                }
+                return (
+                    <div className="row form-group" key={index}>
+                        <div className={extendedProps.labelClasses} />
+                        <div className={extendedProps.formControlClasses}>
+                            <div className="radio">
+                                <input
+                                    id={"radio" + index.toString()}
+                                    type="radio"
+                                    className="form-check-input custom-control-input"
+                                    name="radio1"
+                                    required={required}
+                                    value={option} />
+                                <label className="form-check-label" htmlFor={"radio" + index.toString()}>
+                                    Radio is {option}
+                                </label>
+                                {invalidFeedback}
+                            </div>
+                        </div>
+                    </div>
                 )
-            })
+            })}
+            </>
         );
     }
 }

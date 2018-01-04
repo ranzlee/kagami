@@ -34,7 +34,7 @@ export class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
             <input
               id={this.props.id}
               type="checkbox"
-              className="form-check-input"
+              className="form-check-input custom-control-input"
               required={required}
             />
             <label className="form-check-label" htmlFor={this.props.id}>
