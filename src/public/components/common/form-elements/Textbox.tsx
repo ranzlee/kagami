@@ -38,7 +38,9 @@ export class Textbox extends React.Component<TextboxProps, TextboxState> {
     if (this.props.validateOnMount) {
       FormControl.OnChangeCustomValidation(this, this.instance);
     }
-    this.props.form.registerFormCustomValidations(this, this.instance);
+    if (this.props.form) {
+      this.props.form.registerFormCustomValidations(this, this.instance);
+    }
   }
   //*** end
 

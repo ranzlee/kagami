@@ -8,18 +8,24 @@ import { Form } from "./common/form-elements/Form";
 import { Radio } from "./common/form-elements/Radio";
 import { RadioOption } from "./common/form-elements/RadioOption";
 import { Textbox } from "./common/form-elements/Textbox";
+import { Checkbox } from "./common/form-elements/Checkbox";
 import * as FormControl from "./common/form-elements/FormControl";
 
 export interface HomeState {
+  validateFormOnMount: boolean;
   myTextboxState: string;
 }
 
-export interface HomeProps { }
+export interface HomeProps {}
 
 export default class Home extends React.Component<HomeProps, HomeState> {
   constructor(props: HomeProps) {
     super(props);
-    this.state = { myTextboxState: "" };
+    this.state = {
+      validateFormOnMount:
+        localStorage.getItem("validateFormOnMount") === "true",
+      myTextboxState: ""
+    };
   }
 
   handleHello = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -59,71 +65,101 @@ export default class Home extends React.Component<HomeProps, HomeState> {
   render() {
     return (
       <>
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col">
-            <form>
-              <div className="form-group">
-                <Button
-                  type="button"
-                  className="primary"
-                  buttonText="Say hi to me!"
-                  iconName="fa-user"
-                  onClick={this.handleHello}
-                />
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-      <div className="container">
-        <div className="row">
-          <div className="col-3" />
-          <div className="col-6">
-            <Card title="Form Controls" iconName="fa-cog">
-              <Form onSubmit={this.handleSubmit} validateOnMount={true}>
-                <Textbox
-                  id="MyTextbox"
-                  type="text"
-                  label="My Textbox"
-                  value={this.state.myTextboxState}
-                  placeholder="Enter 'aaaa'"
-                  required={true}
-                  onChange={this.handleMyTextboxChange}
-                  onChangeCustomValidation={
-                    this.handleMyTextboxCustomValidation
-                  }
-                  invalidFeedback="Required"
-                  controlCol={8}
-                  labelCol={4}
-                />
-                <Radio
-                  id="yes"
-                  label="Yes"
-                  name="required"
-                  controlCol={4}
-                  labelCol={4}
-                  required={true}
-                  invalidFeedback="Required">
-                  <RadioOption label="Yes" value="yes" />
-                  <RadioOption label="No" value="no" />
-                </Radio>
-                <div className="row">
-                  <div className="col-4" />
-                  <div className="col-8 text-right">
-                    <Button
-                      type="submit"
-                      className="primary"
-                      buttonText="Submit!"
-                      iconName="fa-check"
-                    />
-                  </div>
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col">
+              <form>
+                <div className="form-group">
+                  <Button
+                    type="button"
+                    className="primary"
+                    buttonText="Say hi to me!"
+                    iconName="fa-user"
+                    onClick={this.handleHello}
+                  />
                 </div>
-              </Form>
-            </Card>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
+        <div className="container">
+          <div className="row">
+            <div className="col-3" />
+            <div className="col-6">
+              <Card title="Form Controls" iconName="fa-cog">
+                <Form onSubmit={() => {}}>
+                  <Checkbox
+                    id="validateOnMount"
+                    label="Validate form on mount"
+                    controlCol={12}
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                      localStorage.setItem(
+                        "validateFormOnMount",
+                        event.currentTarget.checked ? "true" : "false"
+                      );
+                      this.setState({
+                        validateFormOnMount: event.currentTarget.checked
+                      });
+                    }}
+                    checked={this.state.validateFormOnMount}
+                  />
+                </Form>
+                <Form
+                  onSubmit={this.handleSubmit}
+                  validateOnMount={this.state.validateFormOnMount}
+                >
+                  <Textbox
+                    id="MyTextbox"
+                    type="text"
+                    label="My Textbox"
+                    value={this.state.myTextboxState}
+                    placeholder="Enter 'aaaa'"
+                    required={true}
+                    onChange={this.handleMyTextboxChange}
+                    onChangeCustomValidation={
+                      this.handleMyTextboxCustomValidation
+                    }
+                    invalidFeedback="Required"
+                    controlCol={8}
+                    labelCol={4}
+                  />
+                  <Checkbox
+                    id="MyCheckbox"
+                    label="My Checkbox"
+                    controlCol={8}
+                    labelCol={4}
+                    required={true}
+                    invalidFeedback="Required"
+                    checked={false}
+                  />
+                  <Radio
+                    id="yes"
+                    label="Yes"
+                    name="required"
+                    controlCol={4}
+                    labelCol={4}
+                    required={true}
+                    invalidFeedback="Required"
+                  >
+                    <RadioOption label="Yes" value="yes" />
+                    <RadioOption label="No" value="no" />
+                  </Radio>
+                  <div className="row">
+                    <div className="col-4" />
+                    <div className="col-8 text-right">
+                      <Button
+                        type="submit"
+                        className="primary"
+                        buttonText="Submit!"
+                        iconName="fa-check"
+                      />
+                    </div>
+                  </div>
+                </Form>
+              </Card>
+            </div>
+          </div>
+        </div>
       </>
     );
   }

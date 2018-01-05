@@ -2,10 +2,11 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as FormControl from "./FormControl";
 
-export interface CheckboxState extends FormControl.FormControlState { }
+export interface CheckboxState extends FormControl.FormControlState {}
 
 export interface CheckboxProps extends FormControl.FormControlProps {
   required?: boolean;
+  checked: boolean;
 }
 
 export class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
@@ -13,6 +14,10 @@ export class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
     super(props);
     this.state = { invalidFeedback: this.props.invalidFeedback };
   }
+
+  //*** every wrapped component needs this!
+  instance: HTMLInputElement;
+  //*** end
 
   onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (this.props.onChange) {
@@ -23,6 +28,17 @@ export class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
     }
   };
 
+  //*** every wrapped component needs this!
+  componentDidMount() {
+    if (this.props.validateOnMount) {
+      FormControl.OnChangeCustomValidation(this, this.instance);
+    }
+    if (this.props.form) {
+      this.props.form.registerFormCustomValidations(this, this.instance);
+    }
+  }
+  //*** end
+
   render() {
     let extendedProps = FormControl.FormControlExtendedProperties(this.props);
     let required = this.props.required ? true : false;
@@ -32,10 +48,18 @@ export class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
         <div className={extendedProps.formControlClasses}>
           <div className="checkbox">
             <input
-              id={this.props.id}
+              ref={instance => {
+                //*** every wrapped component needs this!
+                this.instance = instance;
+              }}
+              id={
+                this.props.id //*** end
+              }
               type="checkbox"
               className="form-check-input custom-control-input"
               required={required}
+              onChange={this.onChange}
+              checked={this.props.checked}
             />
             <label className="form-check-label" htmlFor={this.props.id}>
               {this.props.label}
