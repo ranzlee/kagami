@@ -39,7 +39,8 @@ export class RadioOption extends React.Component<RadioOptionProps, RadioOptionSt
                         name={this.props.radio.props.name}
                         onChange={this.props.radio.onChange}
                         required={this.props.radio.props.required}
-                        value={this.props.value} />
+                        value={this.props.value}
+                        checked={this.props.radio.props.value === this.props.value} />
                     <label className="form-check-label" htmlFor={this.props.value}>
                         {this.props.label}
                     </label>

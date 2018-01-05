@@ -7,6 +7,7 @@ import * as linq from "linq";
 export interface RadioState extends FormControl.FormControlState { }
 
 export interface RadioProps extends FormControl.FormControlProps {
+    value: string;
     required?: boolean;
 }
 
