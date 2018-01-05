@@ -30,6 +30,9 @@ export class RadioOption extends React.Component<RadioOptionProps, RadioOptionSt
             <div className={extendedProps.formControlClasses}>
                 <div className="radio">
                     <input
+                        ref={instance => {
+                            this.props.radio.instance = instance;
+                        }}
                         id={this.props.value}
                         type="radio"
                         className="form-check-input custom-control-input"
