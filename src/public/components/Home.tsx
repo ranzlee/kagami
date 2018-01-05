@@ -14,6 +14,7 @@ import * as FormControl from "./common/form-elements/FormControl";
 export interface HomeState {
   validateFormOnMount: boolean;
   myTextboxState: string;
+  myCheckboxState: boolean;
 }
 
 export interface HomeProps {}
@@ -24,7 +25,8 @@ export default class Home extends React.Component<HomeProps, HomeState> {
     this.state = {
       validateFormOnMount:
         localStorage.getItem("validateFormOnMount") === "true",
-      myTextboxState: ""
+      myTextboxState: "aaa",
+      myCheckboxState: false
     };
   }
 
@@ -122,6 +124,7 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                     invalidFeedback="Required"
                     controlCol={8}
                     labelCol={4}
+                    doCustomValidationOnMount={true}
                   />
                   <Checkbox
                     id="MyCheckbox"
@@ -130,7 +133,12 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                     labelCol={4}
                     required={true}
                     invalidFeedback="Required"
-                    checked={false}
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                      this.setState({
+                        myCheckboxState: event.currentTarget.checked
+                      });
+                    }}
+                    checked={this.state.myCheckboxState}
                   />
                   <Radio
                     id="yes"

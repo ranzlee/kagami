@@ -84,9 +84,9 @@ export class Form extends React.Component<FormProps, FormState> {
   renderChildren() {
     return React.Children.map(this.props.children, child => {
       if ((child as any).props.onChangeCustomValidation) {
-        if ((child as any).props.validateOnMount == null) {
+        if ((child as any).props.doCustomValidationOnMount == null) {
           return React.cloneElement(child as any, {
-            validateOnMount: this.props.validateOnMount,
+            doCustomValidationOnMount: this.props.validateOnMount,
             form: this
           });
         } else {

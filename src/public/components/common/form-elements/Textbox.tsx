@@ -35,7 +35,7 @@ export class Textbox extends React.Component<TextboxProps, TextboxState> {
 
   //*** every wrapped component needs this!
   componentDidMount() {
-    if (this.props.validateOnMount) {
+    if (this.props.doCustomValidationOnMount) {
       FormControl.OnChangeCustomValidation(this, this.instance);
     }
     if (this.props.form) {

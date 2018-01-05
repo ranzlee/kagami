@@ -28,7 +28,7 @@ export interface FormControlProps {
   onChangeCustomValidation?: (
     element: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
   ) => CustomValidationResult;
-  validateOnMount?: boolean;
+  doCustomValidationOnMount?: boolean;
   form?: Form;
 }
 

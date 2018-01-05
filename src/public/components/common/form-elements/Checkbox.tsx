@@ -30,7 +30,7 @@ export class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
 
   //*** every wrapped component needs this!
   componentDidMount() {
-    if (this.props.validateOnMount) {
+    if (this.props.doCustomValidationOnMount) {
       FormControl.OnChangeCustomValidation(this, this.instance);
     }
     if (this.props.form) {
