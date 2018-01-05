@@ -24,7 +24,11 @@ export interface FormControlProps {
   labelColSm?: number;
   controlColSm?: number;
   invalidFeedback?: string;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (
+    event:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
+  ) => void;
   onChangeCustomValidation?: (
     element: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
   ) => CustomValidationResult;

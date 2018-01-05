@@ -10,6 +10,7 @@ import { RadioOption } from "./common/form-elements/RadioOption";
 import { Textbox } from "./common/form-elements/Textbox";
 import { Checkbox } from "./common/form-elements/Checkbox";
 import { Number } from "./common/form-elements/Number";
+import { TextArea } from "./common/form-elements/TextArea";
 import * as FormControl from "./common/form-elements/FormControl";
 
 export interface HomeState {
@@ -17,6 +18,7 @@ export interface HomeState {
   myTextboxState: string;
   myCheckboxState: boolean;
   myNumberState: number;
+  myTextAreaState: string;
 }
 
 export interface HomeProps {}
@@ -29,7 +31,8 @@ export default class Home extends React.Component<HomeProps, HomeState> {
         localStorage.getItem("validateFormOnMount") === "true",
       myTextboxState: "aaa",
       myCheckboxState: false,
-      myNumberState: 0
+      myNumberState: 0,
+      myTextAreaState: ""
     };
   }
 
@@ -146,6 +149,26 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                     invalidFeedback="Required and between 100 and 200 with step of 50"
                     controlCol={8}
                     labelCol={4}
+                  />
+                  <TextArea
+                    id="MyTextbox"
+                    label="My Text Area"
+                    value={this.state.myTextAreaState}
+                    placeholder="Enter some text"
+                    minLength={10}
+                    maxLength={100}
+                    required={true}
+                    onChange={(
+                      event: React.ChangeEvent<HTMLTextAreaElement>
+                    ) => {
+                      this.setState({
+                        myTextAreaState: event.currentTarget.value
+                      });
+                    }}
+                    invalidFeedback="Required as length between 10 and 100"
+                    controlCol={8}
+                    labelCol={4}
+                    rows={5}
                   />
                   <Checkbox
                     id="MyCheckbox"
