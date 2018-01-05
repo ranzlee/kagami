@@ -49,10 +49,10 @@ export class CreateAccount extends React.Component<
   };
 
   handleConfirmPasswordChangeCustomValidation = (
-    event: React.ChangeEvent<HTMLInputElement>
+    element: HTMLInputElement
   ): FormControl.CustomValidationResult => {
     let isValid = true;
-    if (this.state.password !== event.currentTarget.value) {
+    if (this.state.password !== element.value) {
       isValid = false;
     }
     return {

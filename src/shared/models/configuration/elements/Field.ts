@@ -6,4 +6,5 @@ export class Field extends BaseConfigurationElement {
     displayExpression: string;
     readonlyExpression: string;
     defaultValueExpression: string;
+    [key: string]: any;
 }

@@ -1,5 +1,5 @@
 import * as React from "react";
-import Config from "./../../containers/configurations/ConfigContainer";
+import ConfigurationItem from "./../../containers/configurations/ConfigurationItemContainer";
 
 export interface IOwnProps { }
 
@@ -20,7 +20,7 @@ export class Configurations extends React.Component<IOwnProps & IConnectedState 
     const { configurationIds } = this.props;
 
     for (var i = 0; i < configurationIds.length; i++) {
-      returnElements.push(<Config id={configurationIds[i]} key={configurationIds[i]} />);
+      returnElements.push(<ConfigurationItem id={configurationIds[i]} key={configurationIds[i]} />);
     }
     return returnElements;
   }

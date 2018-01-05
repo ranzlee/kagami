@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import { Store } from "./../Store";
 import KagamiRoutes from "./../routes/KagamiRoutes";
 import * as Raven from "raven-js";
+import { WebSocketService } from "../services/WebSocketService";
 
 //configure error handling
 Raven.config(
@@ -34,3 +35,5 @@ if (module.hot) {
     renderApp(require("./../routes/KagamiRoutes").default);
   });
 }
+
+WebSocketService.initialize();

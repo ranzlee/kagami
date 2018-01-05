@@ -3,12 +3,14 @@ import { IConfigurationElement } from "./../shared/models/configuration/elements
 import { Response, Request, NextFunction } from "express";
 import { ConfigurationEntity } from "./../models/ConfigurationEntity";
 import { ConfigurationElementEntity } from "./../models/ConfigurationElementEntity";
+import { SocketServer } from "./../socketServer";
+import { SocketMessage } from "./../models/SocketMessage";
 
 export const fetchConfigurations = (req: Request, res: Response): void => {
-        ConfigurationEntity.find({ }, (err, configs) => {
-            res.send(configs);
-            return;
-        });
+    ConfigurationEntity.find({}, (err, configs) => {
+        res.send(configs);
+        return;
+    });
 };
 
 export const addConfiguration = (req: Request, res: Response): void => {
@@ -39,6 +41,10 @@ export const updateConfiguration = (req: Request, res: Response): void => {
             }
             else {
                 res.sendStatus(200);
+                SocketServer.sendToNamespace(configId, new SocketMessage("Update", {
+                    propertyName: propertyName,
+                    value: newValue
+                }));
             }
             return;
         });

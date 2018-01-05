@@ -25,9 +25,7 @@ export interface FormControlProps {
   invalidFeedback?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeCustomValidation?: (
-    event: React.ChangeEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
+    element: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
   ) => CustomValidationResult;
 }
 
@@ -39,19 +37,19 @@ export interface FormControlExtendedProperties {
 
 export let OnChangeCustomValidation = (
   component: React.Component<FormControlProps, FormControlState>,
-  event: React.ChangeEvent<HTMLInputElement>
+  element: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
 ): void => {
   let target = event.currentTarget;
-  let validationResult = component.props.onChangeCustomValidation(event);
-  target.setCustomValidity("");
+  let validationResult = component.props.onChangeCustomValidation(element);
+  element.setCustomValidity("");
   component.setState(
     { invalidFeedback: component.props.invalidFeedback },
     () => {
-      if (!target.validity.valid) {
+      if (!element.validity.valid) {
         return;
       }
       if (!validationResult.isValid) {
-        target.setCustomValidity(validationResult.validationMessage);
+        element.setCustomValidity(validationResult.validationMessage);
         component.setState({
           invalidFeedback: validationResult.validationMessage
         });

@@ -7,6 +7,7 @@ export interface FormState {
 
 export interface FormProps {
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  validateOnMount?: boolean;
 }
 
 export class Form extends React.Component<FormProps, FormState> {
@@ -14,6 +15,8 @@ export class Form extends React.Component<FormProps, FormState> {
     super(props);
     this.state = { formWasValidated: "" };
   }
+
+  instance: HTMLFormElement;
 
   onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -25,9 +28,23 @@ export class Form extends React.Component<FormProps, FormState> {
     }
   };
 
+  setFormValidated(form: HTMLFormElement) {
+    this.setState({ formWasValidated: "was-validated" });
+    form.checkValidity();
+  }
+
+  componentDidMount() {
+    if (this.props.validateOnMount) {
+      this.setFormValidated(this.instance);
+    }
+  }
+
   render() {
     return (
       <form
+        ref={instance => {
+          this.instance = instance;
+        }}
         noValidate
         onSubmit={this.onSubmit}
         className={this.state.formWasValidated}

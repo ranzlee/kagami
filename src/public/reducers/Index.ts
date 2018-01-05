@@ -1,13 +1,15 @@
 import { combineReducers } from "redux";
-import { configElementReducer } from './domain/ConfigElementReducer';
+import { configElementLookupReducer } from './domain/ConfigElementLookupReducer';
 
 import { appStateReducer } from "./appState/AppStateReducer";
-import { configurationReducer } from "./../reducers/domain/ConfigurationReducer";
+import { configurationReducer } from "./domain/ConfigurationReducer";
+import { configElementMappingReducer } from "./domain/ConfigElementMappingReducer";
 
 var domainReducer = combineReducers(
     {
         configurations: configurationReducer,
-        configElements: configElementReducer
+        configElements: configElementLookupReducer,
+        configElementMapping: configElementMappingReducer
     });
 
 export default combineReducers(
