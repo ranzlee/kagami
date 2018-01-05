@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import { Form } from "./Form";
 
 export interface CustomValidationResult {
   isValid: boolean;
@@ -27,6 +28,8 @@ export interface FormControlProps {
   onChangeCustomValidation?: (
     element: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
   ) => CustomValidationResult;
+  validateOnMount?: boolean;
+  form?: Form;
 }
 
 export interface FormControlExtendedProperties {
@@ -38,8 +41,7 @@ export interface FormControlExtendedProperties {
 export let OnChangeCustomValidation = (
   component: React.Component<FormControlProps, FormControlState>,
   element: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-): void => {
-  let target = event.currentTarget;
+): CustomValidationResult => {
   let validationResult = component.props.onChangeCustomValidation(element);
   element.setCustomValidity("");
   component.setState(
@@ -56,6 +58,7 @@ export let OnChangeCustomValidation = (
       }
     }
   );
+  return validationResult;
 };
 
 export let FormControlExtendedProperties = (
