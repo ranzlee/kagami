@@ -2,6 +2,8 @@ import { Tag } from './../../shared/models/configuration/Tag';
 import { Configuration } from './../../shared/models/configuration/Configuration';
 import { IConfigurationElement } from './../../shared/models/configuration/elements/IConfigurationElement';
 import { ConfigElementType } from './../../shared/models/enums/ConfigElementType';
+import { ConfigurationRecord } from './immutable/ConfigurationRecord';
+import { Record, Map } from 'immutable'
 
 export type AppStore = {
     readonly domain: IDomain,
@@ -10,14 +12,10 @@ export type AppStore = {
 }
 
 export interface IDomain {
-    configurations: IConfigLookup;
+    configurations: Map<string, ConfigurationRecord>;
     configElements: IConfigElementLookup;
     configElementMapping: IConfigElementMapping
     tags: Tag[];
-}
-
-export interface IConfigLookup {
-    [key: string] : Configuration
 }
 
 export interface IConfigElementLookup {

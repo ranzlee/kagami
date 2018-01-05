@@ -1,4 +1,3 @@
-import { IConfigLookup } from './../types/AppStore';
 import { Configuration } from './../../shared/models/configuration/Configuration';
 import {
     AddConfigurationAction,
@@ -31,14 +30,7 @@ export const fetchConfigurationsEpic = (action$: any) =>
     action$.ofType(ActionTypeKeys.FETCH_CONFIGS)
         .mergeMap((action: FetchConfigsAction) =>
             ajax.getJSON(`./api/config`)
-                .map((configs: Configuration[]) => {
-                    const configLookup = configs.reduce(
-                        (dict: IConfigLookup, item: Configuration, index) => {
-                            dict[item._id] = item;
-                            return dict;
-                        }, {});
-                    return fetchConfigsSuccess(configLookup as IConfigLookup)
-                })
+                .map((configs: Configuration[]) => fetchConfigsSuccess(configs))
                 .takeUntil(action$.ofType(ActionTypeKeys.CANCEL_QUERY))
                 .catch(error => Observable.of(fetchConfigsError(error.xhr.response)))
         );
