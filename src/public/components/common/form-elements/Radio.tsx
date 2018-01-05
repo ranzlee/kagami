@@ -18,9 +18,9 @@ export class Radio extends React.Component<RadioProps, RadioState> {
         if (this.props.onChange) {
             this.props.onChange(event);
         }
-        if (this.props.onChangeCustomValidation) {
-            FormControl.OnChangeCustomValidation(this, event);
-        }
+        //if (this.props.onChangeCustomValidation) {
+        //FormControl.OnChangeCustomValidation(this, event.currentTarget);
+        //}
     };
 
     render() {
