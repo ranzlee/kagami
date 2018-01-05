@@ -9,12 +9,14 @@ import { Radio } from "./common/form-elements/Radio";
 import { RadioOption } from "./common/form-elements/RadioOption";
 import { Textbox } from "./common/form-elements/Textbox";
 import { Checkbox } from "./common/form-elements/Checkbox";
+import { Number } from "./common/form-elements/Number";
 import * as FormControl from "./common/form-elements/FormControl";
 
 export interface HomeState {
   validateFormOnMount: boolean;
   myTextboxState: string;
   myCheckboxState: boolean;
+  myNumberState: number;
 }
 
 export interface HomeProps {}
@@ -26,7 +28,8 @@ export default class Home extends React.Component<HomeProps, HomeState> {
       validateFormOnMount:
         localStorage.getItem("validateFormOnMount") === "true",
       myTextboxState: "aaa",
-      myCheckboxState: false
+      myCheckboxState: false,
+      myNumberState: 0
     };
   }
 
@@ -124,7 +127,25 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                     invalidFeedback="Required"
                     controlCol={8}
                     labelCol={4}
-                    doCustomValidationOnMount={true}
+                  />
+                  <Number
+                    id="MyNumber"
+                    type="number"
+                    label="My Number"
+                    value={this.state.myNumberState}
+                    placeholder="Enter 100 or 1000"
+                    required={true}
+                    min={100}
+                    max={200}
+                    step={50}
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                      this.setState({
+                        myNumberState: event.currentTarget.valueAsNumber
+                      });
+                    }}
+                    invalidFeedback="Required and between 100 and 200 with step of 50"
+                    controlCol={8}
+                    labelCol={4}
                   />
                   <Checkbox
                     id="MyCheckbox"

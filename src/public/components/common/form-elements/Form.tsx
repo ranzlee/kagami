@@ -38,7 +38,6 @@ export class Form extends React.Component<FormProps, FormState> {
       formWasValidated: this.wasValidatedClassName
     });
     if (form.checkValidity() !== false) {
-      //todo: if custom validation passes
       let isValid = true;
       this.formCustomValidationRegistry.forEach(r => {
         let validationResult = FormControl.OnChangeCustomValidation(
