@@ -66,6 +66,7 @@
     "passport-facebook": "^2.1.1",
     "passport-google-oauth": "^1.0.0",
     "passport-local": "^1.0.0",
+    "performance-now": "^2.1.0",
     "popper.js": "^1.12.9",
     "raven": "^2.3.0",
     "raven-js": "^3.21.0",

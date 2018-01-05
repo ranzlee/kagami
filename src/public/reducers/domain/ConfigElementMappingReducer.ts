@@ -68,6 +68,7 @@ function createNewConfig(configElementMapping: IConfigElementMapping,
     var copy = { ...configElementMapping, [configId]: newLookup };
     for (let configElementType in ConfigElementType) {
         if (isNaN(Number(configElementType))) {
+            console.log(configElementType);
             copy[configId][configElementType] = [];
         }
     }

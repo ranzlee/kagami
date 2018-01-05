@@ -1,9 +1,10 @@
 import { ActionTypeKeys } from './../../actions/ActionTypeKeys';
 import { configurationReducer } from "./ConfigurationReducer";
-import { AddConfigurationSuccessAction, FetchConfigsSuccessAction } from '../../actions/ConfigurationActions';
+import { AddConfigurationSuccessAction, FetchConfigsSuccessAction, UpdateConfigurationAction } from '../../actions/ConfigurationActions';
 import { OtherAction } from '../../actions/GeneralActions';
-import { IConfigLookup } from '../../types/AppStore';
-import { Configuration } from '../../../shared/models/configuration/Configuration';
+import { IConfigLookup, IConfigElementByTypeLookup } from '../../types/AppStore';
+import { Configuration } from '../../../shared/models/configuration/Configuration'
+var now = require("performance-now")
 
 const testConfig : Configuration = {
     _id: "13", 
@@ -52,4 +53,33 @@ describe("Configuration Reducer", () => {
         expect(configurationReducer(initialState, addConfigsSuccessAction))
             .toEqual(toState);
     });
+
+    it("UPDATE PERFORMANCE TEST", () => {
+        var configs: IConfigLookup = {}
+        for (var i = 0; i < 100000; i++) {
+            var indexAsString: string = i.toString();
+            var newConfig : Configuration = {
+                _id: indexAsString,
+                name: 'This is a test name',
+                description: 'This is a test description',
+            };
+            configs[indexAsString] = newConfig;
+        }
+
+        const updateAction : UpdateConfigurationAction = {
+            type: ActionTypeKeys.UPDATE_CONFIGURATION,
+            configId: "13",
+            propertyName: "name",
+            newValue: "Funky Monkey App",
+            oldValue: "Funky Mongoose App"
+        };
+
+        const start = now()
+        const whoCares = configurationReducer(configs, updateAction);
+        const end = now()
+        const ms = end - start; 
+        console.log(`Update took ${ms.toFixed(3)} milliseconds.`);
+        expect(ms).toBeLessThan(100);
+    });
 });
+

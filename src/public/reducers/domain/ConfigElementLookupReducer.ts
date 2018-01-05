@@ -11,9 +11,6 @@ export function configElementLookupReducer(configurationElements: IConfigElement
                 id: action.elementId,
                 configId: action.configId,
                 configElementType: action.configElementType,
-                name: 'New',
-                dependencies: new Array<string>(),
-                tags: new Array<string>()
             };
             return { ...configurationElements, [action.elementId]: newElement }
         case ActionTypeKeys.UPDATE_CONFIG_ELEMENT:
