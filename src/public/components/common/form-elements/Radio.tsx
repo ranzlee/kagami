@@ -16,6 +16,8 @@ export class Radio extends React.Component<RadioProps, RadioState> {
         this.state = { invalidFeedback: this.props.invalidFeedback };
     }
 
+    instance: HTMLInputElement;
+
     onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (this.props.onChange) {
             this.props.onChange(event);
@@ -25,6 +27,15 @@ export class Radio extends React.Component<RadioProps, RadioState> {
         }
     };
 
+    componentDidMount() {
+        if (this.props.doCustomValidationOnMount) {
+            FormControl.OnChangeCustomValidation(this, this.instance);
+        }
+        if (this.props.form) {
+            this.props.form.registerFormCustomValidations(this, this.instance);
+        }
+    }
+
     renderChildren() {
         let extendedProps = FormControl.FormControlExtendedProperties(this.props);
         var countOfRadioOptions = linq.from(this.props.children).count(i => (i as any).type === RadioOption);
@@ -33,13 +44,8 @@ export class Radio extends React.Component<RadioProps, RadioState> {
             if ((child as any).type === RadioOption) {
                 count++;
                 return React.cloneElement((child as any), {
-                    name: this.props.name,
-                    isRequired: this.props.required,
-                    labelCol: extendedProps.labelClasses,
-                    controlCol: extendedProps.formControlClasses,
                     isLast: count === countOfRadioOptions,
-                    invalidFeedback: this.state.invalidFeedback,
-                    onChange: this.onChange
+                    radio: this
                 })
             }
             else

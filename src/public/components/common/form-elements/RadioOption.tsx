@@ -1,17 +1,15 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as FormControl from "./FormControl";
+import { Radio } from './Radio';
 
 export interface RadioOptionState extends FormControl.FormControlState { }
 
 export interface RadioOptionProps extends FormControl.FormControlProps {
     label: string;
     value: string;
-    name?: string;
-    isRequired?: boolean;
     isLast?: boolean;
-    invalidFeedback?: string;
-    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    radio?: Radio;
 }
 
 export class RadioOption extends React.Component<RadioOptionProps, RadioOptionState> {
@@ -20,11 +18,11 @@ export class RadioOption extends React.Component<RadioOptionProps, RadioOptionSt
     }
 
     render() {
-        let extendedProps = FormControl.FormControlExtendedProperties(this.props);
+        let extendedProps = FormControl.FormControlExtendedProperties(this.props.radio.props);
         let invalidFeedback = null;
         if (this.props.isLast) {
             invalidFeedback = <div className="invalid-feedback">
-                {this.props.invalidFeedback ? this.props.invalidFeedback : ""}
+                {this.props.radio.props.invalidFeedback ? this.props.radio.props.invalidFeedback : ""}
             </div>
         }
         return <div className="row">
@@ -35,9 +33,9 @@ export class RadioOption extends React.Component<RadioOptionProps, RadioOptionSt
                         id={this.props.value}
                         type="radio"
                         className="form-check-input custom-control-input"
-                        name={this.props.name}
-                        onChange={this.props.onChange}
-                        required={this.props.isRequired}
+                        name={this.props.radio.props.name}
+                        onChange={this.props.radio.onChange}
+                        required={this.props.radio.props.required}
                         value={this.props.value} />
                     <label className="form-check-label" htmlFor={this.props.value}>
                         {this.props.label}
