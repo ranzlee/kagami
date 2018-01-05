@@ -38,7 +38,8 @@ export class Radio extends React.Component<RadioProps, RadioState> {
                     labelCol: extendedProps.labelClasses,
                     controlCol: extendedProps.formControlClasses,
                     isLast: count === countOfRadioOptions,
-                    invalidFeedback: this.state.invalidFeedback
+                    invalidFeedback: this.state.invalidFeedback,
+                    onChange: this.onChange
                 })
             }
             else
