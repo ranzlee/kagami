@@ -20,14 +20,13 @@ export interface IConnectedDispatch {
 export class Fields extends React.Component<IOwnProps & IConnectedState & IConnectedDispatch, {}>
 {
   private renderFields(): JSX.Element[] {
+    const { fieldIds } = this.props;
+    if (!fieldIds) return null;
+
     var returnElements: JSX.Element[] = [];
 
-    const { fieldIds } = this.props;
-
-    if (fieldIds) {
-      for (var i = 0; i < fieldIds.length; i++) {
-        returnElements.push(<Field fieldId={fieldIds[i]} key={fieldIds[i]} />);
-      }
+    for (var i = 0; i < fieldIds.length; i++) {
+      returnElements.push(<Field fieldId={fieldIds[i]} key={fieldIds[i]} />);
     }
     return returnElements;
   }
