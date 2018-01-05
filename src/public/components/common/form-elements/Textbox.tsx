@@ -20,6 +20,10 @@ export class Textbox extends React.Component<TextboxProps, TextboxState> {
     this.state = { invalidFeedback: this.props.invalidFeedback };
   }
 
+  //*** every wrapped component needs this!
+  instance: HTMLInputElement;
+  //*** end
+
   onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (this.props.onChange) {
       this.props.onChange(event);
@@ -28,6 +32,15 @@ export class Textbox extends React.Component<TextboxProps, TextboxState> {
       FormControl.OnChangeCustomValidation(this, event.currentTarget);
     }
   };
+
+  //*** every wrapped component needs this!
+  componentDidMount() {
+    if (this.props.validateOnMount) {
+      FormControl.OnChangeCustomValidation(this, this.instance);
+    }
+    this.props.form.registerFormCustomValidations(this, this.instance);
+  }
+  //*** end
 
   render() {
     let required = this.props.required ? true : false;
@@ -42,6 +55,10 @@ export class Textbox extends React.Component<TextboxProps, TextboxState> {
         </label>
         <div className={extendedProps.formControlClasses}>
           <input
+            ref={instance => {
+              //*** every wrapped component needs this!
+              this.instance = instance;
+            }} //*** end
             className="form-control"
             id={this.props.id}
             name={this.props.name}
