@@ -6,6 +6,7 @@ import { Button } from "./common/form-elements/Button";
 import { Card } from "./common/containers/Card";
 import { Form } from "./common/form-elements/Form";
 import { Radio } from "./common/form-elements/Radio";
+import { RadioOption } from "./common/form-elements/RadioOption";
 import { Textbox } from "./common/form-elements/Textbox";
 import * as FormControl from "./common/form-elements/FormControl";
 
@@ -103,6 +104,7 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                   labelCol={4}
                   required={true}
                   invalidFeedback="Required"
+                  <RadioOption />
                 />
                 <div className="row">
                   <div className="col-4" />
