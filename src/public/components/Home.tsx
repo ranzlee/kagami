@@ -97,6 +97,17 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                   controlCol={8}
                   labelCol={4}
                 />
+                <Radio
+                  id="yes"
+                  label="Yes"
+                  name="required"
+                  controlCol={4}
+                  labelCol={4}
+                  required={true}
+                  invalidFeedback="Required">
+                  <RadioOption label="Yes" value="yes" />
+                  <RadioOption label="No" value="no" />
+                </Radio>
                 <div className="row">
                   <div className="col-4" />
                   <div className="col-8 text-right">
