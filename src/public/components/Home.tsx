@@ -14,6 +14,8 @@ import { TextArea } from "./common/form-elements/TextArea";
 
 export interface HomeState {
   validateFormOnMount: boolean;
+  readOnly: boolean;
+  disabled: boolean;
   myTextboxState: string;
   myCheckboxState: boolean;
   myNumberState: number;
@@ -29,6 +31,8 @@ export default class Home extends React.Component<HomeProps, HomeState> {
     this.state = {
       validateFormOnMount:
         localStorage.getItem("validateFormOnMount") === "true",
+      readOnly: false,
+      disabled: false,
       myTextboxState: "aaaa",
       myCheckboxState: true,
       myNumberState: 100,
@@ -94,6 +98,32 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                         }}
                         checked={this.state.validateFormOnMount}
                       />
+                      <Checkbox
+                        id="disable"
+                        label="Disabled form"
+                        controlCol={12}
+                        onChange={(
+                          event: React.ChangeEvent<HTMLInputElement>
+                        ) => {
+                          this.setState({
+                            disabled: event.currentTarget.checked
+                          });
+                        }}
+                        checked={this.state.disabled}
+                      />
+                      <Checkbox
+                        id="readOnly"
+                        label="Read-only form"
+                        controlCol={12}
+                        onChange={(
+                          event: React.ChangeEvent<HTMLInputElement>
+                        ) => {
+                          this.setState({
+                            readOnly: event.currentTarget.checked
+                          });
+                        }}
+                        checked={this.state.readOnly}
+                      />
                     </Form>
                   </div>
                 </div>
@@ -111,6 +141,8 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                             label="My Textbox"
                             value={this.state.myTextboxState}
                             placeholder="Enter 'aaaa'"
+                            readOnly={this.state.readOnly}
+                            disabled={this.state.disabled}
                             required={true}
                             onChange={(
                               event: React.ChangeEvent<HTMLInputElement>
@@ -143,6 +175,8 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                             label="My Number"
                             value={this.state.myNumberState}
                             placeholder="Enter 100 or 1000"
+                            readOnly={this.state.readOnly}
+                            disabled={this.state.disabled}
                             required={true}
                             min={100}
                             max={200}
@@ -167,6 +201,8 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                             label="My Text Area"
                             value={this.state.myTextAreaState}
                             placeholder="Enter some text"
+                            readOnly={this.state.readOnly}
+                            disabled={this.state.disabled}
                             minLength={10}
                             maxLength={100}
                             required={true}
@@ -189,6 +225,8 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                               <Checkbox
                                 id="MyCheckbox"
                                 label="My Checkbox"
+                                readOnly={this.state.readOnly}
+                                disabled={this.state.disabled}
                                 controlCol={8}
                                 labelCol={4}
                                 required={true}
@@ -210,6 +248,8 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                                 id="yes"
                                 label="Yes"
                                 name="required"
+                                readOnly={this.state.readOnly}
+                                disabled={this.state.disabled}
                                 controlCol={8}
                                 labelCol={4}
                                 required={true}
@@ -234,6 +274,7 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                         <div className="col text-right">
                           <Button
                             type="submit"
+                            disabled={this.state.disabled}
                             className="primary"
                             buttonText="Submit!"
                             iconName="fa-check"

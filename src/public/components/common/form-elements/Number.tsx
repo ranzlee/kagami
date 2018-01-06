@@ -60,13 +60,17 @@ export class Number extends React.Component<NumberProps, NumberState> {
             ref={instance => {
               //*** every wrapped component needs this!
               this.instance = instance;
-            }} //*** end
+            }}
             className="form-control"
-            id={this.props.id}
+            id={
+              this.props.id //*** end
+            }
             name={this.props.name}
             type={this.props.type}
             value={this.props.value.toString()}
             placeholder={this.props.placeholder}
+            disabled={this.props.disabled}
+            readOnly={this.props.readOnly}
             onChange={this.onChange}
             required={required}
             step={step}

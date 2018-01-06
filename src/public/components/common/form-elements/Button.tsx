@@ -15,6 +15,7 @@ export interface ButtonProps {
     | "light"
     | "dark";
   buttonText: string;
+  disabled?: boolean;
   iconName?: string;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
@@ -45,11 +46,20 @@ export class Button extends React.Component<ButtonProps, ButtonState> {
       );
     let comp =
       this.props.type === "submit" ? (
-        <button type="submit" className={buttonClasses}>
+        <button
+          type="submit"
+          className={buttonClasses}
+          disabled={this.props.disabled}
+        >
           {innerElement}
         </button>
       ) : (
-        <button type="button" className={buttonClasses} onClick={this.onClick}>
+        <button
+          type="button"
+          className={buttonClasses}
+          disabled={this.props.disabled}
+          onClick={this.onClick}
+        >
           {innerElement}
         </button>
       );

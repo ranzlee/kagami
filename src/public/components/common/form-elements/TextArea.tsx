@@ -65,6 +65,8 @@ export class TextArea extends React.Component<TextAreaProps, TextAreaState> {
             }
             name={this.props.name}
             placeholder={this.props.placeholder}
+            disabled={this.props.disabled}
+            readOnly={this.props.readOnly}
             onChange={this.onChange}
             required={required}
             maxLength={maxLength}

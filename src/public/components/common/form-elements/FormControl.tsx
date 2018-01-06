@@ -15,6 +15,8 @@ export interface FormControlProps {
   id: string;
   name?: string;
   label: string;
+  readOnly?: boolean;
+  disabled?: boolean;
   labelCol?: number;
   controlCol?: number;
   labelColLg?: number;

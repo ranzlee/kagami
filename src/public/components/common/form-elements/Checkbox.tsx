@@ -20,6 +20,9 @@ export class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
   //*** end
 
   onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (this.props.readOnly) {
+      return;
+    }
     if (this.props.onChange) {
       this.props.onChange(event);
     }
@@ -59,6 +62,7 @@ export class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
               className="form-check-input custom-control-input"
               required={required}
               onChange={this.onChange}
+              disabled={this.props.disabled}
               checked={this.props.checked}
             />
             <label className="form-check-label" htmlFor={this.props.id}>
