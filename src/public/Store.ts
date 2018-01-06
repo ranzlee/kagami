@@ -2,6 +2,7 @@ import { applyMiddleware, createStore, compose } from "redux";
 import { createLogger } from 'redux-logger';
 import { createEpicMiddleware } from 'redux-observable';
 import { rootEpic } from './epics/RootEpic';
+import { perflogger } from 'redux-perf-middleware';
 
 
 
@@ -21,7 +22,7 @@ const composeEnhancers =
         }) : compose;
 
 const enhancer = composeEnhancers(
-    applyMiddleware(logger, epicMiddleware),
+    applyMiddleware(logger, epicMiddleware, perflogger),
     // other store enhancers if any
 );
 

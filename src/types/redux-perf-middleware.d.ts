@@ -1,0 +1,1 @@
+export function perflogger(store: any): any;
