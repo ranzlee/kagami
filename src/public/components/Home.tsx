@@ -104,7 +104,7 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                       validateOnMount={this.state.validateFormOnMount}
                     >
                       <div className="row">
-                        <div className="col-6">
+                        <div className="col-lg-6 col-sm-12">
                           <Textbox
                             id="MyTextbox"
                             type="text"
@@ -136,7 +136,7 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                             labelCol={4}
                           />
                         </div>
-                        <div className="col-6">
+                        <div className="col-lg-6 col-sm-12">
                           <Number
                             id="MyNumber"
                             type="number"
@@ -160,9 +160,8 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                           />
                         </div>
                       </div>
-
                       <div className="row">
-                        <div className="col-6">
+                        <div className="col-lg-6 col-sm-12">
                           <TextArea
                             id="MyTextbox"
                             label="My Text Area"
@@ -184,7 +183,7 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                             rows={5}
                           />
                         </div>
-                        <div className="col-6">
+                        <div className="col-lg-6 col-sm-12">
                           <div className="row">
                             <div className="col">
                               <Checkbox
