@@ -7,17 +7,9 @@ import { ConfigurationRecord } from '../../types/immutable/ConfigurationRecord';
 import { Map, Record } from "immutable";
 
 function getDefault(): Map<string, ConfigurationRecord> {
-    var config: Configuration = {
-        _id: "5a4e5fdd20006f00d17b5a5d",
-        name: "Test 2",
-        description: "Funny",
-        complex: undefined
-    };
 
-    var configRecord = new ConfigurationRecord(config);
-    var configs: Map<string, ConfigurationRecord> = Map({ "5a4e5fdd20006f00d17b5a5d": configRecord });
-
-    for (var i = 0; i < 10000; i++) {
+    const records: ConfigurationRecord[] = [];
+    for (var i = 0; i < 1000000; i++) {
         var indexAsString: string = i.toString();
         var newConfig: Configuration = {
             _id: indexAsString,
@@ -34,11 +26,20 @@ function getDefault(): Map<string, ConfigurationRecord> {
                 }
             }
         };
-        const newConfigRecord = new ConfigurationRecord(newConfig);
-        configs = configs.set(newConfig._id, newConfigRecord);
-    }
+        records.push(new ConfigurationRecord(newConfig));
 
-    return configs;
+    }
+    var configs: Map<string, ConfigurationRecord> = configs = Map(records.map((item, index) => ([item._id, item])));
+
+    var config: Configuration = {
+        _id: "5a4e5fdd20006f00d17b5a5d",
+        name: "Test 2",
+        description: "Funny",
+        complex: undefined
+    };
+
+    var configRecord = new ConfigurationRecord(config);
+    return configs.set(config._id, configRecord);
 }
 
 
