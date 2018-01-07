@@ -50,9 +50,9 @@ export class ConfigurationItem extends React.Component<IOwnProps & IConnectedSta
             placeholder="Configuration Name"
             label="Name: "
             value={configuration.name}
-            onChange={this.updateClickHandler} 
+            onChange={this.updateClickHandler}
             labelColSm={3}
-            controlColSm={9}/>
+            controlColSm={9} />
         </div>
         <div className="row">
           <div className="col-xs">
@@ -66,7 +66,7 @@ export class ConfigurationItem extends React.Component<IOwnProps & IConnectedSta
               name="description"
               value={configuration.description}
               onChange={this.updateClickHandler}
-              
+
             />
           </div>
           <div className="col-xs">
