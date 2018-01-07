@@ -3,10 +3,11 @@ import { AppStore } from './../../types/AppStore';
 import { Configuration, IOwnProps, IConnectedState, IConnectedDispatch } from './../../components/configuration/Configuration';
 import * as configElementActions from './../../actions/ConfigElementActions';
 import * as configActions from './../../actions/ConfigurationActions';
+import { ConfigurationRecord } from "./../../../shared/models/configuration/Configuration"
 
 export const mapStateToProps = (AppStore: AppStore, props: IOwnProps): IConnectedState => {
     return {
-        configuration: AppStore.domain.configurations.get(props.match.params.configId),
+        configuration: AppStore.domain.configurations.get(props.match.params.configId) || new ConfigurationRecord(),
         areConfigElementsLoaded: AppStore.domain.configElementMapping[props.match.params.configId] !== undefined
     }
 }

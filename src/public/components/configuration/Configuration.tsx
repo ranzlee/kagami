@@ -2,7 +2,7 @@ import * as React from "react";
 import { RouteComponentProps } from "react-router";
 import { Link } from "react-router-dom";
 import { Textbox } from "./../common/form-elements/Textbox"
-import { ConfigurationRecord } from "../../types/immutable/ConfigurationRecord";
+import { ConfigurationRecord } from "./../../../shared/models/configuration/Configuration";
 
 interface IRouteParams {
   configId: string;
