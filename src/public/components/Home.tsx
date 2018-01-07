@@ -197,7 +197,7 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                       <div className="row">
                         <div className="col-lg-6 col-sm-12">
                           <TextArea
-                            id="MyTextbox"
+                            id="MyTextArea"
                             label="My Text Area"
                             value={this.state.myTextAreaState}
                             placeholder="Enter some text"
