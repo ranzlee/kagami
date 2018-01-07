@@ -47,6 +47,7 @@ export class RadioOption extends React.Component<
               className="form-check-input custom-control-input"
               name={this.props.radio.props.name}
               disabled={this.props.radio.props.disabled}
+              readOnly={this.props.radio.props.readOnly}
               onChange={this.props.radio.onChange}
               required={this.props.radio.props.required}
               value={this.props.value}
