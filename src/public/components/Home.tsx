@@ -12,6 +12,7 @@ import { Toggle } from "./common/form-elements/Toggle";
 import { Checkbox } from "./common/form-elements/Checkbox";
 import { Numberbox } from "./common/form-elements/Numberbox";
 import { TextArea } from "./common/form-elements/TextArea";
+import { Select } from "./common/form-elements/Select";
 
 export interface HomeState {
   validateFormOnMount: boolean;
@@ -23,6 +24,7 @@ export interface HomeState {
   myTextAreaState: string;
   myToggleState: boolean;
   myRadioState: string;
+  mySelectState: string;
 }
 
 export interface HomeProps {}
@@ -41,7 +43,8 @@ export default class Home extends React.Component<HomeProps, HomeState> {
       myTextAreaState:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.",
       myToggleState: true,
-      myRadioState: "yes"
+      myRadioState: "yes",
+      mySelectState: "r"
     };
   }
 
@@ -283,6 +286,31 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                               />
                             </div>
                           </div>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-lg-6 col-sm-12">
+                          <Select
+                            id="MySelect"
+                            label="My Select"
+                            defaultOption="Pick a color, any color"
+                            controlCol={8}
+                            labelCol={4}
+                            required={true}
+                            invalidFeedback="Required"
+                            onChange={(
+                              event: React.ChangeEvent<HTMLSelectElement>
+                            ) => {
+                              this.setState({
+                                mySelectState: event.currentTarget.value
+                              });
+                            }}
+                            value={this.state.mySelectState}
+                          >
+                            <option value="r">Red</option>
+                            <option value="g">Green</option>
+                            <option value="b">Blue</option>
+                          </Select>
                         </div>
                       </div>
                       <div className="row">
