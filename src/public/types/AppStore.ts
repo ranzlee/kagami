@@ -3,6 +3,7 @@ import { Configuration, ConfigurationRecord } from './../../shared/models/config
 import { IConfigurationElement } from './../../shared/models/configuration/elements/IConfigurationElement';
 import { ConfigElementType } from './../../shared/models/enums/ConfigElementType';
 import { Record, Map } from 'immutable'
+import { Notification } from './../../shared/models/Notification';
 
 export type AppStore = {
     readonly domain: IDomain,
@@ -31,6 +32,11 @@ export interface IConfigElementByTypeLookup {
 
 export interface IAppState {
     currentConfiguration?: string;
+    notificationState: INotificationState
+}
+
+export interface INotificationState {
+    notifications: Array<Notification>;
 }
 
 export interface IUi {

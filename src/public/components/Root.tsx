@@ -4,6 +4,7 @@ import { createHashHistory } from "history";
 import * as Axios from "axios";
 import KagamiRoutes from "./../routes/KagamiRoutes";
 import * as UserService from "./../services/userService"
+import NotificationsList from "./../containers/NotificationsListContainer";
 
 const history = createHashHistory();
 
@@ -14,9 +15,12 @@ export default class Root extends React.Component {
 
   render() {
     return (
+      <>
+      <NotificationsList />
       <Router history={history}>
         <KagamiRoutes children={this.props.children} />
       </Router>
+      </>
     );
   }
 }

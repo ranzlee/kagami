@@ -32,6 +32,7 @@
     ]
   },
   "dependencies": {
+    "@types/guid": "^1.0.0",
     "@types/react-redux": "^5.0.14",
     "@types/redux": "^3.6.31",
     "@types/redux-logger": "^3.0.5",
@@ -56,6 +57,7 @@
     "express-validator": "^4.3.0",
     "fbgraph": "^1.4.1",
     "immutable": "^3.8.2",
+    "guid": "0.0.12",
     "linq": "^3.0.9",
     "lodash": "^4.17.4",
     "lusca": "^1.5.2",
