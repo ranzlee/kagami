@@ -3,10 +3,12 @@ import { Fields, IOwnProps, IConnectedState, IConnectedDispatch } from './../../
 import * as actions from './../../../actions/ConfigElementActions';
 import { ConfigElementType } from './../../../../shared/models/enums/ConfigElementType';
 import { AppStoreRecord } from '../../../types/AppStore';
+import { FieldRecord } from '../../../../shared/models/configuration/elements/Field';
+import { List } from 'immutable';
 
 export const mapStateToProps = (appStoreRecord: AppStoreRecord, props: IOwnProps): IConnectedState => {
     return {
-        fieldIds: appStoreRecord.domain.configElementMapping.get(props.match.params.configId).fields
+        fieldIds: appStoreRecord.domain.configElementMapping.get(props.match.params.configId).fields || List<string>()
     }
 }
 

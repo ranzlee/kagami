@@ -6,6 +6,7 @@ import { config } from 'rx';
 import { domainDefaults } from '../../types/immutable/DomainRecord';
 import { Map, List } from "immutable";
 import { ConfigElementsByTypeRecord } from '../../types/immutable/ConfigElementsByTypeRecord';
+import * as Enumerable from "linq";
 
 
 export function configElementMappingReducer(
@@ -16,18 +17,28 @@ export function configElementMappingReducer(
 
             const addMergeMap = Map<string, ConfigElementsByTypeRecord>(
                 [
-                    action.configId,
-                    new ConfigElementsByTypeRecord({ [action.configElementType]: List<string>(action.elementId) })
+                    [
+                        action.configId,
+                        new ConfigElementsByTypeRecord({ [action.configElementType]: List<string>(action.elementId) })
+                    ]
                 ]
             );
             return configElementMapping.mergeDeep(addMergeMap)
 
         case ActionTypeKeys.FETCH_CONFIG_ELEMENTS_SUCCESS:
+            debugger;
+
+            const configElementByTypeRecord = new ConfigElementsByTypeRecord(
+                {
+                    fields: List<string>(Enumerable.from(action.configElements).where(i => i.type === ConfigElementType.field).toArray()),
+                    expressions: List<string>(Enumerable.from(action.configElements).where(i => i.type === ConfigElementType.expression).toArray())
+                });
+
             const fetchMergeMap = Map<string, ConfigElementsByTypeRecord>(
-                action.configElements.map(configElement => {
-                    return [action.configId, new ConfigElementsByTypeRecord(configElement)]
-                })
-            )
+                [
+                    [action.configId, configElementByTypeRecord]
+                ]);
+
             return configElementMapping.mergeDeep(fetchMergeMap)
 
         default:
