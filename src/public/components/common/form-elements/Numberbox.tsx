@@ -2,9 +2,9 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as FormControl from "./FormControl";
 
-export interface NumberState extends FormControl.FormControlState {}
+export interface NumberboxState extends FormControl.FormControlState {}
 
-export interface NumberProps extends FormControl.FormControlProps {
+export interface NumberboxProps extends FormControl.FormControlProps {
   type: "range" | "number";
   required?: boolean;
   max?: number;
@@ -14,8 +14,8 @@ export interface NumberProps extends FormControl.FormControlProps {
   placeholder: string;
 }
 
-export class Number extends React.Component<NumberProps, NumberState> {
-  constructor(props: NumberProps) {
+export class Numberbox extends React.Component<NumberboxProps, NumberboxState> {
+  constructor(props: NumberboxProps) {
     super(props);
     this.state = { invalidFeedback: this.props.invalidFeedback };
   }
@@ -69,8 +69,20 @@ export class Number extends React.Component<NumberProps, NumberState> {
             type={this.props.type}
             value={this.props.value.toString()}
             placeholder={this.props.placeholder}
-            disabled={this.props.disabled}
-            readOnly={this.props.readOnly}
+            disabled={
+              this.props.disabled != null
+                ? this.props.disabled
+                : this.props.form && this.props.form.props.disabled != null
+                  ? this.props.form.props.disabled
+                  : false
+            }
+            readOnly={
+              this.props.readOnly != null
+                ? this.props.readOnly
+                : this.props.form && this.props.form.props.readOnly != null
+                  ? this.props.form.props.readOnly
+                  : false
+            }
             onChange={this.onChange}
             required={required}
             step={step}

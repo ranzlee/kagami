@@ -3,10 +3,11 @@ import * as ReactDOM from "react-dom";
 import * as FormControl from "./FormControl";
 import { Radio } from "./Radio";
 
-export interface RadioOptionState extends FormControl.FormControlState {}
+export interface RadioOptionState {}
 
-export interface RadioOptionProps extends FormControl.FormControlProps {
+export interface RadioOptionProps {
   value: string;
+  label: string;
   isLast?: boolean;
   radio?: Radio;
 }
@@ -46,8 +47,22 @@ export class RadioOption extends React.Component<
               type="radio"
               className="form-check-input custom-control-input"
               name={this.props.radio.props.name}
-              disabled={this.props.radio.props.disabled}
-              readOnly={this.props.radio.props.readOnly}
+              disabled={
+                this.props.radio.props.disabled != null
+                  ? this.props.radio.props.disabled
+                  : this.props.radio.props.form &&
+                    this.props.radio.props.form.props.disabled != null
+                    ? this.props.radio.props.form.props.disabled
+                    : false
+              }
+              readOnly={
+                this.props.radio.props.readOnly != null
+                  ? this.props.radio.props.readOnly
+                  : this.props.radio.props.form &&
+                    this.props.radio.props.form.props.readOnly != null
+                    ? this.props.radio.props.form.props.readOnly
+                    : false
+              }
               onChange={this.props.radio.onChange}
               required={this.props.radio.props.required}
               value={this.props.value}

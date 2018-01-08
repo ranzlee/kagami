@@ -62,8 +62,20 @@ export class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
               className="form-check-input custom-control-input"
               required={required}
               onChange={this.onChange}
-              disabled={this.props.disabled}
-              readOnly={this.props.readOnly}
+              disabled={
+                this.props.disabled != null
+                  ? this.props.disabled
+                  : this.props.form && this.props.form.props.disabled != null
+                    ? this.props.form.props.disabled
+                    : false
+              }
+              readOnly={
+                this.props.readOnly != null
+                  ? this.props.readOnly
+                  : this.props.form && this.props.form.props.readOnly != null
+                    ? this.props.form.props.readOnly
+                    : false
+              }
               checked={this.props.checked}
             />
             <label className="form-check-label" htmlFor={this.props.id}>

@@ -69,8 +69,20 @@ export class Textbox extends React.Component<TextboxProps, TextboxState> {
             type={this.props.type}
             value={this.props.value}
             placeholder={this.props.placeholder}
-            disabled={this.props.disabled}
-            readOnly={this.props.readOnly}
+            disabled={
+              this.props.disabled != null
+                ? this.props.disabled
+                : this.props.form && this.props.form.props.disabled != null
+                  ? this.props.form.props.disabled
+                  : false
+            }
+            readOnly={
+              this.props.readOnly != null
+                ? this.props.readOnly
+                : this.props.form && this.props.form.props.readOnly != null
+                  ? this.props.form.props.readOnly
+                  : false
+            }
             onChange={this.onChange}
             required={required}
             pattern={pattern}

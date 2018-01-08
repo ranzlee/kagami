@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import { Form } from "./Form";
 
 export interface ButtonState {}
 
@@ -17,6 +18,7 @@ export interface ButtonProps {
   buttonText: string;
   disabled?: boolean;
   iconName?: string;
+  form?: Form;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
@@ -49,7 +51,13 @@ export class Button extends React.Component<ButtonProps, ButtonState> {
         <button
           type="submit"
           className={buttonClasses}
-          disabled={this.props.disabled}
+          disabled={
+            this.props.disabled != null
+              ? this.props.disabled
+              : this.props.form && this.props.form.props.disabled != null
+                ? this.props.form.props.disabled
+                : false
+          }
         >
           {innerElement}
         </button>
@@ -57,7 +65,13 @@ export class Button extends React.Component<ButtonProps, ButtonState> {
         <button
           type="button"
           className={buttonClasses}
-          disabled={this.props.disabled}
+          disabled={
+            this.props.disabled != null
+              ? this.props.disabled
+              : this.props.form && this.props.form.props.disabled != null
+                ? this.props.form.props.disabled
+                : false
+          }
           onClick={this.onClick}
         >
           {innerElement}

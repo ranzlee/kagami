@@ -9,7 +9,7 @@ import { Radio } from "./common/form-elements/Radio";
 import { RadioOption } from "./common/form-elements/RadioOption";
 import { Textbox } from "./common/form-elements/Textbox";
 import { Checkbox } from "./common/form-elements/Checkbox";
-import { Number } from "./common/form-elements/Number";
+import { Numberbox } from "./common/form-elements/Numberbox";
 import { TextArea } from "./common/form-elements/TextArea";
 
 export interface HomeState {
@@ -132,6 +132,8 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                     <Form
                       onSubmit={this.handleSubmit}
                       validateOnMount={this.state.validateFormOnMount}
+                      readOnly={this.state.readOnly}
+                      disabled={this.state.disabled}
                     >
                       <div className="row">
                         <div className="col-lg-6 col-sm-12">
@@ -141,8 +143,6 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                             label="My Textbox"
                             value={this.state.myTextboxState}
                             placeholder="Enter 'aaaa'"
-                            readOnly={this.state.readOnly}
-                            disabled={this.state.disabled}
                             required={true}
                             onChange={(
                               event: React.ChangeEvent<HTMLInputElement>
@@ -169,14 +169,12 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                           />
                         </div>
                         <div className="col-lg-6 col-sm-12">
-                          <Number
+                          <Numberbox
                             id="MyNumber"
                             type="number"
                             label="My Number"
                             value={this.state.myNumberState}
                             placeholder="Enter 100 or 1000"
-                            readOnly={this.state.readOnly}
-                            disabled={this.state.disabled}
                             required={true}
                             min={100}
                             max={200}
@@ -201,8 +199,6 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                             label="My Text Area"
                             value={this.state.myTextAreaState}
                             placeholder="Enter some text"
-                            readOnly={this.state.readOnly}
-                            disabled={this.state.disabled}
                             minLength={10}
                             maxLength={100}
                             required={true}
@@ -225,8 +221,6 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                               <Checkbox
                                 id="MyCheckbox"
                                 label="My Checkbox"
-                                readOnly={this.state.readOnly}
-                                disabled={this.state.disabled}
                                 controlCol={8}
                                 labelCol={4}
                                 required={true}
@@ -248,8 +242,6 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                                 id="yes"
                                 label="Yes"
                                 name="required"
-                                readOnly={this.state.readOnly}
-                                disabled={this.state.disabled}
                                 controlCol={8}
                                 labelCol={4}
                                 required={true}
@@ -263,8 +255,8 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                                 }}
                                 value={this.state.myRadioState}
                               >
-                                <RadioOption id="Yes" label="Yes" value="yes" />
-                                <RadioOption id="No" label="No" value="no" />
+                                <RadioOption label="Yes" value="yes" />
+                                <RadioOption label="No" value="no" />
                               </Radio>
                             </div>
                           </div>
@@ -274,7 +266,6 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                         <div className="col text-right">
                           <Button
                             type="submit"
-                            disabled={this.state.disabled}
                             className="primary"
                             buttonText="Submit!"
                             iconName="fa-check"
