@@ -7,6 +7,10 @@ export class Notification {
 
     message: string;
     id: string;
+    headline: string;
+    showIcon: boolean;
+    timeoutInMs: number;
+
 
     public static createSuccess(message: string) {
         return new Notification("success", message);

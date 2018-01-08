@@ -15,7 +15,8 @@ export const mapDispatchToProps = (dispatch: Dispatch<actions.ConfigurationActio
     return {
         add: () => {
             dispatch(actions.addConfig());
-            dispatch(notificationActions.createNotification(Notification.createSuccess("Configuration Added!!!")))
+            let notf = Notification.createSuccess("Configuration Added!!!");
+            dispatch(notificationActions.createNotification(notf))
         },
         fetchConfigs: () => dispatch(actions.fetchConfigs())
     }
