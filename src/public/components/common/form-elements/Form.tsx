@@ -89,7 +89,11 @@ export class Form extends React.Component<FormProps, FormState> {
     });
   }
 
-  recursiveMap(children: any, fn: any, thisComponent: Form): any {
+  recursiveMap(
+    children: React.ReactNode,
+    fn: (child: React.ReactNode, thisComponent: Form) => React.ReactNode,
+    thisComponent: Form
+  ): React.ReactNode {
     return React.Children.map(children, child => {
       if (!React.isValidElement(child)) {
         return child;
@@ -107,22 +111,7 @@ export class Form extends React.Component<FormProps, FormState> {
     });
   }
 
-  isWrappedComponent(child: any): boolean {
-    if (
-      child.type === Button ||
-      child.type === Checkbox ||
-      child.type === Numberbox ||
-      child.type === Radio ||
-      child.type === TextArea ||
-      child.type === Textbox ||
-      child.type === Toggle
-    ) {
-      return true;
-    }
-    return false;
-  }
-
-  mapChild(child: React.ReactNode, thisComponent: Form) {
+  mapChild(child: React.ReactNode, thisComponent: Form): React.ReactNode {
     if (thisComponent.isWrappedComponent(child as any)) {
       if ((child as any).props.doCustomValidationOnMount == null) {
         return React.cloneElement(child as any, {
@@ -130,29 +119,29 @@ export class Form extends React.Component<FormProps, FormState> {
           form: thisComponent
         });
       } else {
-        return React.cloneElement(child as any, { form: thisComponent });
+        return React.cloneElement(child as any, {
+          form: thisComponent
+        });
       }
     } else {
       return child;
     }
   }
 
-  // renderChildren(children: React.ReactNode) {
-  //   return React.Children.map(children, child => {
-  //     if ((child as any).props.onChangeCustomValidation) {
-  //       if ((child as any).props.doCustomValidationOnMount == null) {
-  //         return React.cloneElement(child as any, {
-  //           doCustomValidationOnMount: self.props.validateOnMount,
-  //           form: this
-  //         });
-  //       } else {
-  //         return React.cloneElement(child as any, { form: this });
-  //       }
-  //     } else {
-  //       return child;
-  //     }
-  //   });
-  // }
+  isWrappedComponent(child: React.ReactNode): boolean {
+    if (
+      (child as any).type === Button ||
+      (child as any).type === Checkbox ||
+      (child as any).type === Numberbox ||
+      (child as any).type === Radio ||
+      (child as any).type === TextArea ||
+      (child as any).type === Textbox ||
+      (child as any).type === Toggle
+    ) {
+      return true;
+    }
+    return false;
+  }
 
   render() {
     return (
