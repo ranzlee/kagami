@@ -2,29 +2,28 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as FormControl from "./FormControl";
 
-export interface TextboxState extends FormControl.FormControlState {}
+export interface TextAreaState extends FormControl.FormControlState {}
 
-export interface TextboxProps extends FormControl.FormControlProps {
-  type: "email" | "password" | "search" | "tel" | "text" | "url";
-  pattern?: string;
+export interface TextAreaProps extends FormControl.FormControlProps {
   required?: boolean;
   maxLength?: number;
   minLength?: number;
   value: string;
   placeholder: string;
+  rows: number;
 }
 
-export class Textbox extends React.Component<TextboxProps, TextboxState> {
-  constructor(props: TextboxProps) {
+export class TextArea extends React.Component<TextAreaProps, TextAreaState> {
+  constructor(props: TextAreaProps) {
     super(props);
     this.state = { invalidFeedback: this.props.invalidFeedback };
   }
 
   //*** every wrapped component needs this!
-  instance: HTMLInputElement;
+  instance: HTMLTextAreaElement;
   //*** end
 
-  onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  onChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (this.props.onChange) {
       this.props.onChange(event);
     }
@@ -46,7 +45,6 @@ export class Textbox extends React.Component<TextboxProps, TextboxState> {
 
   render() {
     let required = this.props.required ? true : false;
-    let pattern = this.props.pattern ? this.props.pattern : null;
     let maxLength = this.props.maxLength ? this.props.maxLength : null;
     let minLength = this.props.minLength ? this.props.minLength : null;
     let extendedProps = FormControl.FormControlExtendedProperties(this.props);
@@ -56,7 +54,7 @@ export class Textbox extends React.Component<TextboxProps, TextboxState> {
           {this.props.label}
         </label>
         <div className={extendedProps.formControlClasses}>
-          <input
+          <textarea
             ref={instance => {
               //*** every wrapped component needs this!
               this.instance = instance;
@@ -66,8 +64,6 @@ export class Textbox extends React.Component<TextboxProps, TextboxState> {
               this.props.id //*** end
             }
             name={this.props.name}
-            type={this.props.type}
-            value={this.props.value}
             placeholder={this.props.placeholder}
             disabled={
               this.props.disabled != null
@@ -85,9 +81,10 @@ export class Textbox extends React.Component<TextboxProps, TextboxState> {
             }
             onChange={this.onChange}
             required={required}
-            pattern={pattern}
             maxLength={maxLength}
             minLength={minLength}
+            rows={this.props.rows}
+            value={this.props.value}
           />
           <div className="invalid-feedback">
             {this.state.invalidFeedback ? this.state.invalidFeedback : ""}

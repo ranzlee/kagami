@@ -1,55 +1,96 @@
 import { ActionTypeKeys } from './../../actions/ActionTypeKeys';
 import { configurationReducer } from "./ConfigurationReducer";
-import { AddConfigurationSuccessAction, FetchConfigsSuccessAction } from '../../actions/ConfigurationActions';
+import { AddConfigurationSuccessAction, FetchConfigsSuccessAction, UpdateConfigurationAction } from '../../actions/ConfigurationActions';
 import { OtherAction } from '../../actions/GeneralActions';
-import { IConfigLookup } from '../../types/AppStore';
-import { Configuration } from '../../../shared/models/configuration/Configuration';
+import { IConfigElementByTypeLookup } from '../../types/AppStore';
+import { IConfiguration, ConfigurationRecord } from '../../../shared/models/configuration/Configuration';
+import { Map } from "immutable";
 
-const testConfig : Configuration = {
-    _id: "13", 
-    name: "made-up", 
+var now = require("performance-now")
+
+const testConfig: IConfiguration = {
+    _id: "13",
+    name: "made-up",
     description: "made-up"
-} 
+}
 
-const testNewConfig : Configuration = {
-    _id: "13", 
-    name: "", 
+const testNewConfig: IConfiguration = {
+    _id: "13",
+    name: "",
     description: ""
-} 
+}
+
+const defaultEmptyState: Map<string, ConfigurationRecord> = Map<string, ConfigurationRecord>();
+
 
 describe("Configuration Reducer", () => {
     it("default case", () => {
-        const defaultState: IConfigLookup = {};
         const otherAction: OtherAction = { type: ActionTypeKeys.OTHER_ACTION };
 
         expect(configurationReducer(undefined, otherAction))
-            .toEqual(defaultState);
+            .toEqual(defaultEmptyState);
     });
 
     it("FETCH_CONFIGS_SUCCESS", () => {
-        const initialState: IConfigLookup = {};
-        const toState: IConfigLookup = {}
-        toState[testConfig._id] = testConfig;
-        const fetchConfigsSuccessAction : FetchConfigsSuccessAction = {
+        const toState: Map<string, ConfigurationRecord> = Map<string, ConfigurationRecord>(
+            [
+                [testConfig._id, new ConfigurationRecord(testConfig)]
+            ]
+        );
+
+        const fetchConfigsSuccessAction: FetchConfigsSuccessAction = {
             type: ActionTypeKeys.FETCH_CONFIGS_SUCCESS,
-            configLookup: toState
+            configs: [testConfig]
         };
-        
-        expect(configurationReducer(initialState, fetchConfigsSuccessAction))
+
+        expect(configurationReducer(defaultEmptyState, fetchConfigsSuccessAction))
             .toEqual(toState);
     });
 
     it("ADD_CONFIGURATION_SUCCESS", () => {
-        const initialState: IConfigLookup = {};
-        const toState : IConfigLookup = {};
-        toState[testNewConfig._id] = testNewConfig;
-        
-        const addConfigsSuccessAction : AddConfigurationSuccessAction = {
+        const toState: Map<string, ConfigurationRecord> = Map<string, ConfigurationRecord>(
+            [
+                [testNewConfig._id, new ConfigurationRecord(testNewConfig)]
+            ]
+        );
+
+        const addConfigsSuccessAction: AddConfigurationSuccessAction = {
             type: ActionTypeKeys.ADD_CONFIGURATION_SUCCESS,
-            id: "13"
+            id: testNewConfig._id
         };
-        
-        expect(configurationReducer(initialState, addConfigsSuccessAction))
+
+        expect(configurationReducer(defaultEmptyState, addConfigsSuccessAction))
             .toEqual(toState);
+    });
+
+    it("UPDATE PERFORMANCE TEST", () => {
+
+        var mapArray = [];
+        const oneMillion = 1000000;
+        for (var i = 0; i < oneMillion; i++) {
+            var indexAsString: string = i.toString();
+            var newConfig: IConfiguration = {
+                _id: indexAsString,
+                name: 'This is a test name',
+                description: 'This is a test description',
+            };
+            mapArray.push([newConfig._id, new ConfigurationRecord(newConfig)]);
+        }
+        const map = Map<string, ConfigurationRecord>(mapArray);
+
+        const updateAction: UpdateConfigurationAction = {
+            type: ActionTypeKeys.UPDATE_CONFIGURATION,
+            configId: "13",
+            propertyName: "name",
+            newValue: "Funky Monkey App",
+            oldValue: "Funky Mongoose App"
+        };
+
+        const start = now()
+        const whoCares = configurationReducer(map, updateAction);
+        const end = now()
+        const ms = end - start;
+        console.log(`Update took ${ms.toFixed(3)} milliseconds.`);
+        expect(ms).toBeLessThan(1);
     });
 });

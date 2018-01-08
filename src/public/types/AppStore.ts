@@ -1,6 +1,8 @@
 import { Tag } from './../../shared/models/configuration/Tag';
-import { Configuration } from '../../shared/models/configuration/Configuration';
-import { IConfigurationElement } from '../../shared/models/configuration/elements/IConfigurationElement';
+import { Configuration, ConfigurationRecord } from './../../shared/models/configuration/Configuration';
+import { IConfigurationElement } from './../../shared/models/configuration/elements/IConfigurationElement';
+import { ConfigElementType } from './../../shared/models/enums/ConfigElementType';
+import { Record, Map } from 'immutable'
 import { Notification } from './../../shared/models/Notification';
 
 export type AppStore = {
@@ -10,22 +12,26 @@ export type AppStore = {
 }
 
 export interface IDomain {
-    configurations: IConfigLookup;
+    configurations: Map<string, ConfigurationRecord>;
     configElements: IConfigElementLookup;
+    configElementMapping: IConfigElementMapping
     tags: Tag[];
 }
 
-export interface IConfigLookup {
-    [key: string]: Configuration
+export interface IConfigElementLookup {
+    [key: string] : IConfigurationElement;
 }
 
-export interface IConfigElementLookup {
-    [key: string]: IConfigurationElement;
+export interface IConfigElementMapping {
+    [key: string] : IConfigElementByTypeLookup; // Key is configuration id
+}
+
+export interface IConfigElementByTypeLookup {
+    [key: string] : string[] // Key - ConfigElementType and values are all config element ids of that type
 }
 
 export interface IAppState {
     currentConfiguration?: string;
-    fetchedConfigs: string[];
     notificationState: INotificationState
 }
 

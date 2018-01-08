@@ -2,20 +2,20 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as FormControl from "./FormControl";
 
-export interface TextboxState extends FormControl.FormControlState {}
+export interface NumberboxState extends FormControl.FormControlState {}
 
-export interface TextboxProps extends FormControl.FormControlProps {
-  type: "email" | "password" | "search" | "tel" | "text" | "url";
-  pattern?: string;
+export interface NumberboxProps extends FormControl.FormControlProps {
+  type: "range" | "number";
   required?: boolean;
-  maxLength?: number;
-  minLength?: number;
-  value: string;
+  max?: number;
+  min?: number;
+  step?: number;
+  value: number;
   placeholder: string;
 }
 
-export class Textbox extends React.Component<TextboxProps, TextboxState> {
-  constructor(props: TextboxProps) {
+export class Numberbox extends React.Component<NumberboxProps, NumberboxState> {
+  constructor(props: NumberboxProps) {
     super(props);
     this.state = { invalidFeedback: this.props.invalidFeedback };
   }
@@ -46,9 +46,9 @@ export class Textbox extends React.Component<TextboxProps, TextboxState> {
 
   render() {
     let required = this.props.required ? true : false;
-    let pattern = this.props.pattern ? this.props.pattern : null;
-    let maxLength = this.props.maxLength ? this.props.maxLength : null;
-    let minLength = this.props.minLength ? this.props.minLength : null;
+    let step = this.props.step ? this.props.step : null;
+    let max = this.props.max ? this.props.max : null;
+    let min = this.props.min ? this.props.min : null;
     let extendedProps = FormControl.FormControlExtendedProperties(this.props);
     return (
       <div className="row form-group">
@@ -67,7 +67,7 @@ export class Textbox extends React.Component<TextboxProps, TextboxState> {
             }
             name={this.props.name}
             type={this.props.type}
-            value={this.props.value}
+            value={this.props.value.toString()}
             placeholder={this.props.placeholder}
             disabled={
               this.props.disabled != null
@@ -85,9 +85,9 @@ export class Textbox extends React.Component<TextboxProps, TextboxState> {
             }
             onChange={this.onChange}
             required={required}
-            pattern={pattern}
-            maxLength={maxLength}
-            minLength={minLength}
+            step={step}
+            max={max}
+            min={min}
           />
           <div className="invalid-feedback">
             {this.state.invalidFeedback ? this.state.invalidFeedback : ""}

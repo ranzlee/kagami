@@ -91,8 +91,7 @@ export class LocalLogin extends React.Component<
             label="Remember me"
             controlCol={4}
             labelCol={4}
-            //required={true}
-            //invalidFeedback="Test required"
+            checked={false}
           >
             <AnchorLink
               linkText="Forgot your password?"

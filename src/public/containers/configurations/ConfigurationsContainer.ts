@@ -7,7 +7,7 @@ import { Notification } from './../../../shared/models/Notification';
 
 export const mapStateToProps = (AppStore: AppStore, props: IOwnProps): IConnectedState => {
     return {
-        configurationIds: Object.keys(AppStore.domain.configurations)
+        configurationIds: AppStore.domain.configurations.keySeq().toArray()
     }
 }
 

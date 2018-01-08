@@ -1,5 +1,5 @@
-import { Configuration } from './../../shared/models/configuration/Configuration';
-import { IDomain, IConfigLookup } from './../types/AppStore';
+import { Configuration, IConfiguration } from './../../shared/models/configuration/Configuration';
+import { IDomain } from './../types/AppStore';
 import { ActionTypeKeys } from "./ActionTypeKeys";
 import { fetchConfiguration } from "./../apis/ConfigApi"
 import { Action, ActionCreator, Dispatch } from 'redux';
@@ -24,7 +24,7 @@ export interface FetchConfigsAction {
 }
 export interface FetchConfigsSuccessAction {
     type: ActionTypeKeys.FETCH_CONFIGS_SUCCESS;
-    configLookup: IConfigLookup;
+    configs: IConfiguration[];
 }
 export interface FetchConfigsErrorAction {
     type: ActionTypeKeys.FETCH_CONFIGS_ERROR;
@@ -58,25 +58,25 @@ export interface UpdateConfigurationAction {
 export const fetchConfigs = (): FetchConfigsAction => ({
     type: ActionTypeKeys.FETCH_CONFIGS,
 });
-export const fetchConfigsSuccess = (configLookup: IConfigLookup) : FetchConfigsSuccessAction => ({
-   type: ActionTypeKeys.FETCH_CONFIGS_SUCCESS,
-   configLookup 
+export const fetchConfigsSuccess = (configs: Configuration[]): FetchConfigsSuccessAction => ({
+    type: ActionTypeKeys.FETCH_CONFIGS_SUCCESS,
+    configs
 });
-export const fetchConfigsError = (error: any) : FetchConfigsErrorAction => ({
-   type: ActionTypeKeys.FETCH_CONFIGS_ERROR,
-   payload: error
+export const fetchConfigsError = (error: any): FetchConfigsErrorAction => ({
+    type: ActionTypeKeys.FETCH_CONFIGS_ERROR,
+    payload: error
 });
 
 export const addConfig = (): AddConfigurationAction => ({
     type: ActionTypeKeys.ADD_CONFIGURATION,
 });
-export const addConfigSuccess = (id: string) : AddConfigurationSuccessAction => ({
-   type: ActionTypeKeys.ADD_CONFIGURATION_SUCCESS,
-   id 
+export const addConfigSuccess = (id: string): AddConfigurationSuccessAction => ({
+    type: ActionTypeKeys.ADD_CONFIGURATION_SUCCESS,
+    id
 });
-export const addConfigError = (error: any) : AddConfigurationErrorAction => ({
-   type: ActionTypeKeys.ADD_CONFIGURATION_ERROR,
-   payload: error
+export const addConfigError = (error: any): AddConfigurationErrorAction => ({
+    type: ActionTypeKeys.ADD_CONFIGURATION_ERROR,
+    payload: error
 });
 
 
