@@ -48,6 +48,9 @@ export let OnChangeCustomValidation = (
   component: React.Component<FormControlProps, FormControlState>,
   element: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
 ): CustomValidationResult => {
+  if (!component.props.onChangeCustomValidation) {
+    return { isValid: true, validationMessage: "" };
+  }
   let validationResult = component.props.onChangeCustomValidation(element);
   element.setCustomValidity("");
   component.setState(
