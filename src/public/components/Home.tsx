@@ -263,26 +263,26 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                               </Radio>
                             </div>
                           </div>
-                          {/* <div className="row">
-                          <div className="col">
-                            <Toggle
-                              id="MyToggle"
-                              label="My Toggle"
-                              controlCol={8}
-                              labelCol={4}
-                              required={true}
-                              invalidFeedback="Required"
-                              onChange={(
-                                event: React.ChangeEvent<HTMLInputElement>
-                              ) => {
-                                this.setState({
-                                  myToggleState: event.currentTarget.checked
-                                });
-                              }}
-                              checked={this.state.myToggleState}
-                            />
+                          <div className="row">
+                            <div className="col">
+                              <Toggle
+                                id="MyToggle"
+                                label="My Toggle"
+                                controlCol={8}
+                                labelCol={4}
+                                required={true}
+                                invalidFeedback="Required"
+                                onChange={(
+                                  event: React.ChangeEvent<HTMLInputElement>
+                                ) => {
+                                  this.setState({
+                                    myToggleState: event.currentTarget.checked
+                                  });
+                                }}
+                                checked={this.state.myToggleState}
+                              />
+                            </div>
                           </div>
-                        </div>*/}
                         </div>
                       </div>
                       <div className="row">

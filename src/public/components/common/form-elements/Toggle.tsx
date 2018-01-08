@@ -36,6 +36,7 @@ export class Toggle extends React.Component<ToggleProps, ToggleState> {
     if (this.props.form) {
       this.props.form.registerFormCustomValidations(this, this.instance);
     }
+    ($("[name='checkbox']") as any).bootstrapSwitch();
   }
 
   render() {
@@ -45,22 +46,20 @@ export class Toggle extends React.Component<ToggleProps, ToggleState> {
       <div className="row form-group">
         <div className={extendedProps.labelClasses}>{this.props.label}</div>
         <div className={extendedProps.formControlClasses}>
-          <div className="bootstrap-switch">
-            <input
-              ref={instance => {
-                this.instance = instance;
-              }}
-              id={this.props.id}
-              type="checkbox"
-              name="checkbox"
-              className="bootstrap-switch"
-              required={required}
-              onChange={this.onChange}
-              checked={this.props.checked}
-            />
-            <div className="invalid-feedback">
-              {this.state.invalidFeedback ? this.state.invalidFeedback : ""}
-            </div>
+          <input
+            ref={instance => {
+              this.instance = instance;
+            }}
+            id={this.props.id}
+            type="checkbox"
+            name="checkbox"
+            className="bootstrap-switch"
+            required={required}
+            onChange={this.onChange}
+            checked={this.props.checked}
+          />
+          <div className="invalid-feedback">
+            {this.state.invalidFeedback ? this.state.invalidFeedback : ""}
           </div>
         </div>
       </div>
