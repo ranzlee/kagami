@@ -7,10 +7,14 @@ export interface IConfiguration {
     [key: string]: any;
 }
 
-export const configurationDefaults : IConfiguration = {
+const configurationDefaults : IConfiguration = {
     _id: "",
     name: "",
     description: "",
+}
+
+export function getConfigurationDefaults(): IConfiguration {
+    return {...configurationDefaults}; // Make copy to be sure nobody changes default values
 }
 
 export class Configuration  {

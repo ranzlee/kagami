@@ -1,5 +1,4 @@
 export enum ConfigElementType {
-    configuration = "Configuration",
-    expression = "Expression",
-    field = "Field"
+    expression = "expression",
+    field = "field"
 }
