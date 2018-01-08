@@ -1,4 +1,4 @@
-import { Configuration } from './../../shared/models/configuration/Configuration';
+import { Configuration, IConfiguration } from './../../shared/models/configuration/Configuration';
 import { IDomain } from './../types/AppStore';
 import { ActionTypeKeys } from "./ActionTypeKeys";
 import { fetchConfiguration } from "./../apis/ConfigApi"
@@ -24,7 +24,7 @@ export interface FetchConfigsAction {
 }
 export interface FetchConfigsSuccessAction {
     type: ActionTypeKeys.FETCH_CONFIGS_SUCCESS;
-    configs: Configuration[];
+    configs: IConfiguration[];
 }
 export interface FetchConfigsErrorAction {
     type: ActionTypeKeys.FETCH_CONFIGS_ERROR;

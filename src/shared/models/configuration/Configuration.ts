@@ -1,25 +1,48 @@
 import { Record } from 'immutable';
 
-export class Configuration {
+export interface IConfiguration {
     _id: string;
     name: string;
     description: string;
     [key: string]: any;
 }
 
-export const configurationDefaults : Configuration = {
+export const configurationDefaults : IConfiguration = {
     _id: "",
     name: "",
     description: "",
 }
 
-export class ConfigurationRecord extends Record(configurationDefaults) implements Configuration {
-    constructor(params?: Configuration) {
+export class Configuration  {
+    _id: string;
+    name: string;
+    description: string;
+    [key: string]: any;
+
+    public validate() : string[] {
+        return validate(this);
+    }
+}
+
+function validate(configuration: IConfiguration) : string[] {
+    var msgs : string[] = [];
+    if (!configuration.name) {
+        msgs.push("A Name must be provided for the Configuration");
+    }
+    return msgs;
+}
+
+export class ConfigurationRecord extends Record(configurationDefaults) implements IConfiguration {
+    constructor(params?: IConfiguration) {
         params ? super(params) : super();
     }
 
     _id: string;
     name: string;
     description: string;
-    [key: string]: any
+    [key: string]: any;
+
+    public validate() : string[] {
+        return validate(this);
+    }
 }
