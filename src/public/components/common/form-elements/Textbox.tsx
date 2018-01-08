@@ -93,7 +93,6 @@ export class Textbox extends React.Component<TextboxProps, TextboxState> {
             {this.state.invalidFeedback ? this.state.invalidFeedback : ""}
           </div>
         </div>
-        {extendedProps.children}
       </div>
     );
   }

@@ -93,7 +93,6 @@ export class Numberbox extends React.Component<NumberboxProps, NumberboxState> {
             {this.state.invalidFeedback ? this.state.invalidFeedback : ""}
           </div>
         </div>
-        {extendedProps.children}
       </div>
     );
   }

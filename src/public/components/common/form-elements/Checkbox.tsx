@@ -94,7 +94,6 @@ export class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
             </div>
           </div>
         </div>
-        {extendedProps.children}
       </div>
     );
   }

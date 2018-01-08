@@ -92,15 +92,15 @@ export class LocalLogin extends React.Component<
             controlCol={4}
             labelCol={4}
             checked={false}
-          >
-            <AnchorLink
-              linkText="Forgot your password?"
-              onClick={this.handleForgotPassword}
-            />
-          </Checkbox>
+          />
           <div className="row">
-            <div className="col-4" />
-            <div className="col-8 text-right">
+            <div className="col-6">
+              <AnchorLink
+                linkText="Forgot your password?"
+                onClick={this.handleForgotPassword}
+              />
+            </div>
+            <div className="col-6 text-right">
               <Button
                 type="submit"
                 className="primary"

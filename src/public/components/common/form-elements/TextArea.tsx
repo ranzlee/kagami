@@ -90,7 +90,6 @@ export class TextArea extends React.Component<TextAreaProps, TextAreaState> {
             {this.state.invalidFeedback ? this.state.invalidFeedback : ""}
           </div>
         </div>
-        {extendedProps.children}
       </div>
     );
   }
