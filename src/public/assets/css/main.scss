@@ -17,3 +17,10 @@
 body {
   margin-top: 80px;
 }
+
+.bootstrap-switch.bootstrap-switch-on .bootstrap-switch-label {
+  background: $primary-color;
+}
+.bootstrap-switch.bootstrap-switch-on:hover .bootstrap-switch-label {
+  background: $primary-color;
+}
