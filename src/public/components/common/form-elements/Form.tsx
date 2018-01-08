@@ -8,6 +8,7 @@ import { Radio } from "./Radio";
 import { TextArea } from "./TextArea";
 import { Textbox } from "./Textbox";
 import { Toggle } from "./Toggle";
+import { Select } from "./Select";
 
 export interface FormState {
   formWasValidated: string;
@@ -136,7 +137,8 @@ export class Form extends React.Component<FormProps, FormState> {
       (child as any).type === Radio ||
       (child as any).type === TextArea ||
       (child as any).type === Textbox ||
-      (child as any).type === Toggle
+      (child as any).type === Toggle ||
+      (child as any).type === Select
     ) {
       return true;
     }

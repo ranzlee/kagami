@@ -19,6 +19,17 @@ export class Select extends React.Component<SelectProps, SelectState> {
   instance: HTMLSelectElement;
 
   onChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    if (this.props.readOnly != null && this.props.readOnly) {
+      return;
+    } else {
+      if (
+        this.props.form != null &&
+        this.props.form.props.readOnly != null &&
+        this.props.form.props.readOnly
+      ) {
+        return;
+      }
+    }
     if (this.props.onChange) {
       this.props.onChange(event);
     }
