@@ -36,7 +36,7 @@ export class Toggle extends React.Component<ToggleProps, ToggleState> {
     if (this.props.form) {
       this.props.form.registerFormCustomValidations(this, this.instance);
     }
-    ($("[name='checkbox']") as any).bootstrapSwitch();
+    ($("[name='checkbox']") as any).bootstrapSwitch("size", "small");
   }
 
   render() {
