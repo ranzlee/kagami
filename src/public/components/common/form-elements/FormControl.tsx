@@ -49,13 +49,45 @@ export let OnChangeCustomValidation = (
   component: React.Component<FormControlProps, FormControlState>,
   element: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
 ): CustomValidationResult => {
+  //if component doesn't have a handler for custom validation, return valid
   if (!component.props.onChangeCustomValidation) {
     return { isValid: true, validationMessage: "" };
   }
+  //if component is read-only, return valid - this is to match the HTML 5 constraint validation specification in that
+  //constraint validation is ignored for readonly form elements
+  if (component.props.readOnly != null) {
+    if (component.props.readOnly) {
+      return { isValid: true, validationMessage: "" };
+    }
+  } else if (
+    component.props.form &&
+    component.props.form.props.readOnly != null
+  ) {
+    if (component.props.form.props.readOnly) {
+      return { isValid: true, validationMessage: "" };
+    }
+  }
+  //if component is disabled, return valid - this is to match the HTML 5 constraint validation specification in that
+  //constraint validation is ignored for disabled form elements
+  if (component.props.disabled != null) {
+    if (component.props.disabled) {
+      return { isValid: true, validationMessage: "" };
+    }
+  } else if (
+    component.props.form &&
+    component.props.form.props.disabled != null
+  ) {
+    if (component.props.form.props.disabled) {
+      return { isValid: true, validationMessage: "" };
+    }
+  }
+  //call custom validation delegate
   let validationResult = component.props.onChangeCustomValidation(element);
   element.setCustomValidity("");
   component.setState(
-    { invalidFeedback: component.props.invalidFeedback },
+    {
+      invalidFeedback: component.props.invalidFeedback
+    },
     () => {
       if (!element.validity.valid) {
         return;
