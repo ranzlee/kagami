@@ -2,7 +2,6 @@ import { ActionTypeKeys } from './../../actions/ActionTypeKeys';
 import { configurationReducer } from "./ConfigurationReducer";
 import { AddConfigurationSuccessAction, FetchConfigsSuccessAction, UpdateConfigurationAction } from '../../actions/ConfigurationActions';
 import { OtherAction } from '../../actions/GeneralActions';
-import { IConfigElementByTypeLookup } from '../../types/AppStore';
 import { IConfiguration, ConfigurationRecord } from '../../../shared/models/configuration/Configuration';
 import { Map } from "immutable";
 

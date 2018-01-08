@@ -1,11 +1,11 @@
 import { connect, Dispatch } from 'react-redux';
-import { AppStore } from './../../types/AppStore';
 import { Configurations, IOwnProps, IConnectedState, IConnectedDispatch } from './../../components/configurations/Configurations';
 import * as actions from './../../actions/ConfigurationActions';
+import { AppStoreRecord } from './../../types/AppStore';
 
-export const mapStateToProps = (AppStore: AppStore, props: IOwnProps): IConnectedState => {
+export const mapStateToProps = (appStoreRecord: AppStoreRecord, props: IOwnProps): IConnectedState => {
     return {
-        configurationIds: AppStore.domain.configurations.keySeq().toArray()
+        configurationIds: appStoreRecord.domain.configurations.keySeq().toArray()
     }
 }
 

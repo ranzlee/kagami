@@ -2,6 +2,7 @@ import * as React from "react";
 import Config from "./../../../containers/configuration/fields/FieldsContainer";
 import Field from "./../../../containers/configuration/field/FieldContainer"
 import { RouteComponentProps } from "react-router";
+import { List } from "immutable";
 
 interface IRouteParams {
   configId: string;
@@ -10,7 +11,7 @@ interface IRouteParams {
 export interface IOwnProps extends RouteComponentProps<IRouteParams> { }
 
 export interface IConnectedState {
-  fieldIds: string[];
+  fieldIds: List<string>;
 }
 
 export interface IConnectedDispatch {
@@ -25,8 +26,8 @@ export class Fields extends React.Component<IOwnProps & IConnectedState & IConne
 
     var returnElements: JSX.Element[] = [];
 
-    for (var i = 0; i < fieldIds.length; i++) {
-      returnElements.push(<Field fieldId={fieldIds[i]} key={fieldIds[i]} />);
+    for (var i = 0; i < fieldIds.size; i++) {
+      returnElements.push(<Field fieldId={fieldIds.get(i)} key={fieldIds.get(i)} />);
     }
     return returnElements;
   }

@@ -1,5 +1,5 @@
 import { ConfigurationItem } from './../../components/configurations/ConfigurationItem';
-import { Configuration, ConfigurationRecord, configurationDefaults } from './../../../shared/models/configuration/Configuration';
+import { Configuration, ConfigurationRecord, getConfigurationDefaults } from './../../../shared/models/configuration/Configuration';
 import { ConfigurationActionTypes } from './../../actions/ConfigurationActions';
 import { ActionTypeKeys } from '../../actions/ActionTypeKeys';
 import { OtherAction } from '../../actions/GeneralActions';
@@ -17,7 +17,7 @@ export function configurationReducer(
             return configurations.setIn([action.configId, action.propertyName], action.newValue);
 
         case ActionTypeKeys.ADD_CONFIGURATION_SUCCESS:
-            var newConfig = configurationDefaults;
+            var newConfig = getConfigurationDefaults();
             newConfig._id = action.id;
             return configurations.set(action.id, new ConfigurationRecord(newConfig))
 

@@ -1,12 +1,12 @@
 import { connect, Dispatch } from 'react-redux';
-import { AppStore } from './../.././../types/AppStore';
 import { Fields, IOwnProps, IConnectedState, IConnectedDispatch } from './../../../components/configuration/fields/Fields';
 import * as actions from './../../../actions/ConfigElementActions';
 import { ConfigElementType } from './../../../../shared/models/enums/ConfigElementType';
+import { AppStoreRecord } from '../../../types/AppStore';
 
-export const mapStateToProps = (AppStore: AppStore, props: IOwnProps): IConnectedState => {
+export const mapStateToProps = (appStoreRecord: AppStoreRecord, props: IOwnProps): IConnectedState => {
     return {
-        fieldIds: AppStore.domain.configElementMapping[props.match.params.configId][ConfigElementType.field]
+        fieldIds: appStoreRecord.domain.configElementMapping.get(props.match.params.configId).fields
     }
 }
 

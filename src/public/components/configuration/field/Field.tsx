@@ -1,12 +1,12 @@
 import * as React from "react";
-import { Field as FieldModel } from "./../../../../shared/models/configuration/elements/Field";
+import { FieldRecord } from "./../../../../shared/models/configuration/elements/Field";
 
 export interface IOwnProps {
   fieldId: string;
 }
 
 export interface IConnectedState {
-  field: FieldModel;
+  field: FieldRecord;
 }
 
 export interface IConnectedDispatch {
