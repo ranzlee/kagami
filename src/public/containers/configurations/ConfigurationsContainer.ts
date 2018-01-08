@@ -2,6 +2,8 @@ import { connect, Dispatch } from 'react-redux';
 import { AppStore } from './../../types/AppStore';
 import { Configurations, IOwnProps, IConnectedState, IConnectedDispatch } from './../../components/configurations/Configurations';
 import * as actions from './../../actions/ConfigurationActions';
+import * as notificationActions from './../../actions/NotificationActions';
+import { Notification } from './../../../shared/models/Notification';
 
 export const mapStateToProps = (AppStore: AppStore, props: IOwnProps): IConnectedState => {
     return {
@@ -11,7 +13,10 @@ export const mapStateToProps = (AppStore: AppStore, props: IOwnProps): IConnecte
 
 export const mapDispatchToProps = (dispatch: Dispatch<actions.ConfigurationActionTypes>): IConnectedDispatch => {
     return {
-        add: () => dispatch(actions.addConfig()),
+        add: () => {
+            dispatch(actions.addConfig());
+            dispatch(notificationActions.createNotification(Notification.createSuccess("Configuration Added!!!")))
+        },
         fetchConfigs: () => dispatch(actions.fetchConfigs())
     }
 }

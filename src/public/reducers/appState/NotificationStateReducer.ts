@@ -12,15 +12,14 @@ const defaultState: INotificationState = {
 export function notificationStateReducer(notificationState: INotificationState = defaultState, action: NotificationActionTypes) {
     switch (action.type) {
         case ActionTypeKeys.CREATE_NOTIFICATION:
-            if (!action || !action.payload)
+            if (!action || !action.notification)
                 return notificationState;
 
-            return { ...notificationState, notifications: [...notificationState.notifications, action.payload] }
+            return { ...notificationState, notifications: [...notificationState.notifications, action.notification] }
         case ActionTypeKeys.REMOVE_NOTIFICATION:
-            if (!action || !action.payload)
+            if (!action || !action.notification)
                 return notificationState;
-
-            return { ...notificationState, notifications: notificationState.notifications.filter(n => n.id == action.payload.id) }
+            return { ...notificationState, notifications: notificationState.notifications.filter(n => n.id != action.notification.id) }
         default:
             return notificationState;
     }
