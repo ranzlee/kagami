@@ -7,6 +7,7 @@ export interface SelectState extends FormControl.FormControlState {}
 export interface SelectProps extends FormControl.FormControlProps {
   value: string;
   required?: boolean;
+  defaultOption?: string;
 }
 
 export class Select extends React.Component<SelectProps, SelectState> {
@@ -38,6 +39,10 @@ export class Select extends React.Component<SelectProps, SelectState> {
   render() {
     let extendedProps = FormControl.FormControlExtendedProperties(this.props);
     let required = this.props.required ? true : false;
+    let defaultOption =
+      this.props.defaultOption != null && this.props.defaultOption !== "" ? (
+        <option value="">{this.props.defaultOption}</option>
+      ) : null;
     return (
       <div className="row form-group">
         <label className={extendedProps.labelClasses} htmlFor={this.props.id}>
@@ -46,7 +51,6 @@ export class Select extends React.Component<SelectProps, SelectState> {
         <div className={extendedProps.formControlClasses}>
           <select
             ref={instance => {
-              //*** every wrapped component needs this!
               this.instance = instance;
             }}
             className="form-control"
@@ -65,6 +69,7 @@ export class Select extends React.Component<SelectProps, SelectState> {
             onChange={this.onChange}
             required={required}
           >
+            {defaultOption}
             {this.props.children}
           </select>
           <div className="invalid-feedback">

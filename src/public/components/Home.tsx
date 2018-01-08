@@ -24,6 +24,7 @@ export interface HomeState {
   myTextAreaState: string;
   myToggleState: boolean;
   myRadioState: string;
+  mySelectState: string;
 }
 
 export interface HomeProps {}
@@ -42,7 +43,8 @@ export default class Home extends React.Component<HomeProps, HomeState> {
       myTextAreaState:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.",
       myToggleState: true,
-      myRadioState: "yes"
+      myRadioState: "yes",
+      mySelectState: "r"
     };
   }
 
@@ -291,9 +293,19 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                           <Select
                             id="MySelect"
                             label="My Select"
-                            value=""
+                            defaultOption="Pick a color, any color"
                             controlCol={8}
                             labelCol={4}
+                            required={true}
+                            invalidFeedback="Required"
+                            onChange={(
+                              event: React.ChangeEvent<HTMLSelectElement>
+                            ) => {
+                              this.setState({
+                                mySelectState: event.currentTarget.value
+                              });
+                            }}
+                            value={this.state.mySelectState}
                           >
                             <option value="r">Red</option>
                             <option value="g">Green</option>
