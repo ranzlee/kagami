@@ -54,6 +54,10 @@ export class Toggle extends React.Component<ToggleProps, ToggleState> {
       "disabled",
       this.props.disabled || this.props.form.props.disabled
     );
+    ($("[name='checkbox']") as any).bootstrapSwitch(
+      "readonly",
+      this.props.readOnly || this.props.form.props.readOnly
+    );
     let extendedProps = FormControl.FormControlExtendedProperties(this.props);
     let required = this.props.required ? true : false;
     return (
