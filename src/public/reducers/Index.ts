@@ -3,6 +3,7 @@ import { configElementReducer } from './domain/ConfigElementReducer';
 
 import { appStateReducer } from "./appState/AppStateReducer";
 import { configurationReducer } from "./../reducers/domain/ConfigurationReducer";
+import { notificationStateReducer } from "./../reducers/appState/NotificationStateReducer";
 
 var domainReducer = combineReducers(
     {
@@ -10,8 +11,15 @@ var domainReducer = combineReducers(
         configElements: configElementReducer
     });
 
-export default combineReducers(
+
+const appStateCombinedReducer = combineReducers(
     {
         appState: appStateReducer,
+        notificationState: notificationStateReducer
+    });
+
+export default combineReducers(
+    {
+        appState: appStateCombinedReducer,
         domain: domainReducer
     });
