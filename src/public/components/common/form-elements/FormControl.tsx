@@ -30,6 +30,7 @@ export interface FormControlProps {
     event:
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLTextAreaElement>
+      | React.ChangeEvent<HTMLSelectElement>
   ) => void;
   onChangeCustomValidation?: (
     element: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
