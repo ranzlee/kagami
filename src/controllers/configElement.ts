@@ -1,11 +1,11 @@
 import { Response, Request, NextFunction } from "express";
-import { IConfigurationElement } from "./../shared/models/configuration/elements/IConfigurationElement";
-import { ConfigurationElementEntity } from "./../models/ConfigurationElementEntity";
+import { IConfigElement } from "./../shared/models/configuration/elements/IConfigElement";
+import { ConfigElementEntity } from "./../models/ConfigElementEntity";
 
 export const fetchConfigElementsByConfigId = (req: Request, res: Response): void => {
     const configId = req.params.id;
     if (configId) {
-        ConfigurationElementEntity.find({ configId: configId }, (err, configElements) => {
+        ConfigElementEntity.find({ configId: configId }, (err, configElements) => {
             res.send(configElements);
             return;
         });
@@ -17,7 +17,7 @@ export const fetchConfigElementsByConfigId = (req: Request, res: Response): void
 
 export const addConfigElement = (req: Request, res: Response): void => {
     const {configId, configElementType } = req.params;
-    const newElement = new ConfigurationElementEntity();
+    const newElement = new ConfigElementEntity();
     newElement.configElementType = configElementType;
     newElement.configId = configId;
 

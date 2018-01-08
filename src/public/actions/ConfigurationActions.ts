@@ -1,9 +1,7 @@
 import { Configuration, IConfiguration } from './../../shared/models/configuration/Configuration';
-import { IDomain } from './../types/AppStore';
 import { ActionTypeKeys } from "./ActionTypeKeys";
 import { fetchConfiguration } from "./../apis/ConfigApi"
 import { Action, ActionCreator, Dispatch } from 'redux';
-import { AppStore } from "./../types/AppStore"
 import { ConfigElementType } from '../../shared/models/enums/ConfigElementType';
 
 export type ConfigurationActionTypes =

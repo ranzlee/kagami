@@ -15,14 +15,14 @@ import {
     addConfigElementSuccess,
 } from './../actions/ConfigElementActions';
 import { Observable } from 'rxjs/Observable';
-import { IConfigurationElement } from '../../shared/models/configuration/elements/IConfigurationElement';
+import { IConfigElement } from '../../shared/models/configuration/elements/IConfigElement';
 import { elementAt } from 'rxjs/operators/elementAt';
 
 export const fetchConfigElementsEpic = (action$: any) =>
     action$.ofType(ActionTypeKeys.FETCH_CONFIG_ELEMENTS)
         .mergeMap((action: FetchConfigElementsAction) =>
             ajax.getJSON(`./api/config/${action.configId}/configElement`)
-                .map(response => fetchConfigElementsSuccess(response as IConfigurationElement[], action.configId))
+                .map(response => fetchConfigElementsSuccess(response as IConfigElement[], action.configId))
                 .takeUntil(action$.ofType(ActionTypeKeys.CANCEL_QUERY))
                 .catch(error => Observable.of(fetchConfigElementsError(error.xhr.response)))
         );
