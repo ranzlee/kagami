@@ -12,6 +12,7 @@ import { Toggle } from "./common/form-elements/Toggle";
 import { Checkbox } from "./common/form-elements/Checkbox";
 import { Numberbox } from "./common/form-elements/Numberbox";
 import { TextArea } from "./common/form-elements/TextArea";
+import { Select } from "./common/form-elements/Select";
 
 export interface HomeState {
   validateFormOnMount: boolean;
@@ -283,6 +284,21 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                               />
                             </div>
                           </div>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-lg-6 col-sm-12">
+                          <Select
+                            id="MySelect"
+                            label="My Select"
+                            value=""
+                            controlCol={8}
+                            labelCol={4}
+                          >
+                            <option value="r">Red</option>
+                            <option value="g">Green</option>
+                            <option value="b">Blue</option>
+                          </Select>
                         </div>
                       </div>
                       <div className="row">

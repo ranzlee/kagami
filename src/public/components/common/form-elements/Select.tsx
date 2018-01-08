@@ -1,36 +1,23 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as FormControl from "./FormControl";
-import { RadioOption } from "./RadioOption";
-import * as linq from "linq";
 
-export interface RadioState extends FormControl.FormControlState {}
+export interface SelectState extends FormControl.FormControlState {}
 
-export interface RadioProps extends FormControl.FormControlProps {
+export interface SelectProps extends FormControl.FormControlProps {
   value: string;
   required?: boolean;
 }
 
-export class Radio extends React.Component<RadioProps, RadioState> {
-  constructor(props: RadioProps) {
+export class Select extends React.Component<SelectProps, SelectState> {
+  constructor(props: SelectProps) {
     super(props);
     this.state = { invalidFeedback: this.props.invalidFeedback };
   }
 
-  instance: HTMLInputElement;
+  instance: HTMLSelectElement;
 
-  onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (this.props.readOnly != null && this.props.readOnly) {
-      return;
-    } else {
-      if (
-        this.props.form != null &&
-        this.props.form.props.readOnly != null &&
-        this.props.form.props.readOnly
-      ) {
-        return;
-      }
-    }
+  onChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     if (this.props.onChange) {
       this.props.onChange(event);
     }
@@ -48,26 +35,43 @@ export class Radio extends React.Component<RadioProps, RadioState> {
     }
   }
 
-  renderChildren() {
-    let extendedProps = FormControl.FormControlExtendedProperties(this.props);
-    var countOfRadioOptions = linq
-      .from(this.props.children)
-      .count(i => (i as any).type === RadioOption);
-    var count = 0;
-    return React.Children.map(this.props.children, child => {
-      if ((child as any).type === RadioOption) {
-        count++;
-        return React.cloneElement(child as any, {
-          isLast: count === countOfRadioOptions,
-          radio: this
-        });
-      } else return child;
-    });
-  }
-
   render() {
     let extendedProps = FormControl.FormControlExtendedProperties(this.props);
     let required = this.props.required ? true : false;
-    return <div className="form-group">{this.renderChildren()}</div>;
+    return (
+      <div className="row form-group">
+        <label className={extendedProps.labelClasses} htmlFor={this.props.id}>
+          {this.props.label}
+        </label>
+        <div className={extendedProps.formControlClasses}>
+          <select
+            ref={instance => {
+              //*** every wrapped component needs this!
+              this.instance = instance;
+            }}
+            className="form-control"
+            id={
+              this.props.id //*** end
+            }
+            name={this.props.name}
+            value={this.props.value}
+            disabled={
+              this.props.disabled != null
+                ? this.props.disabled
+                : this.props.form && this.props.form.props.disabled != null
+                  ? this.props.form.props.disabled
+                  : false
+            }
+            onChange={this.onChange}
+            required={required}
+          >
+            {this.props.children}
+          </select>
+          <div className="invalid-feedback">
+            {this.state.invalidFeedback ? this.state.invalidFeedback : ""}
+          </div>
+        </div>
+      </div>
+    );
   }
 }
