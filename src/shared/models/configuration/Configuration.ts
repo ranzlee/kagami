@@ -17,7 +17,7 @@ export function getConfigurationDefaults(): IConfiguration {
     return {...configurationDefaults}; // Make copy to be sure nobody changes default values
 }
 
-export class Configuration  {
+export class Configuration implements IConfiguration {
     _id: string;
     name: string;
     description: string;

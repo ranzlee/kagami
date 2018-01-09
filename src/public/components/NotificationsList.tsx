@@ -3,16 +3,18 @@ import { connect } from 'react-redux';
 //declare module 'react-bs-notifier';
 import { AlertList } from 'react-bs-notifier';
 import { removeNotification } from '../actions/NotificationActions';
+import { List } from "immutable";
+import { NotificationRecord, INotification } from "../types/immutable/NotificationRecord";
 
 export interface IOwnProps {
 
 }
 export interface IConnectedState {
-    notifications: Array<any>;
+    notifications: NotificationRecord[];
 }
 
 export interface IConnectedDispatch {
-    removeNotification: (notification: any) => void;
+    removeNotification: (notification: INotification) => void;
 }
 
 export class NotificationsList extends React.Component<IOwnProps & IConnectedState & IConnectedDispatch, {}>
