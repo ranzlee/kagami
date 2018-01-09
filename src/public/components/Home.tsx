@@ -294,8 +294,8 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                           <div className="row">
                             <div className="col">
                               <Slider
-                                id="MyToggle"
-                                label="My Toggle"
+                                id="MySlider"
+                                label="My Slider"
                                 controlCol={8}
                                 labelCol={4}
                                 required={true}

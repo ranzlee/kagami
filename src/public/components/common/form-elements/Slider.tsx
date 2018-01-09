@@ -66,6 +66,7 @@ export class Slider extends React.Component<SliderProps, SliderState> {
       step: this.props.step ? this.props.step : 1,
       tooltips: this.props.showToolTip ? this.props.showToolTip : false
     });
+    slider.style.marginTop = "20px";
   }
 
   render() {
@@ -73,7 +74,7 @@ export class Slider extends React.Component<SliderProps, SliderState> {
     let required = this.props.required ? true : false;
     return (
       <div className="row form-group">
-        <div className={extendedProps.labelClasses} />
+        <div className={extendedProps.labelClasses}>{this.props.label}</div>
         <div className={extendedProps.formControlClasses}>
           <div id="sliderRegular" className="slider" />
           {/* <div className="checkbox">
