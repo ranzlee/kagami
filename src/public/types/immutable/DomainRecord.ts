@@ -11,7 +11,7 @@ export interface IDomainRecord {
     tags: List<string>; 
 }
 
-export const domainDefaults = {
+const domainDefaults = {
     configurations: Map<string, ConfigurationRecord>(),
     configElements: Map<string, ConfigElementRecord>(),
     configElementMapping: Map<string, ConfigElementsByTypeRecord>(),

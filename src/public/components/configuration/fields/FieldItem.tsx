@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Field as FieldModel } from "./../../../../shared/models/configuration/elements/Field";
+import { IField as FieldModel } from "./../../../../shared/models/configuration/elements/Field";
 import { ConfigElementType } from "../../../../shared/models/enums/ConfigElementType";
 import { Link } from "react-router-dom";
 

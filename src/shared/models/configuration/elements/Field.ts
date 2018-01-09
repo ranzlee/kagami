@@ -3,6 +3,7 @@ import { FieldType } from './../../enums/FieldType';
 import { BaseConfigElement } from "./BaseConfigElement";
 import { ConfigElementRecord, IConfigElement, getConfigElementDefaults } from './IConfigElement';
 import { ConfigElementType } from './../../enums/ConfigElementType';
+import { GenericPartial } from './../../Helpers';
 
 export interface IField extends IConfigElement {
     type?: FieldType;
@@ -22,18 +23,10 @@ export function getFieldDefaults(): IField {
     };
 }
 
-export class Field extends BaseConfigElement implements IField {
-    type: FieldType;
-    displayExpression: string;
-    readonlyExpression: string;
-    defaultValueExpression: string;
-    [key: string]: any;
-}
-
-
+export type FieldParams = GenericPartial<IField>;
 
 export class FieldRecord extends Record(getFieldDefaults()) implements IField {
-    constructor(params?: IField) {
+    constructor(params?: FieldParams) {
         params ? super(params) : super();
     }
 
@@ -50,4 +43,8 @@ export class FieldRecord extends Record(getFieldDefaults()) implements IField {
     readonlyExpression: string;
     defaultValueExpression: string;
     [key: string]: any;
+
+    public static asFieldRecord(configElementRecord: ConfigElementRecord) : FieldRecord {
+        return configElementRecord as FieldRecord;
+    }
 }
