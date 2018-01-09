@@ -1,5 +1,5 @@
 import { ActionTypeKeys } from "./ActionTypeKeys";
-import { NotificationRecord, INotification, INotificationParams } from "./../types/immutable/NotificationRecord";
+import { NotificationRecord, INotification, NotificationParams } from "./../types/immutable/NotificationRecord";
 
 export type NotificationActionTypes = | CreateNotificationAction | RemoveNotificationAction;
 
@@ -9,9 +9,9 @@ export interface RemoveNotificationAction {
 }
 export interface CreateNotificationAction {
     type: ActionTypeKeys.CREATE_NOTIFICATION,
-    notificationParams: INotificationParams
+    notificationParams: NotificationParams
 }
-export const createNotification = (notificationParams: INotificationParams): CreateNotificationAction => ({
+export const createNotification = (notificationParams: NotificationParams): CreateNotificationAction => ({
     type: ActionTypeKeys.CREATE_NOTIFICATION,
     notificationParams
 });

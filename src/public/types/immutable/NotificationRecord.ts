@@ -1,4 +1,5 @@
 import { Record } from 'immutable';
+import { GenericPartial } from './../../../shared/models/Helpers';
 
 export interface INotification {
     message: string;
@@ -9,14 +10,7 @@ export interface INotification {
     type: string;
 }
 
-export interface INotificationParams {
-    id?: string;
-    message?: string;
-    headline?: string;
-    showIcon?: boolean;
-    timeoutInMs?: number; 
-    type?: string;
-}
+export type NotificationParams = GenericPartial<INotification>
 
 const notificationDefaults : INotification = {
     message: "",
@@ -32,7 +26,7 @@ export function getNotificationDefaults() : INotification {
 }
 
 export class NotificationRecord extends Record(notificationDefaults) implements INotification {
-    constructor(params?: INotificationParams) {
+    constructor(params?: NotificationParams) {
         params ? super(params) : super();
     }
 

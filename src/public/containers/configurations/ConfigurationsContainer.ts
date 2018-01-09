@@ -4,7 +4,7 @@ import { Configurations, IOwnProps, IConnectedState, IConnectedDispatch } from '
 import * as actions from './../../actions/ConfigurationActions';
 import * as notificationActions from './../../actions/NotificationActions';
 import { AppStoreRecord } from './../../types/AppStore';
-import { NotificationRecord, getNotificationDefaults, INotificationParams } from './../../types/immutable/NotificationRecord';
+import { NotificationRecord, getNotificationDefaults, INotification, NotificationParams } from './../../types/immutable/NotificationRecord';
 
 export const mapStateToProps = (appStoreRecord: AppStoreRecord, props: IOwnProps): IConnectedState => {
     return {
@@ -18,7 +18,7 @@ export const mapDispatchToProps = (dispatch: Dispatch<actions.ConfigurationActio
 
             dispatch(actions.addConfig());
 
-            const notf: INotificationParams = {
+            const notf: NotificationParams = {
                 id: Guid.raw(),
                 type: "success",
                 message: "Configuration Added!!!"
