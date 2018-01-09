@@ -1,7 +1,6 @@
 import { ConfigElementType } from './../../shared/models/enums/ConfigElementType';
 import { ActionTypeKeys } from "./../actions/ActionTypeKeys";
-import { IDomain } from '../types/AppStore';
-import { IConfigurationElement } from '../../shared/models/configuration/elements/IConfigurationElement';
+import { IConfigElement } from '../../shared/models/configuration/elements/IConfigElement';
 
 
 export type ConfigElementActionTypes =
@@ -22,7 +21,7 @@ export interface FetchConfigElementsAction {
 export interface FetchConfigElementsSuccessAction {
     type: ActionTypeKeys.FETCH_CONFIG_ELEMENTS_SUCCESS,
     configId: string;
-    configElements: IConfigurationElement[]
+    configElements: IConfigElement[]
 }
 export interface FetchConfigElementsErrorAction {
     type: ActionTypeKeys.FETCH_CONFIG_ELEMENTS_ERROR,
@@ -58,7 +57,7 @@ export const fetchConfigElements = (configId: string): FetchConfigElementsAction
     type: ActionTypeKeys.FETCH_CONFIG_ELEMENTS,
     configId
 });
-export const fetchConfigElementsSuccess = (configElements: IConfigurationElement[], configId: string): FetchConfigElementsSuccessAction => ({
+export const fetchConfigElementsSuccess = (configElements: IConfigElement[], configId: string): FetchConfigElementsSuccessAction => ({
     type: ActionTypeKeys.FETCH_CONFIG_ELEMENTS_SUCCESS,
     configId,
     configElements: configElements

@@ -7,6 +7,8 @@ export interface ToggleState extends FormControl.FormControlState {}
 export interface ToggleProps extends FormControl.FormControlProps {
   required?: boolean;
   checked: boolean;
+  labelOn?: string;
+  labelOff?: string;
 }
 
 export class Toggle extends React.Component<ToggleProps, ToggleState> {
@@ -37,9 +39,25 @@ export class Toggle extends React.Component<ToggleProps, ToggleState> {
       this.props.form.registerFormCustomValidations(this, this.instance);
     }
     ($("[name='checkbox']") as any).bootstrapSwitch("size", "small");
+    ($("[name='checkbox']") as any).bootstrapSwitch(
+      "onText",
+      this.props.labelOn
+    );
+    ($("[name='checkbox']") as any).bootstrapSwitch(
+      "offText",
+      this.props.labelOff
+    );
   }
 
   render() {
+    ($("[name='checkbox']") as any).bootstrapSwitch(
+      "disabled",
+      this.props.disabled || this.props.form.props.disabled
+    );
+    ($("[name='checkbox']") as any).bootstrapSwitch(
+      "readonly",
+      this.props.readOnly || this.props.form.props.readOnly
+    );
     let extendedProps = FormControl.FormControlExtendedProperties(this.props);
     let required = this.props.required ? true : false;
     return (

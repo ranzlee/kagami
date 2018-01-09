@@ -1,8 +1,8 @@
 import { Configuration } from "./../shared/models/configuration/Configuration";
-import { IConfigurationElement } from "./../shared/models/configuration/elements/IConfigurationElement";
+import { IConfigElement } from "./../shared/models/configuration/elements/IConfigElement";
 import { Response, Request, NextFunction } from "express";
 import { ConfigurationEntity } from "./../models/ConfigurationEntity";
-import { ConfigurationElementEntity } from "./../models/ConfigurationElementEntity";
+import { ConfigElementEntity } from "./../models/ConfigElementEntity";
 import { SocketServer } from "./../socketServer";
 import { SocketMessage } from "./../models/SocketMessage";
 

@@ -1,5 +1,5 @@
-import { BaseConfigurationElement } from './BaseConfigurationElement';
+import { BaseConfigElement } from './BaseConfigElement';
 
-export class Expression extends BaseConfigurationElement {
+export class Expression extends BaseConfigElement {
     customFunction: string;
 }

@@ -1,20 +1,22 @@
 import { ActionTypeKeys } from "./ActionTypeKeys";
-import { Notification } from "./../../shared/models/Notification";
+import { NotificationRecord, INotification, NotificationParams } from "./../types/immutable/NotificationRecord";
 
 export type NotificationActionTypes = | CreateNotificationAction | RemoveNotificationAction;
 
 export interface RemoveNotificationAction {
     type: ActionTypeKeys.REMOVE_NOTIFICATION,
-    notification: Notification
+    id: string
 }
 export interface CreateNotificationAction {
     type: ActionTypeKeys.CREATE_NOTIFICATION,
-    notification: Notification
+    notificationParams: NotificationParams
 }
-export const createNotification = (notification: Notification): CreateNotificationAction => ({
-    type: ActionTypeKeys.CREATE_NOTIFICATION, notification: { ...notification }
+export const createNotification = (notificationParams: NotificationParams): CreateNotificationAction => ({
+    type: ActionTypeKeys.CREATE_NOTIFICATION,
+    notificationParams
 });
 
-export const removeNotification = (notification: Notification): RemoveNotificationAction => (
-    { type: ActionTypeKeys.REMOVE_NOTIFICATION, notification: notification }
-);
+export const removeNotification = (id: string): RemoveNotificationAction => ({
+    type: ActionTypeKeys.REMOVE_NOTIFICATION,
+    id
+});

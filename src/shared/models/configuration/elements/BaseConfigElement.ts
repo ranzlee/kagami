@@ -1,7 +1,7 @@
 import { ConfigElementType } from './../../enums/ConfigElementType';
-import { IConfigurationElement } from './IConfigurationElement';
+import { IConfigElement } from './IConfigElement';
 
-export abstract class BaseConfigurationElement implements IConfigurationElement {
+export abstract class BaseConfigElement implements IConfigElement {
     _id: string;
     configId: string;
     configElementType: ConfigElementType;
