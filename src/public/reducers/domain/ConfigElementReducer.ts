@@ -4,7 +4,7 @@ import { ConfigElementParams, IConfigElement, ConfigElementRecord } from './../.
 import { ActionTypeKeys } from '../../actions/ActionTypeKeys';
 import { Map } from 'immutable';
 
-export function configElementLookupReducer(
+export function configElementReducer(
     configElements: Map<string, ConfigElementRecord> = Map<string, ConfigElementRecord>(),
     action: ConfigElementActionTypes) {
 
@@ -15,7 +15,6 @@ export function configElementLookupReducer(
                 configId: action.configId,
                 configElementType: action.configElementType
             };
-
             return configElements.set(newElement._id, new ConfigElementRecord(newElement))
 
         case ActionTypeKeys.UPDATE_CONFIG_ELEMENT:

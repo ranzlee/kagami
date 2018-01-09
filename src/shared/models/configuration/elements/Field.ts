@@ -30,8 +30,6 @@ export class Field extends BaseConfigElement implements IField {
     [key: string]: any;
 }
 
-
-
 export class FieldRecord extends Record(getFieldDefaults()) implements IField {
     constructor(params?: IField) {
         params ? super(params) : super();
@@ -50,4 +48,8 @@ export class FieldRecord extends Record(getFieldDefaults()) implements IField {
     readonlyExpression: string;
     defaultValueExpression: string;
     [key: string]: any;
+
+    public static asFieldRecord(configElementRecord: ConfigElementRecord) : FieldRecord {
+        return configElementRecord as FieldRecord;
+    }
 }

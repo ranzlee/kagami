@@ -32,9 +32,9 @@ export const addConfigElementEpic = (action$: any) =>
         .mergeMap((action: AddConfigElementAction) =>
             ajax.put(`./api/config/${action.configId}/configElement/${action.configElementType}`)
                 .map(response => {
-                    const {configId, elementId , configElementType } = response.xhr.response;
-                    return addConfigElementSuccess(configId, elementId, configElementType);
+                    const { configId, _id, configElementType } = response.xhr.response;
+                    return addConfigElementSuccess(configId, _id, configElementType);
                 })
-                //TODO: Add catch 
+        //TODO: Add catch 
         );
 

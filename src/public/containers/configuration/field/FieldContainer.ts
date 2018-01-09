@@ -7,11 +7,8 @@ import { AppStoreRecord } from '../../../types/AppStore';
 import { ConfigElementRecord } from './../../../../shared/models/configuration/elements/IConfigElement';
 
 export const mapStateToProps = (appStoreRecord: AppStoreRecord, props: IOwnProps): IConnectedState => {
-    const test = appStoreRecord.domain.configElements.get(props.fieldId) as ConfigElementRecord;
-    const cast = test as any as FieldRecord;
-
     return {
-        field: appStoreRecord.domain.configElements.get(props.fieldId) as any as FieldRecord
+        field: FieldRecord.asFieldRecord(appStoreRecord.domain.configElements.get(props.fieldId))
     }
 }
 

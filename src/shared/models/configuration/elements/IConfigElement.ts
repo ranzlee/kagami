@@ -13,7 +13,7 @@ export interface IConfigElement {
     [key: string]: any;
 }
 
-const configElementDefaults : IConfigElement = {
+const configElementDefaults: IConfigElement = {
     _id: "",
     configId: "",
     configElementType: undefined,
@@ -26,14 +26,14 @@ const configElementDefaults : IConfigElement = {
 export type ConfigElementParams = GenericPartial<IConfigElement>;
 
 export function getConfigElementDefaults(): IConfigElement {
-    return {...configElementDefaults}; // Make copy to be sure nobody changes default values
+    return { ...configElementDefaults }; // Make copy to be sure nobody changes default values
 }
 
-export class ConfigElementRecord extends Record(configElementDefaults) implements IConfigElement {
+export class ConfigElementRecord extends Record(configElementDefaults, "Config Element Record") implements IConfigElement {
     constructor(params?: GenericPartial<IConfigElement>) {
         params ? super(params) : super();
     }
-    
+
     _id: string;
     configId: string;
     configElementType?: ConfigElementType;
@@ -41,5 +41,4 @@ export class ConfigElementRecord extends Record(configElementDefaults) implement
     description: string;
     dependencies: string[];
     tags: string[];
-    [key: string]: any; 
 }

@@ -1,16 +1,16 @@
-import { Record, List } from 'immutable';
+import { Record, Set } from 'immutable';
 
 export interface IConfigElementsByType {
-    expressions: List<string>;
-    fields: List<string>;
+    expression: Set<string>;
+    field: Set<string>;
 }
 
 const defaultConfigElementsByType: IConfigElementsByType = {
-    expressions: List<string>(),
-    fields: List<string>()
+    expression: Set<string>(),
+    field: Set<string>()
 }
 
 export class ConfigElementsByTypeRecord extends Record(defaultConfigElementsByType) implements IConfigElementsByType {
-    expressions: List<string>;
-    fields: List<string>;
+    expression: Set<string>;
+    field: Set<string>;
 }

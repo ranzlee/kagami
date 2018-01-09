@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { configElementLookupReducer } from './domain/ConfigElementLookupReducer';
+import { configElementReducer } from './domain/ConfigElementReducer';
 
 import { appStateReducer } from "./appState/AppStateReducer";
 import { configurationReducer } from "./domain/ConfigurationReducer";
@@ -9,7 +9,7 @@ import { notificationsReducer } from "./../reducers/appState/NotificationsReduce
 var domainReducer = combineReducers(
     {
         configurations: configurationReducer,
-        configElements: configElementLookupReducer,
+        configElements: configElementReducer,
         configElementMapping: configElementMappingReducer
     });
 
