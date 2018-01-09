@@ -5,6 +5,7 @@ import Root from "./Root";
 import "./../assets/css/main.scss";
 import "./../assets/js/lib/bootstrap.min.js";
 import "./../assets/css/themes/now-ui/js/plugins/bootstrap-switch.js";
+import "./../assets/css/themes/now-ui/js/plugins/nouislider.min.js";
 import { Provider } from "react-redux";
 import { Store } from "./../Store";
 import KagamiRoutes from "./../routes/KagamiRoutes";
