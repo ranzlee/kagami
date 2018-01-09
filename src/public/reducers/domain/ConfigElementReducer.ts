@@ -23,6 +23,10 @@ export function configElementReducer(
         case ActionTypeKeys.DELETE_CONFIG_ELEMENT:
             return configElements.delete(action.id);
 
+        case ActionTypeKeys.FETCH_CONFIG_ELEMENTS_SUCCESS:
+            return configElements.mergeDeep(Map<string, ConfigElementRecord>(
+                action.configElements.map(item => [item._id, new ConfigElementRecord(item)])))
+
         default:
             return configElements;
     }

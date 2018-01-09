@@ -5,7 +5,6 @@ import { ActionTypeKeys } from '../../actions/ActionTypeKeys';
 import { config } from 'rx';
 import { Map, Set } from "immutable";
 import { ConfigElementsByTypeRecord } from '../../types/immutable/ConfigElementsByTypeRecord';
-import * as Enumerable from "linq";
 
 
 export function configElementMappingReducer(
@@ -14,28 +13,24 @@ export function configElementMappingReducer(
     switch (action.type) {
         case ActionTypeKeys.ADD_CONFIG_ELEMENT_SUCCESS:
             const addMergeMap = Map<string, ConfigElementsByTypeRecord>(
-                [
-                    [
-                        action.configId,
-                        new ConfigElementsByTypeRecord({ [action.configElementType]: Set<string>([action.elementId]) })
-                    ]
-                ]
+                [[action.configId, new ConfigElementsByTypeRecord({ [action.configElementType]: Set<string>([action.elementId]) })]]
             );
-            debugger;
             return configElementMapping.mergeDeep(addMergeMap)
 
         case ActionTypeKeys.FETCH_CONFIG_ELEMENTS_SUCCESS:
 
+
             const configElementByTypeRecord = new ConfigElementsByTypeRecord(
                 {
-                    fields: Set<string>(Enumerable.from(action.configElements).where(i => i.type === ConfigElementType.field).toArray()),
-                    expressions: Set<string>(Enumerable.from(action.configElements).where(i => i.type === ConfigElementType.expression).toArray())
+                    field: Set<string>(action.configElements.filter(i => i.configElementType === ConfigElementType.field).map(i => i._id)),
+                    expression: Set<string>(action.configElements.filter(i => i.configElementType === ConfigElementType.expression).map(i => i._id))
                 });
 
             const fetchMergeMap = Map<string, ConfigElementsByTypeRecord>(
                 [
                     [action.configId, configElementByTypeRecord]
                 ]);
+
 
             return configElementMapping.mergeDeep(fetchMergeMap)
 
