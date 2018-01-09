@@ -309,6 +309,9 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                                   });
                                 }}
                                 value={this.state.mySliderState}
+                                step={10}
+                                showToolTip={true}
+                                showHorizontal={true}
                               />
                             </div>
                           </div>

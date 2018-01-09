@@ -7,6 +7,9 @@ export interface SliderState extends FormControl.FormControlState {}
 
 export interface SliderProps extends FormControl.FormControlProps {
   value: number;
+  step?: number;
+  showToolTip?: boolean;
+  showHorizontal?: boolean;
   required?: boolean;
 }
 
@@ -46,15 +49,22 @@ export class Slider extends React.Component<SliderProps, SliderState> {
       this.props.form.registerFormCustomValidations(this, this.instance);
     }
 
-    var slider = document.getElementById("sliderRegular");
+    const sliderOrientation =
+      this.props.showHorizontal == null || this.props.showHorizontal
+        ? "horizontal"
+        : "vertical";
 
+    var slider = document.getElementById("sliderRegular");
     noUiSlider.create(slider, {
       start: this.props.value,
       connect: [true, false],
       range: {
         min: 0,
         max: 100
-      }
+      },
+      orientation: sliderOrientation,
+      step: this.props.step ? this.props.step : 1,
+      tooltips: this.props.showToolTip ? this.props.showToolTip : false
     });
   }
 
