@@ -3,17 +3,18 @@ import { Configuration, ConfigurationRecord } from './../../shared/models/config
 import { IConfigElement, ConfigElementRecord } from './../../shared/models/configuration/elements/IConfigElement';
 import { ConfigElementType } from './../../shared/models/enums/ConfigElementType';
 import { Record, Map } from 'immutable'
-import { Notification } from './../../shared/models/Notification';
-import { DomainRecord } from "./immutable/DomainRecord"
+import { DomainRecord } from "./immutable/DomainRecord";
+import { AppStateRecord } from "./immutable/AppStateRecord";
+import { INotificationState, NotificationStateRecord } from './../types/immutable/NotificationStateRecord';
 
 export interface IAppStore {
     domain: DomainRecord;
-    appState: IAppState;
+    appState: AppStateRecord;
 }
 
 const defaultAppStore = {
     domain: new DomainRecord(),
-    appState: {}
+    appState: new AppStateRecord()
 }
 
 export class AppStoreRecord extends Record(defaultAppStore) implements IAppStore {
@@ -22,14 +23,10 @@ export class AppStoreRecord extends Record(defaultAppStore) implements IAppStore
     }
 
     domain: DomainRecord;
-    appState: IAppState;
+    appState: AppStateRecord;
 }
 
 export interface IAppState {
     currentConfiguration?: string;
-    notificationState: INotificationState
-}
-
-export interface INotificationState {
-    notifications: Array<Notification>;
+    notificationState: NotificationStateRecord
 }
