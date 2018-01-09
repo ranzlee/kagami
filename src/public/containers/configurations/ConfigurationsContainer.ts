@@ -4,7 +4,7 @@ import { Configurations, IOwnProps, IConnectedState, IConnectedDispatch } from '
 import * as actions from './../../actions/ConfigurationActions';
 import * as notificationActions from './../../actions/NotificationActions';
 import { AppStoreRecord } from './../../types/AppStore';
-import { NotificationRecord, getNotificationDefaults, INotification, NotificationParams } from './../../types/immutable/NotificationRecord';
+import { NotificationRecord, INotification, NotificationParams } from './../../types/immutable/NotificationRecord';
 
 export const mapStateToProps = (appStoreRecord: AppStoreRecord, props: IOwnProps): IConnectedState => {
     return {

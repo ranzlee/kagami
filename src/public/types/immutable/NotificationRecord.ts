@@ -21,10 +21,6 @@ const notificationDefaults : INotification = {
     timeoutInMs: 5000 
 }
 
-export function getNotificationDefaults() : INotification {
-    return {...notificationDefaults}; // Make copy to be sure nobody changes default values
-}
-
 export class NotificationRecord extends Record(notificationDefaults) implements INotification {
     constructor(params?: NotificationParams) {
         params ? super(params) : super();

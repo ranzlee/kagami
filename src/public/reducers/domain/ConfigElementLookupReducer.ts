@@ -1,20 +1,20 @@
 import { ConfigElementActionTypes } from './../../actions/ConfigElementActions';
 import { ConfigElementType } from './../../../shared/models/enums/ConfigElementType';
-import { getConfigElementDefaults, IConfigElement, ConfigElementRecord } from './../../../shared/models/configuration/elements/IConfigElement';
+import { ConfigElementParams, IConfigElement, ConfigElementRecord } from './../../../shared/models/configuration/elements/IConfigElement';
 import { ActionTypeKeys } from '../../actions/ActionTypeKeys';
-import { domainDefaults } from "./../../types/immutable/DomainRecord";
 import { Map } from 'immutable';
 
 export function configElementLookupReducer(
-    configElements: Map<string, ConfigElementRecord> = domainDefaults.configElements,
+    configElements: Map<string, ConfigElementRecord> = Map<string, ConfigElementRecord>(),
     action: ConfigElementActionTypes) {
 
     switch (action.type) {
         case ActionTypeKeys.ADD_CONFIG_ELEMENT_SUCCESS:
-            const newElement = getConfigElementDefaults();
-            newElement._id = action.elementId;
-            newElement.configId = action.configId;
-            newElement.configElementType = action.configElementType;
+            const newElement: ConfigElementParams = {
+                _id: action.elementId,
+                configId: action.configId,
+                configElementType: action.configElementType
+            };
 
             return configElements.set(newElement._id, new ConfigElementRecord(newElement))
 

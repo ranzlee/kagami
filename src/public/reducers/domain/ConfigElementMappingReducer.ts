@@ -3,14 +3,13 @@ import { ConfigElementType } from './../../../shared/models/enums/ConfigElementT
 import { IConfigElement } from './../../../shared/models/configuration/elements/IConfigElement';
 import { ActionTypeKeys } from '../../actions/ActionTypeKeys';
 import { config } from 'rx';
-import { domainDefaults } from '../../types/immutable/DomainRecord';
 import { Map, List } from "immutable";
 import { ConfigElementsByTypeRecord } from '../../types/immutable/ConfigElementsByTypeRecord';
 import * as Enumerable from "linq";
 
 
 export function configElementMappingReducer(
-    configElementMapping: Map<string, ConfigElementsByTypeRecord> = domainDefaults.configElementMapping,
+    configElementMapping: Map<string, ConfigElementsByTypeRecord> = Map<string, ConfigElementsByTypeRecord>(),
     action: ConfigElementActionTypes) {
     switch (action.type) {
         case ActionTypeKeys.ADD_CONFIG_ELEMENT_SUCCESS:
@@ -26,7 +25,6 @@ export function configElementMappingReducer(
             return configElementMapping.mergeDeep(addMergeMap)
 
         case ActionTypeKeys.FETCH_CONFIG_ELEMENTS_SUCCESS:
-            debugger;
 
             const configElementByTypeRecord = new ConfigElementsByTypeRecord(
                 {

@@ -1,5 +1,6 @@
 import { Record } from 'immutable';
 import { ConfigElementType } from './../../enums/ConfigElementType';
+import { GenericPartial } from './../../Helpers';
 
 export interface IConfigElement {
     _id: string;
@@ -22,12 +23,14 @@ const configElementDefaults : IConfigElement = {
     tags: []
 }
 
+export type ConfigElementParams = GenericPartial<IConfigElement>;
+
 export function getConfigElementDefaults(): IConfigElement {
     return {...configElementDefaults}; // Make copy to be sure nobody changes default values
 }
 
 export class ConfigElementRecord extends Record(configElementDefaults) implements IConfigElement {
-    constructor(params?: IConfigElement) {
+    constructor(params?: GenericPartial<IConfigElement>) {
         params ? super(params) : super();
     }
     
