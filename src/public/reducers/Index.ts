@@ -4,7 +4,7 @@ import { configElementLookupReducer } from './domain/ConfigElementLookupReducer'
 import { appStateReducer } from "./appState/AppStateReducer";
 import { configurationReducer } from "./domain/ConfigurationReducer";
 import { configElementMappingReducer } from "./domain/ConfigElementMappingReducer";
-import { notificationStateReducer } from "./../reducers/appState/NotificationStateReducer";
+import { notificationsReducer } from "./../reducers/appState/NotificationsReducer";
 
 var domainReducer = combineReducers(
     {
@@ -13,11 +13,15 @@ var domainReducer = combineReducers(
         configElementMapping: configElementMappingReducer
     });
 
+    var notificationsStateReducer = combineReducers( {
+        notifications: notificationsReducer
+    })
+
 
 const appStateCombinedReducer = combineReducers(
     {
         appState: appStateReducer,
-        notificationState: notificationStateReducer
+        notificationState: notificationsStateReducer
     });
 
 export default combineReducers(
