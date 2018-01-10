@@ -9,6 +9,7 @@ import { TextArea } from "./TextArea";
 import { Textbox } from "./Textbox";
 import { Toggle } from "./Toggle";
 import { Select } from "./Select";
+import { DatePicker } from "./DatePicker";
 
 export interface FormState {
   formWasValidated: string;
@@ -144,7 +145,8 @@ export class Form extends React.Component<FormProps, FormState> {
       (child as any).type === TextArea ||
       (child as any).type === Textbox ||
       (child as any).type === Toggle ||
-      (child as any).type === Select
+      (child as any).type === Select ||
+      (child as any).type === DatePicker
     ) {
       return true;
     }
