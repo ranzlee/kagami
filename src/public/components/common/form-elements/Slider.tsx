@@ -36,9 +36,6 @@ export class Slider extends React.Component<SliderProps, SliderState> {
     if (this.props.onChange) {
       this.props.onChange(event);
     }
-    if (this.props.onChangeCustomValidation) {
-      FormControl.OnChangeCustomValidation(this, event.currentTarget);
-    }
   };
 
   componentDidMount() {
@@ -67,6 +64,7 @@ export class Slider extends React.Component<SliderProps, SliderState> {
       tooltips: this.props.showToolTip ? this.props.showToolTip : false
     });
     slider.style.marginTop = "20px";
+    (slider as any).noUiSlider.on("change", this.onChange);
   }
 
   render() {
