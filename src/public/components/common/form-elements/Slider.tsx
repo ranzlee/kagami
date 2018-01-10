@@ -40,10 +40,10 @@ export class Slider extends React.Component<SliderProps, SliderState> {
 
   componentDidMount() {
     if (this.props.doCustomValidationOnMount) {
-      FormControl.OnChangeCustomValidation(this, this.instance);
+      //FormControl.OnChangeCustomValidation(this, this.instance);
     }
     if (this.props.form) {
-      this.props.form.registerFormCustomValidations(this, this.instance);
+      //this.props.form.registerFormCustomValidations(this, this.instance);
     }
 
     const sliderOrientation =
