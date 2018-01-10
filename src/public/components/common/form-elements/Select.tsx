@@ -5,9 +5,11 @@ import * as FormControl from "./FormControl";
 export interface SelectState extends FormControl.FormControlState {}
 
 export interface SelectProps extends FormControl.FormControlProps {
-  value: string;
+  value: string | Array<string>;
   required?: boolean;
-  defaultOption?: string;
+  placeholderOption?: string;
+  size?: number;
+  multiple?: boolean;
 }
 
 export class Select extends React.Component<SelectProps, SelectState> {
@@ -50,9 +52,12 @@ export class Select extends React.Component<SelectProps, SelectState> {
   render() {
     let extendedProps = FormControl.FormControlExtendedProperties(this.props);
     let required = this.props.required ? true : false;
+    let multiple = this.props.multiple ? true : false;
+    //let size = this.props.size ? this.props.size : 1;
     let defaultOption =
-      this.props.defaultOption != null && this.props.defaultOption !== "" ? (
-        <option value="">{this.props.defaultOption}</option>
+      this.props.placeholderOption != null &&
+      this.props.placeholderOption !== "" ? (
+        <option value="">{this.props.placeholderOption}</option>
       ) : null;
     return (
       <div className="row form-group">
@@ -79,6 +84,8 @@ export class Select extends React.Component<SelectProps, SelectState> {
             }
             onChange={this.onChange}
             required={required}
+            multiple={multiple}
+            size={this.props.size}
           >
             {defaultOption}
             {this.props.children}
