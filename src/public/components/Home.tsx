@@ -45,7 +45,7 @@ export default class Home extends React.Component<HomeProps, HomeState> {
       myTextAreaState:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.",
       myToggleState: true,
-      myRadioState: "",
+      myRadioState: "yes",
       mySelectState: "r",
       mySliderState: 50
     };
