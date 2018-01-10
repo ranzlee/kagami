@@ -25,8 +25,3 @@ export class AppStoreRecord extends Record(defaultAppStore) implements IAppStore
     domain: DomainRecord;
     appState: AppStateRecord;
 }
-
-export interface IAppState {
-    currentConfiguration?: string;
-    notificationState: NotificationStateRecord
-}

@@ -1,4 +1,5 @@
-import { combineReducers } from "redux";
+import { combineReducers } from 'redux-immutable';
+import { createStore } from 'redux';
 import { configElementReducer } from './domain/ConfigElementReducer';
 
 import { appStateReducer } from "./appState/AppStateReducer";
@@ -6,21 +7,20 @@ import { configurationReducer } from "./domain/ConfigurationReducer";
 import { configElementMappingReducer } from "./domain/ConfigElementMappingReducer";
 import { notificationsReducer } from "./../reducers/appState/NotificationsReducer";
 
-var domainReducer = combineReducers(
+const domainReducer = combineReducers(
     {
         configurations: configurationReducer,
         configElements: configElementReducer,
         configElementMapping: configElementMappingReducer
     });
 
-    var notificationsStateReducer = combineReducers( {
-        notifications: notificationsReducer
-    })
-
+const notificationsStateReducer = combineReducers({
+    notifications: notificationsReducer
+})
 
 const appStateCombinedReducer = combineReducers(
     {
-        appState: appStateReducer,
+        currentConfiguration: appStateReducer,
         notificationState: notificationsStateReducer
     });
 
