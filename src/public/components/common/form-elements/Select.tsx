@@ -53,7 +53,7 @@ export class Select extends React.Component<SelectProps, SelectState> {
     let extendedProps = FormControl.FormControlExtendedProperties(this.props);
     let required = this.props.required ? true : false;
     let multiple = this.props.multiple ? true : false;
-    //let size = this.props.size ? this.props.size : 1;
+    let size = this.props.multiple && this.props.size ? this.props.size : null;
     let defaultOption =
       this.props.placeholderOption != null &&
       this.props.placeholderOption !== "" ? (
@@ -85,7 +85,7 @@ export class Select extends React.Component<SelectProps, SelectState> {
             onChange={this.onChange}
             required={required}
             multiple={multiple}
-            size={this.props.size}
+            size={size}
           >
             {defaultOption}
             {this.props.children}

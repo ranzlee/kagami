@@ -323,6 +323,7 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                                 required={true}
                                 invalidFeedback="Required"
                                 multiple={true}
+                                size={5}
                                 onChange={(
                                   event: React.ChangeEvent<HTMLSelectElement>
                                 ) => {
