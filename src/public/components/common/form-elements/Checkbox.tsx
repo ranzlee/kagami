@@ -77,13 +77,6 @@ export class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
                     ? this.props.form.props.disabled
                     : false
               }
-              readOnly={
-                this.props.readOnly != null
-                  ? this.props.readOnly
-                  : this.props.form && this.props.form.props.readOnly != null
-                    ? this.props.form.props.readOnly
-                    : false
-              }
               checked={this.props.checked}
             />
             <label className="form-check-label" htmlFor={this.props.id}>

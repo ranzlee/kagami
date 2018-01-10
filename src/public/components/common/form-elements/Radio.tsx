@@ -2,9 +2,10 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as FormControl from "./FormControl";
 import { RadioOption } from "./RadioOption";
-import * as linq from "linq";
 
-export interface RadioState extends FormControl.FormControlState {}
+export interface RadioState extends FormControl.FormControlState {
+  value: string;
+}
 
 export interface RadioProps extends FormControl.FormControlProps {
   value: string;
@@ -14,10 +15,17 @@ export interface RadioProps extends FormControl.FormControlProps {
 export class Radio extends React.Component<RadioProps, RadioState> {
   constructor(props: RadioProps) {
     super(props);
-    this.state = { invalidFeedback: this.props.invalidFeedback };
+    this.state = {
+      invalidFeedback: this.props.invalidFeedback,
+      value: this.props.value
+    };
+    this.radioOptions = [];
   }
 
+  //hidden field keeps the selected radio option value to check custom validation against
   instance: HTMLInputElement;
+  //all radio option elements (inputs) in the group
+  radioOptions: Array<HTMLInputElement>;
 
   onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (this.props.readOnly != null && this.props.readOnly) {
@@ -31,33 +39,73 @@ export class Radio extends React.Component<RadioProps, RadioState> {
         return;
       }
     }
+    //clear custom validation error on change
+    this.radioOptions.forEach(radioOption => {
+      radioOption.setCustomValidity("");
+    });
+    let val = event.currentTarget.value;
     if (this.props.onChange) {
       this.props.onChange(event);
     }
-    if (this.props.onChangeCustomValidation) {
-      FormControl.OnChangeCustomValidation(this, event.currentTarget);
-    }
+    //set the hidden input to the selected radio option value
+    this.setState({ value: val }, () => {
+      if (this.props.onChangeCustomValidation) {
+        this.setRadioOptionsValidState(
+          FormControl.OnChangeCustomValidation(this, this.instance)
+        );
+      }
+    });
   };
+
+  registerRadioOption(element: HTMLInputElement) {
+    this.radioOptions.push(element);
+  }
 
   componentDidMount() {
     if (this.props.doCustomValidationOnMount) {
-      FormControl.OnChangeCustomValidation(this, this.instance);
+      if (this.radioOptions && this.radioOptions.length > 0) {
+        //only check custom validation and set all options invalid if the constraint validation passes.
+        //constraint validation is only checked on a single radio option with the same name
+        if (this.radioOptions[0].validity.valid) {
+          this.setRadioOptionsValidState(
+            FormControl.OnChangeCustomValidation(this, this.instance)
+          );
+        }
+      }
     }
     if (this.props.form) {
-      this.props.form.registerFormCustomValidations(this, this.instance);
+      this.props.form.registerFormCustomValidations(
+        this,
+        this.instance,
+        (validationResult: FormControl.CustomValidationResult) => {
+          this.setRadioOptionsValidState(validationResult);
+        }
+      );
+    }
+  }
+
+  setRadioOptionsValidState(
+    validationResult: FormControl.CustomValidationResult
+  ) {
+    if (!validationResult.isValid) {
+      this.radioOptions.forEach(radioOption => {
+        //set all radio options invalid if constraint validation passes and custom validation fails
+        if (radioOption.validity.valid) {
+          radioOption.setCustomValidity("*");
+        }
+      });
     }
   }
 
   renderChildren() {
     let extendedProps = FormControl.FormControlExtendedProperties(this.props);
-    var countOfRadioOptions = linq
-      .from(this.props.children)
-      .count(i => (i as any).type === RadioOption);
+    let countOfRadioOptions = React.Children.count(this.props.children);
     var count = 0;
     return React.Children.map(this.props.children, child => {
       if ((child as any).type === RadioOption) {
         count++;
         return React.cloneElement(child as any, {
+          isFirst: count === 1,
           isLast: count === countOfRadioOptions,
           radio: this
         });
@@ -66,8 +114,17 @@ export class Radio extends React.Component<RadioProps, RadioState> {
   }
 
   render() {
-    let extendedProps = FormControl.FormControlExtendedProperties(this.props);
-    let required = this.props.required ? true : false;
-    return <div className="form-group">{this.renderChildren()}</div>;
+    return (
+      <div className="form-group">
+        {this.renderChildren()}
+        <input
+          ref={instance => {
+            this.instance = instance;
+          }}
+          type="hidden"
+          value={this.state.value}
+        />
+      </div>
+    );
   }
 }

@@ -27,6 +27,7 @@ export interface FormCustomValidationRegister {
     FormControl.FormControlState
   >;
   element: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+  callback?: (validationResult: FormControl.CustomValidationResult) => void;
 }
 
 export class Form extends React.Component<FormProps, FormState> {
@@ -54,6 +55,9 @@ export class Form extends React.Component<FormProps, FormState> {
           r.component,
           r.element
         );
+        if (r.callback) {
+          r.callback(validationResult);
+        }
         if (!validationResult.isValid) {
           isValid = false;
         }
@@ -82,11 +86,13 @@ export class Form extends React.Component<FormProps, FormState> {
       FormControl.FormControlProps,
       FormControl.FormControlState
     >,
-    element: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    element: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement,
+    callback?: (validationResult: FormControl.CustomValidationResult) => void
   ) {
     this.formCustomValidationRegistry.push({
       component: component,
-      element: element
+      element: element,
+      callback: callback
     });
   }
 

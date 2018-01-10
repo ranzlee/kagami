@@ -50,17 +50,6 @@ export class Select extends React.Component<SelectProps, SelectState> {
   render() {
     let extendedProps = FormControl.FormControlExtendedProperties(this.props);
     let required = this.props.required ? true : false;
-    if (this.props.readOnly != null && this.props.readOnly) {
-      required = false;
-    } else {
-      if (
-        this.props.form != null &&
-        this.props.form.props.readOnly != null &&
-        this.props.form.props.readOnly
-      ) {
-        required = false;
-      }
-    }
     let defaultOption =
       this.props.defaultOption != null && this.props.defaultOption !== "" ? (
         <option value="">{this.props.defaultOption}</option>
@@ -86,13 +75,6 @@ export class Select extends React.Component<SelectProps, SelectState> {
                 ? this.props.disabled
                 : this.props.form && this.props.form.props.disabled != null
                   ? this.props.form.props.disabled
-                  : false
-            }
-            data-readonly={
-              this.props.readOnly != null
-                ? this.props.readOnly
-                : this.props.form && this.props.form.props.readOnly != null
-                  ? this.props.form.props.readOnly
                   : false
             }
             onChange={this.onChange}

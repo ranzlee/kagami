@@ -43,7 +43,7 @@ export default class Home extends React.Component<HomeProps, HomeState> {
       myTextAreaState:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.",
       myToggleState: true,
-      myRadioState: "yes",
+      myRadioState: "",
       mySelectState: "r"
     };
   }
@@ -245,9 +245,8 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                           <div className="row">
                             <div className="col">
                               <Radio
-                                id="yes"
-                                label="Yes"
-                                name="required"
+                                id="myRadio"
+                                label="My Radio"
                                 controlCol={8}
                                 labelCol={4}
                                 required={true}
@@ -259,10 +258,23 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                                     myRadioState: event.currentTarget.value
                                   });
                                 }}
+                                onChangeCustomValidation={(
+                                  element: HTMLInputElement
+                                ) => {
+                                  let isValid = true;
+                                  if (element.value !== "yes") {
+                                    isValid = false;
+                                  }
+                                  return {
+                                    isValid: isValid,
+                                    validationMessage: "Value must be Yes."
+                                  };
+                                }}
                                 value={this.state.myRadioState}
                               >
                                 <RadioOption label="Yes" value="yes" />
                                 <RadioOption label="No" value="no" />
+                                <RadioOption label="Maybe" value="maybe" />
                               </Radio>
                             </div>
                           </div>
