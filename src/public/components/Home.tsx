@@ -14,6 +14,7 @@ import { Checkbox } from "./common/form-elements/Checkbox";
 import { Numberbox } from "./common/form-elements/Numberbox";
 import { TextArea } from "./common/form-elements/TextArea";
 import { Select } from "./common/form-elements/Select";
+import { DatePicker } from "./common/form-elements/DatePicker";
 import * as linq from "linq";
 
 export interface HomeState {
@@ -29,6 +30,7 @@ export interface HomeState {
   mySelectState: string;
   myMultiSelectState: Array<string>;
   mySliderState: number;
+  myDatePickerState: string;
 }
 
 export interface HomeProps {}
@@ -50,7 +52,8 @@ export default class Home extends React.Component<HomeProps, HomeState> {
       myRadioState: "yes",
       mySelectState: "r",
       myMultiSelectState: ["r", "g"],
-      mySliderState: 50
+      mySliderState: 50,
+      myDatePickerState: ""
     };
   }
 
@@ -387,6 +390,27 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                                 step={10}
                                 showToolTip={true}
                                 showHorizontal={true}
+                              />
+                            </div>
+                          </div>
+                          <div className="row">
+                            <div className="col">
+                              <DatePicker
+                                id="MyDatePicker"
+                                label="My Date Picker"
+                                value={this.state.myDatePickerState}
+                                placeholder="Pick a date"
+                                required={true}
+                                onChange={(
+                                  event: React.ChangeEvent<HTMLInputElement>
+                                ) => {
+                                  this.setState({
+                                    myDatePickerState: event.currentTarget.value
+                                  });
+                                }}
+                                //invalidFeedback="Required and between 100 and 200 with step of 50"
+                                controlCol={8}
+                                labelCol={4}
                               />
                             </div>
                           </div>
