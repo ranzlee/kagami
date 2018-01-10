@@ -54,7 +54,8 @@ export class Select extends React.Component<SelectProps, SelectState> {
     let required = this.props.required ? true : false;
     let multiple = this.props.multiple ? true : false;
     let size = this.props.multiple && this.props.size ? this.props.size : null;
-    let defaultOption =
+    let placeholderOption =
+      !this.props.multiple &&
       this.props.placeholderOption != null &&
       this.props.placeholderOption !== "" ? (
         <option value="">{this.props.placeholderOption}</option>
@@ -87,7 +88,7 @@ export class Select extends React.Component<SelectProps, SelectState> {
             multiple={multiple}
             size={size}
           >
-            {defaultOption}
+            {placeholderOption}
             {this.props.children}
           </select>
           <div className="invalid-feedback">
