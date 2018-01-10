@@ -13,7 +13,7 @@
         - "3000"
         - "9229:9229"
       volumes:
-        - .:/usr/src/app
+        - .:/usr/src/app:cached
       links:
         - mongodb
         - redis

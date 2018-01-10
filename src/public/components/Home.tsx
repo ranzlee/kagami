@@ -14,6 +14,7 @@ import { Checkbox } from "./common/form-elements/Checkbox";
 import { Numberbox } from "./common/form-elements/Numberbox";
 import { TextArea } from "./common/form-elements/TextArea";
 import { Select } from "./common/form-elements/Select";
+import * as linq from "linq";
 
 export interface HomeState {
   validateFormOnMount: boolean;
@@ -26,6 +27,7 @@ export interface HomeState {
   myToggleState: boolean;
   myRadioState: string;
   mySelectState: string;
+  myMultiSelectState: Array<string>;
   mySliderState: number;
 }
 
@@ -47,6 +49,7 @@ export default class Home extends React.Component<HomeProps, HomeState> {
       myToggleState: true,
       myRadioState: "yes",
       mySelectState: "r",
+      myMultiSelectState: ["r", "g"],
       mySliderState: 50
     };
   }
@@ -248,9 +251,8 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                           <div className="row">
                             <div className="col">
                               <Radio
-                                id="yes"
-                                label="Yes"
-                                name="required"
+                                id="myRadio"
+                                label="My Radio"
                                 controlCol={8}
                                 labelCol={4}
                                 required={true}
@@ -262,13 +264,86 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                                     myRadioState: event.currentTarget.value
                                   });
                                 }}
+                                onChangeCustomValidation={(
+                                  element: HTMLInputElement
+                                ) => {
+                                  let isValid = true;
+                                  if (element.value !== "yes") {
+                                    isValid = false;
+                                  }
+                                  return {
+                                    isValid: isValid,
+                                    validationMessage: "Value must be Yes."
+                                  };
+                                }}
                                 value={this.state.myRadioState}
                               >
                                 <RadioOption label="Yes" value="yes" />
                                 <RadioOption label="No" value="no" />
+                                <RadioOption label="Maybe" value="maybe" />
                               </Radio>
                             </div>
                           </div>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-lg-6 col-sm-12">
+                          <div className="row">
+                            <div className="col">
+                              <Select
+                                id="MySelect"
+                                label="My Select"
+                                placeholderOption="Pick a color, any color"
+                                controlCol={8}
+                                labelCol={4}
+                                required={true}
+                                invalidFeedback="Required"
+                                onChange={(
+                                  event: React.ChangeEvent<HTMLSelectElement>
+                                ) => {
+                                  this.setState({
+                                    mySelectState: event.currentTarget.value
+                                  });
+                                }}
+                                value={this.state.mySelectState}
+                              >
+                                <option value="r">Red</option>
+                                <option value="g">Green</option>
+                                <option value="b">Blue</option>
+                              </Select>
+                            </div>
+                          </div>
+                          <div className="row">
+                            <div className="col">
+                              <Select
+                                id="MyMultiSelect"
+                                label="My Multi-Select"
+                                controlCol={8}
+                                labelCol={4}
+                                required={true}
+                                invalidFeedback="Required"
+                                multiple={true}
+                                size={5}
+                                onChange={(
+                                  event: React.ChangeEvent<HTMLSelectElement>
+                                ) => {
+                                  this.setState({
+                                    myMultiSelectState: linq
+                                      .from(event.currentTarget.selectedOptions)
+                                      .select(x => x.value)
+                                      .toArray()
+                                  });
+                                }}
+                                value={this.state.myMultiSelectState}
+                              >
+                                <option value="r">Red</option>
+                                <option value="g">Green</option>
+                                <option value="b">Blue</option>
+                              </Select>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-lg-6 col-sm-12">
                           <div className="row">
                             <div className="col">
                               <Toggle
@@ -315,31 +390,6 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                               />
                             </div>
                           </div>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-lg-6 col-sm-12">
-                          <Select
-                            id="MySelect"
-                            label="My Select"
-                            defaultOption="Pick a color, any color"
-                            controlCol={8}
-                            labelCol={4}
-                            required={true}
-                            invalidFeedback="Required"
-                            onChange={(
-                              event: React.ChangeEvent<HTMLSelectElement>
-                            ) => {
-                              this.setState({
-                                mySelectState: event.currentTarget.value
-                              });
-                            }}
-                            value={this.state.mySelectState}
-                          >
-                            <option value="r">Red</option>
-                            <option value="g">Green</option>
-                            <option value="b">Blue</option>
-                          </Select>
                         </div>
                       </div>
                       <div className="row">
