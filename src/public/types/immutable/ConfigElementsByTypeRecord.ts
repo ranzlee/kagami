@@ -1,16 +1,27 @@
-import { Record, List } from 'immutable';
+import { Record, Set } from 'immutable';
+import {GenericPartial} from "./../../../shared/models/Helpers";
+import {ConfigElementType} from "./../../../shared/models/enums/ConfigElementType"
 
 export interface IConfigElementsByType {
-    expressions: List<string>;
-    fields: List<string>;
+    expression: Set<string>;
+    field: Set<string>;
+    [key: string] : any;
 }
 
+export type ConfigElementsByTypeParams = GenericPartial<IConfigElementsByType>;
+
 const defaultConfigElementsByType: IConfigElementsByType = {
-    expressions: List<string>(),
-    fields: List<string>()
+    expression: Set<string>(),
+    field: Set<string>()
 }
 
 export class ConfigElementsByTypeRecord extends Record(defaultConfigElementsByType) implements IConfigElementsByType {
-    expressions: List<string>;
-    fields: List<string>;
+    
+    constructor(params?: ConfigElementsByTypeParams) {
+        params ? super(params) : super();
+    }
+
+    expression: Set<string>;
+    field: Set<string>;
+    [key: string] : any;
 }

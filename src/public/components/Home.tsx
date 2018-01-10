@@ -7,6 +7,7 @@ import { Card } from "./common/containers/Card";
 import { Form } from "./common/form-elements/Form";
 import { Radio } from "./common/form-elements/Radio";
 import { RadioOption } from "./common/form-elements/RadioOption";
+import { Slider } from "./common/form-elements/Slider";
 import { Textbox } from "./common/form-elements/Textbox";
 import { Toggle } from "./common/form-elements/Toggle";
 import { Checkbox } from "./common/form-elements/Checkbox";
@@ -25,6 +26,7 @@ export interface HomeState {
   myToggleState: boolean;
   myRadioState: string;
   mySelectState: string;
+  mySliderState: number;
 }
 
 export interface HomeProps {}
@@ -44,7 +46,8 @@ export default class Home extends React.Component<HomeProps, HomeState> {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.",
       myToggleState: true,
       myRadioState: "",
-      mySelectState: "r"
+      mySelectState: "r",
+      mySliderState: 50
     };
   }
 
@@ -297,6 +300,30 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                                 checked={this.state.myToggleState}
                                 labelOn="Yes"
                                 labelOff="No"
+                              />
+                            </div>
+                          </div>
+                          <div className="row">
+                            <div className="col">
+                              <Slider
+                                id="MySlider"
+                                label="My Slider"
+                                controlCol={8}
+                                labelCol={4}
+                                required={true}
+                                invalidFeedback="Required"
+                                onChange={(
+                                  event: React.ChangeEvent<HTMLInputElement>
+                                ) => {
+                                  this.setState({
+                                    mySliderState:
+                                      event.currentTarget.valueAsNumber
+                                  });
+                                }}
+                                value={this.state.mySliderState}
+                                step={10}
+                                showToolTip={true}
+                                showHorizontal={true}
                               />
                             </div>
                           </div>

@@ -8,14 +8,14 @@ export interface IDomainRecord {
     configurations: Map<string, ConfigurationRecord>;
     configElements: Map<string, ConfigElementRecord>;
     configElementMapping: Map<string, ConfigElementsByTypeRecord>
-    tags: List<string>; 
+    //tags: List<string>; 
 }
 
-export const domainDefaults = {
+const domainDefaults = {
     configurations: Map<string, ConfigurationRecord>(),
     configElements: Map<string, ConfigElementRecord>(),
     configElementMapping: Map<string, ConfigElementsByTypeRecord>(),
-    tags: List<string>()
+    //tags: List<string>()
 }
 
 export class DomainRecord extends Record(domainDefaults) implements IDomainRecord {
@@ -26,5 +26,5 @@ export class DomainRecord extends Record(domainDefaults) implements IDomainRecor
     configurations: Map<string, ConfigurationRecord>;
     configElements: Map<string, ConfigElementRecord>;
     configElementMapping: Map<string, ConfigElementsByTypeRecord>
-    tags: List<string>; 
+    //tags: List<string>; 
 }
