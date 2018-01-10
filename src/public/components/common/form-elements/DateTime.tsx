@@ -3,22 +3,20 @@ import * as ReactDOM from "react-dom";
 import * as FormControl from "./FormControl";
 import * as $ from "jquery";
 
-export interface DatePickerState extends FormControl.FormControlState {}
+export interface DateTimeState extends FormControl.FormControlState {}
 
-export interface DatePickerProps extends FormControl.FormControlProps {
+export interface DateTimeProps extends FormControl.FormControlProps {
+  type: "date" | "datetime" | "datetime-local" | "time";
   required?: boolean;
-  //max?: Date;
-  //min?: Date;
-  //step?: number;
-  value: string;
+  max?: Date;
+  min?: Date;
+  step?: number;
+  value: Date;
   placeholder: string;
 }
 
-export class DatePicker extends React.Component<
-  DatePickerProps,
-  DatePickerState
-> {
-  constructor(props: DatePickerProps) {
+export class DateTime extends React.Component<DateTimeProps, DateTimeState> {
+  constructor(props: DateTimeProps) {
     super(props);
     this.state = { invalidFeedback: this.props.invalidFeedback };
   }
@@ -36,23 +34,6 @@ export class DatePicker extends React.Component<
 
   componentDidMount() {
     let thisInstance = this.instance;
-    ($(thisInstance) as any)
-      .datepicker({
-        templates: {
-          leftArrow: '<i class="now-ui-icons arrows-1_minimal-left"></i>',
-          rightArrow: '<i class="now-ui-icons arrows-1_minimal-right"></i>'
-        }
-      })
-      .on("show", () => {
-        $(".datepicker").addClass("open");
-        let datepicker_color = $(thisInstance).data("datepicker-color");
-        if (datepicker_color && datepicker_color.length != 0) {
-          $(".datepicker").addClass("datepicker-" + datepicker_color + "");
-        }
-      })
-      .on("hide", () => {
-        $(".datepicker").removeClass("open");
-      });
     if (this.props.doCustomValidationOnMount) {
       FormControl.OnChangeCustomValidation(this, this.instance);
     }
@@ -63,9 +44,9 @@ export class DatePicker extends React.Component<
 
   render() {
     let required = this.props.required ? true : false;
-    //let step = this.props.step ? this.props.step : null;
-    //let max = this.props.max ? this.props.max.toDateString() : null;
-    //let min = this.props.min ? this.props.min.toDateString() : null;
+    let step = this.props.step ? this.props.step : "";
+    let max = this.props.max ? this.props.max.toDateString() : "";
+    let min = this.props.min ? this.props.min.toDateString() : "";
     let extendedProps = FormControl.FormControlExtendedProperties(this.props);
     return (
       <div className="row form-group">
@@ -78,13 +59,15 @@ export class DatePicker extends React.Component<
               //*** every wrapped component needs this!
               this.instance = instance;
             }}
-            className="form-control date-picker"
+            className="form-control"
             id={
               this.props.id //*** end
             }
             name={this.props.name}
-            type="text"
-            value={this.props.value}
+            type={this.props.type}
+            value={
+              this.props.value != null ? this.props.value.toDateString() : ""
+            }
             placeholder={this.props.placeholder}
             disabled={
               this.props.disabled != null
@@ -102,10 +85,9 @@ export class DatePicker extends React.Component<
             }
             onChange={this.onChange}
             required={required}
-            //min={min}
-            //max={max}
-            //step={step}
-            data-datepicker-color=""
+            min={min}
+            max={max}
+            step={step}
           />
           <div className="invalid-feedback">
             {this.state.invalidFeedback ? this.state.invalidFeedback : ""}
