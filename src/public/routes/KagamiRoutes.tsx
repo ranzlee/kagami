@@ -6,6 +6,7 @@ import Home from "./../components/Home";
 import About from "./../components/About";
 import Login from "./../components/login/Login";
 import ConfigurationRoutes from "./ConfigurationRoutes";
+import ConfigElementRoutes from "./ConfigElementRoutes";
 import * as UserService from "./../services/userService";
 
 export default class KagamiRoutes extends React.Component {
@@ -67,6 +68,7 @@ export default class KagamiRoutes extends React.Component {
         <Route exact path="/about" component={About} />
         <Route exact path="/login" component={Login} />
         <Route path="/configuration" component={ConfigurationRoutes} />
+        <Route path="/configElement" component={ConfigElementRoutes} />
       </div>
     );
   }
