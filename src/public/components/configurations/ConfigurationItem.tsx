@@ -3,6 +3,7 @@ import { Configuration } from "./../../../shared/models/configuration/Configurat
 import { ConfigElementType } from "../../../shared/models/enums/ConfigElementType";
 import { Link } from "react-router-dom";
 import { Textbox } from "./../common/form-elements/Textbox"
+import { TextArea } from "../common/form-elements/TextArea";
 
 export interface IOwnProps {
   id: string;
@@ -43,7 +44,7 @@ export class ConfigurationItem extends React.Component<IOwnProps & IConnectedSta
       <div>
         <div className="row">
           <Textbox
-            id={'ConfigurationName_' + configuration._id}
+            id={'Configuration_Name_' + configuration._id}
             name="name"
             type="text"
             required={true}
@@ -55,21 +56,17 @@ export class ConfigurationItem extends React.Component<IOwnProps & IConnectedSta
             controlColSm={9} />
         </div>
         <div className="row">
-          <div className="col-xs">
-            <label>Description:</label>
-          </div>
-          <div className="col-xs">
-            <textarea
-              className="form-control"
-              placeholder="Description"
-              aria-label="Description"
-              name="description"
-              value={configuration.description}
-              onChange={this.updateClickHandler}
-
-            />
-          </div>
-          <div className="col-xs">
+          <TextArea
+            id={'Configuration_Description_' + configuration._id}
+            name="description"
+            label="Description: "
+            placeholder="Description"
+            value={configuration.description}
+            onChange={this.updateClickHandler}
+            labelColSm={3}
+            controlColSm={6}
+            rows={5} />
+          <div className="col-sm">
             <Link to={editUrl}>
               <button type="button" className="btn btn-primary">
                 Edit
@@ -77,7 +74,7 @@ export class ConfigurationItem extends React.Component<IOwnProps & IConnectedSta
             </Link>
           </div>
         </div>
-      </div>
+      </div >
     );
   }
 }

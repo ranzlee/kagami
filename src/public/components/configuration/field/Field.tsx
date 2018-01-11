@@ -1,6 +1,7 @@
 import * as React from "react";
 import { FieldRecord } from "./../../../../shared/models/configuration/elements/Field";
 import { Textbox } from "../../common/form-elements/Textbox";
+import { TextArea } from "../../common/form-elements/TextArea";
 
 export interface IOwnProps {
   fieldId: string;
@@ -33,10 +34,10 @@ export class Field extends React.Component<IOwnProps & IConnectedState & IConnec
   render() {
     const { field } = this.props;
     return (
-      <div>
+      <div className="container-fluid">
         <div className="row">
           <Textbox
-            id={'Field_' + field._id}
+            id={'Field_Name_' + field._id}
             name="name"
             type="text"
             required={true}
@@ -48,20 +49,16 @@ export class Field extends React.Component<IOwnProps & IConnectedState & IConnec
             controlColSm={9} />
         </div>
         <div className="row">
-          <div className="col-xs">
-            <label>Description:</label>
-          </div>
-          <div className="col-xs">
-            <textarea
-              className="form-control"
-              placeholder="Description"
-              aria-label="Description"
-              name="description"
-              value={field.description}
-              onChange={this.updateClickHandler}
-
-            />
-          </div>
+          <TextArea
+            id={'Field_Description_' + field._id}
+            name="description"
+            label="Description: "
+            placeholder="Description"
+            value={field.description}
+            onChange={this.updateClickHandler}
+            labelColSm={3}
+            controlColSm={9}
+            rows={5} />
         </div>
       </div>
     )
