@@ -3,7 +3,7 @@ import * as React from 'react';
 export interface AlertListProps {
     position: string;
     alerts: any;
-    timeout: number;
+    timeout?: number;
     onDismiss: any;
 }
 

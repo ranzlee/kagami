@@ -1,12 +1,29 @@
-import { applyMiddleware, createStore, compose } from "redux";
-import { createLogger } from 'redux-logger';
-import { createEpicMiddleware } from 'redux-observable';
-import { rootEpic } from './epics/RootEpic';
-import { perflogger } from 'redux-perf-middleware';
+import {
+    applyMiddleware,
+    createStore,
+    compose
+} from "redux";
+import {
+    createLogger
+} from 'redux-logger';
+import {
+    createEpicMiddleware
+} from 'redux-observable';
+import {
+    rootEpic
+} from './epics/RootEpic';
+import {
+    perflogger
+} from 'redux-perf-middleware';
 import * as Immutable from 'immutable';
 import reducer from "./reducers/RootReducer";
-import { ConfigurationRecord } from "./../shared/models/configuration/Configuration";
-import { AppStoreRecord } from "./types/AppStore";
+import {
+    ConfigurationRecord
+} from "./../shared/models/configuration/Configuration";
+import {
+    AppStoreRecord
+} from "./types/AppStore";
+import KagamiRoutes from "./routes/KagamiRoutes";
 
 const logger = createLogger({
     // .. options
@@ -30,4 +47,15 @@ const enhancer = composeEnhancers(
     // other store enhancers if any
 );
 
-export const Store = createStore(reducer, new AppStoreRecord(), enhancer);
+declare const module: any;
+
+export function configureStore() {
+    const store = createStore(reducer, new AppStoreRecord(), enhancer);
+    if (module.hot) {
+        module.hot.accept('./reducers/RootReducer', () => {
+            console.log('Store Changed');
+            store.replaceReducer(require('./reducers/RootReducer').default);
+        });
+    }
+    return store;
+}

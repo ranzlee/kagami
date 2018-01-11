@@ -6,7 +6,7 @@
   "scripts": {
     "build-client-prod": "webpack --config webpack.prod.js --display-error-details",
     "build-server": "tsc --project ./src/tsconfig.json",
-    "nodemon-and-tsc-watch": "concurrently --kill-others \"nodemon --inspect=0.0.0.0:9229 dist/server.js\" \"tsc --project ./src/tsconfig.json --watch\"",
+    "nodemon-and-tsc-watch": "concurrently --kill-others \"nodemon dist/server.js\" \"tsc --project ./src/tsconfig.json --watch\"",
     "start-dev": "npm run copy-dev-config && npm run nodemon-and-tsc-watch",
     "start-prod": "npm run build-client-prod && npm run build-server && npm run copy-prod-config && nodemon dist/server.js",
     "copy-dev-config": "node copyDevConfig.js",

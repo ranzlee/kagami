@@ -25,7 +25,6 @@ export class NotificationsList extends React.Component<IOwnProps & IConnectedSta
                 <AlertList
                     position="top-right"
                     alerts={this.props.notifications}
-                    timeout={4000}
                     onDismiss={(notification: any) => this.props.removeNotification(notification)}
                 />
             </div>
