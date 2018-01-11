@@ -64,6 +64,13 @@ export class Slider extends React.Component<SliderProps, SliderState> {
             ? this.props.form.props.disabled
             : false;
 
+      const sliderReadOnly =
+        this.props.readOnly != null
+          ? this.props.readOnly
+          : this.props.form && this.props.form.props.readOnly != null
+            ? this.props.form.props.readOnly
+            : false;
+
       if (createSlider) {
         noUiSlider.create(slider, {
           start: this.props.value,
@@ -79,7 +86,7 @@ export class Slider extends React.Component<SliderProps, SliderState> {
       }
       slider.style.marginTop = "20px";
       (slider as any).noUiSlider.on("change", this.onChange);
-      if (sliderDisabled) {
+      if (sliderDisabled || sliderReadOnly) {
         slider.setAttribute("disabled", "true");
       } else {
         slider.removeAttribute("disabled");
