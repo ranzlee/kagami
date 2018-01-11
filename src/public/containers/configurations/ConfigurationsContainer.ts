@@ -21,7 +21,8 @@ export const mapDispatchToProps = (dispatch: Dispatch<actions.ConfigurationActio
             const notf: NotificationParams = {
                 id: Guid.raw(),
                 type: "success",
-                message: "Configuration Added!!!"
+                message: "Configuration Added!!!",
+                timeoutInMs: undefined
             };
             dispatch(notificationActions.createNotification(notf))
         },

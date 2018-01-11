@@ -6,19 +6,19 @@ export interface INotification {
     id: string;
     headline: string;
     showIcon: boolean;
-    timeoutInMs: number; 
+    timeoutInMs: number;
     type: string;
 }
 
 export type NotificationParams = GenericPartial<INotification>
 
-const notificationDefaults : INotification = {
+const notificationDefaults: INotification = {
     message: "",
     id: "",
-    headline:"",
+    headline: "",
     showIcon: false,
     type: "success",
-    timeoutInMs: 5000 
+    timeoutInMs: undefined
 }
 
 export class NotificationRecord extends Record(notificationDefaults) implements INotification {
