@@ -10,7 +10,7 @@ import { Textbox } from "./Textbox";
 import { Toggle } from "./Toggle";
 import { Select } from "./Select";
 import { Slider } from "./Slider";
-import { DatePicker } from "./DatePicker";
+import { DateTime } from "./DateTime";
 
 export interface FormState {
   formWasValidated: string;
@@ -148,7 +148,7 @@ export class Form extends React.Component<FormProps, FormState> {
       (child as any).type === Toggle ||
       (child as any).type === Select ||
       (child as any).type === Slider ||
-      (child as any).type === DatePicker
+      (child as any).type === DateTime
     ) {
       return true;
     }

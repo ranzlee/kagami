@@ -14,8 +14,9 @@ import { Checkbox } from "./common/form-elements/Checkbox";
 import { Numberbox } from "./common/form-elements/Numberbox";
 import { TextArea } from "./common/form-elements/TextArea";
 import { Select } from "./common/form-elements/Select";
-import { DatePicker } from "./common/form-elements/DatePicker";
+import { DateTime } from "./common/form-elements/DateTime";
 import * as linq from "linq";
+import * as DateService from "../../shared/services/DateService";
 
 export interface HomeState {
   validateFormOnMount: boolean;
@@ -30,7 +31,7 @@ export interface HomeState {
   mySelectState: string;
   myMultiSelectState: Array<string>;
   mySliderState: number;
-  myDatePickerState: string;
+  myDatePickerState: Date;
 }
 
 export interface HomeProps {}
@@ -53,9 +54,12 @@ export default class Home extends React.Component<HomeProps, HomeState> {
       mySelectState: "r",
       myMultiSelectState: ["r", "g"],
       mySliderState: 50,
-      myDatePickerState: ""
+      myDatePickerState: DateService.NowAsUtc()
     };
+    this.maxDate = "2020-01-01";
   }
+
+  maxDate: string;
 
   handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     alert("form was submitted!");
@@ -395,9 +399,11 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                           </div>
                           <div className="row">
                             <div className="col">
-                              <DatePicker
-                                id="MyDatePicker"
-                                label="My Date Picker"
+                              <DateTime
+                                id="MyDateTime"
+                                label="My Date"
+                                type="date"
+                                dateKind="utc"
                                 value={this.state.myDatePickerState}
                                 placeholder="Pick a date"
                                 required={true}
@@ -405,12 +411,22 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                                   event: React.ChangeEvent<HTMLInputElement>
                                 ) => {
                                   this.setState({
-                                    myDatePickerState: event.currentTarget.value
+                                    myDatePickerState:
+                                      event.currentTarget.valueAsDate
                                   });
                                 }}
-                                //invalidFeedback="Required and between 100 and 200 with step of 50"
+                                invalidFeedback={
+                                  "Required and must be a valid date between " +
+                                  DateService.NowAsLocalString() +
+                                  " and " +
+                                  DateService.StringDateAsLocalString(
+                                    this.maxDate
+                                  )
+                                }
                                 controlCol={8}
                                 labelCol={4}
+                                min={DateService.NowAsUtc()}
+                                max={DateService.StringDateAsUtc(this.maxDate)}
                               />
                             </div>
                           </div>
