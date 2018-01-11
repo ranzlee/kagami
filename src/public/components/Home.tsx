@@ -16,7 +16,7 @@ import { TextArea } from "./common/form-elements/TextArea";
 import { Select } from "./common/form-elements/Select";
 import { DateTime } from "./common/form-elements/DateTime";
 import * as linq from "linq";
-import * as DateService from "../../shared/services/DateService";
+import * as Moment from "moment";
 
 export interface HomeState {
   validateFormOnMount: boolean;
@@ -31,7 +31,7 @@ export interface HomeState {
   mySelectState: string;
   myMultiSelectState: Array<string>;
   mySliderState: number;
-  myDatePickerState: Date;
+  myDatePickerState: Moment.Moment;
 }
 
 export interface HomeProps {}
@@ -54,7 +54,7 @@ export default class Home extends React.Component<HomeProps, HomeState> {
       mySelectState: "r",
       myMultiSelectState: ["r", "g"],
       mySliderState: 50,
-      myDatePickerState: DateService.NowAsUtc()
+      myDatePickerState: Moment()
     };
     this.maxDate = "2020-01-01";
   }
@@ -403,7 +403,6 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                                 id="MyDateTime"
                                 label="My Date"
                                 type="date"
-                                dateKind="utc"
                                 value={this.state.myDatePickerState}
                                 placeholder="Pick a date"
                                 required={true}
@@ -411,22 +410,21 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                                   event: React.ChangeEvent<HTMLInputElement>
                                 ) => {
                                   this.setState({
-                                    myDatePickerState:
+                                    myDatePickerState: Moment(
                                       event.currentTarget.valueAsDate
+                                    )
                                   });
                                 }}
                                 invalidFeedback={
                                   "Required and must be a valid date between " +
-                                  DateService.NowAsLocalString() +
+                                  Moment().format("MM/DD/YYYY") +
                                   " and " +
-                                  DateService.StringDateAsLocalString(
-                                    this.maxDate
-                                  )
+                                  Moment(this.maxDate).format("MM/DD/YYYY")
                                 }
                                 controlCol={8}
                                 labelCol={4}
-                                min={DateService.NowAsUtc()}
-                                max={DateService.StringDateAsUtc(this.maxDate)}
+                                min={Moment()}
+                                max={Moment(this.maxDate)}
                               />
                             </div>
                           </div>

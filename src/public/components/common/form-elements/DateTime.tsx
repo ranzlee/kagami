@@ -2,18 +2,17 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as FormControl from "./FormControl";
 import * as $ from "jquery";
-import * as moment from "moment";
+import { Moment } from "moment";
 
 export interface DateTimeState extends FormControl.FormControlState {}
 
 export interface DateTimeProps extends FormControl.FormControlProps {
   type: "date" | "datetime-local" | "time";
-  dateKind: "utc" | "local";
   required?: boolean;
-  max?: Date;
-  min?: Date;
+  max?: Moment;
+  min?: Moment;
   step?: number;
-  value: Date;
+  value: Moment;
   placeholder: string;
 }
 
@@ -21,9 +20,11 @@ export class DateTime extends React.Component<DateTimeProps, DateTimeState> {
   constructor(props: DateTimeProps) {
     super(props);
     this.state = { invalidFeedback: this.props.invalidFeedback };
+    this.dateInputSupported = true;
   }
 
   instance: HTMLInputElement;
+  dateInputSupported: boolean;
 
   onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (this.props.onChange) {
@@ -35,7 +36,9 @@ export class DateTime extends React.Component<DateTimeProps, DateTimeState> {
   };
 
   componentDidMount() {
-    let thisInstance = this.instance;
+    if ($(this.instance).prop("type") != "date") {
+      this.dateInputSupported = false;
+    }
     if (this.props.doCustomValidationOnMount) {
       FormControl.OnChangeCustomValidation(this, this.instance);
     }
@@ -48,25 +51,6 @@ export class DateTime extends React.Component<DateTimeProps, DateTimeState> {
     let dateFormat = "YYYY-MM-DD";
     let required = this.props.required ? true : false;
     let step = this.props.step ? this.props.step : "";
-    let max = this.props.max
-      ? this.props.dateKind === "utc"
-        ? moment(this.props.max)
-            .utc()
-            .format(dateFormat)
-        : moment(this.props.max)
-            .local()
-            .format(dateFormat)
-      : "";
-
-    let min = this.props.min
-      ? this.props.dateKind === "utc"
-        ? moment(this.props.min)
-            .utc()
-            .format(dateFormat)
-        : moment(this.props.min)
-            .local()
-            .format(dateFormat)
-      : "";
     let extendedProps = FormControl.FormControlExtendedProperties(this.props);
     return (
       <div className="row form-group">
@@ -81,16 +65,12 @@ export class DateTime extends React.Component<DateTimeProps, DateTimeState> {
             className="form-control"
             id={this.props.id}
             name={this.props.name}
-            type={this.props.type}
+            type={this.dateInputSupported ? this.props.type : "text"}
             value={
               this.props.value != null
-                ? this.props.dateKind === "utc"
-                  ? moment(this.props.value)
-                      .utc()
-                      .format(dateFormat)
-                  : moment(this.props.value)
-                      .local()
-                      .format(dateFormat)
+                ? this.props.value.isUTC()
+                  ? this.props.value.format(dateFormat)
+                  : this.props.value.utc().format(dateFormat)
                 : ""
             }
             placeholder={this.props.placeholder}
@@ -110,8 +90,20 @@ export class DateTime extends React.Component<DateTimeProps, DateTimeState> {
             }
             onChange={this.onChange}
             required={required}
-            min={min}
-            max={max}
+            min={
+              this.props.min != null
+                ? this.props.min.isUTC()
+                  ? this.props.min.format(dateFormat)
+                  : this.props.min.utc().format(dateFormat)
+                : ""
+            }
+            max={
+              this.props.max != null
+                ? this.props.max.isUTC()
+                  ? this.props.max.format(dateFormat)
+                  : this.props.max.utc().format(dateFormat)
+                : ""
+            }
             step={step}
             pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
           />
