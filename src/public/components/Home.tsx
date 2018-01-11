@@ -16,6 +16,7 @@ import { TextArea } from "./common/form-elements/TextArea";
 import { Select } from "./common/form-elements/Select";
 import { DateTime } from "./common/form-elements/DateTime";
 import * as linq from "linq";
+import * as moment from "moment";
 
 export interface HomeState {
   validateFormOnMount: boolean;
@@ -410,9 +411,24 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                                       event.currentTarget.valueAsDate
                                   });
                                 }}
-                                //invalidFeedback="Required and between 100 and 200 with step of 50"
+                                invalidFeedback={
+                                  "Required and must be a valid date between " +
+                                  moment()
+                                    .local()
+                                    .format("MM/DD/YYYY") +
+                                  " and " +
+                                  moment("2020-12-31")
+                                    .local()
+                                    .format("MM/DD/YYYY")
+                                }
                                 controlCol={8}
                                 labelCol={4}
+                                min={moment()
+                                  .local()
+                                  .toDate()}
+                                max={moment("2020-12-31")
+                                  .local()
+                                  .toDate()}
                               />
                             </div>
                           </div>

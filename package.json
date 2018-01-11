@@ -62,6 +62,7 @@
     "linq": "^3.0.9",
     "lodash": "^4.17.4",
     "lusca": "^1.5.2",
+    "moment": "^2.20.1",
     "mongoose": "^4.13.7",
     "morgan": "^1.9.0",
     "nodemailer": "^4.4.1",

@@ -2,11 +2,12 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as FormControl from "./FormControl";
 import * as $ from "jquery";
+import * as moment from "moment";
 
 export interface DateTimeState extends FormControl.FormControlState {}
 
 export interface DateTimeProps extends FormControl.FormControlProps {
-  type: "date" | "datetime" | "datetime-local" | "time";
+  type: "date" | "datetime-local" | "time";
   required?: boolean;
   max?: Date;
   min?: Date;
@@ -43,10 +44,11 @@ export class DateTime extends React.Component<DateTimeProps, DateTimeState> {
   }
 
   render() {
+    let dateFormat = "YYYY-MM-DD";
     let required = this.props.required ? true : false;
     let step = this.props.step ? this.props.step : "";
-    let max = this.props.max ? this.props.max.toDateString() : "";
-    let min = this.props.min ? this.props.min.toDateString() : "";
+    let max = this.props.max ? moment(this.props.max).format(dateFormat) : "";
+    let min = this.props.min ? moment(this.props.min).format(dateFormat) : "";
     let extendedProps = FormControl.FormControlExtendedProperties(this.props);
     return (
       <div className="row form-group">
@@ -56,17 +58,18 @@ export class DateTime extends React.Component<DateTimeProps, DateTimeState> {
         <div className={extendedProps.formControlClasses}>
           <input
             ref={instance => {
-              //*** every wrapped component needs this!
               this.instance = instance;
             }}
             className="form-control"
-            id={
-              this.props.id //*** end
-            }
+            id={this.props.id}
             name={this.props.name}
             type={this.props.type}
             value={
-              this.props.value != null ? this.props.value.toDateString() : ""
+              this.props.value != null
+                ? moment(this.props.value)
+                    .utc()
+                    .format(dateFormat)
+                : ""
             }
             placeholder={this.props.placeholder}
             disabled={
@@ -88,6 +91,7 @@ export class DateTime extends React.Component<DateTimeProps, DateTimeState> {
             min={min}
             max={max}
             step={step}
+            pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
           />
           <div className="invalid-feedback">
             {this.state.invalidFeedback ? this.state.invalidFeedback : ""}
