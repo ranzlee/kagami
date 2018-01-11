@@ -8,6 +8,7 @@ export interface DateTimeState extends FormControl.FormControlState {}
 
 export interface DateTimeProps extends FormControl.FormControlProps {
   type: "date" | "datetime-local" | "time";
+  dateKind: "utc" | "local";
   required?: boolean;
   max?: Date;
   min?: Date;
@@ -47,8 +48,25 @@ export class DateTime extends React.Component<DateTimeProps, DateTimeState> {
     let dateFormat = "YYYY-MM-DD";
     let required = this.props.required ? true : false;
     let step = this.props.step ? this.props.step : "";
-    let max = this.props.max ? moment(this.props.max).format(dateFormat) : "";
-    let min = this.props.min ? moment(this.props.min).format(dateFormat) : "";
+    let max = this.props.max
+      ? this.props.dateKind === "utc"
+        ? moment(this.props.max)
+            .utc()
+            .format(dateFormat)
+        : moment(this.props.max)
+            .local()
+            .format(dateFormat)
+      : "";
+
+    let min = this.props.min
+      ? this.props.dateKind === "utc"
+        ? moment(this.props.min)
+            .utc()
+            .format(dateFormat)
+        : moment(this.props.min)
+            .local()
+            .format(dateFormat)
+      : "";
     let extendedProps = FormControl.FormControlExtendedProperties(this.props);
     return (
       <div className="row form-group">
@@ -66,9 +84,13 @@ export class DateTime extends React.Component<DateTimeProps, DateTimeState> {
             type={this.props.type}
             value={
               this.props.value != null
-                ? moment(this.props.value)
-                    .utc()
-                    .format(dateFormat)
+                ? this.props.dateKind === "utc"
+                  ? moment(this.props.value)
+                      .utc()
+                      .format(dateFormat)
+                  : moment(this.props.value)
+                      .local()
+                      .format(dateFormat)
                 : ""
             }
             placeholder={this.props.placeholder}

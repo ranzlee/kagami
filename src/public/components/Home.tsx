@@ -16,7 +16,7 @@ import { TextArea } from "./common/form-elements/TextArea";
 import { Select } from "./common/form-elements/Select";
 import { DateTime } from "./common/form-elements/DateTime";
 import * as linq from "linq";
-import * as moment from "moment";
+import * as DateService from "../../shared/services/DateService";
 
 export interface HomeState {
   validateFormOnMount: boolean;
@@ -54,9 +54,12 @@ export default class Home extends React.Component<HomeProps, HomeState> {
       mySelectState: "r",
       myMultiSelectState: ["r", "g"],
       mySliderState: 50,
-      myDatePickerState: null
+      myDatePickerState: DateService.NowAsUtc()
     };
+    this.maxDate = "2020-01-01";
   }
+
+  maxDate: string;
 
   handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     alert("form was submitted!");
@@ -400,6 +403,7 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                                 id="MyDateTime"
                                 label="My Date"
                                 type="date"
+                                dateKind="utc"
                                 value={this.state.myDatePickerState}
                                 placeholder="Pick a date"
                                 required={true}
@@ -413,22 +417,16 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                                 }}
                                 invalidFeedback={
                                   "Required and must be a valid date between " +
-                                  moment()
-                                    .local()
-                                    .format("MM/DD/YYYY") +
+                                  DateService.NowAsLocalString() +
                                   " and " +
-                                  moment("2020-12-31")
-                                    .local()
-                                    .format("MM/DD/YYYY")
+                                  DateService.StringDateAsLocalString(
+                                    this.maxDate
+                                  )
                                 }
                                 controlCol={8}
                                 labelCol={4}
-                                min={moment()
-                                  .local()
-                                  .toDate()}
-                                max={moment("2020-12-31")
-                                  .local()
-                                  .toDate()}
+                                min={DateService.NowAsUtc()}
+                                max={DateService.StringDateAsUtc(this.maxDate)}
                               />
                             </div>
                           </div>
