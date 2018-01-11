@@ -57,5 +57,13 @@ export function configureStore() {
             store.replaceReducer(require('./reducers/RootReducer').default);
         });
     }
+    if (module.hot) {
+        module.hot.accept('./epics/RootEpic', () => {
+            console.log('Epics Changed');
+            var epic = require('./epics/RootEpic').rootEpic;
+
+            epicMiddleware.replaceEpic(epic);
+        });
+    }
     return store;
 }
