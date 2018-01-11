@@ -67,7 +67,7 @@ export class DateTime extends React.Component<DateTimeProps, DateTimeState> {
             name={this.props.name}
             type={this.dateInputSupported ? this.props.type : "text"}
             value={
-              this.props.value != null
+              this.props.value != null && this.props.value.isValid()
                 ? this.props.value.isUTC()
                   ? this.props.value.format(dateFormat)
                   : this.props.value.utc().format(dateFormat)
