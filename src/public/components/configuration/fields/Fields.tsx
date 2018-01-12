@@ -3,6 +3,7 @@ import Config from "./../../../containers/configuration/fields/FieldsContainer";
 import Field from "./../../../containers/configuration/field/FieldContainer"
 import { RouteComponentProps } from "react-router";
 import { Set } from "immutable";
+import FieldItem from "./../../../containers/configuration/fields/FieldItemContainer";
 
 interface IRouteParams {
   configId: string;
@@ -27,7 +28,7 @@ export class Fields extends React.Component<IOwnProps & IConnectedState & IConne
     var returnElements: JSX.Element[] = [];
 
     fieldIds.toIndexedSeq().toArray().forEach(fieldId => {
-      returnElements.push(<Field fieldId={fieldId} key={fieldId} />);
+      returnElements.push(<FieldItem fieldId={fieldId} key={fieldId} />);
     });
 
     return returnElements;

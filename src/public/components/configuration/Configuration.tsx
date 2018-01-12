@@ -48,7 +48,7 @@ export class Configuration extends React.Component<IOwnProps & IConnectedState &
     const editFieldUrl = `/configuration/${configuration._id}/field`;
 
     return (
-      <div>
+      <div className="container-fluid">
         <h2>
           Configuration: {configuration.name}
         </h2>
