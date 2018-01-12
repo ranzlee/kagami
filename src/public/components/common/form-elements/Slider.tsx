@@ -3,7 +3,9 @@ import * as ReactDOM from "react-dom";
 import * as FormControl from "./FormControl";
 const noUiSlider = require("../../../assets/css/themes/now-ui/js/plugins/nouislider.min.js");
 
-export interface SliderState extends FormControl.FormControlState {}
+export interface SliderState extends FormControl.FormControlState {
+  value: number;
+}
 
 export interface SliderProps extends FormControl.FormControlProps {
   value: number;
@@ -16,10 +18,14 @@ export interface SliderProps extends FormControl.FormControlProps {
 export class Slider extends React.Component<SliderProps, SliderState> {
   constructor(props: SliderProps) {
     super(props);
-    this.state = { invalidFeedback: this.props.invalidFeedback };
+    this.state = {
+      invalidFeedback: this.props.invalidFeedback,
+      value: this.props.value
+    };
   }
 
-  instance: HTMLDivElement;
+  //hidden field keeps the slider value to check custom validation against
+  instance: HTMLInputElement;
 
   onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (this.props.readOnly != null && this.props.readOnly) {
@@ -33,17 +39,24 @@ export class Slider extends React.Component<SliderProps, SliderState> {
         return;
       }
     }
-    if (this.props.onChange) {
-      this.props.onChange(event);
+
+    //set the hidden input to the selected slider value
+    var slider = document.getElementById("sliderRegular");
+    if (slider) {
+      this.instance.value = (slider as any).noUiSlider.get();
+      if (this.props.onChangeCustomValidation) {
+        this.props.onChangeCustomValidation(this.instance);
+        FormControl.OnChangeCustomValidation(this, this.instance);
+      }
     }
   };
 
   componentDidMount() {
     if (this.props.doCustomValidationOnMount) {
-      //FormControl.OnChangeCustomValidation(this, this.instance);
+      FormControl.OnChangeCustomValidation(this, this.instance);
     }
     if (this.props.form) {
-      //this.props.form.registerFormCustomValidations(this, this.instance);
+      this.props.form.registerFormCustomValidations(this, this.instance);
     }
 
     this.renderSlider(true);
@@ -72,6 +85,8 @@ export class Slider extends React.Component<SliderProps, SliderState> {
             : false;
 
       if (createSlider) {
+        //var input = document.createElement("hiddenInput");
+
         noUiSlider.create(slider, {
           start: this.props.value,
           connect: [true, false],
@@ -83,9 +98,9 @@ export class Slider extends React.Component<SliderProps, SliderState> {
           step: this.props.step ? this.props.step : 1,
           tooltips: this.props.showToolTip ? this.props.showToolTip : false
         });
+        slider.style.marginTop = "20px";
       }
-      slider.style.marginTop = "20px";
-      (slider as any).noUiSlider.on("change", this.onChange);
+      (slider as any).noUiSlider.on("change", this.onChange.bind(this));
       if (sliderDisabled || sliderReadOnly) {
         slider.setAttribute("disabled", "true");
       } else {
@@ -102,12 +117,14 @@ export class Slider extends React.Component<SliderProps, SliderState> {
       <div className="row form-group">
         <div className={extendedProps.labelClasses}>{this.props.label}</div>
         <div className={extendedProps.formControlClasses}>
-          <div
+          <div id="sliderRegular" className="slider" />
+          <input
+            id="hiddenInput"
             ref={instance => {
               this.instance = instance;
             }}
-            id="sliderRegular"
-            className="slider"
+            type="hidden"
+            value={this.state.value}
           />
           <div className="invalid-feedback">
             {this.state.invalidFeedback ? this.state.invalidFeedback : ""}

@@ -390,6 +390,18 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                                       event.currentTarget.valueAsNumber
                                   });
                                 }}
+                                onChangeCustomValidation={(
+                                  element: HTMLInputElement
+                                ) => {
+                                  let isValid = true;
+                                  if (element.value !== "50") {
+                                    isValid = false;
+                                  }
+                                  return {
+                                    isValid: isValid,
+                                    validationMessage: "Value must be 50."
+                                  };
+                                }}
                                 value={this.state.mySliderState}
                                 step={10}
                                 showToolTip={true}
