@@ -13,9 +13,48 @@
 //bootstrap social buttons
 @import "lib/bootstrap-social.scss";
 
+@import "../../../../node_modules/react-datepicker/src/stylesheets/datepicker.scss";
+
 //custom globals
 body {
   margin-top: 80px;
+}
+
+//react datepicker
+.react-datepicker__time-container
+  .react-datepicker__time
+  .react-datepicker__time-box
+  ul.react-datepicker__time-list {
+  list-style: none !important;
+  margin: 0 !important;
+  //height: calc(195px + (1.7rem / 2)) !important;
+  overflow-y: scroll !important;
+  padding-right: 30px !important;
+  width: 200px !important;
+  word-wrap: normal !important;
+}
+
+.react-datepicker__time-container
+  .react-datepicker__time
+  .react-datepicker__time-box
+  ul.react-datepicker__time-list
+  li.react-datepicker__time-list-item {
+  margin-left: -40px !important;
+}
+
+.react-datepicker__time-container {
+  float: right !important;
+  border-left: 1px solid #aeaeae !important;
+  //width: 110px !important;
+}
+
+.react-datepicker__time-container--with-today-button {
+  display: inline !important;
+  border: 1px solid #aeaeae !important;
+  border-radius: 0.3rem !important;
+  position: absolute !important;
+  right: -73px !important;
+  top: 0 !important;
 }
 
 .bootstrap-switch {

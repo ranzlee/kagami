@@ -15,6 +15,7 @@ import { Numberbox } from "./common/form-elements/Numberbox";
 import { TextArea } from "./common/form-elements/TextArea";
 import { Select } from "./common/form-elements/Select";
 import { DateTime } from "./common/form-elements/DateTime";
+import { DateTimePicker } from "./common/form-elements/DateTimePicker";
 import * as linq from "linq";
 import * as Moment from "moment";
 
@@ -425,6 +426,32 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                                 labelCol={4}
                                 min={Moment()}
                                 max={Moment(this.maxDate)}
+                              />
+                            </div>
+                          </div>
+
+                          <div className="row">
+                            <div className="col">
+                              <DateTimePicker
+                                id="MyDateTimePicker"
+                                label="My Date Time Picker"
+                                value={this.state.myDatePickerState}
+                                placeholder="Pick a date - MM/DD/YYYY HH:MM AM or PM"
+                                invalidFeedback={
+                                  "Required and must be a valid date between " +
+                                  Moment().format("MM/DD/YYYY") +
+                                  " and " +
+                                  Moment(this.maxDate).format("MM/DD/YYYY")
+                                }
+                                controlCol={8}
+                                labelCol={4}
+                                required={true}
+                                minDate={Moment()}
+                                maxDate={Moment(this.maxDate)}
+                                //todayButton="Today"
+                                showMonthDropdown={true}
+                                showYearDropdown={true}
+                                showTimeSelect={true}
                               />
                             </div>
                           </div>
