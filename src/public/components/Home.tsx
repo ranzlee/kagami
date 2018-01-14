@@ -410,7 +410,7 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                               />
                             </div>
                           </div>
-                          <div className="row">
+                          {/* <div className="row">
                             <div className="col">
                               <DateTime
                                 id="MyDateTime"
@@ -440,8 +440,7 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                                 max={Moment(this.maxDate)}
                               />
                             </div>
-                          </div>
-
+                          </div> */}
                           <div className="row">
                             <div className="col">
                               <DateTimePicker
@@ -460,10 +459,11 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                                 required={true}
                                 minDate={Moment()}
                                 maxDate={Moment(this.maxDate)}
-                                //todayButton="Today"
                                 showMonthDropdown={true}
                                 showYearDropdown={true}
                                 showTimeSelect={true}
+                                timeIntervalInMinutes={60}
+                                useInputMask={true}
                               />
                             </div>
                           </div>

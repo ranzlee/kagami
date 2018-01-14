@@ -4,6 +4,7 @@ import * as FormControl from "./FormControl";
 import * as $ from "jquery";
 import * as Moment from "moment";
 import * as ReactDatePicker from "react-datepicker";
+require("jquery-mask-plugin");
 
 export interface DateTimePickerState extends FormControl.FormControlState {
   selectedMoment: Moment.Moment;
@@ -15,7 +16,6 @@ export interface DateTimePickerState extends FormControl.FormControlState {
 export interface DateTimePickerProps extends FormControl.FormControlProps {
   value: Moment.Moment;
   placeholder: string;
-  todayButton?: string;
   showYearDropdown?: boolean;
   showMonthDropdown?: boolean;
   required?: boolean;
@@ -24,7 +24,8 @@ export interface DateTimePickerProps extends FormControl.FormControlProps {
   dateFormat?: string;
   showTimeSelect?: boolean;
   timeFormat?: string;
-  timeIntervalInMinutes?: 0 | 15 | 30 | 60;
+  timeIntervalInMinutes?: 1 | 5 | 10 | 15 | 30 | 60;
+  useInputMask?: boolean;
 }
 
 export class DateTimePicker extends React.Component<
@@ -34,9 +35,13 @@ export class DateTimePicker extends React.Component<
   constructor(props: DateTimePickerProps) {
     super(props);
     let dateFormat =
-      this.props.dateFormat != null ? this.props.dateFormat : "MM/DD/YYYY";
+      this.props.dateFormat != null
+        ? this.props.dateFormat
+        : this.defaultDateFormat;
     let timeFormat =
-      this.props.timeFormat != null ? this.props.timeFormat : "hh:mm A";
+      this.props.timeFormat != null
+        ? this.props.timeFormat
+        : this.defaultTimeFormat;
     this.state = {
       selectedMoment: Moment(),
       invalidFeedback: "",
@@ -57,6 +62,8 @@ export class DateTimePicker extends React.Component<
   };
 
   childInput: HTMLInputElement;
+  defaultDateFormat: string = "MM/DD/YYYY";
+  defaultTimeFormat: string = "hh:mm A";
 
   onChildInstanceSet = (input: HTMLInputElement) => {
     this.childInput = input;
@@ -94,7 +101,6 @@ export class DateTimePicker extends React.Component<
             selected={this.state.selectedMoment}
             minDate={minDate}
             maxDate={maxDate}
-            todayButton={this.props.todayButton}
             showYearDropdown={this.props.showYearDropdown}
             showMonthDropdown={this.props.showMonthDropdown}
             dateFormat={this.state.dateFormat}
@@ -134,6 +140,67 @@ export class DateTimePickerInput extends React.Component<
   }
 
   componentDidMount() {
+    if (this.props.component.props.useInputMask) {
+      if (this.props.component.props.showTimeSelect) {
+        if (
+          this.props.component.state.dateFormat ===
+            this.props.component.defaultDateFormat &&
+          this.props.component.state.timeFormat ===
+            this.props.component.defaultTimeFormat
+        ) {
+          ($(this.instance) as any).mask("T0/D0/0000 T0:M0 AZ", {
+            placeholder: "MM/DD/YYYY hh:mm AM",
+            translation: {
+              T: {
+                pattern: /[0-1]/,
+                optional: false
+              },
+              D: {
+                pattern: /[0-3]/,
+                optional: false
+              },
+              M: {
+                pattern: /[0-5]/,
+                optional: false
+              },
+              A: {
+                pattern: /[AaPp]/,
+                optional: false
+              },
+              Z: {
+                pattern: /[Mm]/,
+                optional: false
+              }
+            },
+            onChange: () => {
+              this.doMomentValidation(this.instance.value);
+            }
+          });
+        }
+      } else {
+        if (
+          this.props.component.state.dateFormat ===
+          this.props.component.defaultDateFormat
+        ) {
+          ($(this.instance) as any).mask("T0/D0/0000", {
+            placeholder: "MM/DD/YYYY",
+            translation: {
+              T: {
+                pattern: /[0-1]/,
+                optional: false
+              },
+              D: {
+                pattern: /[0-3]/,
+                optional: false
+              }
+            },
+            onChange: () => {
+              this.doMomentValidation(this.instance.value);
+            }
+          });
+        }
+      }
+    }
     this.doMomentValidation(this.instance.value);
   }
 
@@ -150,7 +217,7 @@ export class DateTimePickerInput extends React.Component<
     return this.props.component.state.dateFormat;
   };
 
-  doMomentValidation = (val: string) => {
+  doMomentValidation = (val: string): Moment.Moment | null => {
     this.instance.setCustomValidity("");
     let m = Moment(val, this.getMomentFormat());
     if (m.isValid()) {
@@ -169,7 +236,7 @@ export class DateTimePickerInput extends React.Component<
       //time interval validation
       if (
         this.props.component.props.showTimeSelect &&
-        this.props.component.state.timeIntervalInMinutes !== 0
+        this.props.component.state.timeIntervalInMinutes !== 1
       ) {
         if (m.minute() !== 0) {
           if (
@@ -180,8 +247,10 @@ export class DateTimePickerInput extends React.Component<
           }
         }
       }
+      return m;
     } else {
       this.instance.setCustomValidity("*");
+      return null;
     }
   };
 
@@ -234,18 +303,10 @@ export class DateTimePickerInput extends React.Component<
             }}
             onBlur={(event: React.FocusEvent<HTMLInputElement>) => {
               let val = event.currentTarget.value;
-              if (val === "") {
-                this.setState({ useProps: true }, () => {
-                  this.props.component.onTextChange(null);
-                });
-              } else {
-                let m = Moment(val, this.getMomentFormat());
-                this.setState({ useProps: true }, () => {
-                  if (m.isValid()) {
-                    this.props.component.onTextChange(m);
-                  }
-                });
-              }
+              let result = this.doMomentValidation(val);
+              this.setState({ useProps: true }, () => {
+                this.props.component.onTextChange(result);
+              });
             }}
           />
           <div className="invalid-feedback">{this.state.invalidFeedback}</div>

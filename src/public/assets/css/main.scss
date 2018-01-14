@@ -20,7 +20,7 @@ body {
   margin-top: 80px;
 }
 
-//react datepicker
+//react datepicker for bootstrap compatibility
 .react-datepicker__time-container
   .react-datepicker__time
   .react-datepicker__time-box
@@ -56,6 +56,7 @@ body {
   right: -73px !important;
   top: 0 !important;
 }
+//END - react datepicker for bootstrap compatibility
 
 .bootstrap-switch {
   margin-top: 10px;
