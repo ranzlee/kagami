@@ -31,7 +31,7 @@ export interface DateTimePickerProps extends FormControl.FormControlProps {
 export class DateTimePicker extends React.Component<
   DateTimePickerProps,
   DateTimePickerState
-> {
+  > {
   constructor(props: DateTimePickerProps) {
     super(props);
     let dateFormat =
@@ -53,9 +53,9 @@ export class DateTimePicker extends React.Component<
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() { }
 
-  onChange = (event: React.ChangeEvent<HTMLInputElement>) => {};
+  onChange = (event: React.ChangeEvent<HTMLInputElement>) => { };
 
   onTextChange = (moment: Moment.Moment) => {
     this.setState({ selectedMoment: moment });
@@ -129,7 +129,7 @@ export interface DateTimePickerInputProps {
 export class DateTimePickerInput extends React.Component<
   DateTimePickerInputProps,
   DateTimePickerInputState
-> {
+  > {
   constructor(props: DateTimePickerInputProps) {
     super(props);
     this.state = {
@@ -144,9 +144,9 @@ export class DateTimePickerInput extends React.Component<
       if (this.props.component.props.showTimeSelect) {
         if (
           this.props.component.state.dateFormat ===
-            this.props.component.defaultDateFormat &&
+          this.props.component.defaultDateFormat &&
           this.props.component.state.timeFormat ===
-            this.props.component.defaultTimeFormat
+          this.props.component.defaultTimeFormat
         ) {
           ($(this.instance) as any).mask("T0/D0/0000 T0:M0 AZ", {
             placeholder: "MM/DD/YYYY hh:mm AM",
@@ -255,9 +255,13 @@ export class DateTimePickerInput extends React.Component<
   };
 
   render() {
-    let style = {
-      marginLeft: "10px"
+    let buttonStyle = {
+      marginTop: 0,
+      marginBottom: 0
     };
+    let inputStyle = {
+      maxWidth: this.props.component.props.showTimeSelect ? "195px" : "130px"
+    }
     let disabled =
       this.props.component.props.disabled != null
         ? this.props.component.props.disabled
@@ -274,7 +278,7 @@ export class DateTimePickerInput extends React.Component<
           : false;
     return (
       <div>
-        <div className="float-left">
+        <div className="input-group">
           <input
             ref={instance => {
               this.instance = instance;
@@ -282,13 +286,14 @@ export class DateTimePickerInput extends React.Component<
             }}
             type="text"
             className="form-control"
+            style={inputStyle}
             value={
               this.state.useProps
                 ? this.props.component.state.selectedMoment != null &&
                   this.props.component.state.selectedMoment.isValid()
                   ? this.props.component.state.selectedMoment.format(
-                      this.getMomentFormat()
-                    )
+                    this.getMomentFormat()
+                  )
                   : ""
                 : this.state.value
             }
@@ -309,20 +314,19 @@ export class DateTimePickerInput extends React.Component<
               });
             }}
           />
+          <div className="input-group-append">
+            <button
+              style={buttonStyle}
+              type="button"
+              disabled={disabled || readOnly}
+              onClick={this.props.onClick}
+              className="btn btn-primary btn-icon"
+            >
+              <i className="fas fa-calendar" />
+            </button>
+          </div>
           <div className="invalid-feedback">{this.state.invalidFeedback}</div>
         </div>
-        <div className="float-left">
-          <button
-            style={style}
-            type="button"
-            disabled={disabled || readOnly}
-            onClick={this.props.onClick}
-            className="btn btn-primary btn-icon btn-sm  btn-icon-mini btn-round"
-          >
-            <i className="fas fa-calendar" />
-          </button>
-        </div>
-        <div className="clearfix" />
       </div>
     );
   }
