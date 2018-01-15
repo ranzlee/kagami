@@ -43,8 +43,8 @@ export class DateTimePicker extends React.Component<
         ? this.props.timeFormat
         : this.defaultTimeFormat;
     this.state = {
-      selectedMoment: Moment(),
-      invalidFeedback: "",
+      selectedMoment: this.props.value,
+      invalidFeedback: this.props.invalidFeedback,
       dateFormat: dateFormat,
       timeFormat: timeFormat,
       timeIntervalInMinutes: this.props.timeIntervalInMinutes
@@ -53,11 +53,37 @@ export class DateTimePicker extends React.Component<
     };
   }
 
-  componentDidMount() { }
+  componentDidMount() {
+    if (this.props.doCustomValidationOnMount) {
+      FormControl.OnChangeCustomValidation(this, this.childInput, this.state.selectedMoment);
+    }
+    if (this.props.form) {
+      this.props.form.registerFormCustomValidations(this, this.childInput);
+    }
+  }
 
-  onChange = (event: React.ChangeEvent<HTMLInputElement>) => { };
+  getMomentFormat = () => {
+    if (this.props.showTimeSelect) {
+      return (
+        this.state.dateFormat +
+        " " +
+        this.state.timeFormat
+      );
+    }
+    return this.state.dateFormat;
+  };
+
+  onChange = (moment: Moment.Moment) => {
+    if (this.props.onChange) {
+      this.props.onChange(moment);
+    }
+    if (this.props.onChangeCustomValidation) {
+      FormControl.OnChangeCustomValidation(this, this.childInput, moment);
+    }
+  };
 
   onTextChange = (moment: Moment.Moment) => {
+    this.onChange(moment);
     this.setState({ selectedMoment: moment });
   };
 
@@ -94,6 +120,7 @@ export class DateTimePicker extends React.Component<
             }
             onChange={(moment: Moment.Moment) => {
               this.childInput.setCustomValidity("");
+              this.onChange(moment);
               this.setState({ selectedMoment: moment });
             }}
             fixedHeight={true}
@@ -117,7 +144,6 @@ export class DateTimePicker extends React.Component<
 export interface DateTimePickerInputState {
   value: string;
   useProps: boolean;
-  invalidFeedback: string;
 }
 
 export interface DateTimePickerInputProps {
@@ -134,8 +160,7 @@ export class DateTimePickerInput extends React.Component<
     super(props);
     this.state = {
       value: "",
-      useProps: true,
-      invalidFeedback: this.props.component.props.invalidFeedback
+      useProps: true
     };
   }
 
@@ -206,20 +231,9 @@ export class DateTimePickerInput extends React.Component<
 
   instance: HTMLInputElement;
 
-  getMomentFormat = () => {
-    if (this.props.component.props.showTimeSelect) {
-      return (
-        this.props.component.state.dateFormat +
-        " " +
-        this.props.component.state.timeFormat
-      );
-    }
-    return this.props.component.state.dateFormat;
-  };
-
   doMomentValidation = (val: string): Moment.Moment | null => {
     this.instance.setCustomValidity("");
-    let m = Moment(val, this.getMomentFormat());
+    let m = Moment(val, this.props.component.getMomentFormat());
     if (m.isValid()) {
       //min date validation
       if (this.props.component.props.minDate != null) {
@@ -253,6 +267,7 @@ export class DateTimePickerInput extends React.Component<
       return null;
     }
   };
+  
 
   render() {
     let buttonStyle = {
@@ -292,7 +307,7 @@ export class DateTimePickerInput extends React.Component<
                 ? this.props.component.state.selectedMoment != null &&
                   this.props.component.state.selectedMoment.isValid()
                   ? this.props.component.state.selectedMoment.format(
-                    this.getMomentFormat()
+                    this.props.component.getMomentFormat()
                   )
                   : ""
                 : this.state.value
@@ -325,7 +340,7 @@ export class DateTimePickerInput extends React.Component<
               <i className="fas fa-calendar" />
             </button>
           </div>
-          <div className="invalid-feedback">{this.state.invalidFeedback}</div>
+          <div className="invalid-feedback">{this.props.component.state.invalidFeedback}</div>
         </div>
       </div>
     );

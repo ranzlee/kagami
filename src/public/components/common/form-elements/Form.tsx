@@ -10,8 +10,8 @@ import { Textbox } from "./Textbox";
 import { Toggle } from "./Toggle";
 import { Select } from "./Select";
 import { Slider } from "./Slider";
-import { DateTime } from "./DateTime";
 import { DateTimePicker } from "./DateTimePicker";
+import * as Moment from "moment";
 
 export interface FormState {
   formWasValidated: string;
@@ -26,8 +26,8 @@ export interface FormProps {
 
 export interface FormCustomValidationRegister {
   component: React.Component<
-    FormControl.FormControlProps,
-    FormControl.FormControlState
+  FormControl.FormControlProps,
+  FormControl.FormControlState
   >;
   element: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
   callback?: (validationResult: FormControl.CustomValidationResult) => void;
@@ -54,10 +54,21 @@ export class Form extends React.Component<FormProps, FormState> {
     if (form.checkValidity() !== false) {
       let isValid = true;
       this.formCustomValidationRegistry.forEach(r => {
-        let validationResult = FormControl.OnChangeCustomValidation(
-          r.component,
-          r.element
-        );
+        var validationResult: FormControl.CustomValidationResult;
+        if (r.component instanceof DateTimePicker) {
+          let comp = r.component as DateTimePicker;
+          let moment = Moment(r.element.value, comp.getMomentFormat())
+          validationResult = FormControl.OnChangeCustomValidation(
+            comp,
+            r.element,
+            moment
+          );
+        } else {
+          validationResult = FormControl.OnChangeCustomValidation(
+            r.component,
+            r.element
+          );
+        }
         if (r.callback) {
           r.callback(validationResult);
         }
@@ -88,7 +99,7 @@ export class Form extends React.Component<FormProps, FormState> {
     component: React.Component<
       FormControl.FormControlProps,
       FormControl.FormControlState
-    >,
+      >,
     element: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement,
     callback?: (validationResult: FormControl.CustomValidationResult) => void
   ) {
@@ -149,7 +160,6 @@ export class Form extends React.Component<FormProps, FormState> {
       (child as any).type === Toggle ||
       (child as any).type === Select ||
       (child as any).type === Slider ||
-      (child as any).type === DateTime ||
       (child as any).type === DateTimePicker
     ) {
       return true;
