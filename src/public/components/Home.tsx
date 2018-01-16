@@ -430,7 +430,7 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                               showMonthDropdown={true}
                               showYearDropdown={true}
                               showTimeSelect={true}
-                              timeIntervalInMinutes={60}
+                              timeIntervalInMinutes={15}
                               useInputMask={true}
                               onChange={(
                                 moment: Moment.Moment
@@ -443,15 +443,21 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                               onChangeCustomValidation={(
                                 moment: Moment.Moment
                               ) => {
+                                let minutesOfDay = (moment: Moment.Moment) => {
+                                  return moment.minutes() + moment.hours() * 60;
+                                }
                                 let isValid = true;
                                 let startTime = Moment(moment.format("MM/DD/YYY") + " 08:00 AM", "MM/DD/YYYY hh:mm A");
                                 let endTime = Moment(moment.format("MM/DD/YYYY") + " 05:00 PM", "MM/DD/YYYY hh:mm A");
-                                if (moment.isBefore(startTime, "minute") || moment.isAfter(endTime, "minute")) {
+                                let startMinutes = minutesOfDay(startTime);
+                                let endMinutes = minutesOfDay(endTime);
+                                let thisMinutes = minutesOfDay(moment);
+                                if (thisMinutes < startMinutes || thisMinutes > endMinutes) {
                                   isValid = false;
                                 }
                                 return {
                                   isValid: isValid,
-                                  validationMessage: "Time must be between 8:00 AM and 5:00 PM"
+                                  validationMessage: "Time must be between 8:00 AM and 5:00 PM and in a 15 minute interval"
                                 };
                               }}
                             />

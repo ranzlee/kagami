@@ -77,7 +77,7 @@ export class DateTimePicker extends React.Component<
     if (this.props.onChange) {
       this.props.onChange(moment);
     }
-    if (this.props.onChangeCustomValidation) {
+    if (moment != null && this.props.onChangeCustomValidation) {
       FormControl.OnChangeCustomValidation(this, this.childInput, moment);
     }
   };
@@ -267,7 +267,7 @@ export class DateTimePickerInput extends React.Component<
       return null;
     }
   };
-  
+
 
   render() {
     let buttonStyle = {
@@ -318,11 +318,16 @@ export class DateTimePickerInput extends React.Component<
             placeholder={this.props.component.props.placeholder}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               let val = event.currentTarget.value;
+              this.props.component.setState({ invalidFeedback: this.props.component.props.invalidFeedback });
+
               this.doMomentValidation(val);
               this.setState({ useProps: false, value: val });
             }}
             onBlur={(event: React.FocusEvent<HTMLInputElement>) => {
               let val = event.currentTarget.value;
+              this.props.component.setState({ invalidFeedback: this.props.component.props.invalidFeedback });
+
+
               let result = this.doMomentValidation(val);
               this.setState({ useProps: true }, () => {
                 this.props.component.onTextChange(result);
