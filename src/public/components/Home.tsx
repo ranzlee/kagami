@@ -417,7 +417,6 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                                 id="MyDatePicker"
                                 label="My Date Picker"
                                 value={this.state.myDatePickerState}
-                                placeholder="Pick a date - MM/DD/YYYY HH:MM AM or PM"
                                 invalidFeedback={
                                   "Required and must be a valid date between " +
                                   Moment().format("MM/DD/YYYY") +
@@ -462,13 +461,12 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                                 id="MyDateTimePicker"
                                 label="My Date Time Picker"
                                 value={this.state.myDateTimePickerState}
-                                placeholder="Pick a date - MM/DD/YYYY HH:MM AM or PM"
                                 invalidFeedback={
                                   "Required and must be a valid date between " +
                                   Moment().format("MM/DD/YYYY") +
                                   " and " +
                                   Moment(this.maxDate).format("MM/DD/YYYY") +
-                                  ". Time must be between 08:00 AM and 05:00 PM."
+                                  ". Time must be between 08:00 AM and 05:00 PM in a 15 minute interval."
                                 }
                                 controlCol={8}
                                 labelCol={4}
@@ -519,7 +517,7 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                                   return {
                                     isValid: isValid,
                                     validationMessage:
-                                      "Time must be between 8:00 AM and 5:00 PM and in a 15 minute interval"
+                                      "Time must be between 8:00 AM and 5:00 PM and in a 15 minute interval, sorry!"
                                   };
                                 }}
                               />

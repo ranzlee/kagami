@@ -15,7 +15,6 @@ export interface DateTimePickerState extends FormControl.FormControlState {
 
 export interface DateTimePickerProps extends FormControl.FormControlProps {
   value: Moment.Moment;
-  placeholder: string;
   showYearDropdown?: boolean;
   showMonthDropdown?: boolean;
   required?: boolean;
@@ -77,8 +76,10 @@ export class DateTimePicker extends React.Component<
     if (this.props.onChange) {
       this.props.onChange(moment);
     }
-    if (moment != null && this.props.onChangeCustomValidation) {
-      FormControl.OnChangeCustomValidation(this, this.childInput, moment);
+    if (this.childInput.validity.valid) {
+      if (moment != null && this.props.onChangeCustomValidation) {
+        FormControl.OnChangeCustomValidation(this, this.childInput, moment);
+      }
     }
   };
 
@@ -124,7 +125,6 @@ export class DateTimePicker extends React.Component<
               this.setState({ selectedMoment: moment });
             }}
             fixedHeight={true}
-            placeholderText={this.props.placeholder}
             selected={this.state.selectedMoment}
             minDate={minDate}
             maxDate={maxDate}
@@ -226,7 +226,6 @@ export class DateTimePickerInput extends React.Component<
         }
       }
     }
-    this.doMomentValidation(this.instance.value);
   }
 
   instance: HTMLInputElement;
@@ -274,7 +273,6 @@ export class DateTimePickerInput extends React.Component<
       marginBottom: 0
     };
     let inputStyle = {
-      //maxWidth: this.props.component.props.showTimeSelect ? "195px" : "130px"
       maxWidth: "195px",
       minWidth: "195px"
     };
@@ -299,6 +297,11 @@ export class DateTimePickerInput extends React.Component<
             ref={instance => {
               this.instance = instance;
               this.props.instanceSetCallback(this.instance);
+              if (this.instance != null) {
+                if (this.instance.validity.valid) {
+                  this.doMomentValidation(this.instance.value);
+                }
+              }
             }}
             type="text"
             className="form-control"
@@ -316,26 +319,32 @@ export class DateTimePickerInput extends React.Component<
             required={this.props.component.props.required}
             disabled={disabled}
             readOnly={readOnly}
-            placeholder={this.props.component.props.placeholder}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               let val = event.currentTarget.value;
-              this.props.component.setState({
-                invalidFeedback: this.props.component.props.invalidFeedback
-              });
-
-              this.doMomentValidation(val);
-              this.setState({ useProps: false, value: val });
+              this.props.component.setState(
+                {
+                  invalidFeedback: this.props.component.props.invalidFeedback
+                },
+                () => {
+                  this.setState({ useProps: false, value: val }, () => {
+                    this.doMomentValidation(val);
+                  });
+                }
+              );
             }}
             onBlur={(event: React.FocusEvent<HTMLInputElement>) => {
               let val = event.currentTarget.value;
-              this.props.component.setState({
-                invalidFeedback: this.props.component.props.invalidFeedback
-              });
-
-              let result = this.doMomentValidation(val);
-              this.setState({ useProps: true }, () => {
-                this.props.component.onTextChange(result);
-              });
+              this.props.component.setState(
+                {
+                  invalidFeedback: this.props.component.props.invalidFeedback
+                },
+                () => {
+                  this.setState({ useProps: true }, () => {
+                    let result = this.doMomentValidation(val);
+                    this.props.component.onTextChange(result);
+                  });
+                }
+              );
             }}
           />
           <div className="input-group-append">
