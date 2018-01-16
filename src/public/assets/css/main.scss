@@ -56,6 +56,12 @@ body {
   right: -73px !important;
   top: 0 !important;
 }
+
+.custom-date-time-picker .input-group-prepend .btn,
+.custom-date-time-picker .input-group-append .btn {
+  position: relative !important;
+  z-index: 1 !important;
+}
 //END - react datepicker for bootstrap compatibility
 
 .bootstrap-switch {

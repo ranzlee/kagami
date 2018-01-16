@@ -31,7 +31,7 @@ export interface DateTimePickerProps extends FormControl.FormControlProps {
 export class DateTimePicker extends React.Component<
   DateTimePickerProps,
   DateTimePickerState
-  > {
+> {
   constructor(props: DateTimePickerProps) {
     super(props);
     let dateFormat =
@@ -55,7 +55,11 @@ export class DateTimePicker extends React.Component<
 
   componentDidMount() {
     if (this.props.doCustomValidationOnMount) {
-      FormControl.OnChangeCustomValidation(this, this.childInput, this.state.selectedMoment);
+      FormControl.OnChangeCustomValidation(
+        this,
+        this.childInput,
+        this.state.selectedMoment
+      );
     }
     if (this.props.form) {
       this.props.form.registerFormCustomValidations(this, this.childInput);
@@ -64,11 +68,7 @@ export class DateTimePicker extends React.Component<
 
   getMomentFormat = () => {
     if (this.props.showTimeSelect) {
-      return (
-        this.state.dateFormat +
-        " " +
-        this.state.timeFormat
-      );
+      return this.state.dateFormat + " " + this.state.timeFormat;
     }
     return this.state.dateFormat;
   };
@@ -155,7 +155,7 @@ export interface DateTimePickerInputProps {
 export class DateTimePickerInput extends React.Component<
   DateTimePickerInputProps,
   DateTimePickerInputState
-  > {
+> {
   constructor(props: DateTimePickerInputProps) {
     super(props);
     this.state = {
@@ -169,9 +169,9 @@ export class DateTimePickerInput extends React.Component<
       if (this.props.component.props.showTimeSelect) {
         if (
           this.props.component.state.dateFormat ===
-          this.props.component.defaultDateFormat &&
+            this.props.component.defaultDateFormat &&
           this.props.component.state.timeFormat ===
-          this.props.component.defaultTimeFormat
+            this.props.component.defaultTimeFormat
         ) {
           ($(this.instance) as any).mask("T0/D0/0000 T0:M0 AZ", {
             placeholder: "MM/DD/YYYY hh:mm AM",
@@ -268,15 +268,16 @@ export class DateTimePickerInput extends React.Component<
     }
   };
 
-
   render() {
     let buttonStyle = {
       marginTop: 0,
       marginBottom: 0
     };
     let inputStyle = {
-      maxWidth: this.props.component.props.showTimeSelect ? "195px" : "130px"
-    }
+      //maxWidth: this.props.component.props.showTimeSelect ? "195px" : "130px"
+      maxWidth: "195px",
+      minWidth: "195px"
+    };
     let disabled =
       this.props.component.props.disabled != null
         ? this.props.component.props.disabled
@@ -292,7 +293,7 @@ export class DateTimePickerInput extends React.Component<
           ? this.props.component.props.form.props.readOnly
           : false;
     return (
-      <div>
+      <div className="custom-date-time-picker">
         <div className="input-group">
           <input
             ref={instance => {
@@ -307,8 +308,8 @@ export class DateTimePickerInput extends React.Component<
                 ? this.props.component.state.selectedMoment != null &&
                   this.props.component.state.selectedMoment.isValid()
                   ? this.props.component.state.selectedMoment.format(
-                    this.props.component.getMomentFormat()
-                  )
+                      this.props.component.getMomentFormat()
+                    )
                   : ""
                 : this.state.value
             }
@@ -318,15 +319,18 @@ export class DateTimePickerInput extends React.Component<
             placeholder={this.props.component.props.placeholder}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               let val = event.currentTarget.value;
-              this.props.component.setState({ invalidFeedback: this.props.component.props.invalidFeedback });
+              this.props.component.setState({
+                invalidFeedback: this.props.component.props.invalidFeedback
+              });
 
               this.doMomentValidation(val);
               this.setState({ useProps: false, value: val });
             }}
             onBlur={(event: React.FocusEvent<HTMLInputElement>) => {
               let val = event.currentTarget.value;
-              this.props.component.setState({ invalidFeedback: this.props.component.props.invalidFeedback });
-
+              this.props.component.setState({
+                invalidFeedback: this.props.component.props.invalidFeedback
+              });
 
               let result = this.doMomentValidation(val);
               this.setState({ useProps: true }, () => {
@@ -345,7 +349,9 @@ export class DateTimePickerInput extends React.Component<
               <i className="fas fa-calendar" />
             </button>
           </div>
-          <div className="invalid-feedback">{this.props.component.state.invalidFeedback}</div>
+          <div className="invalid-feedback">
+            {this.props.component.state.invalidFeedback}
+          </div>
         </div>
       </div>
     );
