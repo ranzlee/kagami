@@ -2,6 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as FormControl from "./FormControl";
 import { Radio } from "./Radio";
+import * as lodash from "lodash";
 
 export interface RadioOptionState {}
 
@@ -34,6 +35,7 @@ export class RadioOption extends React.Component<
       this.props.radio.props
     );
     let invalidFeedback = null;
+    let id = lodash.uniqueId(this.props.value);
     if (this.props.isLast) {
       invalidFeedback = (
         <div className="invalid-feedback">
@@ -54,7 +56,7 @@ export class RadioOption extends React.Component<
               ref={instance => {
                 this.instance = instance;
               }}
-              id={this.props.value}
+              id={id}
               type="radio"
               className="form-check-input custom-control-input"
               name={this.props.radio.props.id}
@@ -71,7 +73,7 @@ export class RadioOption extends React.Component<
               value={this.props.value}
               checked={this.props.radio.props.value === this.props.value}
             />
-            <label className="form-check-label" htmlFor={this.props.value}>
+            <label className="form-check-label" htmlFor={id}>
               {this.props.label}
             </label>
             {invalidFeedback}

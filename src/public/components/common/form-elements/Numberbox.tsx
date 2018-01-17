@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as FormControl from "./FormControl";
+import * as lodash from "lodash";
 
 export interface NumberboxState extends FormControl.FormControlState {}
 
@@ -50,9 +51,10 @@ export class Numberbox extends React.Component<NumberboxProps, NumberboxState> {
     let max = this.props.max ? this.props.max : null;
     let min = this.props.min ? this.props.min : null;
     let extendedProps = FormControl.FormControlExtendedProperties(this.props);
+    let id = lodash.uniqueId(this.props.id);
     return (
       <div className="row form-group">
-        <label className={extendedProps.labelClasses} htmlFor={this.props.id}>
+        <label className={extendedProps.labelClasses} htmlFor={id}>
           {this.props.label}
         </label>
         <div className={extendedProps.formControlClasses}>
@@ -63,7 +65,7 @@ export class Numberbox extends React.Component<NumberboxProps, NumberboxState> {
             }}
             className="form-control"
             id={
-              this.props.id //*** end
+              id //*** end
             }
             name={this.props.name}
             type={this.props.type}

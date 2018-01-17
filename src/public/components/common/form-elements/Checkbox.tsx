@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as FormControl from "./FormControl";
+import * as lodash from "lodash";
 
 export interface CheckboxState extends FormControl.FormControlState {}
 
@@ -53,6 +54,7 @@ export class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
   render() {
     let extendedProps = FormControl.FormControlExtendedProperties(this.props);
     let required = this.props.required ? true : false;
+    let id = lodash.uniqueId(this.props.id);
     return (
       <div className="row form-group">
         <div className={extendedProps.labelClasses} />
@@ -64,7 +66,7 @@ export class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
                 this.instance = instance;
               }}
               id={
-                this.props.id //*** end
+                id //*** end
               }
               type="checkbox"
               className="form-check-input custom-control-input"
@@ -79,7 +81,7 @@ export class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
               }
               checked={this.props.checked}
             />
-            <label className="form-check-label" htmlFor={this.props.id}>
+            <label className="form-check-label" htmlFor={id}>
               {this.props.label}
             </label>
             <div className="invalid-feedback">
