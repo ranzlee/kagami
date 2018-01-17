@@ -329,42 +329,41 @@ export class FormExample extends React.Component<
                       />
                     </div>
                   </div>
-                  {/* <div className="row">
-                          <div className="col">
-                            <Slider
-                              id="MySlider"
-                              label="My Slider"
-                              controlCol={8}
-                              labelCol={4}
-                              required={true}
-                              invalidFeedback="Required"
-                              onChange={(
-                                event: React.ChangeEvent<HTMLInputElement>
-                              ) => {
-                                this.setState({
-                                  mySliderState:
-                                    event.currentTarget.valueAsNumber
-                                });
-                              }}
-                              onChangeCustomValidation={(
-                                element: HTMLInputElement
-                              ) => {
-                                let isValid = true;
-                                if (element.value !== "50") {
-                                  isValid = false;
-                                }
-                                return {
-                                  isValid: isValid,
-                                  validationMessage: "Value must be 50."
-                                };
-                              }}
-                              value={this.state.mySliderState}
-                              step={10}
-                              showToolTip={true}
-                              showHorizontal={true}
-                            />
-                          </div>
-                        </div> */}
+                  <div className="row">
+                    <div className="col">
+                      <Slider
+                        id="MySlider"
+                        label="My Slider"
+                        controlCol={8}
+                        labelCol={4}
+                        required={true}
+                        invalidFeedback="Required"
+                        onChange={(
+                          event: React.ChangeEvent<HTMLInputElement>
+                        ) => {
+                          this.setState({
+                            mySliderState: event.currentTarget.valueAsNumber
+                          });
+                        }}
+                        onChangeCustomValidation={(
+                          element: HTMLInputElement
+                        ) => {
+                          let isValid = true;
+                          if (element.value !== "50") {
+                            isValid = false;
+                          }
+                          return {
+                            isValid: isValid,
+                            validationMessage: "Value must be 50."
+                          };
+                        }}
+                        value={this.state.mySliderState}
+                        step={10}
+                        showToolTip={true}
+                        showHorizontal={true}
+                      />
+                    </div>
+                  </div>
                   <div className="row">
                     <div className="col">
                       <DateTimePicker
