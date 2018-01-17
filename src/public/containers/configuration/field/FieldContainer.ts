@@ -5,10 +5,16 @@ import { ConfigElementType } from "./../../../../shared/models/enums/ConfigEleme
 import * as actions from './../../../actions/ConfigElementActions';
 import { AppStoreRecord } from '../../../types/AppStore';
 import { ConfigElementRecord } from './../../../../shared/models/configuration/elements/IConfigElement';
+import { ExpressionRecord } from '../../../../shared/models/configuration/elements/Expression';
 
 export const mapStateToProps = (appStoreRecord: AppStoreRecord, props: IOwnProps): IConnectedState => {
+    const field = FieldRecord.asFieldRecord(appStoreRecord.domain.configElements.get(props.fieldId)) || new FieldRecord();
+    const expressionIds = appStoreRecord.domain.configElementMapping.get(field.configId).expression.toIndexedSeq().toArray();
+    const expressions = expressionIds.map(i => ExpressionRecord.asExpressionRecord(appStoreRecord.domain.configElements.get(i)));
+
     return {
-        field: FieldRecord.asFieldRecord(appStoreRecord.domain.configElements.get(props.fieldId)) || new FieldRecord()
+        field,
+        expressions
     }
 }
 

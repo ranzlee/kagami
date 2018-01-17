@@ -2,6 +2,8 @@ import * as React from "react";
 import { FieldRecord } from "./../../../../shared/models/configuration/elements/Field";
 import { Textbox } from "../../common/form-elements/Textbox";
 import { TextArea } from "../../common/form-elements/TextArea";
+import { ExpressionRecord } from "../../../../shared/models/configuration/elements/Expression";
+import { Select } from "../../common/form-elements/Select";
 
 export interface IOwnProps {
   fieldId: string;
@@ -9,6 +11,7 @@ export interface IOwnProps {
 
 export interface IConnectedState {
   field: FieldRecord;
+  expressions: ExpressionRecord[]
 }
 
 export interface IConnectedDispatch {
@@ -20,7 +23,14 @@ export interface IConnectedDispatch {
 
 export class Field extends React.Component<IOwnProps & IConnectedState & IConnectedDispatch, {}> {
 
+  getExpressionOptions(): JSX.Element[] {
+    var returnElements: JSX.Element[] = [];
+    returnElements = this.props.expressions.map(i => (<option key={i._id} value={i._id}>{i.name}</option>));
+    return returnElements;
+  }
+
   updateClickHandler = (event: any) => {
+    debugger;
     const { field, update } = this.props;
 
     const target = event.target;
@@ -45,8 +55,8 @@ export class Field extends React.Component<IOwnProps & IConnectedState & IConnec
             label="Name: "
             value={field.name}
             onChange={this.updateClickHandler}
-            labelColSm={3}
-            controlColSm={9} />
+            labelColSm={6}
+            controlColSm={6} />
         </div>
         <div className="row">
           <TextArea
@@ -56,9 +66,23 @@ export class Field extends React.Component<IOwnProps & IConnectedState & IConnec
             placeholder="Description"
             value={field.description}
             onChange={this.updateClickHandler}
-            labelColSm={3}
-            controlColSm={9}
+            labelColSm={6}
+            controlColSm={6}
             rows={5} />
+        </div>
+        <div className="row">
+          <Select
+            name="displayExpression"
+            label="Display Expression"
+            placeholderOption="Select"
+            labelColSm={6}
+            controlColSm={6}
+            required={false}
+            onChange={this.updateClickHandler}
+            value={field.displayExpression}
+          >
+            {this.getExpressionOptions()}
+          </Select>
         </div>
       </div>
     )
