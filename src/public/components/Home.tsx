@@ -3,6 +3,8 @@ import * as axios from "axios";
 import { User } from "../../shared/models/User";
 import { Button } from "./common/form-elements/Button";
 import { FormExample } from "./FormExample";
+import { Modal } from "./common/containers/Modal";
+import { Card } from "./common/containers/Card";
 
 export interface HomeState {}
 
@@ -40,9 +42,20 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                 </div>
               </form>
             </div>
+            <div className="col">
+              <Modal id="formExampleModal" width="1200px">
+                <FormExample />
+              </Modal>
+            </div>
           </div>
         </div>
-        <FormExample />
+        <Card title="Form Control Examples" iconName="fa-cog">
+          <div className="row">
+            <div className="col">
+              <FormExample />
+            </div>
+          </div>
+        </Card>
       </>
     );
   }
