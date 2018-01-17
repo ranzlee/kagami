@@ -2,6 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as FormControl from "./FormControl";
 const noUiSlider = require("../../../assets/css/themes/now-ui/js/plugins/nouislider.min.js");
+import * as lodash from "lodash";
 
 export interface SliderState extends FormControl.FormControlState {
   value: number;
@@ -109,6 +110,8 @@ export class Slider extends React.Component<SliderProps, SliderState> {
   render() {
     let extendedProps = FormControl.FormControlExtendedProperties(this.props);
     let required = this.props.required ? true : false;
+    let sliderId = lodash.uniqueId("slider");
+    let hiddenId = lodash.uniqueId("hiddenSlider");
     this.renderSlider(false);
     return (
       <div className="row form-group">
@@ -118,11 +121,11 @@ export class Slider extends React.Component<SliderProps, SliderState> {
             ref={slider => {
               this.slider = slider;
             }}
-            id="sliderRegular"
+            id={sliderId}
             className="slider"
           />
           <input
-            id="hiddenInput"
+            id={hiddenId}
             ref={instance => {
               this.instance = instance;
             }}
