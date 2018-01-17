@@ -4,6 +4,7 @@ import * as FormControl from "./FormControl";
 import * as $ from "jquery";
 import * as Moment from "moment";
 import * as ReactDatePicker from "react-datepicker";
+import * as lodash from "lodash";
 require("jquery-mask-plugin");
 
 export interface DateTimePickerState extends FormControl.FormControlState {
@@ -11,6 +12,7 @@ export interface DateTimePickerState extends FormControl.FormControlState {
   dateFormat: string;
   timeFormat: string;
   timeIntervalInMinutes: number;
+  id: string;
 }
 
 export interface DateTimePickerProps extends FormControl.FormControlProps {
@@ -48,7 +50,8 @@ export class DateTimePicker extends React.Component<
       timeFormat: timeFormat,
       timeIntervalInMinutes: this.props.timeIntervalInMinutes
         ? this.props.timeIntervalInMinutes
-        : 15
+        : 15,
+      id: lodash.uniqueId(this.props.id)
     };
   }
 
@@ -108,7 +111,7 @@ export class DateTimePicker extends React.Component<
         : null;
     return (
       <div className="row form-group">
-        <label className={extendedProps.labelClasses} htmlFor={this.props.id}>
+        <label className={extendedProps.labelClasses} htmlFor={this.state.id}>
           {this.props.label}
         </label>
         <div className={extendedProps.formControlClasses}>
@@ -303,6 +306,7 @@ export class DateTimePickerInput extends React.Component<
                 }
               }
             }}
+            id={this.props.component.state.id}
             type="text"
             className="form-control"
             style={inputStyle}
