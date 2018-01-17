@@ -73,7 +73,6 @@ export class FormExample extends React.Component<
           <div className="col">
             <Form onSubmit={() => {}}>
               <Checkbox
-                id="validateOnMount"
                 label="Validate form on mount (refresh browser after changing to take effect)"
                 controlCol={12}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
@@ -88,7 +87,6 @@ export class FormExample extends React.Component<
                 checked={this.state.validateFormOnMount}
               />
               <Checkbox
-                id="disable"
                 label="Disabled form"
                 controlCol={12}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
@@ -97,7 +95,6 @@ export class FormExample extends React.Component<
                 checked={this.state.disabled}
               />
               <Checkbox
-                id="readOnly"
                 label="Read-only form"
                 controlCol={12}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
@@ -119,7 +116,6 @@ export class FormExample extends React.Component<
               <div className="row">
                 <div className="col-lg-6 col-sm-12">
                   <Textbox
-                    id="MyTextbox"
                     type="text"
                     label="My Textbox"
                     value={this.state.myTextboxState}
@@ -147,7 +143,6 @@ export class FormExample extends React.Component<
                 </div>
                 <div className="col-lg-6 col-sm-12">
                   <Numberbox
-                    id="MyNumber"
                     type="number"
                     label="My Number"
                     value={this.state.myNumberState}
@@ -170,7 +165,6 @@ export class FormExample extends React.Component<
               <div className="row">
                 <div className="col-lg-6 col-sm-12">
                   <TextArea
-                    id="MyTextArea"
                     label="My Text Area"
                     value={this.state.myTextAreaState}
                     placeholder="Enter some text"
@@ -194,7 +188,6 @@ export class FormExample extends React.Component<
                   <div className="row">
                     <div className="col">
                       <Checkbox
-                        id="MyCheckbox"
                         label="My Checkbox"
                         controlCol={8}
                         labelCol={4}
@@ -214,7 +207,6 @@ export class FormExample extends React.Component<
                   <div className="row">
                     <div className="col">
                       <Radio
-                        id="myRadio"
                         label="My Radio"
                         controlCol={8}
                         labelCol={4}
@@ -254,7 +246,6 @@ export class FormExample extends React.Component<
                   <div className="row">
                     <div className="col">
                       <Select
-                        id="MySelect"
                         label="My Select"
                         placeholderOption="Pick a color, any color"
                         controlCol={8}
@@ -279,7 +270,6 @@ export class FormExample extends React.Component<
                   <div className="row">
                     <div className="col">
                       <Select
-                        id="MyMultiSelect"
                         label="My Multi-Select"
                         controlCol={8}
                         labelCol={4}
@@ -310,7 +300,6 @@ export class FormExample extends React.Component<
                   <div className="row">
                     <div className="col">
                       <Toggle
-                        id="MyToggle"
                         label="My Toggle"
                         controlCol={8}
                         labelCol={4}
@@ -332,7 +321,6 @@ export class FormExample extends React.Component<
                   <div className="row">
                     <div className="col">
                       <Slider
-                        id="MySlider"
                         label="My Slider"
                         controlCol={8}
                         labelCol={4}
@@ -367,7 +355,6 @@ export class FormExample extends React.Component<
                   <div className="row">
                     <div className="col">
                       <DateTimePicker
-                        id="MyDatePicker"
                         label="My Date Picker"
                         value={this.state.myDatePickerState}
                         invalidFeedback={
@@ -407,7 +394,6 @@ export class FormExample extends React.Component<
                   <div className="row">
                     <div className="col">
                       <DateTimePicker
-                        id="MyDateTimePicker"
                         label="My Date Time Picker"
                         value={this.state.myDateTimePickerState}
                         invalidFeedback={

@@ -1,11 +1,12 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as $ from "jquery";
+import * as lodash from "lodash";
 
 export interface ModalState {}
 
 export interface ModalProps {
-  id: string;
+  id?: string;
   width?: string;
 }
 
@@ -28,6 +29,7 @@ export class Modal extends React.Component<ModalProps, ModalState> {
       minWidth: this.props.width != null ? this.props.width : "0px"
     };
 
+    let id = lodash.uniqueId(this.props.id);
     return (
       <>
         <button
@@ -42,7 +44,7 @@ export class Modal extends React.Component<ModalProps, ModalState> {
             this.instance = instance;
           }}
           className="modal fade"
-          id={this.props.id}
+          id={id}
           tabIndex={-1}
           role="dialog"
           aria-labelledby="myModalLabel"
