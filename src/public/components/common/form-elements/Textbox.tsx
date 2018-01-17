@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as FormControl from "./FormControl";
+import * as lodash from "lodash";
 
 export interface TextboxState extends FormControl.FormControlState {}
 
@@ -49,10 +50,11 @@ export class Textbox extends React.Component<TextboxProps, TextboxState> {
     let pattern = this.props.pattern ? this.props.pattern : null;
     let maxLength = this.props.maxLength ? this.props.maxLength : null;
     let minLength = this.props.minLength ? this.props.minLength : null;
+    let id = lodash.uniqueId(this.props.id);
     let extendedProps = FormControl.FormControlExtendedProperties(this.props);
     return (
       <div className="row form-group">
-        <label className={extendedProps.labelClasses} htmlFor={this.props.id}>
+        <label className={extendedProps.labelClasses} htmlFor={id}>
           {this.props.label}
         </label>
         <div className={extendedProps.formControlClasses}>
@@ -63,7 +65,7 @@ export class Textbox extends React.Component<TextboxProps, TextboxState> {
             }}
             className="form-control"
             id={
-              this.props.id //*** end
+              id //*** end
             }
             name={this.props.name}
             type={this.props.type}

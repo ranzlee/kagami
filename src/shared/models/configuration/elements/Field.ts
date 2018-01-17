@@ -1,6 +1,5 @@
 import { Record } from 'immutable';
 import { FieldType } from './../../enums/FieldType';
-import { BaseConfigElement } from "./BaseConfigElement";
 import { ConfigElementRecord, IConfigElement, getConfigElementDefaults } from './IConfigElement';
 import { ConfigElementType } from './../../enums/ConfigElementType';
 import { GenericPartial } from './../../Helpers';
@@ -13,7 +12,7 @@ export interface IField extends IConfigElement {
     [key: string]: any;
 }
 
-export function getFieldDefaults(): IField {
+function getFieldDefaults(): IField {
     return {
         ...getConfigElementDefaults(),
         type: undefined,

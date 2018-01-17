@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as FormControl from "./FormControl";
+import * as lodash from "lodash";
 
 export interface TextAreaState extends FormControl.FormControlState {}
 
@@ -47,10 +48,11 @@ export class TextArea extends React.Component<TextAreaProps, TextAreaState> {
     let required = this.props.required ? true : false;
     let maxLength = this.props.maxLength ? this.props.maxLength : null;
     let minLength = this.props.minLength ? this.props.minLength : null;
+    let id = lodash.uniqueId(this.props.id);
     let extendedProps = FormControl.FormControlExtendedProperties(this.props);
     return (
       <div className="row form-group">
-        <label className={extendedProps.labelClasses} htmlFor={this.props.id}>
+        <label className={extendedProps.labelClasses} htmlFor={id}>
           {this.props.label}
         </label>
         <div className={extendedProps.formControlClasses}>
@@ -61,7 +63,7 @@ export class TextArea extends React.Component<TextAreaProps, TextAreaState> {
             }}
             className="form-control"
             id={
-              this.props.id //*** end
+              id //*** end
             }
             name={this.props.name}
             placeholder={this.props.placeholder}

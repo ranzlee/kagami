@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as FormControl from "./FormControl";
+import * as lodash from "lodash";
 
 export interface ToggleState extends FormControl.FormControlState {}
 
@@ -60,6 +61,7 @@ export class Toggle extends React.Component<ToggleProps, ToggleState> {
     );
     let extendedProps = FormControl.FormControlExtendedProperties(this.props);
     let required = this.props.required ? true : false;
+    let id = lodash.uniqueId(this.props.id);
     return (
       <div className="row form-group">
         <div className={extendedProps.labelClasses}>{this.props.label}</div>
@@ -68,7 +70,7 @@ export class Toggle extends React.Component<ToggleProps, ToggleState> {
             ref={instance => {
               this.instance = instance;
             }}
-            id={this.props.id}
+            id={id}
             type="checkbox"
             name="checkbox"
             className="bootstrap-switch"

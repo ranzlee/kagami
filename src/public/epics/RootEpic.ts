@@ -1,7 +1,7 @@
 import { combineEpics } from 'redux-observable';
 import { combineReducers } from 'redux';
 import { fetchConfigurationsEpic, addConfigurationEpic, updateConfigurationEpic } from "./ConfigurationEpic";
-import { fetchConfigElementsEpic, addConfigElementEpic } from "./ConfigElementEpic";
+import { fetchConfigElementsEpic, addConfigElementEpic, updateConfigElementEpic } from "./ConfigElementEpic";
 
 export const rootEpic = combineEpics(
   fetchConfigurationsEpic,
@@ -9,5 +9,6 @@ export const rootEpic = combineEpics(
   updateConfigurationEpic,
 
   fetchConfigElementsEpic,
-  addConfigElementEpic
+  addConfigElementEpic,
+  updateConfigElementEpic
 );

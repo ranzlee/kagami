@@ -13,10 +13,12 @@ import {
     fetchConfigElementsError,
     AddConfigElementAction,
     addConfigElementSuccess,
+    UpdateConfigElementAction,
 } from './../actions/ConfigElementActions';
 import { Observable } from 'rxjs/Observable';
 import { IConfigElement } from '../../shared/models/configuration/elements/IConfigElement';
 import { elementAt } from 'rxjs/operators/elementAt';
+import { ajaxSuccess } from '../actions/GeneralActions';
 
 export const fetchConfigElementsEpic = (action$: any) =>
     action$.ofType(ActionTypeKeys.FETCH_CONFIG_ELEMENTS)
@@ -38,3 +40,23 @@ export const addConfigElementEpic = (action$: any) =>
         //TODO: Add catch 
         );
 
+
+export const updateConfigElementEpic = (action$: any) =>
+    action$.ofType(ActionTypeKeys.UPDATE_CONFIG_ELEMENT)
+        .groupBy((action: UpdateConfigElementAction) => action.propertyName)
+        .mergeMap((group: any) => group
+            .distinctUntilChanged(
+            (action1: UpdateConfigElementAction, action2: UpdateConfigElementAction) => 
+                {
+                    return action1.newValue === action2.newValue;
+                }
+            )
+            .debounceTime(2000))
+        .mergeMap((action: UpdateConfigElementAction) => {
+            return ajax.post(`./api/configElement/${action.id}`,
+                {
+                    propertyName: action.propertyName,
+                    newValue: action.newValue
+                })
+                .map(ajaxSuccess)
+        });

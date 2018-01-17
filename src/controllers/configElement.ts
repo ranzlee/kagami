@@ -31,3 +31,26 @@ export const addConfigElement = (req: Request, res: Response): void => {
         return;
     });
 };
+
+export const updateConfigElement = (req: Request, res: Response): void => {
+    const configElementId = req.params.id;
+    const propertyName = req.body.propertyName;
+    const newValue = req.body.newValue;
+
+    if (configElementId) {
+        const changeObject: any = {};
+        changeObject[propertyName] = newValue;
+
+        ConfigElementEntity.findByIdAndUpdate(configElementId, changeObject, { new: true }, (err: Error, updatedConfig: any) => {
+            if (err) {
+                res.status(500).send(`Error encountered while trying to update a config element: ${configElementId} in the DB`);
+            }
+            else {
+                res.sendStatus(200);
+            }
+            return;
+        });
+    } else {
+        res.status(500).send(`No config element id passed into update config element`);
+    }
+}

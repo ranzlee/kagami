@@ -13,7 +13,7 @@ export interface FormControlState {
 }
 
 export interface FormControlProps {
-  id: string;
+  id?: string;
   name?: string;
   label: string;
   readOnly?: boolean;
@@ -29,13 +29,17 @@ export interface FormControlProps {
   invalidFeedback?: string;
   onChange?: (
     eventOrMoment:
-      React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLTextAreaElement>
       | React.ChangeEvent<HTMLSelectElement>
       | Moment.Moment
   ) => void;
   onChangeCustomValidation?: (
-    elementOrMoment: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | Moment.Moment
+    elementOrMoment:
+      | HTMLInputElement
+      | HTMLSelectElement
+      | HTMLTextAreaElement
+      | Moment.Moment
   ) => CustomValidationResult;
   doCustomValidationOnMount?: boolean;
   form?: Form;
@@ -84,7 +88,9 @@ export let OnChangeCustomValidation = (
     }
   }
   //call custom validation delegate
-  let validationResult = component.props.onChangeCustomValidation(moment !== undefined ? moment : element);
+  let validationResult = component.props.onChangeCustomValidation(
+    moment !== undefined ? moment : element
+  );
   element.setCustomValidity("");
   component.setState(
     {

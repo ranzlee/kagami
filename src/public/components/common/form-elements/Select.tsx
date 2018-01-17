@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as FormControl from "./FormControl";
+import * as lodash from "lodash";
 
 export interface SelectState extends FormControl.FormControlState {}
 
@@ -54,6 +55,7 @@ export class Select extends React.Component<SelectProps, SelectState> {
     let required = this.props.required ? true : false;
     let multiple = this.props.multiple ? true : false;
     let size = this.props.multiple && this.props.size ? this.props.size : null;
+    let id = lodash.uniqueId(this.props.id);
     let placeholderOption =
       !this.props.multiple &&
       this.props.placeholderOption != null &&
@@ -62,7 +64,7 @@ export class Select extends React.Component<SelectProps, SelectState> {
       ) : null;
     return (
       <div className="row form-group">
-        <label className={extendedProps.labelClasses} htmlFor={this.props.id}>
+        <label className={extendedProps.labelClasses} htmlFor={id}>
           {this.props.label}
         </label>
         <div className={extendedProps.formControlClasses}>
@@ -72,7 +74,7 @@ export class Select extends React.Component<SelectProps, SelectState> {
             }}
             className="form-control"
             id={
-              this.props.id //*** end
+              id //*** end
             }
             name={this.props.name}
             value={this.props.value}

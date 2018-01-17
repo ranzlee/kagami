@@ -1,14 +1,14 @@
 import { connect, Dispatch } from 'react-redux';
-import { FieldRecord } from "./../../../../shared/models/configuration/elements/Field";
+import { ExpressionRecord } from "./../../../../shared/models/configuration/elements/Expression";
 import { ConfigElementType } from "./../../../../shared/models/enums/ConfigElementType";
 import * as actions from './../../../actions/ConfigElementActions';
 import { AppStoreRecord } from '../../../types/AppStore';
 import { ConfigElementRecord } from './../../../../shared/models/configuration/elements/IConfigElement';
-import { FieldItem, IConnectedDispatch, IConnectedState, IOwnProps } from '../../../components/configuration/fields/FieldItem';
+import { ExpressionItem, IConnectedDispatch, IConnectedState, IOwnProps } from '../../../components/configuration/expressions/ExpressionItem';
 
 export const mapStateToProps = (appStoreRecord: AppStoreRecord, props: IOwnProps): IConnectedState => {
     return {
-        field: FieldRecord.asFieldRecord(appStoreRecord.domain.configElements.get(props.fieldId))
+        expression: ExpressionRecord.asExpressionRecord(appStoreRecord.domain.configElements.get(props.expressionId))
     }
 }
 
@@ -19,8 +19,8 @@ export const mapDispatchToProps = (dispatch: Dispatch<actions.ConfigElementActio
             propertyName: string,
             newValue: any,
             oldValue: any) =>
-            dispatch(actions.updateConfigElement(id, ConfigElementType.field, propertyName, newValue, oldValue)) 
+            dispatch(actions.updateConfigElement(id, ConfigElementType.expression, propertyName, newValue, oldValue))
     }
 }
 
-export default connect<IConnectedState, IConnectedDispatch, IOwnProps>(mapStateToProps, mapDispatchToProps)(FieldItem);
+export default connect<IConnectedState, IConnectedDispatch, IOwnProps>(mapStateToProps, mapDispatchToProps)(ExpressionItem);
