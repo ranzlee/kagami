@@ -68,7 +68,7 @@ export class FormExample extends React.Component<
 
   render() {
     return (
-      <div className="container-fluid">
+      <>
         <div className="row">
           <div className="col">
             <Form onSubmit={() => {}}>
@@ -465,7 +465,7 @@ export class FormExample extends React.Component<
             </Form>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 }
