@@ -35,6 +35,7 @@ export class FieldItem extends React.Component<IOwnProps & IConnectedState & ICo
     const oldValue = field[name];
     update(field._id, name, value, oldValue);
   };
+  
   render() {
     const { field } = this.props;
     const editUrl = "/configElement/field/" + field._id;

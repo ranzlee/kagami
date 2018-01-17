@@ -19,7 +19,7 @@ export const mapDispatchToProps = (dispatch: Dispatch<actions.ConfigElementActio
             propertyName: string,
             newValue: any,
             oldValue: any) =>
-            dispatch(actions.updateConfigElement(id, ConfigElementType.field, propertyName, newValue, oldValue)),
+            dispatch(actions.updateConfigElement(id, ConfigElementType.field, propertyName, newValue, oldValue)) 
     }
 }
 

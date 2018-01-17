@@ -13,8 +13,14 @@ export const mapStateToProps = (appStoreRecord: AppStoreRecord, props: IOwnProps
 }
 
 export const mapDispatchToProps = (dispatch: Dispatch<actions.ConfigElementActionTypes>): IConnectedDispatch => {
-    return {  
-        delete: (fieldId: string) => {console.log("TODO")}   }
+    return {
+        delete: (fieldId: string) => { console.log("TODO") },
+        update: (id: string,
+            propertyName: string,
+            newValue: any,
+            oldValue: any) =>
+            dispatch(actions.updateConfigElement(id, ConfigElementType.expression, propertyName, newValue, oldValue))
+    }
 }
 
 export default connect<IConnectedState, IConnectedDispatch, IOwnProps>(mapStateToProps, mapDispatchToProps)(ExpressionItem);
