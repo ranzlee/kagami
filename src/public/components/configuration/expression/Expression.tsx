@@ -36,29 +36,37 @@ export class Expression extends React.Component<IOwnProps & IConnectedState & IC
     return (
       <div className="container-fluid">
         <div className="row">
-          <Textbox
-            id={'Expression_Name_' + expression._id}
-            name="name"
-            type="text"
-            required={true}
-            placeholder="Expression Name"
-            label="Name: "
-            value={expression.name}
-            onChange={this.updateClickHandler}
-            labelColSm={3}
-            controlColSm={9} />
+          <div className="col-lg-6 col-sm-12">
+            <Textbox
+              id={'Expression_Name_' + expression._id}
+              name="name"
+              type="text"
+              required={true}
+              placeholder="Expression Name"
+              label="Name: "
+              value={expression.name}
+              onChange={this.updateClickHandler}
+              labelColLg={3}
+              controlColLg={9}
+              labelColSm={6}
+              controlColSm={6} />
+          </div>
         </div>
         <div className="row">
-          <TextArea
-            id={'Expression_Description_' + expression._id}
-            name="description"
-            label="Description: "
-            placeholder="Description"
-            value={expression.description}
-            onChange={this.updateClickHandler}
-            labelColSm={3}
-            controlColSm={9}
-            rows={5} />
+          <div className="col-lg-6 col-sm-12">
+            <TextArea
+              id={'Expression_Description_' + expression._id}
+              name="description"
+              label="Description: "
+              placeholder="Description"
+              value={expression.description}
+              onChange={this.updateClickHandler}
+              labelColLg={3}
+              controlColLg={9}
+              labelColSm={6}
+              controlColSm={6}
+              rows={5} />
+          </div>
         </div>
       </div>
     )
