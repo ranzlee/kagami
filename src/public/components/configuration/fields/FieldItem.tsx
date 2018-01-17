@@ -35,7 +35,7 @@ export class FieldItem extends React.Component<IOwnProps & IConnectedState & ICo
     const oldValue = field[name];
     update(field._id, name, value, oldValue);
   };
-  
+
   render() {
     const { field } = this.props;
     const editUrl = "/configElement/field/" + field._id;
@@ -43,30 +43,39 @@ export class FieldItem extends React.Component<IOwnProps & IConnectedState & ICo
     return (
       <div>
         <div className="row">
-          <Textbox
-            id={'Field_Name_' + field._id}
-            name="name"
-            type="text"
-            required={true}
-            placeholder="Field Name"
-            label="Name: "
-            value={field.name}
-            onChange={this.updateClickHandler}
-            labelColSm={3}
-            controlColSm={9} />
+          <div className="col-lg-6 col-sm-12">
+            <Textbox
+              id={'Field_Name_' + field._id}
+              name="name"
+              type="text"
+              required={true}
+              placeholder="Field Name"
+              label="Name: "
+              value={field.name}
+              onChange={this.updateClickHandler}
+              labelColLg={3}
+              controlColLg={5}
+              labelColSm={6}
+              controlColSm={6}
+            />
+          </div>
         </div>
         <div className="row">
-          <TextArea
-            id={'Field_Description_' + field._id}
-            name="description"
-            label="Description: "
-            placeholder="Field Description"
-            value={field.description}
-            onChange={this.updateClickHandler}
-            labelColSm={3}
-            controlColSm={6}
-            rows={5} />
-          <div className="col-sm">
+          <div className="col-lg-6 col-sm-12">
+            <TextArea
+              id={'Field_Description_' + field._id}
+              name="description"
+              label="Description: "
+              placeholder="Field Description"
+              value={field.description}
+              onChange={this.updateClickHandler}
+              labelColLg={3}
+              controlColLg={5}
+              labelColSm={6}
+              controlColSm={6}
+              rows={5} />
+          </div>
+          <div className="col-lg-6 col-sm-12">
             <Link to={editUrl}>
               <button type="button" className="btn btn-primary">
                 Edit

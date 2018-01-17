@@ -46,43 +46,55 @@ export class Field extends React.Component<IOwnProps & IConnectedState & IConnec
     return (
       <div className="container-fluid">
         <div className="row">
-          <Textbox
-            id={'Field_Name_' + field._id}
-            name="name"
-            type="text"
-            required={true}
-            placeholder="Field Name"
-            label="Name: "
-            value={field.name}
-            onChange={this.updateClickHandler}
-            labelColSm={6}
-            controlColSm={6} />
+          <div className="col-lg-6 col-sm-12">
+            <Textbox
+              id={'Field_Name_' + field._id}
+              name="name"
+              type="text"
+              required={true}
+              placeholder="Field Name"
+              label="Name: "
+              value={field.name}
+              onChange={this.updateClickHandler}
+              labelColLg={3}
+              controlColLg={9}
+              labelColSm={6}
+              controlColSm={6} />
+          </div>
         </div>
         <div className="row">
-          <TextArea
-            id={'Field_Description_' + field._id}
-            name="description"
-            label="Description: "
-            placeholder="Description"
-            value={field.description}
-            onChange={this.updateClickHandler}
-            labelColSm={6}
-            controlColSm={6}
-            rows={5} />
+          <div className="col-lg-6 col-sm-12">
+            <TextArea
+              id={'Field_Description_' + field._id}
+              name="description"
+              label="Description: "
+              placeholder="Description"
+              value={field.description}
+              onChange={this.updateClickHandler}
+              labelColLg={3}
+              controlColLg={9}
+              labelColSm={6}
+              controlColSm={6}
+              rows={5} />
+          </div>
         </div>
         <div className="row">
-          <Select
-            name="displayExpression"
-            label="Display Expression"
-            placeholderOption="Select"
-            labelColSm={6}
-            controlColSm={6}
-            required={false}
-            onChange={this.updateClickHandler}
-            value={field.displayExpression}
-          >
-            {this.getExpressionOptions()}
-          </Select>
+          <div className="col-lg-6 col-sm-12">
+            <Select
+              name="displayExpression"
+              label="Display Expression"
+              placeholderOption="Select"
+              labelColLg={3}
+              controlColLg={9}
+              labelColSm={6}
+              controlColSm={6}
+              required={false}
+              onChange={this.updateClickHandler}
+              value={field.displayExpression}
+            >
+              {this.getExpressionOptions()}
+            </Select>
+          </div>
         </div>
       </div>
     )
