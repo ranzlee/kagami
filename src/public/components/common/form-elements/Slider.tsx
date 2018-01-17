@@ -43,9 +43,8 @@ export class Slider extends React.Component<SliderProps, SliderState> {
     }
 
     //set the hidden input to the selected slider value
-    var slider = document.getElementById("sliderRegular");
-    if (slider) {
-      this.instance.value = (slider as any).noUiSlider.get();
+    if (this.slider) {
+      this.instance.value = (this.slider as any).noUiSlider.get();
       if (this.props.onChangeCustomValidation) {
         this.props.onChangeCustomValidation(this.instance);
         FormControl.OnChangeCustomValidation(this, this.instance);
