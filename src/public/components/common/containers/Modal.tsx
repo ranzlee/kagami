@@ -2,18 +2,28 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as $ from "jquery";
 import * as lodash from "lodash";
+import { Form } from "../form-elements/Form";
 
 export interface ModalState {}
 
 export interface ModalProps {
   id?: string;
   width?: string;
+  buttonAlignment?: "left" | "right";
+  buttonTitle: string;
+  modalTitle: string;
 }
 
 export class Modal extends React.Component<ModalProps, ModalState> {
   constructor(props: ModalProps) {
     super(props);
     this.state = {};
+  }
+
+  componentWillUnmount() {
+    if (this.instance != null) {
+      ($(this.instance) as any).modal("dispose");
+    }
   }
 
   instance: HTMLDivElement;
@@ -24,21 +34,61 @@ export class Modal extends React.Component<ModalProps, ModalState> {
     }
   };
 
+  hideModal = () => {
+    if (this.instance != null) {
+      ($(this.instance) as any).modal("hide");
+    }
+  };
+
+  recursiveMap(
+    children: React.ReactNode,
+    fn: (child: React.ReactNode, thisComponent: Modal) => React.ReactNode,
+    thisComponent: Modal
+  ): React.ReactNode {
+    return React.Children.map(children, child => {
+      if (!React.isValidElement(child)) {
+        return child;
+      }
+      if ((child as any).props.children) {
+        child = React.cloneElement(child as any, {
+          children: this.recursiveMap(
+            (child as any).props.children,
+            fn,
+            thisComponent
+          )
+        });
+      }
+      return fn(child, thisComponent);
+    });
+  }
+
+  mapChild(child: React.ReactNode, thisComponent: Modal): React.ReactNode {
+    //if ((child as any).props.modal) {
+    return React.cloneElement(child as any, { modal: thisComponent });
+    //} else {
+    //  return child;
+    //}
+  }
+
   render() {
     let modalStyle = {
       minWidth: this.props.width != null ? this.props.width : "0px"
     };
-
     let id = lodash.uniqueId(this.props.id);
+    let alignmentClass =
+      this.props.buttonAlignment === "right" ? "float-right" : "float-left";
     return (
       <>
-        <button
-          type="button"
-          className="btn btn-primary"
-          onClick={this.showModal}
-        >
-          Launch demo modal
-        </button>
+        <div className={alignmentClass}>
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={this.showModal}
+          >
+            {this.props.buttonTitle}
+          </button>
+        </div>
+        <div className="clearfix" />
         <div
           ref={instance => {
             this.instance = instance;
@@ -59,17 +109,18 @@ export class Modal extends React.Component<ModalProps, ModalState> {
                 <button
                   type="button"
                   className="close"
-                  data-dismiss="modal"
                   aria-hidden="true"
+                  onClick={this.hideModal}
                 >
                   &times;
                 </button>
-                <h4 className="modal-title" id="myModalLabel">
-                  Modal title
-                </h4>
+                <h4 className="modal-title">{this.props.modalTitle}</h4>
               </div>
-              <div className="modal-body">{this.props.children}</div>
-              <div className="modal-footer">
+              <div className="modal-body">
+                <hr className="bg-primary" />
+                {this.recursiveMap(this.props.children, this.mapChild, this)}
+              </div>
+              {/* <div className="modal-footer">
                 <button
                   type="button"
                   className="btn btn-default btn-simple"
@@ -80,7 +131,7 @@ export class Modal extends React.Component<ModalProps, ModalState> {
                 <button type="button" className="btn btn-info btn-simple">
                   Save
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

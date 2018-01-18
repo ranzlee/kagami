@@ -68,10 +68,10 @@ export class FormExample extends React.Component<
 
   render() {
     return (
-      <>
+      <div>
         <div className="row">
           <div className="col">
-            <Form onSubmit={() => {}}>
+            <Form>
               <Checkbox
                 label="Validate form on mount (refresh browser after changing to take effect)"
                 controlCol={12}
@@ -112,6 +112,8 @@ export class FormExample extends React.Component<
               validateOnMount={this.state.validateFormOnMount}
               readOnly={this.state.readOnly}
               disabled={this.state.disabled}
+              closeModalOnSubmit={true}
+              modal={(this as any).props.modal}
             >
               <div className="row">
                 <div className="col-lg-6 col-sm-12">
@@ -465,7 +467,7 @@ export class FormExample extends React.Component<
             </Form>
           </div>
         </div>
-      </>
+      </div>
     );
   }
 }

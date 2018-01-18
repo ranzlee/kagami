@@ -11,6 +11,7 @@ import { Toggle } from "./Toggle";
 import { Select } from "./Select";
 import { Slider } from "./Slider";
 import { DateTimePicker } from "./DateTimePicker";
+import { Modal } from "../containers/Modal";
 import * as Moment from "moment";
 
 export interface FormState {
@@ -18,7 +19,9 @@ export interface FormState {
 }
 
 export interface FormProps {
-  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void;
+  closeModalOnSubmit?: boolean;
+  modal?: Modal;
   validateOnMount?: boolean;
   disabled?: boolean;
   readOnly?: boolean;
@@ -26,8 +29,8 @@ export interface FormProps {
 
 export interface FormCustomValidationRegister {
   component: React.Component<
-  FormControl.FormControlProps,
-  FormControl.FormControlState
+    FormControl.FormControlProps,
+    FormControl.FormControlState
   >;
   element: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
   callback?: (validationResult: FormControl.CustomValidationResult) => void;
@@ -57,7 +60,7 @@ export class Form extends React.Component<FormProps, FormState> {
         var validationResult: FormControl.CustomValidationResult;
         if (r.component instanceof DateTimePicker) {
           let comp = r.component as DateTimePicker;
-          let moment = Moment(r.element.value, comp.getMomentFormat())
+          let moment = Moment(r.element.value, comp.getMomentFormat());
           validationResult = FormControl.OnChangeCustomValidation(
             comp,
             r.element,
@@ -77,7 +80,14 @@ export class Form extends React.Component<FormProps, FormState> {
         }
       });
       if (isValid === true) {
-        this.props.onSubmit(event);
+        if (this.props.onSubmit) {
+          this.props.onSubmit(event);
+          if (this.props.closeModalOnSubmit) {
+            if (this.props.modal) {
+              this.props.modal.hideModal();
+            }
+          }
+        }
       }
     }
   };
@@ -99,7 +109,7 @@ export class Form extends React.Component<FormProps, FormState> {
     component: React.Component<
       FormControl.FormControlProps,
       FormControl.FormControlState
-      >,
+    >,
     element: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement,
     callback?: (validationResult: FormControl.CustomValidationResult) => void
   ) {

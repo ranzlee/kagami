@@ -42,7 +42,13 @@ export default class Home extends React.Component<HomeProps, HomeState> {
             </form>
           </div>
           <div className="col">
-            <Modal id="formExampleModal" width="1200px">
+            <Modal
+              id="formExampleModal"
+              width="1200px"
+              buttonAlignment="right"
+              buttonTitle="Show Modal"
+              modalTitle="Form Control Example Hosted In Modal Dialog"
+            >
               <FormExample />
             </Modal>
           </div>
