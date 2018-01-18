@@ -49,6 +49,7 @@ export class Button extends React.Component<ButtonProps, ButtonState> {
     return (
       <button
         type={this.props.type}
+        onClick={this.props.type === "button" ? this.onClick : null}
         className={buttonClasses}
         disabled={
           this.props.disabled != null

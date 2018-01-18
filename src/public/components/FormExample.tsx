@@ -4,10 +4,8 @@ import { Form } from "./common/form-elements/Form";
 import { Radio } from "./common/form-elements/Radio";
 import { RadioOption } from "./common/form-elements/RadioOption";
 import { Slider } from "./common/form-elements/Slider";
-//import { Textbox } from "./common/form-elements/Textbox";
 import { Toggle } from "./common/form-elements/Toggle";
 import { Checkbox } from "./common/form-elements/Checkbox";
-//import { Numberbox } from "./common/form-elements/Numberbox";
 import { TextArea } from "./common/form-elements/TextArea";
 import { Select } from "./common/form-elements/Select";
 import { DateTimePicker } from "./common/form-elements/DateTimePicker";
@@ -19,9 +17,7 @@ export interface FormExampleState {
   validateFormOnMount: boolean;
   readOnly: boolean;
   disabled: boolean;
-  myTextboxState: string;
   myCheckboxState: boolean;
-  myNumberState: number;
   myTextAreaState: string;
   myToggleState: boolean;
   myRadioState: string;
@@ -45,9 +41,7 @@ export class FormExample extends React.Component<
         localStorage.getItem("validateFormOnMount") === "true",
       readOnly: false,
       disabled: false,
-      myTextboxState: "aaaa",
       myCheckboxState: true,
-      myNumberState: 100,
       myTextAreaState:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.",
       myToggleState: true,
@@ -116,55 +110,6 @@ export class FormExample extends React.Component<
               closeModalOnSubmit={true}
               modal={(this as any).props.modal}
             >
-              {/* <div className="row">
-                <div className="col-lg-6 col-sm-12">
-                  <Textbox
-                    type="text"
-                    label="My Textbox"
-                    value={this.state.myTextboxState}
-                    placeholder="Enter 'aaaa'"
-                    required={true}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                      this.setState({
-                        myTextboxState: event.currentTarget.value
-                      });
-                    }}
-                    onChangeCustomValidation={(element: HTMLInputElement) => {
-                      let isValid = true;
-                      if (element.value !== "aaaa") {
-                        isValid = false;
-                      }
-                      return {
-                        isValid: isValid,
-                        validationMessage: "Value must be aaaa."
-                      };
-                    }}
-                    invalidFeedback="Required"
-                    controlCol={8}
-                    labelCol={4}
-                  />
-                </div>
-                <div className="col-lg-6 col-sm-12">
-                  <Numberbox
-                    type="number"
-                    label="My Number"
-                    value={this.state.myNumberState}
-                    placeholder="Enter 100 or 1000"
-                    required={true}
-                    min={100}
-                    max={200}
-                    step={50}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                      this.setState({
-                        myNumberState: event.currentTarget.valueAsNumber
-                      });
-                    }}
-                    invalidFeedback="Required and between 100 and 200 with step of 50"
-                    controlCol={8}
-                    labelCol={4}
-                  />
-                </div>
-              </div> */}
               <FormSubComponentExample />
               <div className="row">
                 <div className="col-lg-6 col-sm-12">
