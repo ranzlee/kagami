@@ -262,8 +262,8 @@ export class FormExample extends React.Component<
                           });
                         }}
                         checked={this.state.myToggleState}
-                        labelOn="Yes"
-                        labelOff="No"
+                        labelOn="YES"
+                        labelOff="NO"
                       />
                     </div>
                   </div>

@@ -64,15 +64,14 @@ body {
 }
 //END - react datepicker for bootstrap compatibility
 
-.bootstrap-switch {
-  margin-top: 10px;
-}
 .bootstrap-switch.bootstrap-switch-on .bootstrap-switch-label {
   background: $primary-color;
 }
+
 .bootstrap-switch.bootstrap-switch-on:hover .bootstrap-switch-label {
   background: $primary-color;
 }
+
 .noUi-target {
   background: $primary-color;
 }

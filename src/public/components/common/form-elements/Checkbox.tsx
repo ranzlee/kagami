@@ -16,9 +16,7 @@ export class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
     this.state = { invalidFeedback: this.props.invalidFeedback };
   }
 
-  //*** every wrapped component needs this!
   instance: HTMLInputElement;
-  //*** end
 
   onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (this.props.readOnly != null && this.props.readOnly) {
@@ -40,7 +38,6 @@ export class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
     }
   };
 
-  //*** every wrapped component needs this!
   componentDidMount() {
     if (this.props.doCustomValidationOnMount) {
       FormControl.OnChangeCustomValidation(this, this.instance);
@@ -49,7 +46,6 @@ export class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
       this.props.form.registerFormCustomValidations(this, this.instance);
     }
   }
-  //*** end
 
   render() {
     let extendedProps = FormControl.FormControlExtendedProperties(this.props);
@@ -62,12 +58,9 @@ export class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
           <div className="checkbox">
             <input
               ref={instance => {
-                //*** every wrapped component needs this!
                 this.instance = instance;
               }}
-              id={
-                id //*** end
-              }
+              id={id}
               type="checkbox"
               className="form-check-input custom-control-input"
               required={required}

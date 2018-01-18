@@ -22,9 +22,8 @@ export class Radio extends React.Component<RadioProps, RadioState> {
     this.radioOptions = [];
   }
 
-  //hidden field keeps the selected radio option value to check custom validation against
   instance: HTMLInputElement;
-  //all radio option elements (inputs) in the group
+
   radioOptions: Array<HTMLInputElement>;
 
   onChange = (event: React.ChangeEvent<HTMLInputElement>) => {

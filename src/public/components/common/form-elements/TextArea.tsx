@@ -20,9 +20,7 @@ export class TextArea extends React.Component<TextAreaProps, TextAreaState> {
     this.state = { invalidFeedback: this.props.invalidFeedback };
   }
 
-  //*** every wrapped component needs this!
   instance: HTMLTextAreaElement;
-  //*** end
 
   onChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (this.props.onChange) {
@@ -33,7 +31,6 @@ export class TextArea extends React.Component<TextAreaProps, TextAreaState> {
     }
   };
 
-  //*** every wrapped component needs this!
   componentDidMount() {
     if (this.props.doCustomValidationOnMount) {
       FormControl.OnChangeCustomValidation(this, this.instance);
@@ -42,7 +39,6 @@ export class TextArea extends React.Component<TextAreaProps, TextAreaState> {
       this.props.form.registerFormCustomValidations(this, this.instance);
     }
   }
-  //*** end
 
   render() {
     let required = this.props.required ? true : false;
@@ -58,13 +54,10 @@ export class TextArea extends React.Component<TextAreaProps, TextAreaState> {
         <div className={extendedProps.formControlClasses}>
           <textarea
             ref={instance => {
-              //*** every wrapped component needs this!
               this.instance = instance;
             }}
             className="form-control"
-            id={
-              id //*** end
-            }
+            id={id}
             name={this.props.name}
             placeholder={this.props.placeholder}
             disabled={

@@ -25,7 +25,6 @@ export class Slider extends React.Component<SliderProps, SliderState> {
     };
   }
 
-  //hidden field keeps the slider value to check custom validation against
   instance: HTMLInputElement;
   slider: HTMLDivElement;
 
@@ -41,7 +40,6 @@ export class Slider extends React.Component<SliderProps, SliderState> {
         return;
       }
     }
-
     //set the hidden input to the selected slider value
     if (this.slider) {
       this.instance.value = (this.slider as any).noUiSlider.get();
@@ -69,21 +67,18 @@ export class Slider extends React.Component<SliderProps, SliderState> {
       this.props.showHorizontal == null || this.props.showHorizontal
         ? "horizontal"
         : "vertical";
-
     const sliderDisabled =
       this.props.disabled != null
         ? this.props.disabled
         : this.props.form && this.props.form.props.disabled != null
           ? this.props.form.props.disabled
           : false;
-
     const sliderReadOnly =
       this.props.readOnly != null
         ? this.props.readOnly
         : this.props.form && this.props.form.props.readOnly != null
           ? this.props.form.props.readOnly
           : false;
-
     if (createSlider) {
       noUiSlider.create(this.slider, {
         start: this.props.value,

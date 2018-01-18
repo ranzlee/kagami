@@ -73,9 +73,7 @@ export class Select extends React.Component<SelectProps, SelectState> {
               this.instance = instance;
             }}
             className="form-control"
-            id={
-              id //*** end
-            }
+            id={id}
             name={this.props.name}
             value={this.props.value}
             disabled={
