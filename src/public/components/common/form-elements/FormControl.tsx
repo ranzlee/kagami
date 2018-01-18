@@ -114,27 +114,27 @@ export let OnChangeCustomValidation = (
 export let FormControlExtendedProperties = (
   props: FormControlProps
 ): FormControlExtendedProperties => {
-  let labelCol = props.labelCol ? "col-" + props.labelCol : null;
-  let labelColLg = props.labelColLg ? "col-lg-" + props.labelColLg : null;
-  let labelColMd = props.labelColMd ? "col-md-" + props.labelColMd : null;
-  let labelColSm = props.labelColSm ? "col-sm-" + props.labelColSm : null;
-  let controlCol = props.controlCol ? "col-" + props.controlCol : null;
-  let controlColLg = props.controlColLg ? "col-lg-" + props.controlColLg : null;
-  let controlColMd = props.controlColMd ? "col-md-" + props.controlColMd : null;
-  let controlColSm = props.controlColSm ? "col-sm-" + props.controlColSm : null;
+  let labelCol = props.labelCol ? "col-" + props.labelCol : "";
+  let labelColLg = props.labelColLg ? "col-lg-" + props.labelColLg : "";
+  let labelColMd = props.labelColMd ? "col-md-" + props.labelColMd : "";
+  let labelColSm = props.labelColSm ? "col-sm-" + props.labelColSm : "";
+  let controlCol = props.controlCol ? "col-" + props.controlCol : "";
+  let controlColLg = props.controlColLg ? "col-lg-" + props.controlColLg : "";
+  let controlColMd = props.controlColMd ? "col-md-" + props.controlColMd : "";
+  let controlColSm = props.controlColSm ? "col-sm-" + props.controlColSm : "";
   if (
-    labelCol == null &&
-    labelColLg == null &&
-    labelColMd == null &&
-    labelColSm == null
+    labelCol == "" &&
+    labelColLg == "" &&
+    labelColMd == "" &&
+    labelColSm == ""
   ) {
     labelCol = "col";
   }
   if (
-    controlCol == null &&
-    controlColLg == null &&
-    controlColMd == null &&
-    controlColSm == null
+    controlCol == "" &&
+    controlColLg == "" &&
+    controlColMd == "" &&
+    controlColSm == ""
   ) {
     controlCol = "col";
   }

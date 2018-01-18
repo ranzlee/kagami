@@ -1,15 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as FormControl from "./FormControl";
-import { Button } from "./Button";
-import { Checkbox } from "./Checkbox";
-import { Numberbox } from "./Numberbox";
-import { Radio } from "./Radio";
-import { TextArea } from "./TextArea";
-import { Textbox } from "./Textbox";
-import { Toggle } from "./Toggle";
-import { Select } from "./Select";
-import { Slider } from "./Slider";
 import { DateTimePicker } from "./DateTimePicker";
 import { Modal } from "../containers/Modal";
 import * as Moment from "moment";
@@ -143,38 +134,24 @@ export class Form extends React.Component<FormProps, FormState> {
   }
 
   mapChild(child: React.ReactNode, thisComponent: Form): React.ReactNode {
-    if (thisComponent.isWrappedComponent(child as any)) {
-      if ((child as any).props.doCustomValidationOnMount == null) {
-        return React.cloneElement(child as any, {
-          doCustomValidationOnMount: thisComponent.props.validateOnMount,
-          form: thisComponent
-        });
-      } else {
-        return React.cloneElement(child as any, {
-          form: thisComponent
-        });
-      }
-    } else {
+    if (
+      !(child as any).type ||
+      !(child as any).type.prototype ||
+      !((child as any).type.prototype instanceof React.Component)
+    ) {
       return child;
     }
-  }
-
-  isWrappedComponent(child: React.ReactNode): boolean {
     if (
-      (child as any).type === Button ||
-      (child as any).type === Checkbox ||
-      (child as any).type === Numberbox ||
-      (child as any).type === Radio ||
-      (child as any).type === TextArea ||
-      (child as any).type === Textbox ||
-      (child as any).type === Toggle ||
-      (child as any).type === Select ||
-      (child as any).type === Slider ||
-      (child as any).type === DateTimePicker
+      !(child as any).props ||
+      !(child as any).props.doCustomValidationOnMount
     ) {
-      return true;
+      return React.cloneElement(child as any, {
+        doCustomValidationOnMount: thisComponent.props.validateOnMount,
+        form: thisComponent
+      });
+    } else {
+      return React.cloneElement(child as any, { form: thisComponent });
     }
-    return false;
   }
 
   render() {

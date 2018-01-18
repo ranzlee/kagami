@@ -63,11 +63,14 @@ export class Modal extends React.Component<ModalProps, ModalState> {
   }
 
   mapChild(child: React.ReactNode, thisComponent: Modal): React.ReactNode {
-    //if ((child as any).props.modal) {
+    if (
+      !(child as any).type ||
+      !(child as any).type.prototype ||
+      !((child as any).type.prototype instanceof React.Component)
+    ) {
+      return child;
+    }
     return React.cloneElement(child as any, { modal: thisComponent });
-    //} else {
-    //  return child;
-    //}
   }
 
   render() {
