@@ -4,6 +4,7 @@ import { Textbox } from "../../common/form-elements/Textbox";
 import { TextArea } from "../../common/form-elements/TextArea";
 import { ExpressionRecord } from "../../../../shared/models/configuration/elements/Expression";
 import { Select } from "../../common/form-elements/Select";
+import { ConfigElementDropDown } from "./../dropDown/ConfigElementDropDown";
 
 export interface IOwnProps {
   fieldId: string;
@@ -23,12 +24,6 @@ export interface IConnectedDispatch {
 
 export class Field extends React.Component<IOwnProps & IConnectedState & IConnectedDispatch, {}> {
 
-  getExpressionOptions(): JSX.Element[] {
-    var returnElements: JSX.Element[] = [];
-    returnElements = this.props.expressions.map(i => (<option key={i._id} value={i._id}>{i.name}</option>));
-    return returnElements;
-  }
-
   updateClickHandler = (event: any) => {
     const { field, update } = this.props;
 
@@ -41,7 +36,7 @@ export class Field extends React.Component<IOwnProps & IConnectedState & IConnec
   };
 
   render() {
-    const { field } = this.props;
+    const { field, expressions } = this.props;
     return (
       <div className="container-fluid">
         <div className="row">
@@ -79,7 +74,8 @@ export class Field extends React.Component<IOwnProps & IConnectedState & IConnec
         </div>
         <div className="row">
           <div className="col-lg-6 col-sm-12">
-            <Select
+            <ConfigElementDropDown
+              configElements={expressions}
               name="displayExpression"
               label="Display Expression"
               placeholderOption="Select"
@@ -90,9 +86,7 @@ export class Field extends React.Component<IOwnProps & IConnectedState & IConnec
               required={false}
               onChange={this.updateClickHandler}
               value={field.displayExpression}
-            >
-              {this.getExpressionOptions()}
-            </Select>
+            />
           </div>
         </div>
       </div>
