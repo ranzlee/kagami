@@ -43,37 +43,46 @@ export class ConfigurationItem extends React.Component<IOwnProps & IConnectedSta
     return (
       <div>
         <div className="row">
-          <Textbox
-            id={'Configuration_Name_' + configuration._id}
-            name="name"
-            type="text"
-            required={true}
-            placeholder="Configuration Name"
-            label="Name: "
-            value={configuration.name}
-            onChange={this.updateClickHandler}
-            labelColSm={3}
-            controlColSm={9} />
+          <div className="col-lg-6 col-sm-12">
+            <Textbox
+              id={'Configuration_Name_' + configuration._id}
+              name="name"
+              type="text"
+              required={true}
+              placeholder="Configuration Name"
+              label="Name: "
+              value={configuration.name}
+              onChange={this.updateClickHandler}
+              labelColLg={3}
+              controlColLg={9}
+              labelColSm={6}
+              controlColSm={6}
+            />
+          </div>
         </div>
         <div className="row">
-          <TextArea
-            id={'Configuration_Description_' + configuration._id}
-            name="description"
-            label="Description: "
-            placeholder="Description"
-            value={configuration.description}
-            onChange={this.updateClickHandler}
-            labelColSm={3}
-            controlColSm={6}
-            rows={5} />
-          <div className="col-sm">
+          <div className="col-lg-6 col-sm-12">
+            <TextArea
+              id={'Configuration_Description_' + configuration._id}
+              name="description"
+              label="Description: "
+              placeholder="Description"
+              value={configuration.description}
+              onChange={this.updateClickHandler}
+              labelColLg={3}
+              controlColLg={9}
+              labelColSm={6}
+              controlColSm={6}
+              rows={5} />
+          </div>
+          <div className="col-lg-6 col-sm-12">
             <Link to={editUrl}>
               <button type="button" className="btn btn-primary">
                 Edit
-            </button>
+                </button>
             </Link>
           </div>
-        </div>
+        </div >
       </div >
     );
   }

@@ -1,6 +1,6 @@
 import { Tag } from './../../shared/models/configuration/Tag';
 import { Configuration, ConfigurationRecord } from './../../shared/models/configuration/Configuration';
-import { IConfigElement, ConfigElementRecord } from './../../shared/models/configuration/elements/IConfigElement';
+import { IConfigElement } from './../../shared/models/configuration/elements/IConfigElement';
 import { ConfigElementType } from './../../shared/models/enums/ConfigElementType';
 import { Record, Map } from 'immutable'
 import { DomainRecord } from "./immutable/DomainRecord";

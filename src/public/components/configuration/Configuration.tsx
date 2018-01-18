@@ -46,6 +46,7 @@ export class Configuration extends React.Component<IOwnProps & IConnectedState &
   render() {
     const { configuration } = this.props;
     const editFieldUrl = `/configuration/${configuration._id}/field`;
+    const editExpressionUrl = `/configuration/${configuration._id}/expression`;
 
     return (
       <div className="container-fluid">
@@ -68,6 +69,12 @@ export class Configuration extends React.Component<IOwnProps & IConnectedState &
         <Link to={editFieldUrl}>
           <button type="button" className="btn btn-primary">
             Manage Fields
+            </button>
+        </Link>
+
+        <Link to={editExpressionUrl}>
+          <button type="button" className="btn btn-primary">
+            Manage Expressions
             </button>
         </Link>
       </div>

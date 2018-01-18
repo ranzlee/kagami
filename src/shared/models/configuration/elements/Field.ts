@@ -1,7 +1,6 @@
 import { Record } from 'immutable';
 import { FieldType } from './../../enums/FieldType';
-import { BaseConfigElement } from "./BaseConfigElement";
-import { ConfigElementRecord, IConfigElement, getConfigElementDefaults } from './IConfigElement';
+import { IConfigElement, getConfigElementDefaults } from './IConfigElement';
 import { ConfigElementType } from './../../enums/ConfigElementType';
 import { GenericPartial } from './../../Helpers';
 
@@ -13,7 +12,7 @@ export interface IField extends IConfigElement {
     [key: string]: any;
 }
 
-export function getFieldDefaults(): IField {
+function getFieldDefaults(): IField {
     return {
         ...getConfigElementDefaults(),
         type: undefined,
@@ -43,8 +42,4 @@ export class FieldRecord extends Record(getFieldDefaults()) implements IField {
     readonlyExpression: string;
     defaultValueExpression: string;
     [key: string]: any;
-
-    public static asFieldRecord(configElementRecord: ConfigElementRecord) : FieldRecord {
-        return configElementRecord as FieldRecord;
-    }
 }

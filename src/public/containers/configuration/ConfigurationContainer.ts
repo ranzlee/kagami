@@ -8,7 +8,7 @@ import { ConfigurationRecord } from "./../../../shared/models/configuration/Conf
 export const mapStateToProps = (appStoreRecord: AppStoreRecord, props: IOwnProps): IConnectedState => {
     return {
         configuration: appStoreRecord.domain.configurations.get(props.match.params.configId) || new ConfigurationRecord(),
-        areConfigElementsLoaded: appStoreRecord.domain.configElementMapping.has(props.match.params.configId)
+        areConfigElementsLoaded: appStoreRecord.domain.configMappings.has(props.match.params.configId)
     }
 }
 

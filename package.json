@@ -47,6 +47,7 @@
     "axios": "^0.17.1",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.2",
+    "class-validator-with-metadata": "^1.0.1",
     "compression": "^1.7.1",
     "connect-mongo": "^2.0.0",
     "crypto": "^1.0.1",
