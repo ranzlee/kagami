@@ -89,6 +89,40 @@ export class Field extends React.Component<IOwnProps & IConnectedState & IConnec
             />
           </div>
         </div>
+        <div className="row">
+          <div className="col-lg-6 col-sm-12">
+            <ConfigElementDropDown
+              configElements={expressions}
+              name="readonlyExpression"
+              label="Readonly Expression"
+              placeholderOption="Select"
+              labelColLg={3}
+              controlColLg={9}
+              labelColSm={6}
+              controlColSm={6}
+              required={false}
+              onChange={this.updateClickHandler}
+              value={field.readonlyExpression}
+            />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-lg-6 col-sm-12">
+            <ConfigElementDropDown
+              configElements={expressions}
+              name="defaultValueExpression"
+              label="Default Value Expression"
+              placeholderOption="Select"
+              labelColLg={3}
+              controlColLg={9}
+              labelColSm={6}
+              controlColSm={6}
+              required={false}
+              onChange={this.updateClickHandler}
+              value={field.defaultValueExpression}
+            />
+          </div>
+        </div>
       </div>
     )
   }
