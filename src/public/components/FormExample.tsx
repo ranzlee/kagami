@@ -4,13 +4,14 @@ import { Form } from "./common/form-elements/Form";
 import { Radio } from "./common/form-elements/Radio";
 import { RadioOption } from "./common/form-elements/RadioOption";
 import { Slider } from "./common/form-elements/Slider";
-import { Textbox } from "./common/form-elements/Textbox";
+//import { Textbox } from "./common/form-elements/Textbox";
 import { Toggle } from "./common/form-elements/Toggle";
 import { Checkbox } from "./common/form-elements/Checkbox";
-import { Numberbox } from "./common/form-elements/Numberbox";
+//import { Numberbox } from "./common/form-elements/Numberbox";
 import { TextArea } from "./common/form-elements/TextArea";
 import { Select } from "./common/form-elements/Select";
 import { DateTimePicker } from "./common/form-elements/DateTimePicker";
+import { FormSubComponentExample } from "./FormSubComponentExample";
 import * as linq from "linq";
 import * as Moment from "moment";
 
@@ -115,7 +116,7 @@ export class FormExample extends React.Component<
               closeModalOnSubmit={true}
               modal={(this as any).props.modal}
             >
-              <div className="row">
+              {/* <div className="row">
                 <div className="col-lg-6 col-sm-12">
                   <Textbox
                     type="text"
@@ -163,7 +164,8 @@ export class FormExample extends React.Component<
                     labelCol={4}
                   />
                 </div>
-              </div>
+              </div> */}
+              <FormSubComponentExample />
               <div className="row">
                 <div className="col-lg-6 col-sm-12">
                   <TextArea

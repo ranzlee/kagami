@@ -56,11 +56,7 @@ export default class Home extends React.Component<HomeProps, HomeState> {
         <div className="row">
           <div className="col">
             <Card title="Form Control Examples" iconName="fa-cog">
-              <div className="row">
-                <div className="col">
-                  <FormExample />
-                </div>
-              </div>
+              <FormExample />
             </Card>
           </div>
         </div>
