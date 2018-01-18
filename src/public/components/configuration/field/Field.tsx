@@ -5,6 +5,7 @@ import { TextArea } from "../../common/form-elements/TextArea";
 import { ExpressionRecord } from "../../../../shared/models/configuration/elements/Expression";
 import { Select } from "../../common/form-elements/Select";
 import { ConfigElementDropDown } from "./../dropDown/ConfigElementDropDown";
+import { Addresses } from "../../address/Addresses";
 
 export interface IOwnProps {
   fieldId: string;
@@ -20,6 +21,7 @@ export interface IConnectedDispatch {
     propertyName: string,
     newValue: any,
     oldValue: any) => void;
+  addFieldAddress: (fieldId: string) => void;
 }
 
 export class Field extends React.Component<IOwnProps & IConnectedState & IConnectedDispatch, {}> {
@@ -35,8 +37,12 @@ export class Field extends React.Component<IOwnProps & IConnectedState & IConnec
     update(field._id, name, value, oldValue);
   };
 
+  addressChange(propertyIndexers: any[], newValue: any, oldValue: any) {
+    debugger;
+  }
+
   render() {
-    const { field, expressions } = this.props;
+    const { field, expressions, addFieldAddress } = this.props;
     return (
       <div className="container-fluid">
         <div className="row">
@@ -122,6 +128,12 @@ export class Field extends React.Component<IOwnProps & IConnectedState & IConnec
               value={field.defaultValueExpression}
             />
           </div>
+        </div>
+        <button className="btn btn-primary" onClick={() => addFieldAddress(field._id)}>
+          Add Address
+        </button>
+        <div className="row">
+          <Addresses addresses={field.addresses} onChange={this.addressChange} />
         </div>
       </div>
     )

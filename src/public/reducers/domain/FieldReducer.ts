@@ -1,8 +1,9 @@
 import { ConfigElementActionTypes } from './../../actions/ConfigElementActions';
 import { ConfigElementType } from './../../../shared/models/enums/ConfigElementType';
 import { ActionTypeKeys } from '../../actions/ActionTypeKeys';
-import { Map } from 'immutable';
+import { Map, List } from 'immutable';
 import { FieldRecord, FieldParams } from './../../../shared/models/configuration/elements/Field';
+import { AddressRecord } from '../../../shared/models/address/Address';
 
 export function fieldReducer(
     fields: Map<string, FieldRecord> = Map<string, FieldRecord>(),
@@ -15,7 +16,7 @@ export function fieldReducer(
                 configId: action.configId,
                 configElementType: action.configElementType
             };
-            return fields.set(newElement._id, new FieldRecord(newElement))
+            return fields.set(newElement._id, new FieldRecord(newElement));
 
         case ActionTypeKeys.UPDATE_CONFIG_ELEMENT:
             return fields.setIn([action.id, action.propertyName], action.newValue);
@@ -27,7 +28,15 @@ export function fieldReducer(
             return fields.mergeDeep(Map<string, FieldRecord>(
                 action.configElements
                     .filter(item => item.configElementType === ConfigElementType.field)
-                    .map(item => [item._id, new FieldRecord(item)])))
+                    .map(item => [item._id, new FieldRecord(item)])));
+
+        case ActionTypeKeys.ADD_FIELD_ADDRESS:
+            const params: FieldParams = {
+                _id: action.fieldElementId,
+                addresses: List<AddressRecord>(new AddressRecord())
+            }
+            const newFieldRecord = new FieldRecord(params);
+            return fields.mergeDeep(Map<string, FieldRecord>([[action.fieldElementId, newFieldRecord]]));
 
         default:
             return fields;
