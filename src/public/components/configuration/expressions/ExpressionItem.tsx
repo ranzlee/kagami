@@ -33,7 +33,6 @@ export class ExpressionItem extends React.Component<IOwnProps & IConnectedState 
     const name = target.name;
 
     const oldValue = expression[name];
-    debugger;
     update(expression._id, name, value, oldValue);
   };
 

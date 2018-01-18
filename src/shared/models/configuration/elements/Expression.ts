@@ -1,5 +1,5 @@
 import { Record } from 'immutable';
-import { IConfigElement, getConfigElementDefaults, ConfigElementRecord } from "./IConfigElement";
+import { IConfigElement, getConfigElementDefaults } from "./IConfigElement";
 import { GenericPartial } from "./../../Helpers";
 import { ConfigElementType } from "./../../enums/ConfigElementType";
 
@@ -9,7 +9,7 @@ export interface IExpression extends IConfigElement {
     [key: string]: any;
 }
 
-function getExpressionDefaults(): IExpression  {
+function getExpressionDefaults(): IExpression {
     return {
         ...getConfigElementDefaults(),
         customFunction: ""
@@ -33,8 +33,4 @@ export class ExpressionRecord extends Record(getExpressionDefaults()) implements
 
     customFunction: string;
     [key: string]: any;
-
-    public static asExpressionRecord(configElementRecord: ConfigElementRecord) : ExpressionRecord {
-        return configElementRecord as ExpressionRecord;
-    }
 }

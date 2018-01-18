@@ -30,7 +30,6 @@ export class Field extends React.Component<IOwnProps & IConnectedState & IConnec
   }
 
   updateClickHandler = (event: any) => {
-    debugger;
     const { field, update } = this.props;
 
     const target = event.target;

@@ -4,11 +4,10 @@ import { ExpressionRecord } from "./../../../../shared/models/configuration/elem
 import { ConfigElementType } from "./../../../../shared/models/enums/ConfigElementType";
 import * as actions from './../../../actions/ConfigElementActions';
 import { AppStoreRecord } from '../../../types/AppStore';
-import { ConfigElementRecord } from './../../../../shared/models/configuration/elements/IConfigElement';
 
 export const mapStateToProps = (appStoreRecord: AppStoreRecord, props: IOwnProps): IConnectedState => {
     return {
-        expression: ExpressionRecord.asExpressionRecord(appStoreRecord.domain.configElements.get(props.expressionId)) || new ExpressionRecord()
+        expression: appStoreRecord.domain.expressions.get(props.expressionId) || new ExpressionRecord()
     }
 }
 

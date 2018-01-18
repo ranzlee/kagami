@@ -1,16 +1,18 @@
 import { combineReducers } from "redux-immutable";
 import { createStore } from "redux";
-import { configElementReducer } from "./domain/ConfigElementReducer";
+import { fieldReducer } from "./domain/FieldReducer";
+import { expressionReducer } from "./domain/ExpressionReducer";
 
 import { appStateReducer } from "./appState/AppStateReducer";
 import { configurationReducer } from "./domain/ConfigurationReducer";
-import { configElementMappingReducer } from "./domain/ConfigElementMappingReducer";
 import { notificationsReducer } from "./../reducers/appState/NotificationsReducer";
+import { configMappingsReducer } from "./domain/ConfigMappingsReducer";
 
 const domainReducer = combineReducers({
   configurations: configurationReducer,
-  configElements: configElementReducer,
-  configElementMapping: configElementMappingReducer
+  configMappings: configMappingsReducer,
+  fields: fieldReducer,
+  expressions: expressionReducer
 });
 
 const notificationsStateReducer = combineReducers({

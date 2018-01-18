@@ -8,7 +8,7 @@ import { Set } from 'immutable';
 
 export const mapStateToProps = (appStoreRecord: AppStoreRecord, props: IOwnProps): IConnectedState => {
     return {
-        fieldIds: appStoreRecord.domain.configElementMapping.get(props.match.params.configId).field || Set<string>()
+        fieldIds: appStoreRecord.domain.configMappings.get(props.match.params.configId).fields || Set<string>()
     }
 }
 

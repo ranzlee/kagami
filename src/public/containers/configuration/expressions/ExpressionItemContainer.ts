@@ -3,12 +3,11 @@ import { ExpressionRecord } from "./../../../../shared/models/configuration/elem
 import { ConfigElementType } from "./../../../../shared/models/enums/ConfigElementType";
 import * as actions from './../../../actions/ConfigElementActions';
 import { AppStoreRecord } from '../../../types/AppStore';
-import { ConfigElementRecord } from './../../../../shared/models/configuration/elements/IConfigElement';
 import { ExpressionItem, IConnectedDispatch, IConnectedState, IOwnProps } from '../../../components/configuration/expressions/ExpressionItem';
 
 export const mapStateToProps = (appStoreRecord: AppStoreRecord, props: IOwnProps): IConnectedState => {
     return {
-        expression: ExpressionRecord.asExpressionRecord(appStoreRecord.domain.configElements.get(props.expressionId))
+        expression: appStoreRecord.domain.expressions.get(props.expressionId)
     }
 }
 
