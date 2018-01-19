@@ -39,7 +39,11 @@ export function fieldReducer(
                     .map(fieldRecordParams => [fieldRecordParams._id, new FieldRecord(fieldRecordParams)])));
 
         case ActionTypeKeys.ADD_FIELD_ADDRESS:
-            return fields.updateIn([action.fieldElementId, "addresses"], (list) => list.push(new AddressRecord()));
+            return fields.updateIn([action.fieldId, "addresses"], (list) => list.push(new AddressRecord()));
+
+        case ActionTypeKeys.UPDATE_FIELD_ADDRESS:
+            return fields.setIn([action.fieldId, "addresses", action.addressIndex, action.propertyName], action.newValue);
+
 
         default:
             return fields;

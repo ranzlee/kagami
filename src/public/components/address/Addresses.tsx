@@ -6,15 +6,14 @@ import { Address } from "./Address";
 
 export interface IOwnProps {
   addresses: List<AddressRecord>;
-  onChange: (propertyIndexers: any[], newValue: any, oldValue: any) => void;
+  onChange: (index: number, propertyName: string, newValue: any, oldValue: any) => void;
 }
 
 export class Addresses extends React.Component<IOwnProps, {}>
 {
   handleAddressChange(index: number, propertyName: string, newValue: any, oldValue: any): void {
     const { onChange } = this.props;
-    const indexers = [index, propertyName]
-    onChange(indexers, newValue, oldValue)
+    onChange(index, propertyName, newValue, oldValue)
   }
 
   renderAddresses(): JSX.Element[] {

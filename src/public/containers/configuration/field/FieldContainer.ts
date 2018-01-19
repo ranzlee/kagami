@@ -27,6 +27,13 @@ export const mapDispatchToProps = (dispatch: Dispatch<actions.ConfigElementActio
         },
         addFieldAddress: (elementId: string) => {
             return dispatch(actions.addFieldAddress(elementId));
+        },
+        updateFieldAddress: (fieldId: string,
+            addressIndex: number,
+            propertyName: string,
+            newValue: any,
+            oldValue: any) => {
+            return dispatch(actions.updateFieldAddress(fieldId, addressIndex, propertyName, newValue, oldValue))
         }
     }
 }

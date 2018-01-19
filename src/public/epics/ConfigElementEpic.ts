@@ -17,7 +17,6 @@ import {
 } from './../actions/ConfigElementActions';
 import { Observable } from 'rxjs/Observable';
 import { IConfigElement } from '../../shared/models/configuration/elements/IConfigElement';
-import { elementAt } from 'rxjs/operators/elementAt';
 import { ajaxSuccess } from '../actions/GeneralActions';
 
 export const fetchConfigElementsEpic = (action$: any) =>

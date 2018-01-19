@@ -22,6 +22,11 @@ export interface IConnectedDispatch {
     newValue: any,
     oldValue: any) => void;
   addFieldAddress: (fieldId: string) => void;
+  updateFieldAddress: (fieldId: string,
+    addressIndex: number,
+    propertyName: string,
+    newValue: any,
+    oldValue: any) => void;
 }
 
 export class Field extends React.Component<IOwnProps & IConnectedState & IConnectedDispatch, {}> {
@@ -37,8 +42,9 @@ export class Field extends React.Component<IOwnProps & IConnectedState & IConnec
     update(field._id, name, value, oldValue);
   };
 
-  addressChange(propertyIndexers: any[], newValue: any, oldValue: any) {
-    alert("Address Change")
+  addressChange(index: number, propertyName: string, newValue: any, oldValue: any) {
+    const { field, updateFieldAddress } = this.props;
+    updateFieldAddress(field._id, index, propertyName, newValue, oldValue);
   }
 
   render() {
@@ -134,7 +140,8 @@ export class Field extends React.Component<IOwnProps & IConnectedState & IConnec
         </button>
         <div className="row">
           <div className="col-lg-6 col-sm-12">
-            <Addresses addresses={field.addresses} onChange={this.addressChange} />
+            <Addresses addresses={field.addresses} onChange={
+              (index: number, propertyName: string, newValue: any, oldValue: any) => this.addressChange(index, propertyName, newValue, oldValue)} />
           </div>
         </div>
       </div>

@@ -7,9 +7,10 @@ export interface IAddress {
     city: string;
     state: string;
     zipcode: string;
+    [key: string]: any;
 }
 
-function getAddressDefaults(): IAddress {
+export function getAddressDefaults(): IAddress {
     return {
         addressLine1: '',
         addressLine2: '',
