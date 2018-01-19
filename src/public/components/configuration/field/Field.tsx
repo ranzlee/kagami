@@ -6,6 +6,8 @@ import { ExpressionRecord } from "../../../../shared/models/configuration/elemen
 import { Select } from "../../common/form-elements/Select";
 import { ConfigElementDropDown } from "./../dropDown/ConfigElementDropDown";
 import { Addresses } from "../../address/Addresses";
+import { Form } from "../../common/form-elements/Form";
+import { Button } from "../../common/form-elements/Button";
 
 export interface IOwnProps {
   fieldId: string;
@@ -47,103 +49,117 @@ export class Field extends React.Component<IOwnProps & IConnectedState & IConnec
     updateFieldAddress(field._id, index, propertyName, newValue, oldValue);
   }
 
+  handleSubmit() {
+    alert("Valid!");
+  }
+
   render() {
     const { field, expressions, addFieldAddress } = this.props;
     return (
       <div className="container-fluid">
-        <div className="row">
-          <div className="col-lg-6 col-sm-12">
-            <Textbox
-              id={'Field_Name_' + field._id}
-              name="name"
-              type="text"
-              required={true}
-              placeholder="Field Name"
-              label="Name: "
-              value={field.name}
-              onChange={this.updateClickHandler}
-              labelColLg={3}
-              controlColLg={9}
-              labelColSm={6}
-              controlColSm={6} />
+        <Form
+          onSubmit={this.handleSubmit}
+          validateOnMount={false}>
+          <div className="row">
+            <div className="col-lg-6 col-sm-12">
+              <Textbox
+                id={'Field_Name_' + field._id}
+                name="name"
+                type="text"
+                required={true}
+                placeholder="Field Name"
+                label="Name: "
+                value={field.name}
+                onChange={this.updateClickHandler}
+                labelColLg={3}
+                controlColLg={9}
+                labelColSm={6}
+                controlColSm={6} />
+            </div>
           </div>
-        </div>
-        <div className="row">
-          <div className="col-lg-6 col-sm-12">
-            <TextArea
-              id={'Field_Description_' + field._id}
-              name="description"
-              label="Description: "
-              placeholder="Description"
-              value={field.description}
-              onChange={this.updateClickHandler}
-              labelColLg={3}
-              controlColLg={9}
-              labelColSm={6}
-              controlColSm={6}
-              rows={5} />
+          <div className="row">
+            <div className="col-lg-6 col-sm-12">
+              <TextArea
+                id={'Field_Description_' + field._id}
+                name="description"
+                label="Description: "
+                placeholder="Description"
+                value={field.description}
+                onChange={this.updateClickHandler}
+                labelColLg={3}
+                controlColLg={9}
+                labelColSm={6}
+                controlColSm={6}
+                rows={5} />
+            </div>
           </div>
-        </div>
-        <div className="row">
-          <div className="col-lg-6 col-sm-12">
-            <ConfigElementDropDown
-              configElements={expressions}
-              name="displayExpression"
-              label="Display Expression"
-              placeholderOption="Select"
-              labelColLg={3}
-              controlColLg={9}
-              labelColSm={6}
-              controlColSm={6}
-              required={false}
-              onChange={this.updateClickHandler}
-              value={field.displayExpression}
-            />
+          <div className="row">
+            <div className="col-lg-6 col-sm-12">
+              <ConfigElementDropDown
+                configElements={expressions}
+                name="displayExpression"
+                label="Display Expression"
+                placeholderOption="Select"
+                labelColLg={3}
+                controlColLg={9}
+                labelColSm={6}
+                controlColSm={6}
+                required={false}
+                onChange={this.updateClickHandler}
+                value={field.displayExpression}
+              />
+            </div>
           </div>
-        </div>
-        <div className="row">
-          <div className="col-lg-6 col-sm-12">
-            <ConfigElementDropDown
-              configElements={expressions}
-              name="readonlyExpression"
-              label="Readonly Expression"
-              placeholderOption="Select"
-              labelColLg={3}
-              controlColLg={9}
-              labelColSm={6}
-              controlColSm={6}
-              required={false}
-              onChange={this.updateClickHandler}
-              value={field.readonlyExpression}
-            />
+          <div className="row">
+            <div className="col-lg-6 col-sm-12">
+              <ConfigElementDropDown
+                configElements={expressions}
+                name="readonlyExpression"
+                label="Readonly Expression"
+                placeholderOption="Select"
+                labelColLg={3}
+                controlColLg={9}
+                labelColSm={6}
+                controlColSm={6}
+                required={false}
+                onChange={this.updateClickHandler}
+                value={field.readonlyExpression}
+              />
+            </div>
           </div>
-        </div>
-        <div className="row">
-          <div className="col-lg-6 col-sm-12">
-            <ConfigElementDropDown
-              configElements={expressions}
-              name="defaultValueExpression"
-              label="Default Value Expression"
-              placeholderOption="Select"
-              labelColLg={3}
-              controlColLg={9}
-              labelColSm={6}
-              controlColSm={6}
-              required={false}
-              onChange={this.updateClickHandler}
-              value={field.defaultValueExpression}
-            />
+          <div className="row">
+            <div className="col-lg-6 col-sm-12">
+              <ConfigElementDropDown
+                configElements={expressions}
+                name="defaultValueExpression"
+                label="Default Value Expression"
+                placeholderOption="Select"
+                labelColLg={3}
+                controlColLg={9}
+                labelColSm={6}
+                controlColSm={6}
+                required={false}
+                onChange={this.updateClickHandler}
+                value={field.defaultValueExpression}
+              />
+            </div>
           </div>
-        </div>
-        <button className="btn btn-primary" onClick={() => addFieldAddress(field._id)}>
-          Add Address
+          <button className="btn btn-primary" onClick={() => addFieldAddress(field._id)}>
+            Add Address
         </button>
-        <div className="row">
-          <div className="col-lg-6 col-sm-12">
-            <Addresses addresses={field.addresses} onChange={
-              (index: number, propertyName: string, newValue: any, oldValue: any) => this.addressChange(index, propertyName, newValue, oldValue)} />
+          <div className="row">
+            <div className="col-lg-6 col-sm-12">
+              <Addresses addresses={field.addresses} onChange={
+                (index: number, propertyName: string, newValue: any, oldValue: any) => this.addressChange(index, propertyName, newValue, oldValue)} />
+            </div>
           </div>
-        </div>
+          <Button
+            type="submit"
+            className="primary"
+            buttonText="Validate"
+            iconName="fa-check"
+          />
+        </Form>
       </div>
     )
   }
