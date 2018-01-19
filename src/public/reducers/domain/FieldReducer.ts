@@ -20,10 +20,8 @@ export function fieldReducer(
             return fields.set(newElement._id, new FieldRecord(newElement));
 
         case ActionTypeKeys.UPDATE_CONFIG_ELEMENT:
+            if (action.configElementType !== ConfigElementType.field) return fields;
             return fields.setIn([action.id, action.propertyName], action.newValue);
-
-        case ActionTypeKeys.DELETE_CONFIG_ELEMENT:
-            return fields.delete(action.id);
 
         case ActionTypeKeys.FETCH_CONFIG_ELEMENTS_SUCCESS:
             return fields.mergeDeep(Map<string, FieldRecord>(

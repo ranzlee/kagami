@@ -36,6 +36,54 @@ export class Address extends React.Component<IOwnProps, {}>
                     controlColLg={9}
                     labelColSm={6}
                     controlColSm={6} />
+                <Textbox
+                    name="addressLine2"
+                    type="text"
+                    required={true}
+                    placeholder="Address Line 2"
+                    label="Address Line 2: "
+                    value={address.addressLine2}
+                    onChange={(event) => this.updateClickHandler(event)}
+                    labelColLg={3}
+                    controlColLg={9}
+                    labelColSm={6}
+                    controlColSm={6} />
+                <Textbox
+                    name="city"
+                    type="text"
+                    required={true}
+                    placeholder="City"
+                    label="City: "
+                    value={address.city}
+                    onChange={(event) => this.updateClickHandler(event)}
+                    labelColLg={3}
+                    controlColLg={9}
+                    labelColSm={6}
+                    controlColSm={6} />
+                <Textbox
+                    name="state"
+                    type="text"
+                    required={true}
+                    placeholder="State"
+                    label="State: "
+                    value={address.state}
+                    onChange={(event) => this.updateClickHandler(event)}
+                    labelColLg={3}
+                    controlColLg={9}
+                    labelColSm={6}
+                    controlColSm={6} />
+                <Textbox
+                    name="zipcode"
+                    type="text"
+                    required={true}
+                    placeholder="Zipcode"
+                    label="Zipcode: "
+                    value={address.zipcode}
+                    onChange={(event) => this.updateClickHandler(event)}
+                    labelColLg={3}
+                    controlColLg={9}
+                    labelColSm={6}
+                    controlColSm={6} />
             </div>
         );
     }

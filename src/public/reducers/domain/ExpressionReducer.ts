@@ -19,10 +19,8 @@ export function expressionReducer(
             return expressions.set(newElement._id, new ExpressionRecord(newElement))
 
         case ActionTypeKeys.UPDATE_CONFIG_ELEMENT:
+            if (action.configElementType !== ConfigElementType.expression) return expressions;
             return expressions.setIn([action.id, action.propertyName], action.newValue);
-
-        case ActionTypeKeys.DELETE_CONFIG_ELEMENT:
-            return expressions.delete(action.id);
 
         case ActionTypeKeys.FETCH_CONFIG_ELEMENTS_SUCCESS:
             return expressions.mergeDeep(Map<string, ExpressionRecord>(
