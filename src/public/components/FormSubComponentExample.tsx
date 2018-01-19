@@ -16,7 +16,7 @@ export class FormSubComponentExample extends React.Component<
   constructor(props: FormSubComponentExampleProps) {
     super(props);
     this.state = {
-      myTextboxState: "aaa",
+      myTextboxState: "aaaa",
       myNumberState: 100
     };
   }

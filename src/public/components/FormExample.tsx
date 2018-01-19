@@ -49,8 +49,10 @@ export class FormExample extends React.Component<
       mySelectState: "r",
       myMultiSelectState: ["r", "g"],
       mySliderState: 50,
-      myDatePickerState: null,
-      myDateTimePickerState: null
+      myDatePickerState: Moment(),
+      myDateTimePickerState: Moment()
+        .set("hour", 8)
+        .set("minute", 0)
     };
     this.maxDate = "2020-01-01";
   }
