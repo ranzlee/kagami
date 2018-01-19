@@ -403,7 +403,6 @@ export class FormExample extends React.Component<
                   </div>
                 </div>
               </div>
-              <hr className="bg-primary" />
               <div className="row">
                 <div className="col text-right">
                   <Button

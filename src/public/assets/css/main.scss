@@ -27,7 +27,6 @@ body {
   ul.react-datepicker__time-list {
   list-style: none !important;
   margin: 0 !important;
-  //height: calc(195px + (1.7rem / 2)) !important;
   overflow-y: scroll !important;
   padding-right: 30px !important;
   width: 200px !important;
@@ -45,7 +44,6 @@ body {
 .react-datepicker__time-container {
   float: right !important;
   border-left: 1px solid #aeaeae !important;
-  //width: 110px !important;
 }
 
 .react-datepicker__time-container--with-today-button {
@@ -86,6 +84,7 @@ body {
 }
 //END - react datepicker for bootstrap compatibility
 
+//bootstrap switch theme compatibility
 .bootstrap-switch.bootstrap-switch-on .bootstrap-switch-label {
   background: $primary-color;
 }
@@ -103,7 +102,14 @@ body {
 .bootstrap-switch {
   background: $dark-background;
 }
+//END - bootstrap switch theme compatibility
 
-.noUi-target {
-  background: $primary-color;
+//slider bootstrap theme compatibility
+.noUi-handle {
+  background-color: $primary-color;
 }
+
+.noUi-horizontal .noUi-handle {
+  background-color: $primary-color;
+}
+//END - slider bootstrap theme compatibility
