@@ -25,7 +25,7 @@ export class Address extends React.Component<IOwnProps, {}>
         return (
             <div>
                 <Textbox
-                    name="addressLine1:"
+                    name="addressLine1"
                     type="text"
                     required={true}
                     placeholder="Address Line 1"

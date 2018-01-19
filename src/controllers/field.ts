@@ -26,7 +26,7 @@ export const addFieldAddress = (req: Request, res: Response): void => {
 
 export const updateFieldAddress = (req: Request, res: Response): void => {
     const fieldId = req.params.id;
-    const addressIndex = req.body.addressIndex;
+    const addressIndex = parseInt(req.body.addressIndex);
     const propertyName = req.body.propertyName;
     const newValue = req.body.newValue;
 
