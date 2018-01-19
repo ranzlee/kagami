@@ -11,6 +11,9 @@ export type ConfigElementActionTypes =
     | AddConfigElementAction
     | AddConfigElementSuccessAction
 
+    | AddFieldAddress
+    | UpdateFieldAddress
+
     | UpdateConfigElementAction
     | DeleteConfigElementAction;
 
@@ -38,6 +41,19 @@ export interface AddConfigElementSuccessAction {
     configId: string,
     configElementType: ConfigElementType,
     elementId: string
+}
+
+export interface AddFieldAddress {
+    type: ActionTypeKeys.ADD_FIELD_ADDRESS,
+    fieldId: string,
+}
+export interface UpdateFieldAddress {
+    type: ActionTypeKeys.UPDATE_FIELD_ADDRESS,
+    fieldId: string,
+    addressIndex: number,
+    propertyName: string;
+    newValue: any;
+    oldValue: any;
 }
 
 export interface UpdateConfigElementAction {
@@ -77,6 +93,20 @@ export const addConfigElementSuccess = (configId: string, elementId: string, con
     configId,
     elementId,
     configElementType
+});
+
+export const addFieldAddress = (fieldId: string): AddFieldAddress => ({
+    type: ActionTypeKeys.ADD_FIELD_ADDRESS,
+    fieldId
+});
+
+export const updateFieldAddress = (fieldId: string, addressIndex: number, propertyName: string, newValue: any, oldValue: any): UpdateFieldAddress => ({
+    type: ActionTypeKeys.UPDATE_FIELD_ADDRESS,
+    fieldId,
+    addressIndex,
+    propertyName,
+    newValue,
+    oldValue
 });
 
 

@@ -10,6 +10,7 @@ export function expressionReducer(
 
     switch (action.type) {
         case ActionTypeKeys.ADD_CONFIG_ELEMENT_SUCCESS:
+            if (action.configElementType !== ConfigElementType.expression) return expressions;
             const newElement: ExpressionParams = {
                 _id: action.elementId,
                 configId: action.configId,
@@ -27,7 +28,7 @@ export function expressionReducer(
             return expressions.mergeDeep(Map<string, ExpressionRecord>(
                 action.configElements
                     .filter(item => item.configElementType === ConfigElementType.expression)
-                    .map(item => [item._id, new ExpressionRecord(item)]))) 
+                    .map(item => [item._id, new ExpressionRecord(item)])))
 
         default:
             return expressions;
