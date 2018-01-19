@@ -153,6 +153,9 @@ export interface DateTimePickerInputProps {
   component: DateTimePicker;
   instanceSetCallback: (input: HTMLElement) => void;
   onClick?: any;
+  onKeyPress?: any;
+  onKeyUp?: any;
+  onKeyDown?: any;
 }
 
 export class DateTimePickerInput extends React.Component<
@@ -357,6 +360,9 @@ export class DateTimePickerInput extends React.Component<
               type="button"
               disabled={disabled || readOnly}
               onClick={this.props.onClick}
+              onKeyPress={this.props.onKeyPress}
+              onKeyUp={this.props.onKeyUp}
+              onKeyDown={this.props.onKeyDown}
               className="btn btn-primary btn-icon"
             >
               <i className="fas fa-calendar" />
