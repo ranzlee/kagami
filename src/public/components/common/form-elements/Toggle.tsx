@@ -18,6 +18,26 @@ export class Toggle extends React.Component<ToggleProps, ToggleState> {
     this.state = { invalidFeedback: this.props.invalidFeedback };
   }
 
+  componentDidMount() {
+    if (this.props.doCustomValidationOnMount) {
+      FormControl.OnChangeCustomValidation(this, this.instance);
+    }
+    if (this.props.form) {
+      this.props.form.registerFormCustomValidations(this, this.instance);
+    }
+    if (this.instance) {
+      ($(this.instance) as any).bootstrapSwitch("size", "small");
+      ($(this.instance) as any).bootstrapSwitch("onText", this.props.labelOn);
+      ($(this.instance) as any).bootstrapSwitch("offText", this.props.labelOff);
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.instance) {
+      ($(this.instance) as any).bootstrapSwitch("destroy");
+    }
+  }
+
   instance: HTMLInputElement;
 
   onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,27 +52,19 @@ export class Toggle extends React.Component<ToggleProps, ToggleState> {
     }
   };
 
-  componentDidMount() {
-    if (this.props.doCustomValidationOnMount) {
-      FormControl.OnChangeCustomValidation(this, this.instance);
-    }
-    if (this.props.form) {
-      this.props.form.registerFormCustomValidations(this, this.instance);
-    }
-    ($(this.instance) as any).bootstrapSwitch("size", "small");
-    ($(this.instance) as any).bootstrapSwitch("onText", this.props.labelOn);
-    ($(this.instance) as any).bootstrapSwitch("offText", this.props.labelOff);
-  }
-
   render() {
-    ($(this.instance) as any).bootstrapSwitch(
-      "disabled",
-      this.props.disabled || (this.props.form && this.props.form.props.disabled)
-    );
-    ($(this.instance) as any).bootstrapSwitch(
-      "readonly",
-      this.props.readOnly || (this.props.form && this.props.form.props.readOnly)
-    );
+    if (this.instance) {
+      ($(this.instance) as any).bootstrapSwitch(
+        "disabled",
+        this.props.disabled ||
+          (this.props.form && this.props.form.props.disabled)
+      );
+      ($(this.instance) as any).bootstrapSwitch(
+        "readonly",
+        this.props.readOnly ||
+          (this.props.form && this.props.form.props.readOnly)
+      );
+    }
     let extendedProps = FormControl.FormControlExtendedProperties(this.props);
     let required = this.props.required ? true : false;
     let id = lodash.uniqueId(this.props.id);

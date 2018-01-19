@@ -25,6 +25,22 @@ export class Slider extends React.Component<SliderProps, SliderState> {
     };
   }
 
+  componentDidMount() {
+    if (this.props.doCustomValidationOnMount) {
+      FormControl.OnChangeCustomValidation(this, this.instance);
+    }
+    if (this.props.form) {
+      this.props.form.registerFormCustomValidations(this, this.instance);
+    }
+    this.renderSlider(true);
+  }
+
+  componentWillUnmount() {
+    if (this.slider) {
+      (this.slider as any).noUiSlider.off();
+    }
+  }
+
   instance: HTMLInputElement;
   slider: HTMLDivElement;
 
@@ -49,17 +65,6 @@ export class Slider extends React.Component<SliderProps, SliderState> {
       }
     }
   };
-
-  componentDidMount() {
-    if (this.props.doCustomValidationOnMount) {
-      FormControl.OnChangeCustomValidation(this, this.instance);
-    }
-    if (this.props.form) {
-      this.props.form.registerFormCustomValidations(this, this.instance);
-    }
-
-    this.renderSlider(true);
-  }
 
   renderSlider(createSlider: boolean) {
     if (this.slider == null) return;
