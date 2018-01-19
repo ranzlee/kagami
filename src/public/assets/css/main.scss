@@ -93,6 +93,14 @@ body {
   background: $primary-color;
 }
 
+.bootstrap-switch.bootstrap-switch-off .bootstrap-switch-label {
+  background: $smoke-bg;
+}
+
+.bootstrap-switch.bootstrap-switch-off:hover .bootstrap-switch-label {
+  background: $smoke-bg;
+}
+
 .bootstrap-switch.bootstrap-switch-small .bootstrap-switch-handle-on,
 .bootstrap-switch.bootstrap-switch-small .bootstrap-switch-handle-off,
 .bootstrap-switch.bootstrap-switch-small .bootstrap-switch-label {
