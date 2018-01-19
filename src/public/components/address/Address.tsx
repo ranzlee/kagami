@@ -31,7 +31,7 @@ export class Address extends React.Component<IOwnProps, {}>
                     placeholder="Address Line 1"
                     label="Address Line 1: "
                     value={address.addressLine1}
-                    onChange={this.updateClickHandler}
+                    onChange={(event) => this.updateClickHandler(event)}
                     labelColLg={3}
                     controlColLg={9}
                     labelColSm={6}
