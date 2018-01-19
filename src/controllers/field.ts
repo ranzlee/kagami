@@ -1,18 +1,18 @@
-import { ConfigElementEntity } from "./../models/ConfigElementEntity";
 import { IField } from "./../shared/models/configuration/elements/Field";
-import { ConfigElementEntityModel } from "./../models/ConfigElementEntity";
 import { Response, Request, NextFunction } from "express";
 import { getAddressDefaults } from "./../shared/models/address/Address";
+import { FieldEntity, FieldEntityModel } from "./../models/FieldEntity";
+import { ConfigElementType } from "./../shared/models/enums/ConfigElementType";
 
 export const addFieldAddress = (req: Request, res: Response): void => {
     const fieldId = req.params.id;
 
     if (fieldId) {
-        ConfigElementEntity.findById(fieldId, (error: Error, configElement: ConfigElementEntityModel) => {
-            const field = configElement as any as IField;
+        FieldEntity.findById(fieldId, (error: Error, fieldElement: FieldEntityModel) => {
+            const field = fieldElement as IField;
             if (!field.addresses) field.addresses = [];
             field.addresses.push(getAddressDefaults());
-            configElement.save((err: Error) => {
+            fieldElement.save((err: Error) => {
                 if (err) {
                     res.status(500).send(`Error encountered while trying to add an address on a field config element: ${fieldId} in the DB`);
                 }
@@ -31,10 +31,10 @@ export const updateFieldAddress = (req: Request, res: Response): void => {
     const newValue = req.body.newValue;
 
     if (fieldId) {
-        ConfigElementEntity.findById(fieldId, (error: Error, configElement: ConfigElementEntityModel) => {
-            const field = configElement as any as IField;
+        FieldEntity.findById(fieldId, (error: Error, fieldElement: FieldEntityModel) => {
+            const field = fieldElement as any as IField;
             field.addresses[addressIndex][propertyName] = newValue;
-            configElement.save((err: Error) => {
+            fieldElement.save((err: Error) => {
                 if (err) {
                     res.status(500).send(`Error encountered while trying to update an address on a field config element: ${fieldId} in the DB`);
                 }
