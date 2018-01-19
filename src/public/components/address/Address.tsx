@@ -12,8 +12,8 @@ export interface IOwnProps {
 
 export class Address extends React.Component<IOwnProps, {}>
 {
-    updateClickHandler(event: any) : void {
-        const {onChange, address} = this.props;
+    updateClickHandler(event: any): void {
+        const { onChange, address } = this.props;
         const target = event.target;
         const value = target.value;
         const name = target.name;
@@ -21,25 +21,21 @@ export class Address extends React.Component<IOwnProps, {}>
     }
 
     render() {
-        const {address} = this.props;
+        const { address } = this.props;
         return (
             <div>
-                <div className="row">
-                    <div className="col-lg-6 col-sm-12">
-                        <Textbox
-                            name="addressLine1:"
-                            type="text"
-                            required={true}
-                            placeholder="Address Line 1"
-                            label="Address Line 1: "
-                            value={address.addressLine1}
-                            onChange={this.updateClickHandler}
-                            labelColLg={3}
-                            controlColLg={9}
-                            labelColSm={6}
-                            controlColSm={6} />
-                    </div>
-                </div>
+                <Textbox
+                    name="addressLine1:"
+                    type="text"
+                    required={true}
+                    placeholder="Address Line 1"
+                    label="Address Line 1: "
+                    value={address.addressLine1}
+                    onChange={this.updateClickHandler}
+                    labelColLg={3}
+                    controlColLg={9}
+                    labelColSm={6}
+                    controlColSm={6} />
             </div>
         );
     }

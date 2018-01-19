@@ -2,7 +2,7 @@ import { ConfigElementActionTypes } from './../../actions/ConfigElementActions';
 import { ConfigElementType } from './../../../shared/models/enums/ConfigElementType';
 import { ActionTypeKeys } from '../../actions/ActionTypeKeys';
 import { Map, List } from 'immutable';
-import { FieldRecord, FieldParams } from './../../../shared/models/configuration/elements/Field';
+import { FieldRecord, FieldParams, IField } from './../../../shared/models/configuration/elements/Field';
 import { AddressRecord } from '../../../shared/models/address/Address';
 
 export function fieldReducer(
@@ -11,6 +11,7 @@ export function fieldReducer(
 
     switch (action.type) {
         case ActionTypeKeys.ADD_CONFIG_ELEMENT_SUCCESS:
+            if (action.configElementType !== ConfigElementType.field) return fields;
             const newElement: FieldParams = {
                 _id: action.elementId,
                 configId: action.configId,
@@ -28,15 +29,17 @@ export function fieldReducer(
             return fields.mergeDeep(Map<string, FieldRecord>(
                 action.configElements
                     .filter(item => item.configElementType === ConfigElementType.field)
-                    .map(item => [item._id, new FieldRecord(item)])));
+                    .map(item => {
+                        const fieldParams = item as FieldRecord;
+                        fieldParams.addresses = fieldParams.addresses
+                            ? fieldParams.addresses = List<AddressRecord>(fieldParams.addresses.map(i => new AddressRecord(i)))
+                            : fieldParams.addresses = List<AddressRecord>();
+                        return fieldParams;
+                    })
+                    .map(fieldRecordParams => [fieldRecordParams._id, new FieldRecord(fieldRecordParams)])));
 
         case ActionTypeKeys.ADD_FIELD_ADDRESS:
-            const params: FieldParams = {
-                _id: action.fieldElementId,
-                addresses: List<AddressRecord>(new AddressRecord())
-            }
-            const newFieldRecord = new FieldRecord(params);
-            return fields.mergeDeep(Map<string, FieldRecord>([[action.fieldElementId, newFieldRecord]]));
+            return fields.updateIn([action.fieldElementId, "addresses"], (list) => list.push(new AddressRecord()));
 
         default:
             return fields;

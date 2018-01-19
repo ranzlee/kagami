@@ -38,7 +38,7 @@ export class Field extends React.Component<IOwnProps & IConnectedState & IConnec
   };
 
   addressChange(propertyIndexers: any[], newValue: any, oldValue: any) {
-    debugger;
+    alert("Address Change")
   }
 
   render() {
@@ -133,7 +133,9 @@ export class Field extends React.Component<IOwnProps & IConnectedState & IConnec
           Add Address
         </button>
         <div className="row">
-          <Addresses addresses={field.addresses} onChange={this.addressChange} />
+          <div className="col-lg-6 col-sm-12">
+            <Addresses addresses={field.addresses} onChange={this.addressChange} />
+          </div>
         </div>
       </div>
     )
