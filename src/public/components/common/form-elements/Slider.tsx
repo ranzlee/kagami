@@ -97,8 +97,8 @@ export class Slider extends React.Component<SliderProps, SliderState> {
         tooltips: this.props.showToolTip ? this.props.showToolTip : false
       });
       this.slider.style.marginTop = "20px";
+      (this.slider as any).noUiSlider.on("change", this.onChange.bind(this));
     }
-    (this.slider as any).noUiSlider.on("change", this.onChange.bind(this));
     if (sliderDisabled || sliderReadOnly) {
       this.slider.setAttribute("disabled", "true");
     } else {
