@@ -120,6 +120,7 @@ require("./config/passport");
 import * as authenticationController from "./controllers/authentication";
 import * as configurationController from "./controllers/configuration";
 import * as configElementController from "./controllers/configElement";
+import * as fieldController from "./controllers/field";
 import { Socket } from "dgram";
 import { SocketServer } from "./socketServer";
 
@@ -155,7 +156,9 @@ app.get("/api/config", configurationController.fetchConfigurations);
 app.put("/api/config", configurationController.addConfiguration);
 app.post("/api/config/:id", configurationController.updateConfiguration);
 app.put("/api/config/:configId/configElement/:configElementType", configElementController.addConfigElement);
-app.post("/api/configElement/:id", configElementController.updateConfigElement)
+app.post("/api/configElement/:id", configElementController.updateConfigElement);
+app.post("/api/field/:id/address", fieldController.updateFieldAddress);
+app.put("/api/field/:id/address", fieldController.addFieldAddress);
 
 const privateKey = fs.readFileSync(path.join(__dirname, "key.pem"));
 const certificate = fs.readFileSync(path.join(__dirname, "certificate.pem"));

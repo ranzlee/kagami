@@ -22,20 +22,22 @@ export class ConfigElementDropDown extends React.Component<IOwnProps, {}> {
     render() {
         const { name, label, placeholderOption, onChange, value, labelColLg, controlColLg, labelColSm, controlColSm, required } = this.props;
         return (
-            <Select
-                name={name}
-                label={label}
-                placeholderOption={placeholderOption}
-                labelColLg={labelColLg}
-                controlColLg={controlColLg}
-                labelColSm={labelColSm}
-                controlColSm={controlColSm}
-                required={required}
-                onChange={onChange}
-                value={value}
-            >
-                {this.getExpressionOptions()}
-            </Select>
+            <div>
+                <Select
+                    name={name}
+                    label={label}
+                    placeholderOption={placeholderOption}
+                    labelColLg={labelColLg}
+                    controlColLg={controlColLg}
+                    labelColSm={labelColSm}
+                    controlColSm={controlColSm}
+                    required={required}
+                    onChange={onChange}
+                    value={value}
+                >
+                    {this.getExpressionOptions()}
+                </Select>
+            </div>
         )
     }
 }
