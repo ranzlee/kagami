@@ -121,3 +121,11 @@ body {
   background-color: $primary-color;
 }
 //END - slider bootstrap theme compatibility
+
+//now UI accessibility - checkbox and radio must be set to visible for keyboard access
+.checkbox input[type="checkbox"],
+.radio input[type="radio"] {
+  visibility: visible;
+  opacity: 0;
+}
+//END now UI accessiblility

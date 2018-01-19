@@ -10,6 +10,8 @@ export interface SliderState extends FormControl.FormControlState {
 
 export interface SliderProps extends FormControl.FormControlProps {
   value: number;
+  min?: number;
+  max?: number;
   step?: number;
   showToolTip?: boolean;
   showHorizontal?: boolean;
@@ -89,8 +91,8 @@ export class Slider extends React.Component<SliderProps, SliderState> {
         start: this.props.value,
         connect: [true, false],
         range: {
-          min: 0,
-          max: 100
+          min: this.props.min ? this.props.min : 0,
+          max: this.props.max ? this.props.max : 100
         },
         orientation: sliderOrientation,
         step: this.props.step ? this.props.step : 1,
@@ -98,6 +100,23 @@ export class Slider extends React.Component<SliderProps, SliderState> {
       });
       this.slider.style.marginTop = "20px";
       (this.slider as any).noUiSlider.on("change", this.onChange.bind(this));
+      //keyboard accessibility
+      (this.slider as any).setAttribute("tabindex", 0);
+      (this.slider as any).addEventListener("click", () => {
+        (this.slider as any).focus();
+      });
+      (this.slider as any).addEventListener("keydown", (e: any) => {
+        var value = Number((this.slider as any).noUiSlider.get());
+        switch (e.which) {
+          case 37:
+            (this.slider as any).noUiSlider.set(value - this.props.step);
+            break;
+          case 39:
+            (this.slider as any).noUiSlider.set(value + this.props.step);
+            break;
+        }
+      });
+      //end keyboard accessibility
     }
     if (sliderDisabled || sliderReadOnly) {
       this.slider.setAttribute("disabled", "true");
@@ -111,6 +130,9 @@ export class Slider extends React.Component<SliderProps, SliderState> {
     let required = this.props.required ? true : false;
     let sliderId = lodash.uniqueId("slider");
     let hiddenId = lodash.uniqueId("hiddenSlider");
+    let sliderStyle = {
+      outline: "none"
+    };
     this.renderSlider(false);
     return (
       <div className="row form-group">
@@ -122,6 +144,7 @@ export class Slider extends React.Component<SliderProps, SliderState> {
             }}
             id={sliderId}
             className="slider"
+            style={sliderStyle}
           />
           <input
             id={hiddenId}
