@@ -14,10 +14,10 @@ export function configMappingsReducer(
             let defaultMergeParams: ConfigElementMappingParams = {};
             switch (action.configElementType) {
                 case ConfigElementType.field:
-                    defaultMergeParams.fields = Set<string>(action.elementId);
+                    defaultMergeParams.fields = Set<string>([action.elementId]);
                     break;
                 case ConfigElementType.expression:
-                    defaultMergeParams.expressions = Set<string>(action.elementId);
+                    defaultMergeParams.expressions = Set<string>([action.elementId]);
                     break;
             }
             const configElementMappingRecord = new ConfigElementMappingRecord(defaultMergeParams);

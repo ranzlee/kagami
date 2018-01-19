@@ -19,5 +19,5 @@ const configElementSchema = new mongoose.Schema(
     } as any
 );
 
-const ConfigElementEntity = mongoose.model<ConfigElementEntityModel>("ConfigElement", configElementSchema);
+const ConfigElementEntity = mongoose.model<ConfigElementEntityModel>("ConfigElement", configElementSchema, "configElements");
 export { ConfigElementEntity };
