@@ -44,10 +44,22 @@ export default class Home extends React.Component<HomeProps, HomeState> {
           <div className="col">
             <Modal
               id="formExampleModal"
-              width="1200px"
               buttonAlignment="right"
               buttonTitle="Show Modal"
               modalTitle="Form Control Example Hosted In Modal Dialog"
+              width="1200px"
+              // size="lg"
+              // showFooter={true}
+              // showFooterCancelButton={true}
+              // footerCancelButtonLabel="No"
+              // onCancelButtonClick={() => {
+              //   alert("No");
+              // }}
+              // showFooterOkButton={true}
+              // footerOkButtonLabel="Yes"
+              // onOkButtonClick={() => {
+              //   alert("Yes");
+              // }}
             >
               <FormExample />
             </Modal>

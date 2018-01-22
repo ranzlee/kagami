@@ -8,10 +8,18 @@ export interface ModalState {}
 
 export interface ModalProps {
   id?: string;
+  size?: "sm" | "md" | "lg";
   width?: string;
   buttonAlignment?: "left" | "right";
   buttonTitle: string;
   modalTitle: string;
+  showFooter?: boolean;
+  showFooterCancelButton?: boolean;
+  footerCancelButtonLabel?: string;
+  onCancelButtonClick?: () => void;
+  showFooterOkButton?: boolean;
+  footerOkButtonLabel?: string;
+  onOkButtonClick?: () => void;
 }
 
 export class Modal extends React.Component<ModalProps, ModalState> {
@@ -37,6 +45,18 @@ export class Modal extends React.Component<ModalProps, ModalState> {
   hideModal = () => {
     if (this.instance != null) {
       ($(this.instance) as any).modal("hide");
+      if (this.props.onCancelButtonClick) {
+        this.props.onCancelButtonClick();
+      }
+    }
+  };
+
+  onOkDismiss = () => {
+    if (this.instance != null) {
+      ($(this.instance) as any).modal("hide");
+      if (this.props.onOkButtonClick) {
+        this.props.onOkButtonClick();
+      }
     }
   };
 
@@ -78,8 +98,46 @@ export class Modal extends React.Component<ModalProps, ModalState> {
       minWidth: this.props.width != null ? this.props.width : "0px"
     };
     let id = lodash.uniqueId(this.props.id);
+    let modalLabelId = lodash.uniqueId();
     let alignmentClass =
       this.props.buttonAlignment === "right" ? "float-right" : "float-left";
+    let modalClasses = "modal-dialog ";
+    modalClasses +=
+      this.props.width != null
+        ? ""
+        : this.props.size && this.props.size === "sm"
+          ? "modal-sm"
+          : this.props.size && this.props.size === "lg" ? "modal-lg" : "";
+    let footerCancelButton = (
+      <button
+        type="button"
+        className="btn btn-default btn-simple"
+        onClick={this.hideModal}
+      >
+        {this.props.footerCancelButtonLabel != null
+          ? this.props.footerCancelButtonLabel
+          : "Cancel"}
+      </button>
+    );
+    let footerOkButton = (
+      <button
+        type="button"
+        className="btn btn-primary btn-simple"
+        onClick={this.onOkDismiss}
+      >
+        {this.props.footerOkButtonLabel != null
+          ? this.props.footerOkButtonLabel
+          : "OK"}
+      </button>
+    );
+    let footer = this.props.showFooter ? (
+      <div className="modal-footer">
+        {footerCancelButton}
+        {footerOkButton}
+      </div>
+    ) : (
+      ""
+    );
     return (
       <>
         <div className={alignmentClass}>
@@ -100,11 +158,11 @@ export class Modal extends React.Component<ModalProps, ModalState> {
           id={id}
           tabIndex={-1}
           role="dialog"
-          aria-labelledby="myModalLabel"
+          aria-labelledby={modalLabelId}
           aria-hidden="true"
         >
           <div
-            className="modal-dialog"
+            className={modalClasses}
             style={this.props.width != null ? modalStyle : null}
           >
             <div className="modal-content">
@@ -117,24 +175,15 @@ export class Modal extends React.Component<ModalProps, ModalState> {
                 >
                   &times;
                 </button>
-                <h4 className="modal-title">{this.props.modalTitle}</h4>
+                <h4 className="modal-title" id={modalLabelId}>
+                  {this.props.modalTitle}
+                </h4>
               </div>
               <div className="modal-body">
                 <hr className="bg-primary" />
                 {this.recursiveMap(this.props.children, this.mapChild, this)}
               </div>
-              {/* <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-default btn-simple"
-                  data-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button type="button" className="btn btn-info btn-simple">
-                  Save
-                </button>
-              </div> */}
+              {footer}
             </div>
           </div>
         </div>
