@@ -26,6 +26,7 @@ export interface FormExampleState {
   mySliderState: number;
   myDatePickerState: Moment.Moment;
   myDateTimePickerState: Moment.Moment;
+  demoFormLevelErrorsOnSubmit: boolean;
 }
 
 export interface FormExampleProps {}
@@ -52,15 +53,23 @@ export class FormExample extends React.Component<
       myDatePickerState: Moment(),
       myDateTimePickerState: Moment()
         .set("hour", 8)
-        .set("minute", 0)
+        .set("minute", 0),
+      demoFormLevelErrorsOnSubmit: false
     };
     this.maxDate = "2020-01-01";
   }
 
   maxDate: string;
 
-  handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    alert("form was submitted!");
+  handleSubmit = (event: React.FormEvent<HTMLFormElement>): Array<string> => {
+    if (this.state.demoFormLevelErrorsOnSubmit) {
+      return [
+        "This is a form level validation error",
+        "This is another form level validation error"
+      ];
+    } else {
+      alert("form was submitted!");
+    }
   };
 
   render() {
@@ -99,6 +108,16 @@ export class FormExample extends React.Component<
                 }}
                 checked={this.state.readOnly}
               />
+              <Checkbox
+                label="Demo form level errors"
+                controlCol={12}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                  this.setState({
+                    demoFormLevelErrorsOnSubmit: event.currentTarget.checked
+                  });
+                }}
+                checked={this.state.demoFormLevelErrorsOnSubmit}
+              />
             </Form>
           </div>
         </div>
@@ -109,7 +128,6 @@ export class FormExample extends React.Component<
               validateOnMount={this.state.validateFormOnMount}
               readOnly={this.state.readOnly}
               disabled={this.state.disabled}
-              closeModalOnSubmit={true}
               modal={(this as any).props.modal}
             >
               <FormSubComponentExample />
