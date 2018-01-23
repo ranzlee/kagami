@@ -174,7 +174,20 @@ export class Form extends React.Component<FormProps, FormState> {
       this.state.errors.length === 0 ? null : this.state.errors.length === 1 ? (
         <div className="row">
           <div className="col">
-            <div className="rounded alert alert-danger">
+            <div className="rounded alert alert-danger" role="alert">
+              <button
+                type="button"
+                className="close"
+                data-dismiss="alert"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">
+                  <i className="now-ui-icons ui-1_simple-remove" />
+                </span>
+              </button>
+              <div className="alert-icon">
+                <i className="fas fa-exclamation" />
+              </div>
               <h6>ERROR</h6>
               <p>{this.state.errors[0]}</p>
             </div>
@@ -183,7 +196,20 @@ export class Form extends React.Component<FormProps, FormState> {
       ) : (
         <div className="row">
           <div className="col">
-            <div className="rounded alert alert-danger">
+            <div className="rounded alert alert-danger" role="alert">
+              <button
+                type="button"
+                className="close"
+                data-dismiss="alert"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">
+                  <i className="now-ui-icons ui-1_simple-remove" />
+                </span>
+              </button>
+              <div className="alert-icon">
+                <i className="fas fa-exclamation" />
+              </div>
               <h6>ERRORS:</h6>
               <ul>
                 {this.state.errors.map(function(name, index) {
