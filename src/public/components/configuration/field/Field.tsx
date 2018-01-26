@@ -8,6 +8,9 @@ import { ConfigElementDropDown } from "./../dropDown/ConfigElementDropDown";
 import { Addresses } from "../../address/Addresses";
 import { Form } from "../../common/form-elements/Form";
 import { Button } from "../../common/form-elements/Button";
+import Expression from "./../../../containers/configuration/expression/ExpressionContainer";
+import { AnchorLink } from "./../../common/widgets/AnchorLink";
+import { Card } from "./../../common/containers/Card";
 
 export interface IOwnProps {
   fieldId: string;
@@ -31,7 +34,15 @@ export interface IConnectedDispatch {
     oldValue: any) => void;
 }
 
-export class Field extends React.Component<IOwnProps & IConnectedState & IConnectedDispatch, {}> {
+export interface IPrivateState {
+  showDisplayExpressionInline: boolean;
+}
+
+export class Field extends React.Component<IOwnProps & IConnectedState & IConnectedDispatch, IPrivateState> {
+  constructor(props: IOwnProps & IConnectedState & IConnectedDispatch) {
+    super(props);
+    this.state = { showDisplayExpressionInline: false };
+  }
 
   updateClickHandler = (event: any) => {
     const { field, update } = this.props;
@@ -94,21 +105,33 @@ export class Field extends React.Component<IOwnProps & IConnectedState & IConnec
             </div>
           </div>
           <div className="row">
-            <div className="col-lg-6 col-sm-12">
-              <ConfigElementDropDown
-                configElements={expressions}
-                name="displayExpression"
-                label="Display Expression"
-                placeholderOption="Select"
-                labelColLg={3}
-                controlColLg={9}
-                labelColSm={6}
-                controlColSm={6}
-                required={false}
-                onChange={this.updateClickHandler}
-                value={field.displayExpression}
-              />
-            </div>
+            {this.state.showDisplayExpressionInline ?
+              (<Card title="Inline Expression View" iconName="fa-cog">
+                <Expression expressionId={field.displayExpression} />
+              </Card>)
+              :
+              (
+                <div className="col-lg-6 col-sm-12">
+                  <ConfigElementDropDown
+                    configElements={expressions}
+                    name="displayExpression"
+                    label="Display Expression"
+                    placeholderOption="Select"
+                    labelColLg={3}
+                    controlColLg={9}
+                    labelColSm={6}
+                    controlColSm={6}
+                    required={false}
+                    onChange={this.updateClickHandler}
+                    value={field.displayExpression}
+                  />
+                </div>
+              )
+            }
+            <AnchorLink
+              linkText="Show/Hide Display Expression Inline"
+              onClick={() => this.setState({ showDisplayExpressionInline: !this.state.showDisplayExpressionInline })}
+            />
           </div>
           <div className="row">
             <div className="col-lg-6 col-sm-12">
