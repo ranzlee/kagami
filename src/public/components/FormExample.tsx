@@ -61,17 +61,6 @@ export class FormExample extends React.Component<
 
   maxDate: string;
 
-  handleSubmit = (event: React.FormEvent<HTMLFormElement>): Array<string> => {
-    if (this.state.demoFormLevelErrorsOnSubmit) {
-      return [
-        "This is a form level validation error",
-        "This is another form level validation error"
-      ];
-    } else {
-      alert("form was submitted!");
-    }
-  };
-
   render() {
     return (
       <div>
@@ -124,7 +113,18 @@ export class FormExample extends React.Component<
         <div className="row">
           <div className="col">
             <Form
-              onSubmit={this.handleSubmit}
+              onSubmit={(
+                event: React.FormEvent<HTMLFormElement>
+              ): Array<string> => {
+                if (this.state.demoFormLevelErrorsOnSubmit) {
+                  return [
+                    "This is a form level validation error",
+                    "This is another form level validation error"
+                  ];
+                } else {
+                  alert("form was submitted!");
+                }
+              }}
               validateOnMount={this.state.validateFormOnMount}
               readOnly={this.state.readOnly}
               disabled={this.state.disabled}
