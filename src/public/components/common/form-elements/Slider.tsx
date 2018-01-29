@@ -62,7 +62,6 @@ export class Slider extends React.Component<SliderProps, SliderState> {
     if (this.slider) {
       this.instance.value = (this.slider as any).noUiSlider.get();
       if (this.props.onChangeCustomValidation) {
-        this.props.onChangeCustomValidation(this.instance);
         FormControl.OnChangeCustomValidation(this, this.instance);
       }
     }
@@ -133,6 +132,10 @@ export class Slider extends React.Component<SliderProps, SliderState> {
     let sliderStyle = {
       outline: "none"
     };
+    let myCustomStyle = {
+      opacity: 0,
+      height: "0px"
+    };
     this.renderSlider(false);
     return (
       <div className="row form-group">
@@ -148,10 +151,12 @@ export class Slider extends React.Component<SliderProps, SliderState> {
           />
           <input
             id={hiddenId}
+            className="form-control"
             ref={instance => {
               this.instance = instance;
             }}
-            type="hidden"
+            type="text"
+            style={myCustomStyle}
             value={this.state.value}
           />
           <div className="invalid-feedback">
