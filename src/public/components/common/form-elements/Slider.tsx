@@ -67,6 +67,8 @@ export class Slider extends React.Component<SliderProps, SliderState> {
     }
   };
 
+  hiddenOnChange() {}
+
   renderSlider(createSlider: boolean) {
     if (this.slider == null) return;
     const sliderOrientation =
@@ -158,6 +160,7 @@ export class Slider extends React.Component<SliderProps, SliderState> {
             type="text"
             style={myCustomStyle}
             value={this.state.value}
+            onChange={this.hiddenOnChange}
           />
           <div className="invalid-feedback">
             {this.state.invalidFeedback ? this.state.invalidFeedback : ""}

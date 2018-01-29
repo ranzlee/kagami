@@ -306,12 +306,14 @@ export class FormExample extends React.Component<
                           element: HTMLInputElement
                         ) => {
                           let isValid = true;
-                          if (element.value !== "50") {
+                          let validationMessage = "";
+                          if (parseFloat(element.value) !== 50) {
                             isValid = false;
+                            validationMessage = "Value must be 50.";
                           }
                           return {
                             isValid: isValid,
-                            validationMessage: "Value must be 50."
+                            validationMessage: validationMessage
                           };
                         }}
                         value={this.state.mySliderState}
