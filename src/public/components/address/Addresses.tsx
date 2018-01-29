@@ -33,8 +33,8 @@ export class Addresses extends React.Component<IOwnProps, {}>
       };
       const title = "Address #" + (index + 1);
       const newElement = (
-        <Card title={title} iconName="address-card">
-          <Address address={address} key={index} onChange={callback} />
+        <Card title={title} key={index} iconName="address-card">
+          <Address address={address} onChange={callback} />
           <button className="btn btn-primary float-right" onClick={() => this.delete(index)}>
             Delete Address
         </button>

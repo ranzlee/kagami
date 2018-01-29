@@ -7,8 +7,9 @@ import { FieldRecord } from '../../../../shared/models/configuration/elements/Fi
 import { Set } from 'immutable';
 
 export const mapStateToProps = (appStoreRecord: AppStoreRecord, props: IOwnProps): IConnectedState => {
+    const configMappings = appStoreRecord.domain.configMappings.get(props.match.params.configId);
     return {
-        fieldIds: appStoreRecord.domain.configMappings.get(props.match.params.configId).fields || Set<string>()
+        fieldIds: configMappings ? configMappings.fields || Set<string>() : Set<string>()
     }
 }
 
