@@ -320,6 +320,7 @@ export class FormExample extends React.Component<
                         step={10}
                         showToolTip={true}
                         showHorizontal={true}
+                        verticalPixels={150}
                       />
                     </div>
                   </div>

@@ -15,6 +15,7 @@ export interface SliderProps extends FormControl.FormControlProps {
   step?: number;
   showToolTip?: boolean;
   showHorizontal?: boolean;
+  verticalPixels?: number;
   required?: boolean;
 }
 
@@ -100,6 +101,9 @@ export class Slider extends React.Component<SliderProps, SliderState> {
         tooltips: this.props.showToolTip ? this.props.showToolTip : false
       });
       this.slider.style.marginTop = "20px";
+      if (sliderOrientation === "vertical") {
+        this.slider.style.height = this.props.verticalPixels + "px";
+      }
       (this.slider as any).noUiSlider.on("change", this.onChange.bind(this));
       //keyboard accessibility
       (this.slider as any).setAttribute("tabindex", 0);
