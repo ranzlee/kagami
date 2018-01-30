@@ -15,6 +15,7 @@ export interface SliderProps extends FormControl.FormControlProps {
   step?: number;
   showToolTip?: boolean;
   showHorizontal?: boolean;
+  verticalPixels?: number;
   required?: boolean;
 }
 
@@ -62,11 +63,12 @@ export class Slider extends React.Component<SliderProps, SliderState> {
     if (this.slider) {
       this.instance.value = (this.slider as any).noUiSlider.get();
       if (this.props.onChangeCustomValidation) {
-        this.props.onChangeCustomValidation(this.instance);
         FormControl.OnChangeCustomValidation(this, this.instance);
       }
     }
   };
+
+  hiddenOnChange() {}
 
   renderSlider(createSlider: boolean) {
     if (this.slider == null) return;
@@ -99,6 +101,9 @@ export class Slider extends React.Component<SliderProps, SliderState> {
         tooltips: this.props.showToolTip ? this.props.showToolTip : false
       });
       this.slider.style.marginTop = "20px";
+      if (sliderOrientation === "vertical") {
+        this.slider.style.height = this.props.verticalPixels + "px";
+      }
       (this.slider as any).noUiSlider.on("change", this.onChange.bind(this));
       //keyboard accessibility
       (this.slider as any).setAttribute("tabindex", 0);
@@ -133,6 +138,10 @@ export class Slider extends React.Component<SliderProps, SliderState> {
     let sliderStyle = {
       outline: "none"
     };
+    let myCustomStyle = {
+      opacity: 0,
+      height: "0px"
+    };
     this.renderSlider(false);
     return (
       <div className="row form-group">
@@ -148,11 +157,14 @@ export class Slider extends React.Component<SliderProps, SliderState> {
           />
           <input
             id={hiddenId}
+            className="form-control"
             ref={instance => {
               this.instance = instance;
             }}
-            type="hidden"
+            type="text"
+            style={myCustomStyle}
             value={this.state.value}
+            onChange={this.hiddenOnChange}
           />
           <div className="invalid-feedback">
             {this.state.invalidFeedback ? this.state.invalidFeedback : ""}
