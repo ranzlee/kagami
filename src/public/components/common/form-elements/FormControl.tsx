@@ -28,18 +28,20 @@ export interface FormControlProps {
   controlColSm?: number;
   invalidFeedback?: string;
   onChange?: (
-    eventOrMoment:
+    eventOrMomentOrAny:
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLTextAreaElement>
       | React.ChangeEvent<HTMLSelectElement>
       | Moment.Moment
+      | any
   ) => void;
   onChangeCustomValidation?: (
-    elementOrMoment:
+    elementOrMomentOrAny:
       | HTMLInputElement
       | HTMLSelectElement
       | HTMLTextAreaElement
       | Moment.Moment
+      | any
   ) => CustomValidationResult;
   doCustomValidationOnMount?: boolean;
   form?: Form;
@@ -53,7 +55,7 @@ export interface FormControlExtendedProperties {
 export let OnChangeCustomValidation = (
   component: React.Component<FormControlProps, FormControlState>,
   element: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement,
-  moment?: Moment.Moment
+  data?: any
 ): CustomValidationResult => {
   //if component doesn't have a handler for custom validation, return valid
   if (!component.props.onChangeCustomValidation) {
@@ -89,7 +91,7 @@ export let OnChangeCustomValidation = (
   }
   //call custom validation delegate
   let validationResult = component.props.onChangeCustomValidation(
-    moment !== undefined ? moment : element
+    data !== undefined ? data : element
   );
   element.setCustomValidity("");
   component.setState(

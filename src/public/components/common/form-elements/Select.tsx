@@ -11,6 +11,10 @@ export interface SelectProps extends FormControl.FormControlProps {
   placeholderOption?: string;
   size?: number;
   multiple?: boolean;
+  onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  onChangeCustomValidation?: (
+    element: HTMLSelectElement
+  ) => FormControl.CustomValidationResult;
 }
 
 export class Select extends React.Component<SelectProps, SelectState> {

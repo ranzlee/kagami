@@ -5,7 +5,6 @@ import * as lodash from "lodash";
 import * as Autosuggest from "react-autosuggest";
 import { FormEvent } from "react";
 import * as $ from "jquery";
-import { CustomValidationResult } from "./FormControl";
 
 export interface AutoCompleteState extends FormControl.FormControlState {
   suggestions: Array<any>;
@@ -29,7 +28,9 @@ export interface AutoCompleteProps extends FormControl.FormControlProps {
   getSuggestionValue: (suggestion: any) => string;
   renderSuggestion: (suggestion: any) => React.ReactElement<any>;
   onChange?: (suggestion: any) => void;
-  onChangeCustomValidation?: (suggestion: any) => CustomValidationResult;
+  onChangeCustomValidation?: (
+    suggestion: any
+  ) => FormControl.CustomValidationResult;
   onRemove?: (suggestion: any) => boolean;
 }
 
@@ -50,7 +51,11 @@ export class AutoComplete extends React.Component<
 
   componentDidMount() {
     if (this.props.doCustomValidationOnMount) {
-      //   FormControl.OnChangeCustomValidation(this, this.inputInstance, this.state.selectedMoment);
+      FormControl.OnChangeCustomValidation(
+        this,
+        this.inputInstance,
+        this.state.selectedSuggestion
+      );
     }
     if (this.props.form) {
       this.props.form.registerFormCustomValidations(this, this.inputInstance);

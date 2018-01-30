@@ -10,6 +10,10 @@ export interface RadioState extends FormControl.FormControlState {
 export interface RadioProps extends FormControl.FormControlProps {
   value: string;
   required?: boolean;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeCustomValidation?: (
+    element: HTMLInputElement
+  ) => FormControl.CustomValidationResult;
 }
 
 export class Radio extends React.Component<RadioProps, RadioState> {

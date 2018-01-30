@@ -13,6 +13,10 @@ export interface TextboxProps extends FormControl.FormControlProps {
   minLength?: number;
   value: string;
   placeholder: string;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeCustomValidation?: (
+    element: HTMLInputElement
+  ) => FormControl.CustomValidationResult;
 }
 
 export class Textbox extends React.Component<TextboxProps, TextboxState> {

@@ -8,6 +8,10 @@ export interface CheckboxState extends FormControl.FormControlState {}
 export interface CheckboxProps extends FormControl.FormControlProps {
   required?: boolean;
   checked: boolean;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeCustomValidation?: (
+    element: HTMLInputElement
+  ) => FormControl.CustomValidationResult;
 }
 
 export class Checkbox extends React.Component<CheckboxProps, CheckboxState> {

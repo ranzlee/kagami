@@ -12,6 +12,10 @@ export interface TextAreaProps extends FormControl.FormControlProps {
   value: string;
   placeholder: string;
   rows: number;
+  onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onChangeCustomValidation?: (
+    element: HTMLTextAreaElement
+  ) => FormControl.CustomValidationResult;
 }
 
 export class TextArea extends React.Component<TextAreaProps, TextAreaState> {

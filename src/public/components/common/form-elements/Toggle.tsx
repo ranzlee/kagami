@@ -10,6 +10,10 @@ export interface ToggleProps extends FormControl.FormControlProps {
   checked: boolean;
   labelOn?: string;
   labelOff?: string;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeCustomValidation?: (
+    element: HTMLInputElement
+  ) => FormControl.CustomValidationResult;
 }
 
 export class Toggle extends React.Component<ToggleProps, ToggleState> {

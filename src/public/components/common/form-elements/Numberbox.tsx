@@ -13,6 +13,10 @@ export interface NumberboxProps extends FormControl.FormControlProps {
   step?: number;
   value: number;
   placeholder: string;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeCustomValidation?: (
+    element: HTMLInputElement
+  ) => FormControl.CustomValidationResult;
 }
 
 export class Numberbox extends React.Component<NumberboxProps, NumberboxState> {

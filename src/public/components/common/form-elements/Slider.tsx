@@ -17,6 +17,10 @@ export interface SliderProps extends FormControl.FormControlProps {
   showHorizontal?: boolean;
   verticalPixels?: number;
   required?: boolean;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeCustomValidation?: (
+    element: HTMLInputElement
+  ) => FormControl.CustomValidationResult;
 }
 
 export class Slider extends React.Component<SliderProps, SliderState> {
