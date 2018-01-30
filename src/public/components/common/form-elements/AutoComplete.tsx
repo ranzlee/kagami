@@ -30,7 +30,6 @@ export interface AutoCompleteProps extends FormControl.FormControlProps {
   onChangeCustomValidation?: (
     suggestion: any
   ) => FormControl.CustomValidationResult;
-  onRemove?: () => void;
 }
 
 export class AutoComplete extends React.Component<
@@ -142,13 +141,16 @@ export class AutoComplete extends React.Component<
   onRemove = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     event.stopPropagation();
+    if (this.inputInstance) {
+      this.inputInstance.focus();
+    }
     if (this.props.value == null) return;
     let proceed = true;
-    if (this.props.onRemove) {
+    if (this.props.onChange) {
       this.setState(
         { value: "", invalidFeedback: this.props.invalidFeedback },
         () => {
-          this.props.onRemove();
+          this.props.onChange(null);
         }
       );
     }

@@ -301,7 +301,7 @@ export class FormExample extends React.Component<
                         required={true}
                         invalidFeedback="Required"
                         value={this.state.myAutoCompleteSuggestion}
-                        placeholder="Type 'C'"
+                        placeholder="Type a programming language (e.g. 'C' or 'P')"
                         onChange={(suggestion: AutoCompleteSuggestion) => {
                           this.setState({
                             myAutoCompleteSuggestion: suggestion
@@ -318,12 +318,7 @@ export class FormExample extends React.Component<
                             isValid: isValid,
                             validationMessage: "Use a real language!"
                           };
-                        }}
-                        onRemove={() => {
-                          this.setState({
-                            myAutoCompleteSuggestion: null
-                          });
-                        }}
+                        }} //teach autocomplete how to display options based on value typed in
                         getSuggestions={(reason: string, value: string) => {
                           let inputValue = value.trim().toLowerCase();
                           let inputLength = inputValue.length;
@@ -335,12 +330,7 @@ export class FormExample extends React.Component<
                                     .toLowerCase()
                                     .slice(0, inputLength) === inputValue
                               );
-                        }}
-                        getSuggestionValue={(
-                          suggestion: AutoCompleteSuggestion
-                        ) => {
-                          return suggestion === null ? "" : suggestion.name;
-                        }}
+                        }} //teach autocomplete how to render suggestion options
                         renderSuggestion={(
                           suggestion: AutoCompleteSuggestion
                         ) => {
@@ -349,6 +339,11 @@ export class FormExample extends React.Component<
                               {suggestion.name + " - " + suggestion.year}
                             </div>
                           );
+                        }} //tell autocomplete what string to display in the textbox for the selected option
+                        getSuggestionValue={(
+                          suggestion: AutoCompleteSuggestion
+                        ) => {
+                          return suggestion === null ? "" : suggestion.name;
                         }}
                       />
                     </div>
