@@ -5,6 +5,7 @@ import * as $ from "jquery";
 import * as Moment from "moment";
 import * as ReactDatePicker from "react-datepicker";
 import * as lodash from "lodash";
+import { CustomValidationResult } from "./FormControl";
 require("jquery-mask-plugin");
 
 export interface DateTimePickerState extends FormControl.FormControlState {
@@ -27,6 +28,8 @@ export interface DateTimePickerProps extends FormControl.FormControlProps {
   timeFormat?: string;
   timeIntervalInMinutes?: 1 | 5 | 10 | 15 | 30 | 60;
   useInputMask?: boolean;
+  onChange?: (moment: Moment.Moment) => void;
+  onChangeCustomValidation?: (moment: Moment.Moment) => CustomValidationResult;
 }
 
 export class DateTimePicker extends React.Component<

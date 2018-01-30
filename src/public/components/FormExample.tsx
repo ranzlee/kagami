@@ -9,9 +9,15 @@ import { Checkbox } from "./common/form-elements/Checkbox";
 import { TextArea } from "./common/form-elements/TextArea";
 import { Select } from "./common/form-elements/Select";
 import { DateTimePicker } from "./common/form-elements/DateTimePicker";
+import { AutoComplete } from "./common/form-elements/AutoComplete";
 import { FormSubComponentExample } from "./FormSubComponentExample";
 import * as linq from "linq";
 import * as Moment from "moment";
+
+interface AutoCompleteSuggestion {
+  name: string;
+  year: number;
+}
 
 export interface FormExampleState {
   validateFormOnMount: boolean;
@@ -26,6 +32,7 @@ export interface FormExampleState {
   mySliderState: number;
   myDatePickerState: Moment.Moment;
   myDateTimePickerState: Moment.Moment;
+  myAutoCompleteSuggestion: AutoCompleteSuggestion;
   demoFormLevelErrorsOnSubmit: boolean;
 }
 
@@ -54,12 +61,31 @@ export class FormExample extends React.Component<
       myDateTimePickerState: Moment()
         .set("hour", 8)
         .set("minute", 0),
+      myAutoCompleteSuggestion: null,
       demoFormLevelErrorsOnSubmit: false
     };
     this.maxDate = "2020-01-01";
+    this.suggestions = [
+      { name: "C", year: 1972 },
+      { name: "C#", year: 2000 },
+      { name: "C++", year: 1983 },
+      { name: "Clojure", year: 2007 },
+      { name: "Elm", year: 2012 },
+      { name: "Go", year: 2009 },
+      { name: "Haskell", year: 1990 },
+      { name: "Java", year: 1995 },
+      { name: "Javascript", year: 1995 },
+      { name: "Perl", year: 1987 },
+      { name: "PHP", year: 1995 },
+      { name: "Python", year: 1991 },
+      { name: "Ruby", year: 1995 },
+      { name: "Scala", year: 2003 }
+    ];
   }
 
   maxDate: string;
+
+  suggestions: Array<AutoCompleteSuggestion>;
 
   render() {
     return (
@@ -262,6 +288,50 @@ export class FormExample extends React.Component<
                         <option value="g">Green</option>
                         <option value="b">Blue</option>
                       </Select>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col">
+                      <AutoComplete
+                        controlCol={8}
+                        labelCol={4}
+                        label="My Auto-Complete"
+                        required={true}
+                        invalidFeedback="Required"
+                        value={this.state.myAutoCompleteSuggestion}
+                        placeholder="Type 'C'"
+                        onChange={(suggestion: AutoCompleteSuggestion) => {
+                          this.setState({
+                            myAutoCompleteSuggestion: suggestion
+                          });
+                        }}
+                        getSuggestions={(reason: string, value: string) => {
+                          let inputValue = value.trim().toLowerCase();
+                          let inputLength = inputValue.length;
+                          return inputLength === 0
+                            ? []
+                            : this.suggestions.filter(
+                                suggestion =>
+                                  suggestion.name
+                                    .toLowerCase()
+                                    .slice(0, inputLength) === inputValue
+                              );
+                        }}
+                        getSuggestionValue={(
+                          suggestion: AutoCompleteSuggestion
+                        ) => {
+                          return suggestion === null ? "" : suggestion.name;
+                        }}
+                        renderSuggestion={(
+                          suggestion: AutoCompleteSuggestion
+                        ) => {
+                          return (
+                            <div>
+                              {suggestion.name + " - " + suggestion.year}
+                            </div>
+                          );
+                        }}
+                      />
                     </div>
                   </div>
                 </div>
