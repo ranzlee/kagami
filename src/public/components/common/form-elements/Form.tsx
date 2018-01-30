@@ -4,6 +4,7 @@ import * as FormControl from "./FormControl";
 import { DateTimePicker } from "./DateTimePicker";
 import { Modal } from "../containers/Modal";
 import * as Moment from "moment";
+import { AutoComplete } from "./AutoComplete";
 
 export interface FormState {
   formWasValidated: string;
@@ -65,6 +66,14 @@ export class Form extends React.Component<FormProps, FormState> {
                 comp,
                 r.element,
                 moment
+              );
+            } else if (r.component instanceof AutoComplete) {
+              let comp = r.component as AutoComplete;
+              let suggestion = comp.props.value;
+              validationResult = FormControl.OnChangeCustomValidation(
+                comp,
+                r.element,
+                suggestion
               );
             } else {
               validationResult = FormControl.OnChangeCustomValidation(

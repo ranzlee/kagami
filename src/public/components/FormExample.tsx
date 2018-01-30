@@ -44,6 +44,23 @@ export class FormExample extends React.Component<
 > {
   constructor(props: FormExampleProps) {
     super(props);
+    this.suggestions = [
+      { name: "C", year: 1972 },
+      { name: "C#", year: 2000 },
+      { name: "C++", year: 1983 },
+      { name: "Clojure", year: 2007 },
+      { name: "Elm", year: 2012 },
+      { name: "Go", year: 2009 },
+      { name: "Haskell", year: 1990 },
+      { name: "Java", year: 1995 },
+      { name: "Javascript", year: 1995 },
+      { name: "Perl", year: 1987 },
+      { name: "PHP", year: 1995 },
+      { name: "Python", year: 1991 },
+      { name: "Ruby", year: 1995 },
+      { name: "Scala", year: 2003 }
+    ];
+    this.maxDate = "2020-01-01";
     this.state = {
       validateFormOnMount:
         localStorage.getItem("validateFormOnMount") === "true",
@@ -61,26 +78,11 @@ export class FormExample extends React.Component<
       myDateTimePickerState: Moment()
         .set("hour", 8)
         .set("minute", 0),
-      myAutoCompleteSuggestion: null,
+      myAutoCompleteSuggestion: linq
+        .from(this.suggestions)
+        .first(i => i.name === "Perl"),
       demoFormLevelErrorsOnSubmit: false
     };
-    this.maxDate = "2020-01-01";
-    this.suggestions = [
-      { name: "C", year: 1972 },
-      { name: "C#", year: 2000 },
-      { name: "C++", year: 1983 },
-      { name: "Clojure", year: 2007 },
-      { name: "Elm", year: 2012 },
-      { name: "Go", year: 2009 },
-      { name: "Haskell", year: 1990 },
-      { name: "Java", year: 1995 },
-      { name: "Javascript", year: 1995 },
-      { name: "Perl", year: 1987 },
-      { name: "PHP", year: 1995 },
-      { name: "Python", year: 1991 },
-      { name: "Ruby", year: 1995 },
-      { name: "Scala", year: 2003 }
-    ];
   }
 
   maxDate: string;
@@ -303,6 +305,23 @@ export class FormExample extends React.Component<
                         onChange={(suggestion: AutoCompleteSuggestion) => {
                           this.setState({
                             myAutoCompleteSuggestion: suggestion
+                          });
+                        }}
+                        onChangeCustomValidation={(
+                          suggestion: AutoCompleteSuggestion
+                        ) => {
+                          let isValid = true;
+                          if (suggestion != null && suggestion.name === "PHP") {
+                            isValid = false;
+                          }
+                          return {
+                            isValid: isValid,
+                            validationMessage: "Use a real language!"
+                          };
+                        }}
+                        onRemove={() => {
+                          this.setState({
+                            myAutoCompleteSuggestion: null
                           });
                         }}
                         getSuggestions={(reason: string, value: string) => {

@@ -8,7 +8,6 @@ import * as $ from "jquery";
 
 export interface AutoCompleteState extends FormControl.FormControlState {
   suggestions: Array<any>;
-  selectedSuggestion: any;
   value: string;
 }
 
@@ -31,7 +30,7 @@ export interface AutoCompleteProps extends FormControl.FormControlProps {
   onChangeCustomValidation?: (
     suggestion: any
   ) => FormControl.CustomValidationResult;
-  onRemove?: (suggestion: any) => boolean;
+  onRemove?: () => void;
 }
 
 export class AutoComplete extends React.Component<
@@ -43,8 +42,7 @@ export class AutoComplete extends React.Component<
     this.state = {
       suggestions: [],
       value: "",
-      invalidFeedback: this.props.invalidFeedback,
-      selectedSuggestion: null
+      invalidFeedback: this.props.invalidFeedback
     };
     this.id = lodash.uniqueId(this.props.id);
   }
@@ -54,7 +52,7 @@ export class AutoComplete extends React.Component<
       FormControl.OnChangeCustomValidation(
         this,
         this.inputInstance,
-        this.state.selectedSuggestion
+        this.props.value
       );
     }
     if (this.props.form) {
@@ -80,6 +78,10 @@ export class AutoComplete extends React.Component<
   onSuggestionsFetchRequested = (
     query: Autosuggest.SuggestionsFetchRequestedParams
   ) => {
+    if (this.props.value != null) {
+      this.setState({ suggestions: [] });
+      return;
+    }
     let results = this.props.getSuggestions(query.reason, query.value);
     if (results == null || results.length == null || results.length < 1) {
       this.setState({ value: "" });
@@ -94,19 +96,25 @@ export class AutoComplete extends React.Component<
   ) => {
     this.setState(
       {
-        selectedSuggestion: data.suggestion,
         value: this.props.getSuggestionValue(data.suggestion)
       },
       () => {
         if (this.props.onChange) {
-          this.props.onChange(this.state.selectedSuggestion);
+          this.props.onChange(data.suggestion);
+        }
+        if (this.props.onChangeCustomValidation) {
+          FormControl.OnChangeCustomValidation(
+            this,
+            this.inputInstance,
+            data.suggestion
+          );
         }
       }
     );
   };
 
   onSuggestionsClearRequested = () => {
-    if (this.state.selectedSuggestion == null) {
+    if (this.props.value == null) {
       this.setState({
         value: "",
         suggestions: []
@@ -134,21 +142,13 @@ export class AutoComplete extends React.Component<
   onRemove = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     event.stopPropagation();
-    if (this.state.selectedSuggestion == null) return;
+    if (this.props.value == null) return;
     let proceed = true;
     if (this.props.onRemove) {
-      proceed = this.props.onRemove(this.state.selectedSuggestion);
-    }
-    if (proceed) {
       this.setState(
-        {
-          selectedSuggestion: null,
-          value: ""
-        },
+        { value: "", invalidFeedback: this.props.invalidFeedback },
         () => {
-          if (this.props.onChange) {
-            this.props.onChange(null);
-          }
+          this.props.onRemove();
         }
       );
     }
@@ -172,10 +172,11 @@ export class AutoComplete extends React.Component<
     return (
       <div className="input-group">
         <input
+          {...inputProps}
           ref={instance => {
             this.inputInstance = instance;
+            inputProps.ref(instance);
           }}
-          {...inputProps}
           className="form-control react-autosuggest__input"
           id={this.id}
           name={this.props.name}
