@@ -302,6 +302,7 @@ export class FormExample extends React.Component<
                         invalidFeedback="Required"
                         value={this.state.myAutoCompleteSuggestion}
                         placeholder="Type a programming language (e.g. 'C' or 'P')"
+                        suggestionsContainerMaxHeight={200}
                         onChange={(suggestion: AutoCompleteSuggestion) => {
                           this.setState({
                             myAutoCompleteSuggestion: suggestion

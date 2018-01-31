@@ -70,6 +70,9 @@ export class Form extends React.Component<FormProps, FormState> {
             } else if (r.component instanceof AutoComplete) {
               let comp = r.component as AutoComplete;
               let suggestion = comp.props.value;
+              if (suggestion == null) {
+                r.element.value = "";
+              }
               validationResult = FormControl.OnChangeCustomValidation(
                 comp,
                 r.element,

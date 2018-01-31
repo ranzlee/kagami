@@ -140,27 +140,6 @@ body {
   position: relative;
 }
 
-.react-autosuggest__input {
-  display: block;
-  width: 100%;
-  padding: 0.375rem 0.75rem;
-  color: $black-color;
-  background-color: $white-bg;
-  background-clip: padding-box;
-  border: 1px solid $light-gray;
-  border-radius: 0;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-
-.react-autosuggest__input--focused {
-  outline: none;
-}
-
-.react-autosuggest__input--open {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
 .react-autosuggest__suggestions-container {
   display: none;
 }
@@ -168,12 +147,12 @@ body {
 .react-autosuggest__suggestions-container--open {
   display: block;
   position: absolute;
+  top: 43px;
   width: 100%;
   border: 1px solid $light-gray;
   background-color: $white-bg;
   font-weight: 300;
   z-index: 9999999;
-  max-height: 200px;
   overflow-y: auto;
 }
 

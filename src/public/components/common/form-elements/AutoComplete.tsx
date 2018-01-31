@@ -15,6 +15,7 @@ export interface AutoCompleteProps extends FormControl.FormControlProps {
   required?: boolean;
   value: any;
   placeholder: string;
+  suggestionsContainerMaxHeight?: number;
   getSuggestions: (
     reason:
       | "input-changed"
@@ -126,12 +127,18 @@ export class AutoComplete extends React.Component<
   renderSuggestionsContainer = (
     params: Autosuggest.RenderSuggestionsContainerParams
   ) => {
+    let style = {
+      maxHeight: this.props.suggestionsContainerMaxHeight
+        ? this.props.suggestionsContainerMaxHeight + "px"
+        : "150px"
+    };
     return (
       <div
         ref={instance => {
           this.containerInstance = instance;
         }}
         {...params.containerProps}
+        style={style}
       >
         {params.children}
       </div>
@@ -157,6 +164,7 @@ export class AutoComplete extends React.Component<
   };
 
   renderInputComponent = (inputProps: any) => {
+    delete inputProps.className;
     let required = this.props.required ? true : false;
     let disabled =
       this.props.disabled != null
@@ -179,7 +187,7 @@ export class AutoComplete extends React.Component<
             this.inputInstance = instance;
             inputProps.ref(instance);
           }}
-          className="form-control react-autosuggest__input"
+          className="form-control"
           id={this.id}
           name={this.props.name}
           type="text"
