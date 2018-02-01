@@ -5,6 +5,7 @@ import * as lodash from "lodash";
 import * as Autosuggest from "react-autosuggest";
 import { FormEvent } from "react";
 import * as $ from "jquery";
+const IsolatedScroll = require("react-isolated-scroll");
 
 export interface AutoCompleteState extends FormControl.FormControlState {
   suggestions: Array<any>;
@@ -63,7 +64,6 @@ export class AutoComplete extends React.Component<
 
   id: string;
   inputInstance: HTMLInputElement;
-  containerInstance: HTMLDivElement;
 
   onChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -159,16 +159,15 @@ export class AutoComplete extends React.Component<
       overflowY: "auto"
     };
     return (
-      <div
+      <IsolatedScroll
         {...params.containerProps}
-        ref={instance => {
-          this.containerInstance = instance;
+        ref={(instance: any) => {
           params.containerProps.ref(instance);
         }}
         style={style}
       >
         {params.children}
-      </div>
+      </IsolatedScroll>
     );
   };
 
