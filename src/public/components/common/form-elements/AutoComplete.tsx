@@ -95,6 +95,8 @@ export class AutoComplete extends React.Component<
     event: FormEvent<any>,
     data: Autosuggest.SuggestionSelectedEventData<any>
   ) => {
+    event.preventDefault();
+    event.stopPropagation();
     this.setState(
       {
         value: this.props.getSuggestionValue(data.suggestion)
