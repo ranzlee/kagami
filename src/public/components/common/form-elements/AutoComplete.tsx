@@ -16,6 +16,7 @@ export interface AutoCompleteProps extends FormControl.FormControlProps {
   value: any;
   placeholder: string;
   suggestionsContainerMaxHeight?: number;
+  suggestionsContainerPosition?: "top" | "bottom";
   getSuggestions: (
     reason:
       | "input-changed"
@@ -124,20 +125,44 @@ export class AutoComplete extends React.Component<
     }
   };
 
+  renderSuggestion = (suggestion: any) => {
+    if (this.props.renderSuggestion) {
+      return this.props.renderSuggestion(suggestion);
+    } else {
+      return <></>;
+    }
+  };
+
   renderSuggestionsContainer = (
     params: Autosuggest.RenderSuggestionsContainerParams
   ) => {
-    let style = {
+    let stylePosition =
+      this.props.suggestionsContainerPosition == null ||
+      this.props.suggestionsContainerPosition === "top"
+        ? { bottom: "43px" }
+        : { top: "43px" };
+    let styleMaxHeight = {
       maxHeight: this.props.suggestionsContainerMaxHeight
         ? this.props.suggestionsContainerMaxHeight + "px"
-        : "150px"
+        : "200px"
+    };
+    let style: any = {
+      ...stylePosition,
+      ...styleMaxHeight,
+      display: "block",
+      position: "absolute",
+      width: "100%",
+      fontWeight: 300,
+      zIndex: 9999999,
+      overflowY: "auto"
     };
     return (
       <div
+        {...params.containerProps}
         ref={instance => {
           this.containerInstance = instance;
+          params.containerProps.ref(instance);
         }}
-        {...params.containerProps}
         style={style}
       >
         {params.children}
@@ -235,7 +260,7 @@ export class AutoComplete extends React.Component<
             onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
             onSuggestionsClearRequested={this.onSuggestionsClearRequested}
             getSuggestionValue={this.props.getSuggestionValue}
-            renderSuggestion={this.props.renderSuggestion}
+            renderSuggestion={this.renderSuggestion}
             inputProps={inputProps}
             renderInputComponent={this.renderInputComponent}
             onSuggestionSelected={this.onSuggestionSelected}

@@ -67,7 +67,7 @@ body {
 .react-datepicker__day--selected:hover,
 .react-datepicker__day--in-selecting-range:hover,
 .react-datepicker__day--in-range:hover {
-  background-color: $primary-color;
+  background-color: $primary-color !important;
 }
 
 .react-datepicker__time-container
@@ -80,97 +80,81 @@ body {
   .react-datepicker__time-box
   ul.react-datepicker__time-list
   li.react-datepicker__time-list-item--selected:hover {
-  background-color: $primary-color;
+  background-color: $primary-color !important;
 }
 //END - react datepicker for bootstrap compatibility
 
 //bootstrap switch theme compatibility
 .bootstrap-switch.bootstrap-switch-on .bootstrap-switch-label {
-  background: $primary-color;
+  background: $primary-color !important;
 }
 
 .bootstrap-switch.bootstrap-switch-on:hover .bootstrap-switch-label {
-  background: $primary-color;
+  background: $primary-color !important;
 }
 
 .bootstrap-switch.bootstrap-switch-off .bootstrap-switch-label {
-  background: $smoke-bg;
+  background: $smoke-bg !important;
 }
 
 .bootstrap-switch.bootstrap-switch-off:hover .bootstrap-switch-label {
-  background: $smoke-bg;
+  background: $smoke-bg !important;
 }
 
 .bootstrap-switch.bootstrap-switch-small .bootstrap-switch-handle-on,
 .bootstrap-switch.bootstrap-switch-small .bootstrap-switch-handle-off,
 .bootstrap-switch.bootstrap-switch-small .bootstrap-switch-label {
-  padding: 3px 10px;
+  padding: 3px 10px !important;
 }
 
 .bootstrap-switch {
-  background: $default-color;
+  background: $default-color !important;
 }
 //END - bootstrap switch theme compatibility
 
 //slider bootstrap theme compatibility
 .noUi-handle {
-  background-color: $primary-color;
+  background-color: $primary-color !important;
 }
 
 .noUi-horizontal .noUi-handle {
-  background-color: $primary-color;
+  background-color: $primary-color !important;
 }
 //END - slider bootstrap theme compatibility
 
 //now UI accessibility - checkbox and radio must be set to visible for keyboard access
 .checkbox input[type="checkbox"],
 .radio input[type="radio"] {
-  visibility: visible;
-  opacity: 0;
+  visibility: visible !important;
+  opacity: 0 !important;
 }
 //END now UI accessiblility
 
 //autocomplete styles
-//card must show overflow for autocomplete popup
-.card {
-  overflow: visible !important;
-}
-
 .react-autosuggest__container {
-  position: relative;
-}
-
-.react-autosuggest__suggestions-container {
-  display: none;
+  position: relative !important;
 }
 
 .react-autosuggest__suggestions-container--open {
-  display: block;
-  position: absolute;
-  top: 43px;
-  width: 100%;
-  border: 1px solid $light-gray;
-  background-color: $white-bg;
-  font-weight: 300;
-  z-index: 9999999;
-  overflow-y: auto;
+  border: 1px solid $light-gray !important;
+  background-color: $white-bg !important;
 }
 
 .react-autosuggest__suggestions-list {
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style-type: none !important;
 }
 
 .react-autosuggest__suggestion {
-  cursor: pointer;
-  padding: 10px 20px;
-  background-color: $white-color;
-  color: $black-color;
+  cursor: pointer !important;
+  padding: 10px 20px !important;
+  background-color: $white-color !important;
+  color: $black-color !important;
 }
 
 .react-autosuggest__suggestion--highlighted {
-  background-color: $primary-color;
-  color: $white-color;
+  background-color: $primary-color !important;
+  color: $white-color !important;
 }
 //END autocomplete styles

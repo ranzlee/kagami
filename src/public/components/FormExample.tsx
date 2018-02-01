@@ -303,6 +303,7 @@ export class FormExample extends React.Component<
                         value={this.state.myAutoCompleteSuggestion}
                         placeholder="Type a programming language (e.g. 'C' or 'P')"
                         suggestionsContainerMaxHeight={200}
+                        suggestionsContainerPosition="top"
                         onChange={(suggestion: AutoCompleteSuggestion) => {
                           this.setState({
                             myAutoCompleteSuggestion: suggestion
@@ -319,8 +320,9 @@ export class FormExample extends React.Component<
                             isValid: isValid,
                             validationMessage: "Use a real language!"
                           };
-                        }} //teach autocomplete how to display options based on value typed in
+                        }}
                         getSuggestions={(reason: string, value: string) => {
+                          //teach autocomplete how to display options based on value typed in
                           let inputValue = value.trim().toLowerCase();
                           let inputLength = inputValue.length;
                           return inputLength === 0
@@ -331,19 +333,21 @@ export class FormExample extends React.Component<
                                     .toLowerCase()
                                     .slice(0, inputLength) === inputValue
                               );
-                        }} //teach autocomplete how to render suggestion options
+                        }}
                         renderSuggestion={(
                           suggestion: AutoCompleteSuggestion
                         ) => {
+                          //teach autocomplete how to render suggestion options
                           return (
                             <div>
                               {suggestion.name + " - " + suggestion.year}
                             </div>
                           );
-                        }} //tell autocomplete what string to display in the textbox for the selected option
+                        }}
                         getSuggestionValue={(
                           suggestion: AutoCompleteSuggestion
                         ) => {
+                          //tell autocomplete what string to display in the textbox for the selected option
                           return suggestion === null ? "" : suggestion.name;
                         }}
                       />
