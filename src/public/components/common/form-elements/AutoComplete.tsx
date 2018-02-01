@@ -69,11 +69,7 @@ export class AutoComplete extends React.Component<
     event: React.ChangeEvent<HTMLInputElement>,
     autosuggestChange: Autosuggest.ChangeEvent
   ) => {
-    if (autosuggestChange.newValue.trim() === "") {
-      this.setState({ value: "" });
-    } else {
-      this.setState({ value: autosuggestChange.newValue });
-    }
+    this.setState({ value: autosuggestChange.newValue });
   };
 
   onSuggestionsFetchRequested = (
@@ -84,9 +80,7 @@ export class AutoComplete extends React.Component<
       return;
     }
     let results = this.props.getSuggestions(query.reason, query.value);
-    if (results == null || results.length == null || results.length < 1) {
-      this.setState({ value: "" });
-    } else {
+    if (!(results == null || results.length == null || results.length < 1)) {
       this.setState({ suggestions: results });
     }
   };

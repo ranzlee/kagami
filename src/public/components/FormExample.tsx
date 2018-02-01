@@ -13,6 +13,7 @@ import { AutoComplete } from "./common/form-elements/AutoComplete";
 import { FormSubComponentExample } from "./FormSubComponentExample";
 import * as linq from "linq";
 import * as Moment from "moment";
+import { link } from "fs";
 
 interface AutoCompleteSuggestion {
   name: string;
@@ -45,20 +46,88 @@ export class FormExample extends React.Component<
   constructor(props: FormExampleProps) {
     super(props);
     this.suggestions = [
-      { name: "C", year: 1972 },
-      { name: "C#", year: 2000 },
-      { name: "C++", year: 1983 },
-      { name: "Clojure", year: 2007 },
-      { name: "Elm", year: 2012 },
-      { name: "Go", year: 2009 },
-      { name: "Haskell", year: 1990 },
-      { name: "Java", year: 1995 },
-      { name: "Javascript", year: 1995 },
-      { name: "Perl", year: 1987 },
-      { name: "PHP", year: 1995 },
-      { name: "Python", year: 1991 },
-      { name: "Ruby", year: 1995 },
-      { name: "Scala", year: 2003 }
+      { year: 1951, name: "Regional Assembly Language" },
+      { year: 1952, name: "Autocode" },
+      { year: 1954, name: "IPL (forerunner to LISP)" },
+      { year: 1955, name: "FLOW-MATIC (led to COBOL)" },
+      { year: 1957, name: "FORTRAN (First compiler)" },
+      { year: 1957, name: "COMTRAN (precursor to COBOL)" },
+      { year: 1958, name: "LISP" },
+      { year: 1958, name: "ALGOL 58" },
+      { year: 1959, name: "FACT (forerunner to COBOL)" },
+      { year: 1959, name: "COBOL" },
+      { year: 1959, name: "RPG" },
+      { year: 1962, name: "APL" },
+      { year: 1962, name: "Simula" },
+      { year: 1962, name: "SNOBOL" },
+      { year: 1963, name: "CPL (forerunner to C)" },
+      { year: 1964, name: "Speakeasy (computational environment)" },
+      { year: 1964, name: "BASIC" },
+      { year: 1964, name: "PL/I" },
+      { year: 1966, name: "JOSS" },
+      { year: 1967, name: "BCPL (forerunner to C)" },
+      { year: 1968, name: "Logo" },
+      { year: 1969, name: "B (forerunner to C)" },
+      { year: 1970, name: "Pascal" },
+      { year: 1970, name: "Forth" },
+      { year: 1972, name: "C" },
+      { year: 1972, name: "Smalltalk" },
+      { year: 1972, name: "Prolog" },
+      { year: 1973, name: "ML" },
+      { year: 1975, name: "Scheme" },
+      { year: 1978, name: "SQL (a query language, later extended)" },
+      { year: 1980, name: "C++ (as C with classes, renamed in 1983)" },
+      { year: 1983, name: "Ada" },
+      { year: 1984, name: "Common Lisp" },
+      { year: 1984, name: "MATLAB" },
+      {
+        year: 1984,
+        name:
+          "dBase III, dBase III Plus (Clipper and FoxPro as FoxBASE, later developing into Visual FoxPro"
+      },
+      { year: 1985, name: "Eiffel" },
+      { year: 1986, name: "Objective-C" },
+      { year: 1986, name: "LabVIEW (Visual Programming Language)" },
+      { year: 1986, name: "Erlang" },
+      { year: 1987, name: "Perl" },
+      { year: 1988, name: "Tcl" },
+      {
+        year: 1988,
+        name:
+          "Wolfram Language (as part of Mathematica, only got a separate name in June 2013)"
+      },
+      { year: 1989, name: "FL (Backus)" },
+      { year: 1990, name: "Haskell" },
+      { year: 1991, name: "Python" },
+      { year: 1991, name: "Visual Basic" },
+      { year: 1993, name: "Lua" },
+      { year: 1993, name: "R" },
+      { year: 1994, name: "CLOS (part of ANSI Common Lisp)" },
+      { year: 1995, name: "Ruby" },
+      { year: 1995, name: "Ada 95" },
+      { year: 1995, name: "Java" },
+      { year: 1995, name: "Delphi (Object Pascal)" },
+      { year: 1995, name: "JavaScript" },
+      { year: 1995, name: "PHP" },
+      { year: 1997, name: "Rebol" },
+      { year: 2000, name: "ActionScript" },
+      { year: 2001, name: "C#" },
+      { year: 2001, name: "D" },
+      { year: 2002, name: "Scratch" },
+      { year: 2003, name: "Groovy" },
+      { year: 2003, name: "Scala" },
+      { year: 2005, name: "F#" },
+      { year: 2006, name: "PowerShell" },
+      { year: 2007, name: "Clojure" },
+      { year: 2009, name: "Go" },
+      { year: 2010, name: "Rust" },
+      { year: 2011, name: "Dart" },
+      { year: 2011, name: "Kotlin" },
+      { year: 2011, name: "Red" },
+      { year: 2011, name: "Elixir" },
+      { year: 2012, name: "Julia" },
+      { year: 2014, name: "Swift" },
+      { year: 2016, name: "Ring" }
     ];
     this.maxDate = "2020-01-01";
     this.state = {
@@ -322,17 +391,20 @@ export class FormExample extends React.Component<
                           };
                         }}
                         getSuggestions={(reason: string, value: string) => {
-                          //teach autocomplete how to display options based on value typed in
+                          //teach autocomplete how to get options based on value typed in
                           let inputValue = value.trim().toLowerCase();
                           let inputLength = inputValue.length;
                           return inputLength === 0
                             ? []
-                            : this.suggestions.filter(
-                                suggestion =>
-                                  suggestion.name
+                            : linq
+                                .from(this.suggestions)
+                                .where(i =>
+                                  i.name
                                     .toLowerCase()
-                                    .slice(0, inputLength) === inputValue
-                              );
+                                    .startsWith(value.toLowerCase())
+                                )
+                                .orderBy(i => i.name)
+                                .toArray();
                         }}
                         renderSuggestion={(
                           suggestion: AutoCompleteSuggestion
