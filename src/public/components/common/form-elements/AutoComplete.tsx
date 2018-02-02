@@ -69,6 +69,9 @@ export class AutoComplete extends React.Component<
     event: React.ChangeEvent<HTMLInputElement>,
     autosuggestChange: Autosuggest.ChangeEvent
   ) => {
+    if (this.inputInstance) {
+      this.inputInstance.setCustomValidity("");
+    }
     this.setState({ value: autosuggestChange.newValue });
   };
 
