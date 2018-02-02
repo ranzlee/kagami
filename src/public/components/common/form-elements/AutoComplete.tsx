@@ -29,6 +29,8 @@ export interface AutoCompleteProps extends FormControl.FormControlProps {
   ) => Array<any> | null;
   getSuggestionValue: (suggestion: any) => string;
   renderSuggestion: (suggestion: any) => React.ReactElement<any>;
+  renderSelectedSuggestion?: (suggestion: any) => React.ReactElement<any>;
+  renderSelectedSuggestionWhenNotSet?: boolean;
   onChange?: (suggestion: any) => void;
   onChangeCustomValidation?: (
     suggestion: any
@@ -246,6 +248,16 @@ export class AutoComplete extends React.Component<
       onChange: this.onChange
     };
     let extendedProps = FormControl.FormControlExtendedProperties(this.props);
+    let selectedSuggestionNode =
+      this.props.renderSelectedSuggestion == null ? (
+        <></>
+      ) : this.props.renderSelectedSuggestionWhenNotSet ? (
+        this.props.renderSelectedSuggestion(this.props.value)
+      ) : this.props.value != null ? (
+        this.props.renderSelectedSuggestion(this.props.value)
+      ) : (
+        <></>
+      );
     return (
       <div className="row form-group">
         <label className={extendedProps.labelClasses} htmlFor={this.id}>
@@ -264,6 +276,7 @@ export class AutoComplete extends React.Component<
             onSuggestionSelected={this.onSuggestionSelected}
             renderSuggestionsContainer={this.renderSuggestionsContainer}
           />
+          <div>{selectedSuggestionNode}</div>
         </div>
       </div>
     );

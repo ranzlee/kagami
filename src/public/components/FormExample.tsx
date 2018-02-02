@@ -422,6 +422,27 @@ export class FormExample extends React.Component<
                           //tell autocomplete what string to display in the textbox for the selected option
                           return suggestion === null ? "" : suggestion.name;
                         }}
+                        //renderSelectedSuggestionWhenNotSet={true}
+                        renderSelectedSuggestion={(
+                          suggestion: AutoCompleteSuggestion
+                        ) => {
+                          return (
+                            <div>
+                              <div className="row bg-primary text-light">
+                                <div className="col-2">Year</div>
+                                <div className="col">Name</div>
+                              </div>
+                              <div className="row">
+                                <div className="col-2">
+                                  {suggestion == null ? "" : suggestion.year}
+                                </div>
+                                <div className="col">
+                                  {suggestion == null ? "" : suggestion.name}
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        }}
                       />
                     </div>
                   </div>
