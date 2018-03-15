@@ -6,7 +6,6 @@
 If using Docker (recommended)
 
 * Install [Docker](https://www.docker.com/community-edition)
-*
 
 If local development (No Docker)
 
@@ -18,7 +17,7 @@ If local development (No Docker)
 * Clone the repository
 
 ```
-git clone https://gitlab.com/Alltech/Kagami.git <project_name>
+git clone https://github.com/ranzlee/kagami <project_name>
 ```
 
 * Install dependencies
